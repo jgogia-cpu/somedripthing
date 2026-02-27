@@ -7,6 +7,7 @@ import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/brands";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 const heroProducts = products.filter(p => p.trending).slice(0, 5);
 
@@ -28,6 +29,7 @@ function getCarouselTransform(index: number, active: number, total: number) {
 
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { formatPrice } = useCurrency();
   const trendingProducts = products.filter(p => p.trending).slice(0, 8);
   const newDropBrands = brands.filter(b => b.newDrop);
   const featuredBrands = brands.filter(b => b.featured).slice(0, 6);
@@ -98,7 +100,7 @@ export default function Index() {
                         {productBrand?.name}
                       </p>
                       <p className="mt-0.5 truncate text-sm font-semibold">{product.name}</p>
-                      <p className="mt-0.5 text-sm font-bold text-accent">${product.price}</p>
+                      <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
                     </div>
                   </div>
                 </motion.div>
