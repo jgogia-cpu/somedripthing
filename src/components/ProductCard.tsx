@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Product } from "@/data/brands";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 interface ProductCardProps {
   product: Product;
@@ -9,6 +10,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
+  const { formatPrice } = useCurrency();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -43,9 +45,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           </p>
           <p className="text-sm font-medium leading-tight">{product.name}</p>
           <div className="flex items-center gap-2">
-            <p className="text-sm font-semibold">${product.price}</p>
+            <p className="text-sm font-semibold">{formatPrice(product.price)}</p>
             {product.originalPrice && (
-              <p className="text-xs text-muted-foreground line-through">${product.originalPrice}</p>
+              <p className="text-xs text-muted-foreground line-through">{formatPrice(product.originalPrice)}</p>
             )}
           </div>
         </div>

@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Search, Heart, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import CurrencySelector from "@/components/CurrencySelector";
 
 const NAV_LINKS = [
   { to: "/", label: "Home" },
@@ -37,6 +38,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          <CurrencySelector />
           <Link to="/explore">
             <Button variant="ghost" size="icon" className="rounded-full">
               <Search className="h-4 w-4" />
