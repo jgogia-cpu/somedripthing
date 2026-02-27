@@ -9,7 +9,12 @@ import NewsletterSignup from "@/components/NewsletterSignup";
 import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 
-const heroProducts = products.filter(p => p.trending).slice(0, 5);
+const heroProducts = (() => {
+  const anchorBrandIds = ["16", "17", "18", "19"];
+  const anchored = products.filter(p => anchorBrandIds.includes(p.brandId) && p.trending);
+  const others = products.filter(p => !anchorBrandIds.includes(p.brandId) && p.trending);
+  return [...anchored, ...others].slice(0, 7);
+})();
 
 function getCarouselTransform(index: number, active: number, total: number) {
   let offset = index - active;
