@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import Explore from "./pages/Explore";
 import BrandProfile from "./pages/BrandProfile";
 import ProductDetail from "./pages/ProductDetail";
+import Category from "./pages/Category";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Wishlist from "./pages/Wishlist";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/explore" element={<Explore />} />
           <Route path="/brand/:slug" element={<BrandProfile />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/shop/:gender/:subcategory" element={<Category />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/wishlist" element={<Wishlist />} />
