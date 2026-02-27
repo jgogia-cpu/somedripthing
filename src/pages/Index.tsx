@@ -10,6 +10,22 @@ import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/br
 
 const heroProducts = products.filter(p => p.trending).slice(0, 5);
 
+function getCarouselTransform(index: number, active: number, total: number) {
+  let offset = index - active;
+  if (offset > Math.floor(total / 2)) offset -= total;
+  if (offset < -Math.floor(total / 2)) offset += total;
+
+  const absOffset = Math.abs(offset);
+  const translateX = offset * 280;
+  const translateZ = -absOffset * 200;
+  const rotateY = offset * -25;
+  const scale = 1 - absOffset * 0.15;
+  const opacity = absOffset > 2 ? 0 : 1 - absOffset * 0.25;
+  const zIndex = 10 - absOffset;
+
+  return { translateX, translateZ, rotateY, scale, opacity, zIndex };
+}
+
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const trendingProducts = products.filter(p => p.trending).slice(0, 8);
@@ -29,93 +45,115 @@ export default function Index() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Carousel */}
-      <section className="relative h-[85vh] min-h-[500px] overflow-hidden bg-primary">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="absolute inset-0"
-          >
-            <img
-              src={current.image}
-              alt={current.name}
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-          </motion.div>
-        </AnimatePresence>
+      {/* 3D Carousel Hero */}
+      <section className="relative overflow-hidden bg-secondary/30 py-12 md:py-20">
+        <div className="container">
+          {/* 3D Carousel */}
+          <div className="relative mx-auto flex items-center justify-center" style={{ perspective: "1200px", height: "440px" }}>
+            {heroProducts.map((product, i) => {
+              const t = getCarouselTransform(i, currentSlide, heroProducts.length);
+              const productBrand = getBrandById(product.brandId);
+              const isActive = i === currentSlide;
+              return (
+                <motion.div
+                  key={product.id}
+                  animate={{
+                    x: t.translateX,
+                    z: t.translateZ,
+                    rotateY: t.rotateY,
+                    scale: t.scale,
+                    opacity: t.opacity,
+                  }}
+                  transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+                  className="absolute cursor-pointer"
+                  style={{
+                    zIndex: t.zIndex,
+                    transformStyle: "preserve-3d",
+                    width: "280px",
+                  }}
+                  onClick={() => setCurrentSlide(i)}
+                >
+                  <div className={`overflow-hidden rounded-2xl bg-card shadow-xl transition-shadow duration-500 ${isActive ? "shadow-2xl ring-2 ring-accent/30" : ""}`}>
+                    <div className="relative">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full object-cover"
+                        style={{ aspectRatio: "3/4", height: "340px" }}
+                      />
+                      {product.newArrival && (
+                        <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-0.5 text-xs font-medium text-accent-foreground">
+                          New
+                        </span>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+                        {productBrand?.name}
+                      </p>
+                      <p className="mt-0.5 truncate text-sm font-semibold">{product.name}</p>
+                      <p className="mt-0.5 text-sm font-bold text-accent">${product.price}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
 
-        {/* Content */}
-        <div className="container relative z-10 flex h-full items-end pb-16 md:items-center md:pb-0">
+          {/* Navigation */}
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <button onClick={prevSlide} className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-accent hover:text-accent-foreground hover:border-accent">
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <div className="flex gap-2">
+              {heroProducts.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  className={`h-2 rounded-full transition-all ${
+                    i === currentSlide ? "w-8 bg-accent" : "w-2 bg-muted-foreground/30"
+                  }`}
+                />
+              ))}
+            </div>
+            <button onClick={nextSlide} className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-accent hover:text-accent-foreground hover:border-accent">
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
+
+          {/* Active product info */}
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-lg"
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="mt-6 text-center"
             >
               {brand && (
-                <Link
-                  to={`/brand/${brand.slug}`}
-                  className="mb-3 inline-block rounded-full border border-white/30 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
-                >
+                <Link to={`/brand/${brand.slug}`} className="text-sm font-medium text-accent hover:underline">
                   {brand.name}
                 </Link>
               )}
-              <h1 className="font-display text-4xl font-bold leading-[1.1] text-white md:text-6xl">
-                {current.name}
-              </h1>
-              <p className="mt-3 text-lg text-white/70">${current.price}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
+              <h2 className="mt-1 font-display text-2xl font-bold md:text-3xl">{current.name}</h2>
+              <div className="mt-2 flex justify-center gap-2">
                 {current.aesthetics.map(a => (
-                  <span key={a} className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-medium text-white/80 backdrop-blur-sm">
+                  <span key={a} className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
                     {a}
                   </span>
                 ))}
               </div>
-              <div className="mt-8 flex gap-3">
+              <div className="mt-4 flex justify-center gap-3">
                 <Link to={`/product/${current.id}`}>
-                  <Button size="lg" className="gap-2 rounded-full bg-white text-black hover:bg-white/90">
-                    View Product <ArrowRight className="h-4 w-4" />
-                  </Button>
+                  <Button className="gap-2 rounded-full">View Product <ArrowRight className="h-4 w-4" /></Button>
                 </Link>
                 <Link to="/explore">
-                  <Button size="lg" variant="outline" className="rounded-full border-white/30 text-white hover:bg-white/10">
-                    Explore All
-                  </Button>
+                  <Button variant="outline" className="rounded-full">Explore All</Button>
                 </Link>
               </div>
             </motion.div>
           </AnimatePresence>
-        </div>
-
-        {/* Nav Arrows */}
-        <div className="absolute bottom-8 right-8 z-10 flex items-center gap-3 md:bottom-auto md:right-12 md:top-1/2 md:-translate-y-1/2 md:flex-col">
-          <button onClick={prevSlide} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white backdrop-blur-sm transition-colors hover:bg-white/20">
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button onClick={nextSlide} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white backdrop-blur-sm transition-colors hover:bg-white/20">
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-
-        {/* Dots */}
-        <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-          {heroProducts.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentSlide(i)}
-              className={`h-1.5 rounded-full transition-all ${
-                i === currentSlide ? "w-8 bg-white" : "w-1.5 bg-white/40"
-              }`}
-            />
-          ))}
         </div>
       </section>
 
