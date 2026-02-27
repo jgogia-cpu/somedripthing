@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, Heart, Menu, X, ChevronDown } from "lucide-react";
+import { Search, Heart, Menu, X, ChevronDown, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
+import AuthDialog from "@/components/AuthDialog";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const SUBCATEGORIES = [
   { slug: "hoodies", label: "Hoodies" },
@@ -65,6 +73,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileHimOpen, setMobileHimOpen] = useState(false);
   const [mobileHerOpen, setMobileHerOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
+  const { user, signOut } = useAuth();
   const location = useLocation();
 
   return (
@@ -103,6 +113,27 @@ export default function Navbar() {
               <Heart className="h-4 w-4" />
             </Button>
           </Link>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <User className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem className="text-xs text-muted-foreground" disabled>
+                  {user.email}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut()} className="gap-2">
+                  <LogOut className="h-3.5 w-3.5" /> Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button variant="ghost" size="icon" className="rounded-full" onClick={() => setAuthOpen(true)}>
+              <User className="h-4 w-4" />
+            </Button>
+          )}
           <Button
             variant="ghost"
             size="icon"
@@ -176,6 +207,8 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <AuthDialog open={authOpen} onClose={() => setAuthOpen(false)} />
     </nav>
   );
 }
