@@ -76,8 +76,6 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden items-center gap-8 md:flex">
-          <GenderDropdown gender="him" label="Him" />
-          <GenderDropdown gender="her" label="Her" />
           {NAV_LINKS.map(link => (
             <Link
               key={link.to}
@@ -89,6 +87,8 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          <GenderDropdown gender="him" label="Him" />
+          <GenderDropdown gender="her" label="Her" />
         </div>
 
         <div className="flex items-center gap-2">
