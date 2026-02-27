@@ -41,7 +41,16 @@ function getCarouselTransform(index: number, active: number, total: number) {
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { formatPrice } = useCurrency();
-  const trendingProducts = products.filter(p => p.trending).slice(0, 8);
+  const trendingProducts = (() => {
+    const anchorBrandIds = ["16", "17", "18", "19", "20"];
+    const guaranteed = anchorBrandIds
+      .map((brandId) => products.find((p) => p.brandId === brandId && p.trending))
+      .filter((p): p is (typeof products)[number] => Boolean(p));
+    const rest = products.filter(
+      (p) => p.trending && !guaranteed.some((g) => g.id === p.id),
+    );
+    return [...guaranteed, ...rest].slice(0, 10);
+  })();
   const newDropBrands = brands.filter(b => b.newDrop);
   const featuredBrands = brands.filter(b => b.featured).slice(0, 6);
 
