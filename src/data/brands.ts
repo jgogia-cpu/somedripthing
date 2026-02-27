@@ -4,6 +4,7 @@ export interface Brand {
   slug: string;
   logo: string;
   banner: string;
+  logoFont?: string;
   bio: string;
   origin: string;
   website: string;
@@ -66,119 +67,119 @@ const IMG = (seed: string, w = 600, h = 800) =>
 export const brands: Brand[] = [
   {
     id: "1", name: "MISBHV", slug: "misbhv", logo: IMG("1611162617474-5b21e879e113", 200, 200),
-    banner: IMG("1558618666-fcd25c85f82e", 1200, 500), bio: "Warsaw-based label merging post-Soviet aesthetics with club culture and Y2K nostalgia.",
+    banner: IMG("1558618666-fcd25c85f82e", 1200, 500), logoFont: "'Bebas Neue', sans-serif", bio: "Warsaw-based label merging post-Soviet aesthetics with club culture and Y2K nostalgia.",
     origin: "Warsaw, Poland", website: "https://misbhv.com", affiliateUrl: "https://misbhv.com?ref=drip",
     instagram: "@misbhv", aesthetics: ["Y2K", "Streetwear", "Avant-Garde"], categories: ["Tops", "Outerwear", "Accessories"],
     priceRange: "premium", followers: 892000, rating: 4.7, featured: true, newDrop: false
   },
   {
     id: "2", name: "Story mfg.", slug: "story-mfg", logo: IMG("1507003211169-0a1dd7228f2d", 200, 200),
-    banner: IMG("1523381294911-8d28f28e5a3b", 1200, 500), bio: "Slow-made, hand-dyed clothing rooted in natural processes and positive manufacturing.",
+    banner: IMG("1523381294911-8d28f28e5a3b", 1200, 500), logoFont: "'Permanent Marker', cursive", bio: "Slow-made, hand-dyed clothing rooted in natural processes and positive manufacturing.",
     origin: "London, UK", website: "https://storymfg.com", affiliateUrl: "https://storymfg.com?ref=drip",
     instagram: "@storymfg", aesthetics: ["Bohemian", "Cottagecore"], categories: ["Tops", "Outerwear", "Knitwear"],
     priceRange: "premium", followers: 245000, rating: 4.9, featured: true, newDrop: true
   },
   {
     id: "3", name: "Ahluwalia", slug: "ahluwalia", logo: IMG("1534528741775-53994a69daeb", 200, 200),
-    banner: IMG("1558171813-4c2ba397e080", 1200, 500), bio: "Luxury craftsmanship meeting Nigerian-Indian heritage through upcycled textiles.",
+    banner: IMG("1558171813-4c2ba397e080", 1200, 500), logoFont: "'Playfair Display', serif", bio: "Luxury craftsmanship meeting Nigerian-Indian heritage through upcycled textiles.",
     origin: "London, UK", website: "https://ahluwalia.world", affiliateUrl: "https://ahluwalia.world?ref=drip",
     instagram: "@ahluwaliastudio", aesthetics: ["Avant-Garde", "Streetwear"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "luxury", followers: 178000, rating: 4.8, featured: false, newDrop: true
   },
   {
     id: "4", name: "Satisfy", slug: "satisfy", logo: IMG("1472099645785-5658abf4ff4e", 200, 200),
-    banner: IMG("1571902943202-507ec2618e8f", 1200, 500), bio: "Performance running gear designed for the ultra-aesthetic runner who demands both form and function.",
+    banner: IMG("1571902943202-507ec2618e8f", 1200, 500), logoFont: "'Oswald', sans-serif", bio: "Performance running gear designed for the ultra-aesthetic runner who demands both form and function.",
     origin: "Paris, France", website: "https://satisfyrunning.com", affiliateUrl: "https://satisfyrunning.com?ref=drip",
     instagram: "@satisfyrunning", aesthetics: ["Gorpcore", "Techwear", "Minimalist"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "premium", followers: 320000, rating: 4.6, featured: true, newDrop: false
   },
   {
     id: "5", name: "Bode", slug: "bode", logo: IMG("1500648767791-00dcc994a43e", 200, 200),
-    banner: IMG("1490481651871-ab68de25d43d", 1200, 500), bio: "One-of-a-kind menswear crafted from antique textiles and deadstock materials.",
+    banner: IMG("1490481651871-ab68de25d43d", 1200, 500), logoFont: "'DM Serif Display', serif", bio: "One-of-a-kind menswear crafted from antique textiles and deadstock materials.",
     origin: "New York, USA", website: "https://bodenewyork.com", affiliateUrl: "https://bodenewyork.com?ref=drip",
     instagram: "@bikinicountdance", aesthetics: ["Bohemian", "Archive", "Cottagecore"], categories: ["Tops", "Outerwear", "Bottoms"],
     priceRange: "luxury", followers: 410000, rating: 4.9, featured: true, newDrop: false
   },
   {
     id: "6", name: "HELIOT EMIL", slug: "heliot-emil", logo: IMG("1506794778202-cad84cf45f1d", 200, 200),
-    banner: IMG("1558618666-fcd25c85f82e", 1200, 500), bio: "Danish label exploring industrial design through deconstructed silhouettes and hardware details.",
+    banner: IMG("1558618666-fcd25c85f82e", 1200, 500), logoFont: "'Archivo Black', sans-serif", bio: "Danish label exploring industrial design through deconstructed silhouettes and hardware details.",
     origin: "Copenhagen, Denmark", website: "https://heliotemil.com", affiliateUrl: "https://heliotemil.com?ref=drip",
     instagram: "@heliotemil", aesthetics: ["Avant-Garde", "Techwear", "Brutalist"], categories: ["Outerwear", "Bags", "Accessories"],
     priceRange: "luxury", followers: 285000, rating: 4.7, featured: false, newDrop: true
   },
   {
     id: "7", name: "Paloma Wool", slug: "paloma-wool", logo: IMG("1438761681033-6461ffad8d80", 200, 200),
-    banner: IMG("1523381294911-8d28f28e5a3b", 1200, 500), bio: "Barcelona creative project blurring fashion, art, and photography with Mediterranean warmth.",
+    banner: IMG("1523381294911-8d28f28e5a3b", 1200, 500), logoFont: "'Syne', sans-serif", bio: "Barcelona creative project blurring fashion, art, and photography with Mediterranean warmth.",
     origin: "Barcelona, Spain", website: "https://palomawool.com", affiliateUrl: "https://palomawool.com?ref=drip",
     instagram: "@palaboralwool", aesthetics: ["Minimalist", "Bohemian"], categories: ["Dresses", "Tops", "Knitwear"],
     priceRange: "mid", followers: 560000, rating: 4.5, featured: true, newDrop: false
   },
   {
     id: "8", name: "GmbH", slug: "gmbh", logo: IMG("1507003211169-0a1dd7228f2d", 200, 200),
-    banner: IMG("1571902943202-507ec2618e8f", 1200, 500), bio: "Berlin-based collective creating fashion at the intersection of club culture and diasporic identity.",
+    banner: IMG("1571902943202-507ec2618e8f", 1200, 500), logoFont: "'Russo One', sans-serif", bio: "Berlin-based collective creating fashion at the intersection of club culture and diasporic identity.",
     origin: "Berlin, Germany", website: "https://gmbhgmbh.eu", affiliateUrl: "https://gmbhgmbh.eu?ref=drip",
     instagram: "@gmbh_official", aesthetics: ["Streetwear", "Techwear", "Avant-Garde"], categories: ["Outerwear", "Bottoms", "Footwear"],
     priceRange: "premium", followers: 195000, rating: 4.6, featured: false, newDrop: false
   },
   {
     id: "9", name: "Rier", slug: "rier", logo: IMG("1472099645785-5658abf4ff4e", 200, 200),
-    banner: IMG("1490481651871-ab68de25d43d", 1200, 500), bio: "Austrian label bringing Alpine heritage into contemporary menswear through considered fabrics.",
+    banner: IMG("1490481651871-ab68de25d43d", 1200, 500), logoFont: "'DM Serif Display', serif", bio: "Austrian label bringing Alpine heritage into contemporary menswear through considered fabrics.",
     origin: "Vienna, Austria", website: "https://rier.at", affiliateUrl: "https://rier.at?ref=drip",
     instagram: "@rier___", aesthetics: ["Minimalist", "Old Money", "Gorpcore"], categories: ["Outerwear", "Knitwear", "Bottoms"],
     priceRange: "premium", followers: 67000, rating: 4.8, featured: false, newDrop: true
   },
   {
     id: "10", name: "Eytys", slug: "eytys", logo: IMG("1534528741775-53994a69daeb", 200, 200),
-    banner: IMG("1558618666-fcd25c85f82e", 1200, 500), bio: "Stockholm footwear brand known for chunky silhouettes and Scandinavian minimalism.",
+    banner: IMG("1558618666-fcd25c85f82e", 1200, 500), logoFont: "'Unbounded', sans-serif", bio: "Stockholm footwear brand known for chunky silhouettes and Scandinavian minimalism.",
     origin: "Stockholm, Sweden", website: "https://eytys.com", affiliateUrl: "https://eytys.com?ref=drip",
     instagram: "@eytys", aesthetics: ["Minimalist", "Streetwear"], categories: ["Footwear", "Bottoms", "Tops"],
     priceRange: "mid", followers: 340000, rating: 4.4, featured: true, newDrop: false
   },
   {
     id: "11", name: "Nanushka", slug: "nanushka", logo: IMG("1500648767791-00dcc994a43e", 200, 200),
-    banner: IMG("1523381294911-8d28f28e5a3b", 1200, 500), bio: "Budapest-born brand mastering vegan leather and earthy, sensual modernism.",
+    banner: IMG("1523381294911-8d28f28e5a3b", 1200, 500), logoFont: "'Playfair Display', serif", bio: "Budapest-born brand mastering vegan leather and earthy, sensual modernism.",
     origin: "Budapest, Hungary", website: "https://nanushka.com", affiliateUrl: "https://nanushka.com?ref=drip",
     instagram: "@nanushka", aesthetics: ["Minimalist", "Old Money", "Bohemian"], categories: ["Outerwear", "Dresses", "Bags"],
     priceRange: "premium", followers: 720000, rating: 4.6, featured: true, newDrop: false
   },
   {
     id: "12", name: "PHIPPS", slug: "phipps", logo: IMG("1506794778202-cad84cf45f1d", 200, 200),
-    banner: IMG("1571902943202-507ec2618e8f", 1200, 500), bio: "Workwear-inspired sustainable fashion rooted in environmental activism and utilitarian design.",
+    banner: IMG("1571902943202-507ec2618e8f", 1200, 500), logoFont: "'Oswald', sans-serif", bio: "Workwear-inspired sustainable fashion rooted in environmental activism and utilitarian design.",
     origin: "Paris, France", website: "https://phfranklinphipps.com", affiliateUrl: "https://phipps.com?ref=drip",
     instagram: "@phipps", aesthetics: ["Gorpcore", "Streetwear", "Grunge"], categories: ["Outerwear", "Tops", "Bottoms"],
     priceRange: "mid", followers: 89000, rating: 4.3, featured: false, newDrop: true
   },
   {
     id: "13", name: "Eckhaus Latta", slug: "eckhaus-latta", logo: IMG("1438761681033-6461ffad8d80", 200, 200),
-    banner: IMG("1490481651871-ab68de25d43d", 1200, 500), bio: "LA art-world darlings challenging gender norms through knitwear and deconstructed Americana.",
+    banner: IMG("1490481651871-ab68de25d43d", 1200, 500), logoFont: "'Syne', sans-serif", bio: "LA art-world darlings challenging gender norms through knitwear and deconstructed Americana.",
     origin: "Los Angeles, USA", website: "https://eckhauslatta.com", affiliateUrl: "https://eckhauslatta.com?ref=drip",
     instagram: "@eckhauslatta", aesthetics: ["Avant-Garde", "Grunge", "Archive"], categories: ["Knitwear", "Tops", "Dresses"],
     priceRange: "luxury", followers: 230000, rating: 4.7, featured: false, newDrop: false
   },
   {
     id: "14", name: "Auralee", slug: "auralee", logo: IMG("1507003211169-0a1dd7228f2d", 200, 200),
-    banner: IMG("1558618666-fcd25c85f82e", 1200, 500), bio: "Japanese brand defining quiet luxury with impeccable fabrics and understated silhouettes.",
+    banner: IMG("1558618666-fcd25c85f82e", 1200, 500), logoFont: "'Abril Fatface', serif", bio: "Japanese brand defining quiet luxury with impeccable fabrics and understated silhouettes.",
     origin: "Tokyo, Japan", website: "https://auralee.jp", affiliateUrl: "https://auralee.jp?ref=drip",
     instagram: "@auralee_official", aesthetics: ["Minimalist", "Old Money"], categories: ["Tops", "Bottoms", "Knitwear", "Outerwear"],
     priceRange: "premium", followers: 155000, rating: 4.9, featured: true, newDrop: false
   },
   {
     id: "15", name: "Collina Strada", slug: "collina-strada", logo: IMG("1534528741775-53994a69daeb", 200, 200),
-    banner: IMG("1523381294911-8d28f28e5a3b", 1200, 500), bio: "Eco-conscious NYC label with tie-dye maximalism, deadstock fabrics, and garden party energy.",
+    banner: IMG("1523381294911-8d28f28e5a3b", 1200, 500), logoFont: "'Monoton', cursive", bio: "Eco-conscious NYC label with tie-dye maximalism, deadstock fabrics, and garden party energy.",
     origin: "New York, USA", website: "https://collinastrada.com", affiliateUrl: "https://collinastrada.com?ref=drip",
     instagram: "@collinastrada", aesthetics: ["Bohemian", "Y2K", "Cottagecore"], categories: ["Dresses", "Tops", "Accessories"],
     priceRange: "mid", followers: 390000, rating: 4.5, featured: false, newDrop: true
   },
   {
     id: "16", name: "VeroBottega", slug: "verobottega", logo: "https://verobottega.store/cdn/shop/files/IMG_7344.jpg?crop=center&height=200&width=200",
-    banner: "https://verobottega.store/cdn/shop/files/IMG_7344.jpg?crop=center&height=500&width=1200", bio: "Streetwear label crafting premium tracksuits, polos, and essentials straight from the workshop.",
+    banner: "https://verobottega.store/cdn/shop/files/IMG_7344.jpg?crop=center&height=500&width=1200", logoFont: "'Anton', sans-serif", bio: "Streetwear label crafting premium tracksuits, polos, and essentials straight from the workshop.",
     origin: "USA", website: "https://verobottega.store", affiliateUrl: "https://verobottega.store",
     instagram: "@verobottega", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 15000, rating: 4.5, featured: true, newDrop: true
   },
   {
     id: "17", name: "Drip by Rage", slug: "drip-by-rage", logo: "https://dripbyrage.store/cdn/shop/files/log_659ff53a-6e0e-469f-a803-e2a3e8b9eec8.png?v=1686708735&width=200",
-    banner: "https://dripbyrage.store/cdn/shop/files/freepik__enhance__244082254.png?v=1760581903&width=1200", bio: "Streetwear brand rooted in Punjabi culture and the ideology of self-expression. Bold graphics, oversized silhouettes, and sun-faded finishes that merge heritage with modern street style.",
+    banner: "https://dripbyrage.store/cdn/shop/files/freepik__enhance__244082254.png?v=1760581903&width=1200", logoFont: "'Rajdhani', sans-serif", bio: "Streetwear brand rooted in Punjabi culture and the ideology of self-expression. Bold graphics, oversized silhouettes, and sun-faded finishes that merge heritage with modern street style.",
     origin: "Canada", website: "https://dripbyrage.store", affiliateUrl: "https://dripbyrage.store",
     instagram: "@dripbyrage", tiktok: "@dripbyrage", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Outerwear", "Bottoms"],
     priceRange: "mid", followers: 50000, rating: 4.7, featured: true, newDrop: true
