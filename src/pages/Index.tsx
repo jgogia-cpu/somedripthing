@@ -1,59 +1,122 @@
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, TrendingUp, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import { brands, products, blogPosts, AESTHETICS } from "@/data/brands";
+import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/brands";
+
+const heroProducts = products.filter(p => p.trending).slice(0, 5);
 
 export default function Index() {
-  const featuredBrand = brands.find(b => b.featured)!;
+  const [currentSlide, setCurrentSlide] = useState(0);
   const trendingProducts = products.filter(p => p.trending).slice(0, 8);
   const newDropBrands = brands.filter(b => b.newDrop);
   const featuredBrands = brands.filter(b => b.featured).slice(0, 6);
 
+  const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
+  const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
+  const current = heroProducts[currentSlide];
+  const brand = getBrandById(current.brandId);
+
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-secondary/30 py-24 md:py-32">
-        <div className="container relative z-10">
+      {/* Hero Carousel */}
+      <section className="relative h-[85vh] min-h-[500px] overflow-hidden bg-primary">
+        <AnimatePresence mode="wait">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-2xl"
+            key={current.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6 }}
+            className="absolute inset-0"
           >
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
-              <Sparkles className="h-3 w-3" /> Now featuring {brands.length}+ brands
-            </span>
-            <h1 className="mt-4 font-display text-5xl font-bold leading-[1.1] tracking-tight md:text-7xl">
-              Discover the brands
-              <br />
-              <span className="text-accent">Instagram won't</span>
-              <br />
-              show you
-            </h1>
-            <p className="mt-5 max-w-md text-lg text-muted-foreground">
-              Your curated discovery engine for underground, emerging, and niche fashion.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/explore">
-                <Button size="lg" className="gap-2 rounded-full">
-                  Explore Brands <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <Link to={`/brand/${featuredBrand.slug}`}>
-                <Button size="lg" variant="outline" className="rounded-full">
-                  Today's Spotlight: {featuredBrand.name}
-                </Button>
-              </Link>
-            </div>
+            <img
+              src={current.image}
+              alt={current.name}
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
           </motion.div>
+        </AnimatePresence>
+
+        {/* Content */}
+        <div className="container relative z-10 flex h-full items-end pb-16 md:items-center md:pb-0">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="max-w-lg"
+            >
+              {brand && (
+                <Link
+                  to={`/brand/${brand.slug}`}
+                  className="mb-3 inline-block rounded-full border border-white/30 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
+                >
+                  {brand.name}
+                </Link>
+              )}
+              <h1 className="font-display text-4xl font-bold leading-[1.1] text-white md:text-6xl">
+                {current.name}
+              </h1>
+              <p className="mt-3 text-lg text-white/70">${current.price}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {current.aesthetics.map(a => (
+                  <span key={a} className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-medium text-white/80 backdrop-blur-sm">
+                    {a}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-8 flex gap-3">
+                <Link to={`/product/${current.id}`}>
+                  <Button size="lg" className="gap-2 rounded-full bg-white text-black hover:bg-white/90">
+                    View Product <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link to="/explore">
+                  <Button size="lg" variant="outline" className="rounded-full border-white/30 text-white hover:bg-white/10">
+                    Explore All
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
-        {/* Decorative bg */}
-        <div className="absolute -right-20 -top-20 h-[500px] w-[500px] rounded-full bg-accent/5 blur-3xl" />
-        <div className="absolute -bottom-32 left-1/3 h-[400px] w-[400px] rounded-full bg-drip-sage/10 blur-3xl" />
+
+        {/* Nav Arrows */}
+        <div className="absolute bottom-8 right-8 z-10 flex items-center gap-3 md:bottom-auto md:right-12 md:top-1/2 md:-translate-y-1/2 md:flex-col">
+          <button onClick={prevSlide} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white backdrop-blur-sm transition-colors hover:bg-white/20">
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button onClick={nextSlide} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white backdrop-blur-sm transition-colors hover:bg-white/20">
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Dots */}
+        <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+          {heroProducts.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentSlide(i)}
+              className={`h-1.5 rounded-full transition-all ${
+                i === currentSlide ? "w-8 bg-white" : "w-1.5 bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
       </section>
 
       {/* Category Chips */}
