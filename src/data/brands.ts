@@ -61,6 +61,8 @@ export const CATEGORIES = [
   "Accessories", "Footwear", "Bags", "Jewelry", "Swimwear"
 ] as const;
 
+import verobottegaLogo from "@/assets/verobottega-logo.png";
+
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
 
@@ -171,7 +173,7 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 390000, rating: 4.5, featured: false, newDrop: true
   },
   {
-    id: "16", name: "VeroBottega", slug: "verobottega", logo: "https://verobottega.store/cdn/shop/files/IMG_7344.jpg?crop=center&height=200&width=200",
+    id: "16", name: "VeroBottega", slug: "verobottega", logo: verobottegaLogo,
     banner: "https://verobottega.store/cdn/shop/files/IMG_7344.jpg?crop=center&height=500&width=1200", logoFont: "'Anton', sans-serif", bio: "Streetwear label crafting premium tracksuits, polos, and essentials straight from the workshop.",
     origin: "USA", website: "https://verobottega.store", affiliateUrl: "https://verobottega.store",
     instagram: "@verobottega", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms", "Outerwear"],
