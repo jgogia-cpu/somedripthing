@@ -10,7 +10,7 @@ import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/br
 import { useCurrency } from "@/contexts/CurrencyContext";
 
 const heroProducts = (() => {
-  const anchorBrandIds = ["16", "17", "18", "19"];
+  const anchorBrandIds = ["16", "17", "18", "19", "20"];
   const anchored = products.filter(p => anchorBrandIds.includes(p.brandId) && p.trending);
   const others = products.filter(p => !anchorBrandIds.includes(p.brandId) && p.trending);
   return [...anchored, ...others].slice(0, 7);
