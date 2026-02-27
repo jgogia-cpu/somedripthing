@@ -15,7 +15,7 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
       transition={{ delay: index * 0.05, duration: 0.4 }}
     >
       <Link to={`/brand/${brand.slug}`} className="group block">
-        <div className="relative overflow-hidden rounded-xl bg-secondary flex items-center justify-center" style={{ aspectRatio: "3/2" }}>
+        <div className={`relative overflow-hidden rounded-xl flex items-center justify-center ${brand.darkCard ? "bg-black" : "bg-secondary"}`} style={{ aspectRatio: "3/2" }}>
           <img
             src={brand.logo}
             alt={brand.name}

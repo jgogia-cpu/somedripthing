@@ -5,6 +5,7 @@ export interface Brand {
   logo: string;
   banner: string;
   logoFont?: string;
+  darkCard?: boolean;
   bio: string;
   origin: string;
   website: string;
@@ -181,7 +182,7 @@ export const brands: Brand[] = [
   },
   {
     id: "17", name: "Drip by Rage", slug: "drip-by-rage", logo: "https://dripbyrage.store/cdn/shop/files/log_659ff53a-6e0e-469f-a803-e2a3e8b9eec8.png?v=1686708735&width=200",
-    banner: "https://dripbyrage.store/cdn/shop/files/freepik__enhance__244082254.png?v=1760581903&width=1200", logoFont: "'Rajdhani', sans-serif", bio: "Streetwear brand rooted in Punjabi culture and the ideology of self-expression. Bold graphics, oversized silhouettes, and sun-faded finishes that merge heritage with modern street style.",
+    banner: "https://dripbyrage.store/cdn/shop/files/freepik__enhance__244082254.png?v=1760581903&width=1200", logoFont: "'Rajdhani', sans-serif", darkCard: true, bio: "Streetwear brand rooted in Punjabi culture and the ideology of self-expression. Bold graphics, oversized silhouettes, and sun-faded finishes that merge heritage with modern street style.",
     origin: "Canada", website: "https://dripbyrage.store", affiliateUrl: "https://dripbyrage.store",
     instagram: "@dripbyrage", tiktok: "@dripbyrage", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Outerwear", "Bottoms"],
     priceRange: "mid", followers: 50000, rating: 4.7, featured: true, newDrop: true
