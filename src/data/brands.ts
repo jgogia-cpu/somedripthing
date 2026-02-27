@@ -63,6 +63,8 @@ export const CATEGORIES = [
 ] as const;
 
 import verobottegaLogo from "@/assets/verobottega-logo.png";
+import apolloOriginalsLogo from "@/assets/apollo-originals-logo.png";
+import touroBanner from "@/assets/touro-studio-banner.jpg";
 
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
@@ -83,15 +85,15 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 50000, rating: 4.7, featured: true, newDrop: true
   },
   {
-    id: "18", name: "Apollo Originals", slug: "apollo-originals", logo: "https://www.apollooriginals.com/cdn/shop/files/APOLLO-College-A.png?v=1752114247&width=400",
+    id: "18", name: "Apollo Originals", slug: "apollo-originals", logo: apolloOriginalsLogo,
     banner: "https://www.apollooriginals.com/cdn/shop/files/DSC04632.jpg?height=500&width=1200&v=1760980219", logoFont: "'Oswald', sans-serif", darkCard: true, bio: "Quality-focused streetwear label blending sports culture with space-age graphics. Custom apparel, heavyweight hoodies, and bold graphic tees designed to stand out.",
     origin: "USA", website: "https://www.apollooriginals.com", affiliateUrl: "https://www.apollooriginals.com",
     instagram: "@apollooriginals", aesthetics: ["Streetwear", "Grunge"], categories: ["Tops", "Outerwear", "Accessories"],
     priceRange: "mid", followers: 12000, rating: 4.4, featured: true, newDrop: true
   },
   {
-    id: "19", name: "Touro Studio", slug: "touro-studio", logo: "https://tourostudio.com/cdn/shop/files/preview_images/e4bc8ab24d2f463c995ababeb75ac330.thumbnail.0000000000_3840x.jpg?v=1765008749",
-    banner: "https://tourostudio.com/cdn/shop/files/touro1.jpg?v=1765346119&width=1200", bio: "Quiet form. Focused fit. India-made, purpose-led. Touro Studio crafts premium oversized tees with minimalist design and intentional silhouettes.",
+    id: "19", name: "Touro Studio", slug: "touro-studio", logo: touroBanner,
+    banner: "https://tourostudio.com/cdn/shop/files/touro1.jpg?v=1765346119&width=1200", logoFont: "'Montserrat', sans-serif", bio: "Quiet form. Focused fit. India-made, purpose-led. Touro Studio crafts premium oversized tees with minimalist design and intentional silhouettes.",
     origin: "India", website: "https://tourostudio.com", affiliateUrl: "https://tourostudio.com",
     instagram: "@tourostudio", aesthetics: ["Minimalist", "Streetwear"], categories: ["Tops"],
     priceRange: "budget", followers: 8000, rating: 4.3, featured: true, newDrop: true
