@@ -9,7 +9,11 @@ import NewsletterSignup from "@/components/NewsletterSignup";
 import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 
-const heroProducts = products.filter(p => p.trending).slice(0, 5);
+const heroBrandIds = ["16", "17"]; // VeroBottega, Drip by Rage
+const heroProducts = [
+  ...products.filter(p => p.trending && heroBrandIds.includes(p.brandId)).slice(0, 3),
+  ...products.filter(p => p.trending && !heroBrandIds.includes(p.brandId)).slice(0, 2),
+].slice(0, 5);
 
 function getCarouselTransform(index: number, active: number, total: number) {
   let offset = index - active;
