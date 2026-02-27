@@ -1,9 +1,20 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, Heart, Menu, X } from "lucide-react";
+import { Search, Heart, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
+
+const SUBCATEGORIES = [
+  { slug: "hoodies", label: "Hoodies" },
+  { slug: "shirts", label: "Shirts" },
+  { slug: "sweaters", label: "Sweaters" },
+  { slug: "denim", label: "Denim" },
+  { slug: "bottoms", label: "Bottoms" },
+  { slug: "jackets", label: "Jackets" },
+  { slug: "kicks", label: "Kicks" },
+  { slug: "accessories", label: "Accessories" },
+];
 
 const NAV_LINKS = [
   { to: "/", label: "Home" },
@@ -11,8 +22,49 @@ const NAV_LINKS = [
   { to: "/blog", label: "Editorial" },
 ];
 
+function GenderDropdown({ gender, label }: { gender: string; label: string }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground">
+        {label}
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.15 }}
+            className="absolute left-0 top-full z-50 mt-2 w-44 rounded-xl border bg-card p-2 shadow-xl"
+          >
+            {SUBCATEGORIES.map(sub => (
+              <Link
+                key={sub.slug}
+                to={`/shop/${gender}/${sub.slug}`}
+                className="block rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                onClick={() => setOpen(false)}
+              >
+                {sub.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileHimOpen, setMobileHimOpen] = useState(false);
+  const [mobileHerOpen, setMobileHerOpen] = useState(false);
   const location = useLocation();
 
   return (
@@ -24,6 +76,8 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden items-center gap-8 md:flex">
+          <GenderDropdown gender="him" label="Him" />
+          <GenderDropdown gender="her" label="Her" />
           {NAV_LINKS.map(link => (
             <Link
               key={link.to}
@@ -69,7 +123,45 @@ export default function Navbar() {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden border-t md:hidden"
           >
-            <div className="container flex flex-col gap-4 py-6">
+            <div className="container flex flex-col gap-2 py-6">
+              {/* HIM mobile */}
+              <button
+                onClick={() => setMobileHimOpen(!mobileHimOpen)}
+                className="flex items-center justify-between font-display text-lg font-semibold uppercase"
+              >
+                Him <ChevronDown className={`h-4 w-4 transition-transform ${mobileHimOpen ? "rotate-180" : ""}`} />
+              </button>
+              <AnimatePresence>
+                {mobileHimOpen && (
+                  <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden pl-4">
+                    {SUBCATEGORIES.map(sub => (
+                      <Link key={sub.slug} to={`/shop/him/${sub.slug}`} onClick={() => setMobileOpen(false)} className="block py-1.5 text-sm text-muted-foreground">
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* HER mobile */}
+              <button
+                onClick={() => setMobileHerOpen(!mobileHerOpen)}
+                className="flex items-center justify-between font-display text-lg font-semibold uppercase"
+              >
+                Her <ChevronDown className={`h-4 w-4 transition-transform ${mobileHerOpen ? "rotate-180" : ""}`} />
+              </button>
+              <AnimatePresence>
+                {mobileHerOpen && (
+                  <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden pl-4">
+                    {SUBCATEGORIES.map(sub => (
+                      <Link key={sub.slug} to={`/shop/her/${sub.slug}`} onClick={() => setMobileOpen(false)} className="block py-1.5 text-sm text-muted-foreground">
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {NAV_LINKS.map(link => (
                 <Link
                   key={link.to}
