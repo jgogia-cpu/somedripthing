@@ -48,6 +48,9 @@ export default function Index() {
       {/* 3D Carousel Hero */}
       <section className="relative overflow-hidden bg-secondary/30 py-12 md:py-20">
         <div className="container">
+          <h1 className="mb-8 text-center font-display text-5xl font-bold tracking-tight md:text-7xl">
+            DRIP<span className="text-accent">.</span>
+          </h1>
           {/* 3D Carousel */}
           <div className="relative mx-auto flex items-center justify-center" style={{ perspective: "1200px", height: "440px" }}>
             {heroProducts.map((product, i) => {
