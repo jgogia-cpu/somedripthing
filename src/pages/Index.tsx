@@ -11,9 +11,15 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 
 const heroProducts = (() => {
   const anchorBrandIds = ["16", "17", "18", "19", "20"];
-  const anchored = products.filter(p => anchorBrandIds.includes(p.brandId) && p.trending);
-  const others = products.filter(p => !anchorBrandIds.includes(p.brandId) && p.trending);
-  return [...anchored, ...others].slice(0, 7);
+  const guaranteed = anchorBrandIds
+    .map((brandId) => products.find((p) => p.brandId === brandId && p.trending))
+    .filter((p): p is (typeof products)[number] => Boolean(p));
+
+  const remainingTrending = products.filter(
+    (p) => p.trending && !guaranteed.some((g) => g.id === p.id),
+  );
+
+  return [...guaranteed, ...remainingTrending].slice(0, 7);
 })();
 
 function getCarouselTransform(index: number, active: number, total: number) {
