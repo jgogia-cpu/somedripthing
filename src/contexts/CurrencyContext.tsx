@@ -65,10 +65,16 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
 
   const formatPrice = useCallback((usdPrice: number) => {
     const converted = usdPrice * currency.rate;
-    if (currency.code === "JPY" || currency.code === "NGN") {
-      return `${currency.symbol}${Math.round(converted).toLocaleString()}`;
+    if (currency.code === "JPY") {
+      // Round to nearest 100 for yen
+      return `${currency.symbol}${(Math.round(converted / 100) * 100).toLocaleString()}`;
     }
-    return `${currency.symbol}${converted.toFixed(2)}`;
+    if (currency.code === "NGN") {
+      // Round to nearest 500 for naira
+      return `${currency.symbol}${(Math.round(converted / 500) * 500).toLocaleString()}`;
+    }
+    // Round to nearest whole number for all other currencies
+    return `${currency.symbol}${Math.round(converted).toLocaleString()}`;
   }, [currency]);
 
   return (
