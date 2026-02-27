@@ -1,0 +1,4 @@
+project_id = "wpadinulltmnllrsaimv"
+
+[functions.exchange-rates]
+verify_jwt = false
