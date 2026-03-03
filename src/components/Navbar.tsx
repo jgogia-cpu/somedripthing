@@ -92,7 +92,9 @@ export default function Navbar() {
               key={link.to}
               to={link.to}
               className={`text-sm font-medium transition-colors hover:text-accent ${
-                location.pathname === link.to ? "text-foreground" : "text-muted-foreground"
+                link.serif
+                  ? "rounded-full bg-primary px-3 py-1 text-primary-foreground hover:opacity-90 hover:text-primary-foreground"
+                  : location.pathname === link.to ? "text-foreground" : "text-muted-foreground"
               }`}
               style={link.serif ? { fontFamily: "'Playfair Display', serif", fontWeight: 700 } : undefined}
             >
