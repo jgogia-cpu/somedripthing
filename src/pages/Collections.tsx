@@ -1,24 +1,62 @@
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { products, getBrandById } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 
-const WEEKLY_COLLECTION = {
-  title: "Heat Check",
-  subtitle: "This Week's Must-Haves",
-  description:
-    "Our editors hand-picked the hardest pieces dropping this week — from statement leather to heritage streetwear. No filler, just heat.",
-  date: "Week of March 3, 2026",
-  picks: ["p29", "p45", "p51", "p35", "p48", "p55", "p42", "p22"],
-};
+/** Return the Monday of the current week as a Date */
+function getCurrentMonday(): Date {
+  const now = new Date();
+  const day = now.getDay(); // 0=Sun … 6=Sat
+  const diff = day === 0 ? -6 : 1 - day; // Mon = 1
+  const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diff);
+  return monday;
+}
+
+/** Simple seeded PRNG (mulberry32) */
+function seededRandom(seed: number) {
+  let t = (seed + 0x6d2b79f5) | 0;
+  t = Math.imul(t ^ (t >>> 15), t | 1);
+  t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+}
+
+/** Deterministic shuffle using a seed */
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(seededRandom(seed + i) * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function getWeeklyCollection() {
+  const monday = getCurrentMonday();
+  // Seed from the Monday date so it changes each week
+  const seed = monday.getFullYear() * 10000 + (monday.getMonth() + 1) * 100 + monday.getDate();
+  const shuffled = seededShuffle(products, seed);
+  const picks = shuffled.slice(0, 8);
+
+  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const dateLabel = `Week of ${monthNames[monday.getMonth()]} ${monday.getDate()}, ${monday.getFullYear()}`;
+
+  return {
+    title: "Heat Check",
+    subtitle: "This Week's Must-Haves",
+    description:
+      "Our editors hand-picked the hardest pieces dropping this week — from statement leather to heritage streetwear. No filler, just heat.",
+    date: dateLabel,
+    picks,
+  };
+}
 
 export default function Collections() {
   const { formatPrice } = useCurrency();
-  const collectionProducts = WEEKLY_COLLECTION.picks
-    .map((id) => products.find((p) => p.id === id))
-    .filter((p): p is (typeof products)[number] => Boolean(p));
+  const collection = useMemo(() => getWeeklyCollection(), []);
+  const collectionProducts = collection.picks;
 
   return (
     <div className="min-h-screen">
@@ -39,23 +77,23 @@ export default function Collections() {
             <div className="flex items-center gap-2 text-primary-foreground/60">
               <Calendar className="h-4 w-4" />
               <span className="text-xs font-medium uppercase tracking-widest">
-                {WEEKLY_COLLECTION.date}
+                {collection.date}
               </span>
             </div>
             <h1
               className="mt-3 text-5xl font-bold tracking-tight md:text-7xl"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              {WEEKLY_COLLECTION.title}
+              {collection.title}
             </h1>
             <p
               className="mt-2 text-2xl font-light text-primary-foreground/80 md:text-3xl"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              {WEEKLY_COLLECTION.subtitle}
+              {collection.subtitle}
             </p>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/60">
-              {WEEKLY_COLLECTION.description}
+              {collection.description}
             </p>
           </motion.div>
         </div>
