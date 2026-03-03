@@ -195,14 +195,7 @@ export default function Index() {
       {/* Category Chips */}
       <section className="border-b py-6">
         <div className="container">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            <Link
-              to="/collections"
-              className="shrink-0 rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-90"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              Collections
-            </Link>
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
             {AESTHETICS.map(tag => (
               <Link
                 key={tag}

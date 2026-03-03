@@ -27,6 +27,7 @@ const SUBCATEGORIES = [
 const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/explore", label: "Explore" },
+  { to: "/collections", label: "Collections", serif: true },
   { to: "/blog", label: "Editorial" },
 ];
 
@@ -93,6 +94,7 @@ export default function Navbar() {
               className={`text-sm font-medium transition-colors hover:text-accent ${
                 location.pathname === link.to ? "text-foreground" : "text-muted-foreground"
               }`}
+              style={link.serif ? { fontFamily: "'Playfair Display', serif", fontWeight: 700 } : undefined}
             >
               {link.label}
             </Link>
