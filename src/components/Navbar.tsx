@@ -82,8 +82,8 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center">
-          <img src={dripwayLogo} alt="DRIPWAY" className="h-5" />
+        <Link to="/" className="text-xl font-bold tracking-tight" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
+          DRIPWAY
         </Link>
 
         {/* Desktop Nav */}
