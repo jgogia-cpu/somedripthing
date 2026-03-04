@@ -60,7 +60,7 @@ export default function AuthDialog({ open, onClose }: AuthDialogProps) {
             </button>
 
             <h2 className="font-display text-2xl font-bold">
-              {mode === "signin" ? "Welcome Back" : "Join DRIP"}
+              {mode === "signin" ? "Welcome Back" : "Join DRIPWAY"}
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
               {mode === "signin" ? "Sign in to access your wishlist" : "Create an account to save your favorites"}

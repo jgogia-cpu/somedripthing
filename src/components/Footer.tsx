@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instagram } from "lucide-react";
+import dripwayLogo from "@/assets/dripway-logo.jpg";
 
 export default function Footer() {
   return (
@@ -7,8 +8,8 @@ export default function Footer() {
       <div className="container">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link to="/" className="font-display text-2xl font-bold">
-              DRIP<span className="text-accent">.</span>
+            <Link to="/" className="flex items-center">
+              <img src={dripwayLogo} alt="DRIPWAY" className="h-5" />
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
               Discover the brands Instagram won't show you.
@@ -41,7 +42,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 border-t pt-6 text-center text-xs text-muted-foreground">
-          © 2026 DRIP. All rights reserved.
+          © 2026 DRIPWAY. All rights reserved.
         </div>
       </div>
     </footer>

@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
 import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/contexts/AuthContext";
+import dripwayLogo from "@/assets/dripway-logo.jpg";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -81,8 +82,8 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="font-display text-2xl font-bold tracking-tight">
-          DRIP<span className="text-accent">.</span>
+        <Link to="/" className="flex items-center">
+          <img src={dripwayLogo} alt="DRIPWAY" className="h-5" />
         </Link>
 
         {/* Desktop Nav */}
