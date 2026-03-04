@@ -29,7 +29,6 @@ const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/explore", label: "Explore" },
   { to: "/collections", label: "Collections", serif: true },
-  { to: "/blog", label: "Editorial" },
 ];
 
 function GenderDropdown({ gender, label }: { gender: string; label: string }) {
