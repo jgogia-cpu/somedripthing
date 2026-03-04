@@ -261,47 +261,6 @@ export default function Index() {
       {/* Newsletter */}
       <NewsletterSignup />
 
-      {/* Editorial Preview */}
-      <section className="py-16">
-        <div className="container">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="font-display text-2xl font-bold">From the Editorial</h2>
-            <Link to="/blog" className="text-sm font-medium text-accent hover:underline">
-              Read all
-            </Link>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {blogPosts.map((post, i) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <Link to={`/blog/${post.slug}`} className="group block">
-                  <div className="overflow-hidden rounded-lg">
-                    <img
-                      src={post.coverImage}
-                      alt={post.title}
-                      loading="lazy"
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="mt-3">
-                    <span className="text-[10px] font-semibold uppercase tracking-widest text-accent">
-                      {post.category}
-                    </span>
-                    <h3 className="mt-1 font-display text-sm font-semibold leading-tight">
-                      {post.title}
-                    </h3>
-                    <p className="mt-1 text-xs text-muted-foreground">{post.readTime} min read</p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

@@ -19,9 +19,11 @@ export default function Footer() {
             <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider">Discover</h4>
             <div className="flex flex-col gap-2 text-sm text-muted-foreground">
               <Link to="/explore" className="hover:text-foreground transition-colors">All Brands</Link>
+              <Link to="/collections" className="hover:text-foreground transition-colors">Collections</Link>
+              <Link to="/shop/him/hoodies" className="hover:text-foreground transition-colors">Shop Him</Link>
+              <Link to="/shop/her/hoodies" className="hover:text-foreground transition-colors">Shop Her</Link>
               <Link to="/explore?aesthetic=Streetwear" className="hover:text-foreground transition-colors">Streetwear</Link>
               <Link to="/explore?aesthetic=Minimalist" className="hover:text-foreground transition-colors">Minimalist</Link>
-              <Link to="/explore?aesthetic=Y2K" className="hover:text-foreground transition-colors">Y2K</Link>
             </div>
           </div>
           <div>
