@@ -77,7 +77,7 @@ export default function Index() {
       {/* 3D Carousel Hero */}
       <section className="relative overflow-hidden bg-secondary/30 py-12 md:py-20">
         <div className="container">
-          <h1 className="mb-1 text-center font-display text-5xl font-bold tracking-tight md:text-7xl">
+          <h1 className="mb-1 text-center text-5xl font-bold tracking-tight md:text-7xl" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
             DRIPWAY
           </h1>
           <p className="mb-8 text-center text-sm font-medium uppercase tracking-widest text-muted-foreground">
