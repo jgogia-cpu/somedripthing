@@ -10,7 +10,7 @@ import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/br
 import { useCurrency } from "@/contexts/CurrencyContext";
 
 const heroProducts = (() => {
-  const anchorBrandIds = ["17", "18", "19", "20", "21", "22", "23"];
+  const anchorBrandIds = ["17", "18", "19", "20", "21", "22", "23", "24"];
   const guaranteed = anchorBrandIds
     .map((brandId) => products.find((p) => p.brandId === brandId && p.trending))
     .filter((p): p is (typeof products)[number] => Boolean(p));
@@ -42,7 +42,7 @@ export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { formatPrice } = useCurrency();
   const trendingProducts = (() => {
-    const newerBrandIds = ["18", "19", "20", "21", "22", "23"];
+    const newerBrandIds = ["18", "19", "20", "21", "22", "23", "24"];
     const olderBrandIds = ["17"];
     // 2 from each newer brand
     const newerPicks = newerBrandIds.flatMap((brandId) =>
