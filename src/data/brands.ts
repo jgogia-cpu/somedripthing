@@ -120,6 +120,13 @@ export const brands: Brand[] = [
     instagram: "@doviraclothing", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 8000, rating: 4.4, featured: true, newDrop: true
   },
+  {
+    id: "24", name: "Preview Worldwide", slug: "preview-worldwide", logo: "https://previewworldwide.com/cdn/shop/files/IMG_7794-removebg-preview.png?v=1771629432&width=600",
+    banner: "https://previewworldwide.com/cdn/shop/files/IMG_7794-removebg-preview.png?v=1771629432&width=600", logoFont: "'Bebas Neue', sans-serif", darkCard: true, bio: "Preview Worldwide is a bold streetwear brand delivering graphic-heavy tees, hoodies, sweatsuits, and accessories. Known for vibrant designs, motorsport-inspired pieces, and statement graphics that blend Y2K energy with modern street culture.",
+    origin: "USA", website: "https://previewworldwide.com", affiliateUrl: "https://previewworldwide.com",
+    instagram: "@previewworldwide", aesthetics: ["Streetwear", "Y2K", "Grunge"], categories: ["Tops", "Bottoms", "Accessories"],
+    priceRange: "budget", followers: 15000, rating: 4.5, featured: true, newDrop: true
+  },
 ];
 
 export const products: Product[] = [
