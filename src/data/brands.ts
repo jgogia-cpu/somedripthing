@@ -90,7 +90,7 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 12000, rating: 4.4, featured: true, newDrop: true
   },
   {
-    id: "19", name: "Touro Studio", slug: "touro-studio", logo: touroBanner,
+    id: "19", name: "Touro Studio", slug: "touro-studio", logo: touroLogo,
     banner: "https://tourostudio.com/cdn/shop/files/touro1.jpg?v=1765346119&width=1200", logoFont: "'Montserrat', sans-serif", bio: "Quiet form. Focused fit. India-made, purpose-led. Touro Studio crafts premium oversized tees with minimalist design and intentional silhouettes.",
     origin: "India", website: "https://tourostudio.com", affiliateUrl: "https://tourostudio.com",
     instagram: "@tourostudio", aesthetics: ["Minimalist", "Streetwear"], categories: ["Tops"],
