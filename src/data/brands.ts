@@ -104,7 +104,7 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 5000, rating: 4.5, featured: true, newDrop: true
   },
   {
-    id: "21", name: "Dimito", slug: "dimito", logo: "https://www.dimito.com/cdn/shop/files/vert-blurry-logo-hoodie-black-39500119048345.jpg?v=1727188903&width=600",
+    id: "21", name: "Dimito", slug: "dimito", logo: dimitoLogo,
     banner: "https://www.dimito.com/cdn/shop/files/vert-blurry-logo-hoodie-black-39500119048345.jpg?v=1727188903&width=1200", logoFont: "'Bebas Neue', sans-serif", darkCard: true, bio: "Born in South Korea, Dimito bridges snowboard culture and street fashion. Known for their 'Positive Mind' philosophy, they craft technical outerwear, garment-dyed tees, and bold graphic hoodies with premium cotton and no-twist tentar processing.",
     origin: "South Korea", website: "https://www.dimito.com", affiliateUrl: "https://www.dimito.com",
     instagram: "@dimito_official", aesthetics: ["Streetwear", "Techwear"], categories: ["Tops", "Outerwear"],
