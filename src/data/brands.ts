@@ -63,9 +63,12 @@ export const CATEGORIES = [
   "Accessories", "Footwear", "Bags", "Jewelry", "Swimwear"
 ] as const;
 
-import apolloOriginalsLogo from "@/assets/apollo-originals-logo.png";
-import touroBanner from "@/assets/touro-studio-banner.jpg";
+import apolloOriginalsLogo from "@/assets/apollo-originals-logo-clean.png";
+import touroLogo from "@/assets/touro-studio-logo-clean.png";
 import kogiBanner from "@/assets/kogi-collective-banner.jpg";
+import dimitoLogo from "@/assets/dimito-logo.png";
+import christopherNoirLogo from "@/assets/christopher-noir-logo.png";
+import doviraLogo from "@/assets/dovira-logo.png";
 import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
 
 const IMG = (seed: string, w = 600, h = 800) =>
@@ -87,7 +90,7 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 12000, rating: 4.4, featured: true, newDrop: true
   },
   {
-    id: "19", name: "Touro Studio", slug: "touro-studio", logo: touroBanner,
+    id: "19", name: "Touro Studio", slug: "touro-studio", logo: touroLogo,
     banner: "https://tourostudio.com/cdn/shop/files/touro1.jpg?v=1765346119&width=1200", logoFont: "'Montserrat', sans-serif", bio: "Quiet form. Focused fit. India-made, purpose-led. Touro Studio crafts premium oversized tees with minimalist design and intentional silhouettes.",
     origin: "India", website: "https://tourostudio.com", affiliateUrl: "https://tourostudio.com",
     instagram: "@tourostudio", aesthetics: ["Minimalist", "Streetwear"], categories: ["Tops"],
@@ -101,21 +104,21 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 5000, rating: 4.5, featured: true, newDrop: true
   },
   {
-    id: "21", name: "Dimito", slug: "dimito", logo: "https://www.dimito.com/cdn/shop/files/vert-blurry-logo-hoodie-black-39500119048345.jpg?v=1727188903&width=600",
+    id: "21", name: "Dimito", slug: "dimito", logo: dimitoLogo,
     banner: "https://www.dimito.com/cdn/shop/files/vert-blurry-logo-hoodie-black-39500119048345.jpg?v=1727188903&width=1200", logoFont: "'Bebas Neue', sans-serif", darkCard: true, bio: "Born in South Korea, Dimito bridges snowboard culture and street fashion. Known for their 'Positive Mind' philosophy, they craft technical outerwear, garment-dyed tees, and bold graphic hoodies with premium cotton and no-twist tentar processing.",
     origin: "South Korea", website: "https://www.dimito.com", affiliateUrl: "https://www.dimito.com",
     instagram: "@dimito_official", aesthetics: ["Streetwear", "Techwear"], categories: ["Tops", "Outerwear"],
     priceRange: "mid", followers: 95000, rating: 4.6, featured: true, newDrop: true
   },
   {
-    id: "22", name: "Christopher Noir", slug: "christopher-noir", logo: "https://www.christophernoir.com/cdn/shop/files/cnoir-noir-croc-statement-jacket-unisex-4070878.png?v=1766246871&width=600",
+    id: "22", name: "Christopher Noir", slug: "christopher-noir", logo: christopherNoirLogo,
     banner: "https://www.christophernoir.com/cdn/shop/files/cnoir-noir-croc-statement-jacket-unisex-4070878.png?v=1766246871&width=1200", logoFont: "'Playfair Display', serif", darkCard: true, bio: "Culture meets couture. Christopher Noir is a London-based luxury label specializing in made-to-order leather jackets, statement bombers, and African-inspired kaftans. Each piece is handcrafted and delivered worldwide — where heritage craftsmanship meets modern edge.",
     origin: "United Kingdom", website: "https://www.christophernoir.com", affiliateUrl: "https://www.christophernoir.com",
     instagram: "@bychristophernoir", aesthetics: ["Avant-Garde", "Old Money"], categories: ["Outerwear", "Tops", "Dresses"],
     priceRange: "luxury", followers: 25000, rating: 4.8, featured: true, newDrop: true
   },
   {
-    id: "23", name: "Dovira", slug: "dovira", logo: "https://doviraclothing.com/cdn/shop/files/01_Mai_Copy_-_Artboard_89_3.png?v=1766357149&width=600",
+    id: "23", name: "Dovira", slug: "dovira", logo: doviraLogo,
     banner: "https://doviraclothing.com/cdn/shop/files/01_Mai_Copy_-_Artboard_89_3.png?v=1766357149&width=1200", logoFont: "'Inter', sans-serif", darkCard: true, bio: "Stay Grounded. Dovira creates premium essentials for those who hustle, stay grounded, and trust their vision. From contrast tracksuits to sun-faded hoodies, every piece blends utility with understated street style.",
     origin: "Canada", website: "https://doviraclothing.com", affiliateUrl: "https://doviraclothing.com",
     instagram: "@doviraclothing", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms", "Outerwear"],
