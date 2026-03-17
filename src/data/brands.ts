@@ -66,6 +66,7 @@ export const CATEGORIES = [
 import apolloOriginalsLogo from "@/assets/apollo-originals-logo.png";
 import touroBanner from "@/assets/touro-studio-banner.jpg";
 import kogiBanner from "@/assets/kogi-collective-banner.jpg";
+import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
 
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
