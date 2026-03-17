@@ -111,7 +111,7 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 95000, rating: 4.6, featured: true, newDrop: true
   },
   {
-    id: "22", name: "Christopher Noir", slug: "christopher-noir", logo: "https://www.christophernoir.com/cdn/shop/files/cnoir-noir-croc-statement-jacket-unisex-4070878.png?v=1766246871&width=600",
+    id: "22", name: "Christopher Noir", slug: "christopher-noir", logo: christopherNoirLogo,
     banner: "https://www.christophernoir.com/cdn/shop/files/cnoir-noir-croc-statement-jacket-unisex-4070878.png?v=1766246871&width=1200", logoFont: "'Playfair Display', serif", darkCard: true, bio: "Culture meets couture. Christopher Noir is a London-based luxury label specializing in made-to-order leather jackets, statement bombers, and African-inspired kaftans. Each piece is handcrafted and delivered worldwide — where heritage craftsmanship meets modern edge.",
     origin: "United Kingdom", website: "https://www.christophernoir.com", affiliateUrl: "https://www.christophernoir.com",
     instagram: "@bychristophernoir", aesthetics: ["Avant-Garde", "Old Money"], categories: ["Outerwear", "Tops", "Dresses"],
