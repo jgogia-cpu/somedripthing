@@ -118,7 +118,7 @@ export const brands: Brand[] = [
     priceRange: "luxury", followers: 25000, rating: 4.8, featured: true, newDrop: true
   },
   {
-    id: "23", name: "Dovira", slug: "dovira", logo: "https://doviraclothing.com/cdn/shop/files/01_Mai_Copy_-_Artboard_89_3.png?v=1766357149&width=600",
+    id: "23", name: "Dovira", slug: "dovira", logo: doviraLogo,
     banner: "https://doviraclothing.com/cdn/shop/files/01_Mai_Copy_-_Artboard_89_3.png?v=1766357149&width=1200", logoFont: "'Inter', sans-serif", darkCard: true, bio: "Stay Grounded. Dovira creates premium essentials for those who hustle, stay grounded, and trust their vision. From contrast tracksuits to sun-faded hoodies, every piece blends utility with understated street style.",
     origin: "Canada", website: "https://doviraclothing.com", affiliateUrl: "https://doviraclothing.com",
     instagram: "@doviraclothing", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms", "Outerwear"],
