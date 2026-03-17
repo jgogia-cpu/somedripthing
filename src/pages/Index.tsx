@@ -10,16 +10,18 @@ import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/br
 import { useCurrency } from "@/contexts/CurrencyContext";
 
 const heroProducts = (() => {
+  const pinnedIds = ["p69", "p70"];
   const anchorBrandIds = ["17", "18", "19", "20", "21", "22", "23", "24"];
   const guaranteed = anchorBrandIds
-    .map((brandId) => products.find((p) => p.brandId === brandId && p.trending))
+    .map((brandId) => products.find((p) => p.brandId === brandId && p.trending && !pinnedIds.includes(p.id)))
     .filter((p): p is (typeof products)[number] => Boolean(p));
 
   const remainingTrending = products.filter(
-    (p) => p.trending && !guaranteed.some((g) => g.id === p.id),
+    (p) => p.trending && !guaranteed.some((g) => g.id === p.id) && !pinnedIds.includes(p.id),
   );
 
-  return [...guaranteed, ...remainingTrending].slice(0, 7);
+  const pinned = pinnedIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
+  return [...pinned, ...guaranteed, ...remainingTrending].slice(0, 8);
 })();
 
 function getCarouselTransform(index: number, active: number, total: number) {
