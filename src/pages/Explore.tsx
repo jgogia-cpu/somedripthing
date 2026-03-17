@@ -56,6 +56,16 @@ export default function Explore() {
     else if (sort === "price-high") result.sort((a, b) => b.price - a.price);
     else if (sort === "newest") result.sort((a, b) => (b.newArrival ? 1 : 0) - (a.newArrival ? 1 : 0));
     else result.sort((a, b) => (b.trending ? 1 : 0) - (a.trending ? 1 : 0));
+    // Pin Preview Worldwide Multicolor products to top
+    const pinnedIds = ["p69", "p70"];
+    result.sort((a, b) => {
+      const aPin = pinnedIds.indexOf(a.id);
+      const bPin = pinnedIds.indexOf(b.id);
+      if (aPin !== -1 && bPin !== -1) return aPin - bPin;
+      if (aPin !== -1) return -1;
+      if (bPin !== -1) return 1;
+      return 0;
+    });
     return result;
   }, [search, selectedAesthetics, selectedCategories, selectedPrice, sort]);
 
