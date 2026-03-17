@@ -63,9 +63,12 @@ export const CATEGORIES = [
   "Accessories", "Footwear", "Bags", "Jewelry", "Swimwear"
 ] as const;
 
-import apolloOriginalsLogo from "@/assets/apollo-originals-logo.png";
-import touroBanner from "@/assets/touro-studio-banner.jpg";
+import apolloOriginalsLogo from "@/assets/apollo-originals-logo-clean.png";
+import touroLogo from "@/assets/touro-studio-logo-clean.png";
 import kogiBanner from "@/assets/kogi-collective-banner.jpg";
+import dimitoLogo from "@/assets/dimito-logo.png";
+import christopherNoirLogo from "@/assets/christopher-noir-logo.png";
+import doviraLogo from "@/assets/dovira-logo.png";
 import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
 
 const IMG = (seed: string, w = 600, h = 800) =>
