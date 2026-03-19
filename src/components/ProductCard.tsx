@@ -25,6 +25,11 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     >
       <Link to={`/product/${product.id}`} className="block">
         <div className="relative overflow-hidden rounded-lg bg-secondary">
+          {product.brandId === "17" && (
+            <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
+              GET 10% OFF WITH CODE DRIPWAYAPPAREL
+            </div>
+          )}
           <img
             src={product.image}
             alt={product.name}
