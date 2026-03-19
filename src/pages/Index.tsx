@@ -11,7 +11,7 @@ import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/br
 import { useCurrency } from "@/contexts/CurrencyContext";
 
 const heroProducts = (() => {
-  const pinnedIds = ["p69", "p70", "p92", "p93"];
+  const pinnedIds = ["p69", "p92", "p93", "p70"];
   const anchorBrandIds = ["17", "19", "20", "21", "23", "24", "25"];
   const guaranteed = anchorBrandIds
     .map((brandId) => products.find((p) => p.brandId === brandId && p.trending && !pinnedIds.includes(p.id)))
