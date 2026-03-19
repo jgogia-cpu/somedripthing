@@ -106,13 +106,20 @@ export default function Index() {
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <video
-            ref={videoRef}
+            ref={videoRefs[0]}
             autoPlay
             muted
             playsInline
-            className="h-full w-full object-cover"
-            src={HERO_VIDEOS[currentVideo]}
-            onEnded={() => setCurrentVideo(v => (v + 1) % HERO_VIDEOS.length)}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 0 ? 'opacity-100' : 'opacity-0'}`}
+            src={HERO_VIDEOS[0]}
+            onEnded={handleVideoEnded}
+          />
+          <video
+            ref={videoRefs[1]}
+            muted
+            playsInline
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 1 ? 'opacity-100' : 'opacity-0'}`}
+            onEnded={handleVideoEnded}
           />
           <div className="absolute inset-0 bg-background/70" />
         </div>
