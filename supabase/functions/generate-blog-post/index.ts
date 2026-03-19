@@ -7,37 +7,66 @@ const corsHeaders = {
 };
 
 const BLOG_TOPICS = [
-  { title: "10 Underground Streetwear Brands You've Never Heard Of", category: "guide", slug: "underground-streetwear-brands" },
-  { title: "Best Niche Instagram Brands for Gorpcore", category: "trend", slug: "niche-gorpcore-brands" },
-  { title: "DripByRage Review: Is It Worth It?", category: "spotlight", slug: "dripbyrage-review" },
-  { title: "Best Niche Instagram Brands for Y2K Style", category: "trend", slug: "niche-y2k-brands" },
-  { title: "How to Build a Streetwear Wardrobe on a Budget", category: "guide", slug: "streetwear-budget-wardrobe" },
-  { title: "Top Emerging Canadian Streetwear Labels to Watch", category: "trend", slug: "canadian-streetwear-labels" },
-  { title: "Brands Like Supreme: 15 Alternatives You'll Love", category: "guide", slug: "brands-like-supreme-alternatives" },
-  { title: "The Rise of South Asian Streetwear Culture", category: "trend", slug: "south-asian-streetwear-culture" },
-  { title: "Best Oversized Hoodies for Every Aesthetic", category: "guide", slug: "best-oversized-hoodies" },
-  { title: "SABR Clothing Review: Rhinestone Tracksuits Worth the Hype?", category: "spotlight", slug: "sabr-clothing-review" },
-  { title: "Varsity Jackets Are Back: How to Style Them in 2026", category: "style", slug: "varsity-jackets-styling-2026" },
-  { title: "Dark Academia Meets Streetwear: The Unexpected Crossover", category: "trend", slug: "dark-academia-streetwear" },
-  { title: "Preview Worldwide: Y2K Racing Aesthetics Explained", category: "spotlight", slug: "preview-worldwide-y2k-racing" },
-  { title: "Grunge Streetwear: Why Faded Hoodies Are Dominating 2026", category: "trend", slug: "grunge-faded-hoodies-trend" },
-  { title: "How Small Fashion Brands Build Loyal Communities", category: "guide", slug: "small-brands-build-communities" },
-  { title: "Best Streetwear Brands for Women in 2026", category: "guide", slug: "best-streetwear-women-2026" },
-  { title: "Techwear vs Gorpcore: What's the Difference?", category: "guide", slug: "techwear-vs-gorpcore" },
-  { title: "The Complete Guide to Archive Fashion", category: "guide", slug: "archive-fashion-guide" },
-  { title: "Touro Studio: Minimalist Streetwear Done Right", category: "spotlight", slug: "touro-studio-minimalist-review" },
-  { title: "Kogi Collective: Where Emotion Meets Fabric", category: "spotlight", slug: "kogi-collective-spotlight" },
-  { title: "Why Oversized Fits Are Here to Stay", category: "trend", slug: "oversized-fits-staying" },
-  { title: "Dimito: Korean Snowboard Culture Goes Global", category: "spotlight", slug: "dimito-snowboard-culture" },
-  { title: "Best Streetwear Accessories Under $50", category: "guide", slug: "streetwear-accessories-under-50" },
-  { title: "How to Spot Fake Streetwear: A Buyer's Guide", category: "guide", slug: "spot-fake-streetwear" },
-  { title: "The Dovira Effect: Eastern European Fashion Rising", category: "spotlight", slug: "dovira-eastern-european-fashion" },
-  { title: "Cottagecore to Streetwear: Cross-Aesthetic Outfit Ideas", category: "style", slug: "cottagecore-streetwear-outfits" },
-  { title: "Best Graphic Tees That Actually Stand Out", category: "guide", slug: "best-graphic-tees-standout" },
-  { title: "Street Style Photography: Capturing the Culture", category: "style", slug: "street-style-photography" },
-  { title: "Workwear Aesthetics: From Factory Floor to Fashion Week", category: "trend", slug: "workwear-aesthetics-trend" },
-  { title: "How Dripway Curates the Best Underground Brands", category: "spotlight", slug: "how-dripway-curates-brands" },
+  { title: "Nike Just Killed Their Best Shoe and Nobody's Talking About It", category: "trend" },
+  { title: "The $30 Brand That's Making Stüssy Fans Switch Up", category: "trend" },
+  { title: "Why Every Rapper Is Wearing This One Brand Right Now", category: "spotlight" },
+  { title: "I Wore Only Thrift Fits for 30 Days — Here's What Happened", category: "style" },
+  { title: "The Underground Brand That Sold Out in 47 Seconds", category: "spotlight" },
+  { title: "Corteiz vs Stüssy: Which One Actually Holds Up?", category: "guide" },
+  { title: "These 7 Brands Will Blow Up in 2026 (Get in Early)", category: "trend" },
+  { title: "Why Your Favorite Streetwear Brand Is Dying", category: "trend" },
+  { title: "The Real Reason Vintage Tees Cost $500 Now", category: "guide" },
+  { title: "Jordan Dropped Their Most Controversial Shoe Yet", category: "trend" },
+  { title: "TikTok Made This Brand Famous Overnight — But Is It Actually Good?", category: "spotlight" },
+  { title: "How to Build a $10K Wardrobe for Under $500", category: "guide" },
+  { title: "The Hoodie That's Outselling Supreme Right Now", category: "trend" },
+  { title: "Drake's Secret Wardrobe: Every Brand He's Worn This Year", category: "style" },
+  { title: "5 Dead Brands That Need to Come Back Immediately", category: "trend" },
+  { title: "This Japanese Brand Is About to Take Over Streetwear", category: "spotlight" },
+  { title: "Why Balenciaga Fans Are Switching to This $80 Brand", category: "trend" },
+  { title: "The Most Overhyped Streetwear Drops of 2026 (So Far)", category: "guide" },
+  { title: "Kanye's New Brand vs Yeezy: Which One Actually Wins?", category: "spotlight" },
+  { title: "Gen Z Killed Hypebeast Culture — Here's What Replaced It", category: "trend" },
+  { title: "The Comeback Nobody Expected: Baggy Jeans Are Everywhere Again", category: "style" },
+  { title: "I Spent $1000 at 5 Different Streetwear Brands — Ranking Them All", category: "guide" },
+  { title: "Why London Streetwear Hits Different Than New York", category: "trend" },
+  { title: "The Influence War: How Streetwear Brands Are Buying Your Feed", category: "trend" },
+  { title: "A$AP Rocky's Stylist Just Leaked the Next Big Trend", category: "style" },
+  { title: "This $40 Cargo Pant Is Beating Every Designer Pair", category: "guide" },
+  { title: "Streetwear Is Dead — Long Live Streetwear", category: "trend" },
+  { title: "The Brand Supreme Doesn't Want You to Know About", category: "spotlight" },
+  { title: "Why Gorpcore Kids Are the New Hypebeasts", category: "trend" },
+  { title: "We Asked 100 Sneakerheads Their All-Time Grails — The Results Are Wild", category: "guide" },
+  { title: "The Fastest-Growing Streetwear Brands on Instagram Right Now", category: "trend" },
+  { title: "How One Drop Made This Unknown Brand Worth Millions", category: "spotlight" },
+  { title: "The Real Cost of Running a Streetwear Brand in 2026", category: "guide" },
+  { title: "Travis Scott's Outfit Breakdown: Every Piece Identified", category: "style" },
+  { title: "Why Heavyweight Blanks Are the Future of Fashion", category: "trend" },
+  { title: "The Archive Fashion Trend Is Getting Out of Hand", category: "trend" },
+  { title: "7 Outfit Formulas That Work Every Single Time", category: "guide" },
+  { title: "This Startup Just Raised $20M to Disrupt Streetwear", category: "spotlight" },
+  { title: "Quiet Luxury Is Dead — Loud Fashion Is Back", category: "trend" },
+  { title: "The Best Streetwear Under $50 That Doesn't Look Cheap", category: "guide" },
+  { title: "How Resellers Ruined Streetwear (And How Brands Fight Back)", category: "trend" },
+  { title: "The 10 Collabs That Actually Changed Fashion Forever", category: "guide" },
+  { title: "Why Korean Streetwear Is Taking Over the World", category: "trend" },
+  { title: "These Influencers Are Lying About Their Outfits", category: "trend" },
+  { title: "The New Wave of Black-Owned Streetwear Brands You Need to Know", category: "spotlight" },
+  { title: "How to Tell if a Streetwear Brand Is Actually Independent", category: "guide" },
+  { title: "The Sneaker Bubble Finally Popped — Now What?",  category: "trend" },
+  { title: "Palace vs Stüssy vs Carhartt WIP: The Ultimate Comparison", category: "guide" },
+  { title: "Why Your Style Peaked in 2019 (And How to Fix It)", category: "style" },
+  { title: "The Brands Celebrities Wear When They're NOT Being Paid", category: "spotlight" },
 ];
+
+function generateSlug(title: string, date: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .slice(0, 60) + `-${date}`;
+}
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -52,32 +81,26 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Get existing slugs to avoid duplicates
-    const { data: existing } = await supabase
-      .from("blog_posts")
-      .select("slug");
+    // Get existing slugs
+    const { data: existing } = await supabase.from("blog_posts").select("slug");
     const existingSlugs = new Set((existing || []).map((p: any) => p.slug));
 
-    // Pick a topic that hasn't been used yet
     const today = new Date();
     const dateStr = today.toISOString().slice(0, 10);
-    const availableTopics = BLOG_TOPICS.filter(t => {
-      const dated = `${t.slug}-${dateStr}`;
-      return !existingSlugs.has(dated);
-    });
 
-    if (availableTopics.length === 0) {
+    // Pick unused topic
+    const available = BLOG_TOPICS.filter(t => !existingSlugs.has(generateSlug(t.title, dateStr)));
+    if (available.length === 0) {
       return new Response(JSON.stringify({ message: "All topics used for today" }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    // Rotate through topics based on day count
     const dayOfYear = Math.floor((today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) / 86400000);
-    const topic = availableTopics[dayOfYear % availableTopics.length];
-    const slug = `${topic.slug}-${dateStr}`;
+    const topic = available[dayOfYear % available.length];
+    const slug = generateSlug(topic.title, dateStr);
 
-    // Generate blog content with AI
+    // Generate 6-7 paragraph blog post
     const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -89,26 +112,32 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You are a streetwear fashion editorial writer for DRIPWAY, a curated streetwear discovery platform featuring brands like Drip by Rage, SABR Clothing, Touro Studio, Kogi Collective, Preview Worldwide, Dimito, Dovira, and Christopher Noir. Write in an engaging, knowledgeable, slightly edgy tone — like a streetwear insider who genuinely cares about the culture. Use SEO-friendly language naturally. Never sound robotic or generic.`
+            content: `You are a viral streetwear journalist and culture writer. You write like a mix of Complex, Highsnobiety, and a streetwear Reddit power user. Your tone is confident, opinionated, a little provocative, and deeply knowledgeable. You reference real brands, real trends, real cultural moments. You know the difference between hype and substance. You write for people who actually wear this stuff — not fashion students. Keep it punchy, insightful, and shareable.`
           },
           {
             role: "user",
             content: `Write a blog post titled "${topic.title}".
 
 Requirements:
-- Write exactly 4 paragraphs, each 4-6 sentences long
-- Make it informative, engaging, and SEO-optimized
-- Naturally mention brands available on DRIPWAY when relevant (Drip by Rage, SABR Clothing, Touro Studio, Kogi Collective, Preview Worldwide, Dimito, Dovira)
-- Include the discount code DRIPWAYAPPAREL for 10% off at Drip by Rage when mentioning that brand
-- Write a compelling 1-2 sentence excerpt/summary
+- Write 6-7 paragraphs, each 5-7 sentences long
+- Be opinionated and bold — take stances, name names
+- Reference real trending streetwear brands (Corteiz, Stüssy, Palace, Carhartt WIP, Aimé Leon Dore, New Balance, Nike, Represent, Fear of God, Chrome Hearts, Raf Simons, etc)
+- Reference cultural figures where relevant (rappers, athletes, influencers)
+- Talk about real trends: archive fashion, gorpcore, quiet luxury, Y2K revival, heavyweight blanks, etc
+- Make it feel like insider knowledge — the kind of stuff people screenshot and share
+- Write a clickbait-worthy excerpt (1-2 sentences) that makes people NEED to click
+- DO NOT mention DRIPWAY or any house brands
 
-Format your response as JSON with this structure:
+Return as JSON:
 {
   "excerpt": "...",
   "paragraph1": "...",
   "paragraph2": "...",
   "paragraph3": "...",
-  "paragraph4": "..."
+  "paragraph4": "...",
+  "paragraph5": "...",
+  "paragraph6": "...",
+  "paragraph7": "..."
 }`
           }
         ],
@@ -117,17 +146,20 @@ Format your response as JSON with this structure:
             type: "function",
             function: {
               name: "create_blog_post",
-              description: "Create a structured blog post with excerpt and 4 paragraphs",
+              description: "Create a structured blog post with excerpt and 6-7 paragraphs",
               parameters: {
                 type: "object",
                 properties: {
-                  excerpt: { type: "string", description: "1-2 sentence compelling summary" },
-                  paragraph1: { type: "string", description: "First paragraph" },
-                  paragraph2: { type: "string", description: "Second paragraph" },
-                  paragraph3: { type: "string", description: "Third paragraph" },
-                  paragraph4: { type: "string", description: "Fourth paragraph" }
+                  excerpt: { type: "string" },
+                  paragraph1: { type: "string" },
+                  paragraph2: { type: "string" },
+                  paragraph3: { type: "string" },
+                  paragraph4: { type: "string" },
+                  paragraph5: { type: "string" },
+                  paragraph6: { type: "string" },
+                  paragraph7: { type: "string", description: "Optional 7th paragraph" }
                 },
-                required: ["excerpt", "paragraph1", "paragraph2", "paragraph3", "paragraph4"],
+                required: ["excerpt", "paragraph1", "paragraph2", "paragraph3", "paragraph4", "paragraph5", "paragraph6"],
                 additionalProperties: false
               }
             }
@@ -141,7 +173,7 @@ Format your response as JSON with this structure:
       const errText = await aiResponse.text();
       console.error("AI gateway error:", aiResponse.status, errText);
       if (aiResponse.status === 429) {
-        return new Response(JSON.stringify({ error: "Rate limited, try again later" }), {
+        return new Response(JSON.stringify({ error: "Rate limited" }), {
           status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
@@ -156,18 +188,14 @@ Format your response as JSON with this structure:
     const aiData = await aiResponse.json();
     const toolCall = aiData.choices?.[0]?.message?.tool_calls?.[0];
     let blogContent;
-    
+
     if (toolCall) {
       blogContent = JSON.parse(toolCall.function.arguments);
     } else {
-      // Fallback: try parsing the content directly
       const content = aiData.choices?.[0]?.message?.content || "";
       const jsonMatch = content.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        blogContent = JSON.parse(jsonMatch[0]);
-      } else {
-        throw new Error("Failed to parse AI response");
-      }
+      if (jsonMatch) blogContent = JSON.parse(jsonMatch[0]);
+      else throw new Error("Failed to parse AI response");
     }
 
     // Generate cover image
@@ -181,12 +209,10 @@ Format your response as JSON with this structure:
         },
         body: JSON.stringify({
           model: "google/gemini-2.5-flash-image",
-          messages: [
-            {
-              role: "user",
-              content: `Create a stylish, editorial-quality fashion photography image for a streetwear blog post titled "${topic.title}". The image should look like a high-end fashion magazine cover photo with moody lighting, urban backdrop, and contemporary streetwear styling. No text or watermarks. Cinematic color grading.`
-            }
-          ],
+          messages: [{
+            role: "user",
+            content: `Create a cinematic editorial fashion photograph for a streetwear article titled "${topic.title}". Urban environment, moody lighting, high contrast. Think Highsnobiety or Complex magazine cover photo. No text, no watermarks, no logos. Photorealistic, editorial quality.`
+          }],
           modalities: ["image", "text"],
         }),
       });
@@ -194,24 +220,16 @@ Format your response as JSON with this structure:
       if (imageResponse.ok) {
         const imageData = await imageResponse.json();
         const imageBase64 = imageData.choices?.[0]?.message?.images?.[0]?.image_url?.url;
-        
         if (imageBase64) {
-          // Upload to Supabase Storage
           const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, "");
           const imageBytes = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
-          
           const filePath = `blog-covers/${slug}.png`;
           const { error: uploadError } = await supabase.storage
             .from("blog-images")
             .upload(filePath, imageBytes, { contentType: "image/png", upsert: true });
-          
           if (!uploadError) {
-            const { data: urlData } = supabase.storage
-              .from("blog-images")
-              .getPublicUrl(filePath);
+            const { data: urlData } = supabase.storage.from("blog-images").getPublicUrl(filePath);
             coverImageUrl = urlData.publicUrl;
-          } else {
-            console.error("Upload error:", uploadError);
           }
         }
       }
@@ -219,15 +237,19 @@ Format your response as JSON with this structure:
       console.error("Image generation error:", imgErr);
     }
 
-    // Compose full content with paragraphs
-    const fullContent = [
+    // Build content
+    const paragraphs = [
       blogContent.paragraph1,
       blogContent.paragraph2,
       blogContent.paragraph3,
       blogContent.paragraph4,
-    ].join("\n\n");
+      blogContent.paragraph5,
+      blogContent.paragraph6,
+      blogContent.paragraph7,
+    ].filter(Boolean);
 
-    // Insert into database
+    const fullContent = paragraphs.join("\n\n");
+
     const { data: post, error: insertError } = await supabase
       .from("blog_posts")
       .insert({
@@ -238,7 +260,7 @@ Format your response as JSON with this structure:
         cover_image_url: coverImageUrl,
         category: topic.category,
         author: "DRIPWAY Editorial",
-        read_time: 5,
+        read_time: Math.ceil(fullContent.split(" ").length / 200),
       })
       .select()
       .single();
@@ -251,8 +273,7 @@ Format your response as JSON with this structure:
   } catch (e) {
     console.error("generate-blog-post error:", e);
     return new Response(JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
 });
