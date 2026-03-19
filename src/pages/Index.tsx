@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -33,8 +33,17 @@ function getCarouselTransform(index: number, active: number, total: number) {
   return { translateX, translateZ, rotateY, scale, opacity, zIndex };
 }
 
+const HERO_VIDEOS = [
+  "/videos/hero-bg.mp4",
+  "/videos/hero-bg-2.mp4",
+  "/videos/hero-bg-3.mp4",
+  "/videos/hero-bg-4.mp4",
+];
+
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentVideo, setCurrentVideo] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { formatPrice } = useCurrency();
   const trendingProducts = (() => {
     const newerBrandIds = ["19", "20", "21", "23", "24", "25"];
@@ -60,6 +69,13 @@ export default function Index() {
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
 
   useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play();
+    }
+  }, [currentVideo]);
+
+  useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, [nextSlide]);
@@ -74,12 +90,13 @@ export default function Index() {
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <video
+            ref={videoRef}
             autoPlay
             muted
-            loop
             playsInline
             className="h-full w-full object-cover"
-            src="/videos/hero-bg.mp4"
+            src={HERO_VIDEOS[currentVideo]}
+            onEnded={() => setCurrentVideo(v => (v + 1) % HERO_VIDEOS.length)}
           />
           <div className="absolute inset-0 bg-background/70" />
         </div>
