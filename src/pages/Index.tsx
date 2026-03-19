@@ -43,7 +43,8 @@ const HERO_VIDEOS = [
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentVideo, setCurrentVideo] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [activePlayer, setActivePlayer] = useState<0 | 1>(0);
+  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
   const { formatPrice } = useCurrency();
   const trendingProducts = (() => {
     const newerBrandIds = ["19", "20", "21", "23", "24", "25"];
@@ -68,12 +69,27 @@ export default function Index() {
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
 
+  // Preload the next video on the inactive player
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play();
+    const nextIdx = (currentVideo + 1) % HERO_VIDEOS.length;
+    const inactivePlayer = activePlayer === 0 ? 1 : 0;
+    const inactiveVideo = videoRefs[inactivePlayer].current;
+    if (inactiveVideo) {
+      inactiveVideo.src = HERO_VIDEOS[nextIdx];
+      inactiveVideo.load();
     }
-  }, [currentVideo]);
+  }, [currentVideo, activePlayer]);
+
+  const handleVideoEnded = useCallback(() => {
+    const nextIdx = (currentVideo + 1) % HERO_VIDEOS.length;
+    const nextPlayer = activePlayer === 0 ? 1 : 0;
+    const nextVideo = videoRefs[nextPlayer].current;
+    if (nextVideo) {
+      nextVideo.play();
+    }
+    setActivePlayer(nextPlayer as 0 | 1);
+    setCurrentVideo(nextIdx);
+  }, [currentVideo, activePlayer, videoRefs]);
 
   useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
@@ -90,13 +106,20 @@ export default function Index() {
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <video
-            ref={videoRef}
+            ref={videoRefs[0]}
             autoPlay
             muted
             playsInline
-            className="h-full w-full object-cover"
-            src={HERO_VIDEOS[currentVideo]}
-            onEnded={() => setCurrentVideo(v => (v + 1) % HERO_VIDEOS.length)}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 0 ? 'opacity-100' : 'opacity-0'}`}
+            src={HERO_VIDEOS[0]}
+            onEnded={handleVideoEnded}
+          />
+          <video
+            ref={videoRefs[1]}
+            muted
+            playsInline
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 1 ? 'opacity-100' : 'opacity-0'}`}
+            onEnded={handleVideoEnded}
           />
           <div className="absolute inset-0 bg-background/70" />
         </div>
