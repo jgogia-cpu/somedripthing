@@ -140,6 +140,11 @@ export default function Navbar() {
 
         <div className="flex items-center gap-1">
           <CurrencySelector />
+          <Link to="/affiliate">
+            <Button variant="outline" size="sm" className="hidden rounded-full border-accent/50 px-3 text-xs font-bold uppercase tracking-wider text-accent hover:bg-accent hover:text-accent-foreground md:inline-flex">
+              Affiliate
+            </Button>
+          </Link>
           <Link to="/explore">
             <Button variant="ghost" size="icon" className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105">
               <Search className="h-4 w-4" />
@@ -243,6 +248,9 @@ export default function Navbar() {
               ))}
               <Link to="/blog" onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2.5 font-display text-lg font-medium transition-colors hover:bg-secondary/60">
                 Blog
+              </Link>
+              <Link to="/affiliate" onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2.5 font-display text-lg font-bold text-accent transition-colors hover:bg-secondary/60">
+                Affiliate
               </Link>
             </div>
           </motion.div>
