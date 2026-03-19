@@ -192,9 +192,6 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Blog / Editorial Hero */}
-      <BlogHeroSection />
-
       {/* Featured Brand */}
       <FeaturedBrandSection />
 

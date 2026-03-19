@@ -103,6 +103,14 @@ export default function Navbar() {
           ))}
           <GenderDropdown gender="him" label="Him" />
           <GenderDropdown gender="her" label="Her" />
+          <Link
+            to="/blog"
+            className={`text-sm font-medium transition-colors hover:text-accent ${
+              location.pathname === "/blog" ? "text-foreground" : "text-muted-foreground"
+            }`}
+          >
+            Blog
+          </Link>
         </div>
 
         <div className="flex items-center gap-2">
