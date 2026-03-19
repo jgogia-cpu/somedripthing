@@ -56,6 +56,9 @@ export default function BlogHeroSection() {
 
   if (latestPosts.length === 0) return null;
 
+  const featured = latestPosts[0];
+  const rest = latestPosts.slice(1);
+
   return (
     <section className="border-t border-border/30 py-10">
       <div className="container">
@@ -68,26 +71,46 @@ export default function BlogHeroSection() {
           </Link>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {latestPosts.map((post, i) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08, duration: 0.4 }}
-            >
-              <Link to={`/blog/${post.slug}`} className="group block">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-accent">
-                  {post.category}
-                </span>
-                <h3 className="mt-1 font-display text-sm font-bold leading-snug line-clamp-3 group-hover:text-accent transition-colors">
-                  {post.title}
-                </h3>
-                <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2">{post.excerpt}</p>
-                <p className="mt-1.5 text-[10px] text-muted-foreground/60">By {post.author}</p>
-              </Link>
-            </motion.div>
-          ))}
+        <div className="grid gap-6 md:grid-cols-2">
+          {/* Featured post — larger */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <Link to={`/blog/${featured.slug}`} className="group block rounded-lg bg-secondary/40 p-6 hover:bg-secondary/60 transition-colors">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-accent">
+                {featured.category}
+              </span>
+              <h3 className="mt-2 font-display text-xl font-bold leading-tight group-hover:text-accent transition-colors md:text-2xl">
+                {featured.title}
+              </h3>
+              <p className="mt-3 text-sm text-muted-foreground line-clamp-3">{featured.excerpt}</p>
+              <p className="mt-3 text-xs text-muted-foreground/60">By {featured.author}</p>
+            </Link>
+          </motion.div>
+
+          {/* Rest stacked */}
+          <div className="flex flex-col gap-4">
+            {rest.map((post, i) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: (i + 1) * 0.08, duration: 0.4 }}
+              >
+                <Link to={`/blog/${post.slug}`} className="group block rounded-lg border border-border/30 p-4 hover:border-border/60 transition-colors">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-accent">
+                    {post.category}
+                  </span>
+                  <h3 className="mt-1 font-display text-sm font-bold leading-snug line-clamp-2 group-hover:text-accent transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="mt-1 text-xs text-muted-foreground line-clamp-2">{post.excerpt}</p>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
