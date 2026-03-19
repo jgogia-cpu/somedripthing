@@ -10,8 +10,8 @@ import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/br
 import { useCurrency } from "@/contexts/CurrencyContext";
 
 const heroProducts = (() => {
-  const pinnedIds = ["p69", "p70"];
-  const anchorBrandIds = ["17", "18", "19", "20", "21", "22", "23", "24"];
+  const pinnedIds = ["p69", "p70", "p92", "p93"];
+  const anchorBrandIds = ["17", "19", "20", "21", "23", "24", "25"];
   const guaranteed = anchorBrandIds
     .map((brandId) => products.find((p) => p.brandId === brandId && p.trending && !pinnedIds.includes(p.id)))
     .filter((p): p is (typeof products)[number] => Boolean(p));
@@ -44,8 +44,8 @@ export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { formatPrice } = useCurrency();
   const trendingProducts = (() => {
-    const newerBrandIds = ["18", "19", "20", "21", "22", "23", "24"];
-    const olderBrandIds = ["17"];
+    const newerBrandIds = ["19", "20", "21", "23", "24", "25"];
+    const olderBrandIds = ["17", "18"];
     // 2 from each newer brand
     const newerPicks = newerBrandIds.flatMap((brandId) =>
       products.filter((p) => p.brandId === brandId && p.trending).slice(0, 2),
