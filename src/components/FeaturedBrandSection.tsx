@@ -25,7 +25,7 @@ export default function FeaturedBrandSection() {
             USE CODE <span style={{ color: "hsl(16, 85%, 60%)" }}>DRIPWAYAPPAREL</span> FOR 10% OFF
           </p>
           <p className="mt-1 text-sm text-white/60">
-            at <a href="https://dripbyrage.store" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">DRIPBYRAGE.STORE</a>
+            at <a href="https://dripbyrage.com/dripwayapparel" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">DRIPBYRAGE.COM</a>
           </p>
         </motion.div>
 
