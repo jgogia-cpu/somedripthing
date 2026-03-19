@@ -33,8 +33,17 @@ function getCarouselTransform(index: number, active: number, total: number) {
   return { translateX, translateZ, rotateY, scale, opacity, zIndex };
 }
 
+const HERO_VIDEOS = [
+  "/videos/hero-bg.mp4",
+  "/videos/hero-bg-2.mp4",
+  "/videos/hero-bg-3.mp4",
+  "/videos/hero-bg-4.mp4",
+];
+
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentVideo, setCurrentVideo] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { formatPrice } = useCurrency();
   const trendingProducts = (() => {
     const newerBrandIds = ["19", "20", "21", "23", "24", "25"];
