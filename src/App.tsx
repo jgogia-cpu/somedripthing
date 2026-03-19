@@ -30,6 +30,11 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <div className="bg-accent text-center py-1.5 px-4">
+          <a href="https://dripbyrage.com/dripwayapparel" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-wider text-black hover:underline">
+            GET 10% OFF DRIPBYRAGE WITH CODE DRIPWAYAPPAREL
+          </a>
+        </div>
         <Navbar />
         <Routes>
           <Route path="/" element={<Index />} />
