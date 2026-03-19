@@ -1,8 +1,9 @@
 import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { blogPosts as staticBlogPosts } from "@/data/brands";
+import { blogPosts as staticBlogPosts, products } from "@/data/brands";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 interface DbBlogPost {
   id: string;
@@ -21,6 +22,20 @@ export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const [dbPost, setDbPost] = useState<DbBlogPost | null>(null);
   const [loading, setLoading] = useState(true);
+  const { formatPrice } = useCurrency();
+
+  // Pick random-ish products seeded by slug for consistency
+  const inlineProducts = useMemo(() => {
+    if (!slug) return [];
+    let seed = 0;
+    for (let i = 0; i < slug.length; i++) seed = ((seed << 5) - seed + slug.charCodeAt(i)) | 0;
+    const shuffled = [...products].sort((a, b) => {
+      const ha = ((seed + a.id.charCodeAt(1)) * 2654435761) >>> 0;
+      const hb = ((seed + b.id.charCodeAt(1)) * 2654435761) >>> 0;
+      return ha - hb;
+    });
+    return shuffled.slice(0, 5);
+  }, [slug]);
 
   useEffect(() => {
     async function fetchPost() {
@@ -80,7 +95,35 @@ export default function BlogPost() {
           <div className="prose prose-invert mt-10 max-w-none">
             <p className="text-lg leading-relaxed text-muted-foreground font-medium">{dbPost.excerpt}</p>
             {paragraphs.map((para, i) => (
-              <p key={i} className="mt-6 leading-relaxed text-muted-foreground">{para}</p>
+              <div key={i}>
+                <p className="mt-6 leading-relaxed text-muted-foreground">{para}</p>
+                {/* Insert product pair after every 2nd paragraph */}
+                {i > 0 && i % 2 === 1 && inlineProducts[Math.floor(i / 2)] && (
+                  <div className="my-8 grid gap-4 sm:grid-cols-2">
+                    {inlineProducts.slice(Math.floor(i / 2) * 2, Math.floor(i / 2) * 2 + 2).map(product => (
+                      <Link key={product.id} to={`/product/${product.id}`} className="group block overflow-hidden rounded-xl bg-secondary/50 no-underline">
+                        <div className="relative">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          {product.brandId === "17" && (
+                            <div className="absolute top-0 left-0 right-0 bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
+                              GET 10% OFF WITH CODE DRIPWAYAPPAREL
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-3">
+                          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{product.brandName}</p>
+                          <p className="mt-0.5 text-sm font-semibold text-foreground">{product.name}</p>
+                          <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </article>
