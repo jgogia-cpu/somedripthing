@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
+import FeaturedBrandSection from "@/components/FeaturedBrandSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
@@ -193,6 +194,9 @@ export default function Index() {
           </AnimatePresence>
         </div>
       </section>
+
+      {/* Featured Brand */}
+      <FeaturedBrandSection />
 
       {/* Category Chips */}
       <section className="border-b py-6">
