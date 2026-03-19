@@ -192,9 +192,6 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Blog / Editorial Hero */}
-      <BlogHeroSection />
-
       {/* Featured Brand */}
       <FeaturedBrandSection />
 
@@ -234,6 +231,9 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* Blog / Editorial */}
+      <BlogHeroSection />
 
       {/* New Drops */}
       <section className="border-t bg-secondary/20 py-16">
