@@ -38,7 +38,10 @@ function getWeeklyCollection() {
   // Seed from the Monday date so it changes each week
   const seed = monday.getFullYear() * 10000 + (monday.getMonth() + 1) * 100 + monday.getDate();
   const shuffled = seededShuffle(products, seed);
-  const picks = shuffled.slice(0, 8);
+  // Ensure SABR products are featured in collections
+  const sabrProducts = products.filter(p => p.brandId === "25").slice(0, 2);
+  const rest = shuffled.filter(p => !sabrProducts.some(s => s.id === p.id));
+  const picks = [...sabrProducts, ...rest].slice(0, 8);
 
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const dateLabel = `Week of ${monthNames[monday.getMonth()]} ${monday.getDate()}, ${monday.getFullYear()}`;
