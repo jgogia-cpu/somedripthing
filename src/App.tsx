@@ -17,6 +17,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Wishlist from "./pages/Wishlist";
 import Collections from "./pages/Collections";
+import Affiliate from "./pages/Affiliate";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
