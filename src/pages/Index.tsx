@@ -11,18 +11,9 @@ import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/br
 import { useCurrency } from "@/contexts/CurrencyContext";
 
 const heroProducts = (() => {
-  const pinnedIds = ["p69", "p92", "p93", "p70"];
-  const anchorBrandIds = ["17", "19", "20", "21", "23", "24", "25"];
-  const guaranteed = anchorBrandIds
-    .map((brandId) => products.find((p) => p.brandId === brandId && p.trending && !pinnedIds.includes(p.id)))
-    .filter((p): p is (typeof products)[number] => Boolean(p));
-
-  const remainingTrending = products.filter(
-    (p) => p.trending && !guaranteed.some((g) => g.id === p.id) && !pinnedIds.includes(p.id),
-  );
-
-  const pinned = pinnedIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
-  return [...pinned, ...guaranteed, ...remainingTrending].slice(0, 8);
+  // Exactly 8: 2 Preview Worldwide, 2 SABR, 4 Drip by Rage
+  const fixedIds = ["p69", "p70", "p92", "p93", "p28", "p29", "p30", "p31"];
+  return fixedIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
 })();
 
 function getCarouselTransform(index: number, active: number, total: number) {
@@ -112,6 +103,11 @@ export default function Index() {
                   onClick={() => setCurrentSlide(i)}
                 >
                   <div className={`overflow-hidden rounded-2xl bg-card shadow-xl transition-shadow duration-500 ${isActive ? "shadow-2xl ring-2 ring-accent/30" : ""}`}>
+                    {product.brandId === "17" && (
+                      <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
+                        GET 10% OFF WITH CODE DRIPWAYAPPAREL
+                      </div>
+                    )}
                     <div className="relative">
                       <img
                         src={product.image}
