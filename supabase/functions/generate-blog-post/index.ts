@@ -251,7 +251,7 @@ Return as JSON:
         slug,
         excerpt: blogContent.excerpt,
         content: fullContent,
-        cover_image_url: null,
+        cover_image_url: COVER_IMAGES[dayOfYear % COVER_IMAGES.length],
         category: topic.category,
         author,
         read_time: Math.ceil(fullContent.split(" ").length / 250),
