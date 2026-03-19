@@ -215,6 +215,9 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              <Link to="/blog" onClick={() => setMobileOpen(false)} className="font-display text-lg font-medium">
+                Blog
+              </Link>
             </div>
           </motion.div>
         )}
