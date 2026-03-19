@@ -221,12 +221,7 @@ export const products: Product[] = [
   { id: "p96", name: "SABR Original Reflective Skull-Cap", brandId: "25", brandName: "SABR", image: "https://sabrclothing2024.com/cdn/shop/files/B2051098-8991-4C06-975B-5D717535966A.jpg?v=1772988836&width=600", images: ["https://sabrclothing2024.com/cdn/shop/files/B2051098-8991-4C06-975B-5D717535966A.jpg?v=1772988836&width=600", "https://sabrclothing2024.com/cdn/shop/files/C30D03BE-54FB-46C9-863E-B0CE71D8D9A8.jpg?v=1772988824&width=600"], price: 12, originalPrice: 19, description: "The original SABR reflective skull-cap. Satin construction with bold reflective branding.", category: "Accessories", aesthetics: ["Streetwear"], sizes: ["One Size"], affiliateUrl: "https://sabrclothing2024.com/products/sabr-original-satin-skull-cap", trending: false, newArrival: true },
 ];
 
-export const blogPosts: BlogPost[] = [
-  { id: "b1", title: "The Rise of Post-Soviet Fashion", slug: "post-soviet-fashion-rise", excerpt: "How Warsaw and Tbilisi became the new fashion capitals for underground labels.", coverImage: IMG("1558618666-fcd25c85f82e", 800, 500), category: "trend", author: "Maya Chen", date: "2026-02-20", readTime: 6 },
-  { id: "b2", title: "Brand Spotlight: Story mfg.", slug: "spotlight-story-mfg", excerpt: "Inside the slow-fashion revolution with London's most mindful label.", coverImage: IMG("1523381294911-8d28f28e5a3b", 800, 500), category: "spotlight", author: "Jordan Blake", date: "2026-02-18", readTime: 8 },
-  { id: "b3", title: "5 Ways to Style Gorpcore in 2026", slug: "style-gorpcore-2026", excerpt: "Trail-to-city dressing that actually looks intentional.", coverImage: IMG("1571902943202-507ec2618e8f", 800, 500), category: "guide", author: "Alex Rivera", date: "2026-02-15", readTime: 5 },
-  { id: "b4", title: "Why Upcycled Fashion Is the Future", slug: "upcycled-fashion-future", excerpt: "The sustainability argument that's winning over luxury consumers.", coverImage: IMG("1490481651871-ab68de25d43d", 800, 500), category: "trend", author: "Maya Chen", date: "2026-02-12", readTime: 7 },
-];
+export const blogPosts: BlogPost[] = [];
 
 export function getBrandById(id: string) {
   return brands.find(b => b.id === id);
