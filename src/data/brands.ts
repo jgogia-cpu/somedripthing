@@ -132,6 +132,13 @@ export const brands: Brand[] = [
     instagram: "@previewworldwide", aesthetics: ["Streetwear", "Y2K", "Grunge"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "budget", followers: 15000, rating: 4.5, featured: true, newDrop: true
   },
+  {
+    id: "25", name: "SABR", slug: "sabr", logo: sabrLogo,
+    banner: "https://sabrclothing2024.com/cdn/shop/files/IMG_2827.jpg?v=1768525898&width=1200", logoFont: "'Playfair Display', serif", darkCard: true, bio: "SABR Clothing blends cultural heritage with modern streetwear. Known for rhinestone-studded satin tracksuits, reflective skull-caps, and reversible sherpa pieces — bold designs rooted in faith and patience.",
+    origin: "USA", website: "https://sabrclothing2024.com", affiliateUrl: "https://sabrclothing2024.com/collections/all",
+    instagram: "@sabrclothing", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops", "Bottoms", "Accessories"],
+    priceRange: "mid", followers: 10000, rating: 4.5, featured: true, newDrop: true
+  },
 ];
 
 export const products: Product[] = [
