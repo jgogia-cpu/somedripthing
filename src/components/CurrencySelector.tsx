@@ -5,6 +5,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 
 export default function CurrencySelector() {
@@ -12,8 +13,8 @@ export default function CurrencySelector() {
 
   return (
     <Select value={currency.code} onValueChange={(v) => setCurrency(v as CurrencyCode)}>
-      <SelectTrigger className="h-8 w-[60px] rounded-full border-muted-foreground/20 text-xs font-medium [&>span:first-child]:hidden">
-        <span>{currency.code}</span>
+      <SelectTrigger className="h-8 w-[60px] rounded-full border-muted-foreground/20 text-xs font-medium">
+        <SelectValue />
       </SelectTrigger>
       <SelectContent>
         {CURRENCIES.map((c) => (
