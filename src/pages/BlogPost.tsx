@@ -95,7 +95,35 @@ export default function BlogPost() {
           <div className="prose prose-invert mt-10 max-w-none">
             <p className="text-lg leading-relaxed text-muted-foreground font-medium">{dbPost.excerpt}</p>
             {paragraphs.map((para, i) => (
-              <p key={i} className="mt-6 leading-relaxed text-muted-foreground">{para}</p>
+              <div key={i}>
+                <p className="mt-6 leading-relaxed text-muted-foreground">{para}</p>
+                {/* Insert product pair after every 2nd paragraph */}
+                {i > 0 && i % 2 === 1 && inlineProducts[Math.floor(i / 2)] && (
+                  <div className="my-8 grid gap-4 sm:grid-cols-2">
+                    {inlineProducts.slice(Math.floor(i / 2) * 2, Math.floor(i / 2) * 2 + 2).map(product => (
+                      <Link key={product.id} to={`/product/${product.id}`} className="group block overflow-hidden rounded-xl bg-secondary/50 no-underline">
+                        <div className="relative">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          {product.brandId === "17" && (
+                            <div className="absolute top-0 left-0 right-0 bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
+                              GET 10% OFF WITH CODE DRIPWAYAPPAREL
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-3">
+                          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{product.brandName}</p>
+                          <p className="mt-0.5 text-sm font-semibold text-foreground">{product.name}</p>
+                          <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </article>
