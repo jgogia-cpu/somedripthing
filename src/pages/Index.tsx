@@ -83,7 +83,7 @@ export default function Index() {
           />
           <div className="absolute inset-0 bg-background/70" />
         </div>
-        <div className="container">
+        <div className="container relative z-10">
           <h1 className="mb-1 text-center text-5xl font-bold tracking-tight md:text-7xl" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
             DRIPWAY
           </h1>
