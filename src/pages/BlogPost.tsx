@@ -24,7 +24,6 @@ export default function BlogPost() {
   const [loading, setLoading] = useState(true);
   const { formatPrice } = useCurrency();
 
-  // Pick random-ish products seeded by slug for consistency
   const inlineProducts = useMemo(() => {
     if (!slug) return [];
     let seed = 0;
@@ -34,7 +33,7 @@ export default function BlogPost() {
       const hb = ((seed + b.id.charCodeAt(1)) * 2654435761) >>> 0;
       return ha - hb;
     });
-    return shuffled.slice(0, 5);
+    return shuffled.slice(0, 6);
   }, [slug]);
 
   useEffect(() => {
@@ -52,17 +51,17 @@ export default function BlogPost() {
     fetchPost();
   }, [slug]);
 
-  // Check static posts as fallback
   const staticPost = staticBlogPosts.find(p => p.slug === slug);
 
   if (loading) {
     return (
       <div className="min-h-screen py-8">
-        <div className="container max-w-3xl animate-pulse">
-          <div className="h-4 w-24 rounded bg-muted mb-6" />
-          <div className="h-8 w-3/4 rounded bg-muted mb-4" />
-          <div className="h-4 w-1/2 rounded bg-muted mb-8" />
-          <div className="aspect-[16/9] rounded-xl bg-muted mb-10" />
+        <div className="container max-w-2xl animate-pulse">
+          <div className="h-3 w-20 rounded bg-muted mb-8" />
+          <div className="h-3 w-32 rounded bg-muted mb-4" />
+          <div className="h-10 w-4/5 rounded bg-muted mb-3" />
+          <div className="h-10 w-3/5 rounded bg-muted mb-6" />
+          <div className="h-3 w-48 rounded bg-muted mb-10" />
           <div className="space-y-4">
             <div className="h-4 w-full rounded bg-muted" />
             <div className="h-4 w-5/6 rounded bg-muted" />
@@ -75,52 +74,70 @@ export default function BlogPost() {
 
   if (dbPost) {
     const paragraphs = dbPost.content.split("\n\n").filter(p => p.trim());
+    const formattedDate = new Date(dbPost.created_at).toLocaleDateString("en-US", {
+      month: "long", day: "numeric", year: "numeric"
+    });
 
     return (
-      <div className="min-h-screen py-8">
-        <article className="container max-w-3xl">
-          <Link to="/blog" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-3 w-3" /> Editorial
-          </Link>
-          <span className="block text-xs font-semibold uppercase tracking-widest text-accent">{dbPost.category}</span>
-          <h1 className="mt-2 font-display text-4xl font-bold leading-tight md:text-5xl">{dbPost.title}</h1>
-          <p className="mt-4 text-muted-foreground">By {dbPost.author} · {new Date(dbPost.created_at).toLocaleDateString()} · {dbPost.read_time} min read</p>
+      <div className="min-h-screen">
+        {/* Highsnobiety-style article header */}
+        <div className="border-b border-border/30">
+          <div className="container max-w-2xl py-10 md:py-16">
+            <Link to="/blog" className="mb-6 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+              <ArrowLeft className="h-3 w-3" /> Editorial
+            </Link>
 
-          {dbPost.cover_image_url && (
-            <div className="mt-8 overflow-hidden rounded-xl">
-              <img src={dbPost.cover_image_url} alt={dbPost.title} className="aspect-[16/9] w-full object-cover" />
+            <div className="mt-6">
+              <span className="text-xs font-bold uppercase tracking-widest text-accent">{dbPost.category}</span>
+              <h1 className="mt-3 font-display text-3xl font-black leading-[1.1] md:text-5xl">{dbPost.title}</h1>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{dbPost.excerpt}</p>
             </div>
-          )}
 
-          <div className="prose prose-invert mt-10 max-w-none">
-            <p className="text-lg leading-relaxed text-muted-foreground font-medium">{dbPost.excerpt}</p>
+            <div className="mt-6 flex items-center gap-3 border-t border-border/30 pt-5">
+              <div>
+                <p className="text-sm font-semibold">{dbPost.author}</p>
+                <p className="text-xs text-muted-foreground">{formattedDate} · {dbPost.read_time} min read</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Article body — clean, text-first like Highsnobiety */}
+        <article className="container max-w-2xl py-10">
+          <div className="prose prose-invert max-w-none">
             {paragraphs.map((para, i) => (
               <div key={i}>
-                <p className="mt-6 leading-relaxed text-muted-foreground">{para}</p>
-                {/* Insert product pair after every 2nd paragraph */}
+                <p className={`leading-[1.8] text-muted-foreground ${i === 0 ? "text-lg font-medium" : ""}`}>
+                  {para}
+                </p>
+
+                {/* Product cards after every 2nd paragraph */}
                 {i > 0 && i % 2 === 1 && inlineProducts[Math.floor(i / 2)] && (
-                  <div className="my-8 grid gap-4 sm:grid-cols-2">
-                    {inlineProducts.slice(Math.floor(i / 2) * 2, Math.floor(i / 2) * 2 + 2).map(product => (
-                      <Link key={product.id} to={`/product/${product.id}`} className="group block overflow-hidden rounded-xl bg-secondary/50 no-underline">
-                        <div className="relative">
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          {product.brandId === "17" && (
-                            <div className="absolute top-0 left-0 right-0 bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
-                              GET 10% OFF WITH CODE DRIPWAYAPPAREL
-                            </div>
-                          )}
-                        </div>
-                        <div className="p-3">
-                          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{product.brandName}</p>
-                          <p className="mt-0.5 text-sm font-semibold text-foreground">{product.name}</p>
-                          <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
-                        </div>
-                      </Link>
-                    ))}
+                  <div className="my-10 border-y border-border/30 py-6">
+                    <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Shop the Story</p>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      {inlineProducts.slice(Math.floor(i / 2) * 2, Math.floor(i / 2) * 2 + 2).map(product => (
+                        <Link key={product.id} to={`/product/${product.id}`} className="group block overflow-hidden rounded no-underline">
+                          <div className="relative">
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            {product.brandId === "17" && (
+                              <div className="absolute top-0 left-0 right-0 bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
+                                GET 10% OFF WITH CODE DRIPWAYAPPAREL
+                              </div>
+                            )}
+                          </div>
+                          <div className="mt-2.5">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{product.brandName}</p>
+                            <p className="mt-0.5 text-sm font-semibold text-foreground">{product.name}</p>
+                            <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -133,24 +150,28 @@ export default function BlogPost() {
 
   if (staticPost) {
     return (
-      <div className="min-h-screen py-8">
-        <article className="container max-w-3xl">
-          <Link to="/blog" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-3 w-3" /> Editorial
-          </Link>
-          <span className="block text-xs font-semibold uppercase tracking-widest text-accent">{staticPost.category}</span>
-          <h1 className="mt-2 font-display text-4xl font-bold leading-tight md:text-5xl">{staticPost.title}</h1>
-          <p className="mt-4 text-muted-foreground">By {staticPost.author} · {staticPost.date} · {staticPost.readTime} min read</p>
-
-          <div className="mt-8 overflow-hidden rounded-xl">
-            <img src={staticPost.coverImage} alt={staticPost.title} className="aspect-[16/9] w-full object-cover" />
+      <div className="min-h-screen">
+        <div className="border-b border-border/30">
+          <div className="container max-w-2xl py-10 md:py-16">
+            <Link to="/blog" className="mb-6 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
+              <ArrowLeft className="h-3 w-3" /> Editorial
+            </Link>
+            <div className="mt-6">
+              <span className="text-xs font-bold uppercase tracking-widest text-accent">{staticPost.category}</span>
+              <h1 className="mt-3 font-display text-3xl font-black leading-[1.1] md:text-5xl">{staticPost.title}</h1>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{staticPost.excerpt}</p>
+            </div>
+            <div className="mt-6 flex items-center gap-3 border-t border-border/30 pt-5">
+              <div>
+                <p className="text-sm font-semibold">{staticPost.author}</p>
+                <p className="text-xs text-muted-foreground">{staticPost.date} · {staticPost.readTime} min read</p>
+              </div>
+            </div>
           </div>
-
-          <div className="prose prose-invert mt-10 max-w-none">
-            <p className="text-lg leading-relaxed text-muted-foreground">{staticPost.excerpt}</p>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              This is a preview of the full article. In a production environment, this content would be loaded from a CMS or database, supporting rich formatting, embedded images, and interactive elements.
-            </p>
+        </div>
+        <article className="container max-w-2xl py-10">
+          <div className="prose prose-invert max-w-none">
+            <p className="text-lg leading-[1.8] text-muted-foreground">{staticPost.excerpt}</p>
           </div>
         </article>
       </div>

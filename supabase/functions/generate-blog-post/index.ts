@@ -53,10 +53,21 @@ const BLOG_TOPICS = [
   { title: "These Influencers Are Lying About Their Outfits", category: "trend" },
   { title: "The New Wave of Black-Owned Streetwear Brands You Need to Know", category: "spotlight" },
   { title: "How to Tell if a Streetwear Brand Is Actually Independent", category: "guide" },
-  { title: "The Sneaker Bubble Finally Popped — Now What?",  category: "trend" },
+  { title: "The Sneaker Bubble Finally Popped — Now What?", category: "trend" },
   { title: "Palace vs Stüssy vs Carhartt WIP: The Ultimate Comparison", category: "guide" },
   { title: "Why Your Style Peaked in 2019 (And How to Fix It)", category: "style" },
   { title: "The Brands Celebrities Wear When They're NOT Being Paid", category: "spotlight" },
+];
+
+const AUTHOR_NAMES = [
+  "Jordan Ellis",
+  "Mia Chen",
+  "Kwame Asante",
+  "Lena Petrova",
+  "Marcus Webb",
+  "Aisha Nakamura",
+  "Diego Reyes",
+  "Priya Sharma",
 ];
 
 function generateSlug(title: string, date: string): string {
@@ -81,14 +92,12 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Get existing slugs
     const { data: existing } = await supabase.from("blog_posts").select("slug");
     const existingSlugs = new Set((existing || []).map((p: any) => p.slug));
 
     const today = new Date();
     const dateStr = today.toISOString().slice(0, 10);
 
-    // Pick unused topic
     const available = BLOG_TOPICS.filter(t => !existingSlugs.has(generateSlug(t.title, dateStr)));
     if (available.length === 0) {
       return new Response(JSON.stringify({ message: "All topics used for today" }), {
@@ -99,8 +108,9 @@ serve(async (req) => {
     const dayOfYear = Math.floor((today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) / 86400000);
     const topic = available[dayOfYear % available.length];
     const slug = generateSlug(topic.title, dateStr);
+    const author = AUTHOR_NAMES[dayOfYear % AUTHOR_NAMES.length];
 
-    // Generate 6-7 paragraph blog post
+    // Generate article — Highsnobiety style: 4-5 tight paragraphs, editorial tone
     const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -112,21 +122,22 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You are a viral streetwear journalist and culture writer. You write like a mix of Complex, Highsnobiety, and a streetwear Reddit power user. Your tone is confident, opinionated, a little provocative, and deeply knowledgeable. You reference real brands, real trends, real cultural moments. You know the difference between hype and substance. You write for people who actually wear this stuff — not fashion students. Keep it punchy, insightful, and shareable.`
+            content: `You are ${author}, a streetwear journalist writing for an editorial fashion publication similar to Highsnobiety. Your writing style is polished, opinionated, culturally informed, and reads like a real magazine article. You write in first person when it adds personality, but mostly in a confident editorial voice. Never mention AI, algorithms, or automated content. Write like a real journalist who lives and breathes this culture.`
           },
           {
             role: "user",
-            content: `Write a blog post titled "${topic.title}".
+            content: `Write an article titled "${topic.title}".
 
 Requirements:
-- Write 6-7 paragraphs, each 5-7 sentences long
-- Be opinionated and bold — take stances, name names
-- Reference real trending streetwear brands (Corteiz, Stüssy, Palace, Carhartt WIP, Aimé Leon Dore, New Balance, Nike, Represent, Fear of God, Chrome Hearts, Raf Simons, etc)
-- Reference cultural figures where relevant (rappers, athletes, influencers)
-- Talk about real trends: archive fashion, gorpcore, quiet luxury, Y2K revival, heavyweight blanks, etc
-- Make it feel like insider knowledge — the kind of stuff people screenshot and share
-- Write a clickbait-worthy excerpt (1-2 sentences) that makes people NEED to click
-- DO NOT mention DRIPWAY or any house brands
+- Write 4-5 paragraphs, each 4-6 sentences
+- Write like Highsnobiety or Complex — polished editorial, not a blog post
+- Reference real brands: Corteiz, Stüssy, Palace, Carhartt WIP, Aimé Leon Dore, Nike, Represent, Fear of God, Chrome Hearts, etc
+- Reference real cultural figures where relevant
+- Mention real trends: archive fashion, gorpcore, quiet luxury, Y2K revival, heavyweight blanks
+- Sound like insider knowledge — authoritative but conversational
+- Write a compelling excerpt (1-2 sentences) that hooks readers
+- Do NOT mention DRIPWAY or any house brands
+- Do NOT mention AI or that this is AI-generated in any way
 
 Return as JSON:
 {
@@ -135,9 +146,7 @@ Return as JSON:
   "paragraph2": "...",
   "paragraph3": "...",
   "paragraph4": "...",
-  "paragraph5": "...",
-  "paragraph6": "...",
-  "paragraph7": "..."
+  "paragraph5": "..."
 }`
           }
         ],
@@ -146,7 +155,7 @@ Return as JSON:
             type: "function",
             function: {
               name: "create_blog_post",
-              description: "Create a structured blog post with excerpt and 6-7 paragraphs",
+              description: "Create a structured article with excerpt and paragraphs",
               parameters: {
                 type: "object",
                 properties: {
@@ -155,11 +164,9 @@ Return as JSON:
                   paragraph2: { type: "string" },
                   paragraph3: { type: "string" },
                   paragraph4: { type: "string" },
-                  paragraph5: { type: "string" },
-                  paragraph6: { type: "string" },
-                  paragraph7: { type: "string", description: "Optional 7th paragraph" }
+                  paragraph5: { type: "string", description: "Optional 5th paragraph" }
                 },
-                required: ["excerpt", "paragraph1", "paragraph2", "paragraph3", "paragraph4", "paragraph5", "paragraph6"],
+                required: ["excerpt", "paragraph1", "paragraph2", "paragraph3", "paragraph4"],
                 additionalProperties: false
               }
             }
@@ -198,54 +205,12 @@ Return as JSON:
       else throw new Error("Failed to parse AI response");
     }
 
-    // Generate cover image
-    let coverImageUrl = null;
-    try {
-      const imageResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${LOVABLE_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "google/gemini-2.5-flash-image",
-          messages: [{
-            role: "user",
-            content: `Create a cinematic editorial fashion photograph for a streetwear article titled "${topic.title}". Urban environment, moody lighting, high contrast. Think Highsnobiety or Complex magazine cover photo. No text, no watermarks, no logos. Photorealistic, editorial quality.`
-          }],
-          modalities: ["image", "text"],
-        }),
-      });
-
-      if (imageResponse.ok) {
-        const imageData = await imageResponse.json();
-        const imageBase64 = imageData.choices?.[0]?.message?.images?.[0]?.image_url?.url;
-        if (imageBase64) {
-          const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, "");
-          const imageBytes = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
-          const filePath = `blog-covers/${slug}.png`;
-          const { error: uploadError } = await supabase.storage
-            .from("blog-images")
-            .upload(filePath, imageBytes, { contentType: "image/png", upsert: true });
-          if (!uploadError) {
-            const { data: urlData } = supabase.storage.from("blog-images").getPublicUrl(filePath);
-            coverImageUrl = urlData.publicUrl;
-          }
-        }
-      }
-    } catch (imgErr) {
-      console.error("Image generation error:", imgErr);
-    }
-
-    // Build content
     const paragraphs = [
       blogContent.paragraph1,
       blogContent.paragraph2,
       blogContent.paragraph3,
       blogContent.paragraph4,
       blogContent.paragraph5,
-      blogContent.paragraph6,
-      blogContent.paragraph7,
     ].filter(Boolean);
 
     const fullContent = paragraphs.join("\n\n");
@@ -257,10 +222,10 @@ Return as JSON:
         slug,
         excerpt: blogContent.excerpt,
         content: fullContent,
-        cover_image_url: coverImageUrl,
+        cover_image_url: null,
         category: topic.category,
-        author: "DRIPWAY Editorial",
-        read_time: Math.ceil(fullContent.split(" ").length / 200),
+        author,
+        read_time: Math.ceil(fullContent.split(" ").length / 250),
       })
       .select()
       .single();
