@@ -23,7 +23,7 @@ export default function CurrencySelector() {
 
   return (
     <Select value={currency.code} onValueChange={(v) => setCurrency(v as CurrencyCode)}>
-      <SelectTrigger className="h-8 w-[68px] rounded-full border-muted-foreground/20 text-xs font-medium">
+      <SelectTrigger className="h-8 w-[68px] rounded-full border-muted-foreground/20 text-xs font-medium [&>span:last-of-type]:hidden">
         <span className="flex items-center gap-1.5">
           <span className="text-base leading-none">{FLAGS[currency.code]}</span>
           <span>{currency.code}</span>
