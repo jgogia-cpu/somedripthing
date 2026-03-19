@@ -57,7 +57,7 @@ export default function Explore() {
     else if (sort === "newest") result.sort((a, b) => (b.newArrival ? 1 : 0) - (a.newArrival ? 1 : 0));
     else result.sort((a, b) => (b.trending ? 1 : 0) - (a.trending ? 1 : 0));
     // Pin Preview Worldwide Multicolor products to top
-    const pinnedIds = ["p69", "p70"];
+    const pinnedIds = ["p92", "p93", "p69", "p70"];
     result.sort((a, b) => {
       const aPin = pinnedIds.indexOf(a.id);
       const bPin = pinnedIds.indexOf(b.id);
