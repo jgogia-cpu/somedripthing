@@ -43,8 +43,9 @@ const HERO_VIDEOS = [
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentVideo, setCurrentVideo] = useState(0);
-  const [activePlayer, setActivePlayer] = useState<0 | 1>(0);
-  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
+  const videoRefA = useRef<HTMLVideoElement>(null);
+  const videoRefB = useRef<HTMLVideoElement>(null);
+  const [activePlayer, setActivePlayer] = useState<'A' | 'B'>('A');
   const { formatPrice } = useCurrency();
   const trendingProducts = (() => {
     const newerBrandIds = ["19", "20", "21", "23", "24", "25"];
