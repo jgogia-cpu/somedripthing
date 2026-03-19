@@ -232,6 +232,9 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Blog / Editorial */}
+      <BlogHeroSection />
+
       {/* New Drops */}
       <section className="border-t bg-secondary/20 py-16">
         <div className="container">
