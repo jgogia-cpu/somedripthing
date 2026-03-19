@@ -83,12 +83,13 @@ export default function Index() {
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <video
+            ref={videoRef}
             autoPlay
             muted
-            loop
             playsInline
             className="h-full w-full object-cover"
-            src="/videos/hero-bg.mp4"
+            src={HERO_VIDEOS[currentVideo]}
+            onEnded={() => setCurrentVideo(v => (v + 1) % HERO_VIDEOS.length)}
           />
           <div className="absolute inset-0 bg-background/70" />
         </div>
