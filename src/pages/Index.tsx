@@ -195,6 +195,9 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Featured Brand */}
+      <FeaturedBrandSection />
+
       {/* Category Chips */}
       <section className="border-b py-6">
         <div className="container">
