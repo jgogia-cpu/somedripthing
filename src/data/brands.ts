@@ -70,6 +70,7 @@ import dimitoLogo from "@/assets/dimito-logo.png";
 import christopherNoirLogo from "@/assets/christopher-noir-logo.png";
 import doviraLogo from "@/assets/dovira-logo.png";
 import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
+import sabrLogo from "@/assets/sabr-logo.png";
 
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
