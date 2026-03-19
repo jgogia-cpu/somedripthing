@@ -1,0 +1,1 @@
+UPDATE public.blog_posts SET cover_image_url = NULL;

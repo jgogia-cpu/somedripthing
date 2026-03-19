@@ -1,0 +1,1 @@
+UPDATE public.blog_posts SET cover_image_url = 'https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=1200&h=630&fit=crop' WHERE cover_image_url IS NULL;

@@ -70,6 +70,35 @@ const AUTHOR_NAMES = [
   "Priya Sharma",
 ];
 
+// Real Unsplash streetwear/fashion editorial photos
+const COVER_IMAGES = [
+  "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1544441893-675973e31985?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1543076447-215ad9ba6923?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1504593811423-6dd665756598?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1495121605193-b116b5b9c5fe?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1550246140-5119ae4790b8?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1580651315530-69c8e0026377?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1507680434567-5739c80be1ac?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=1200&h=630&fit=crop",
+  "https://images.unsplash.com/photo-1551803091-e20673f15770?w=1200&h=630&fit=crop",
+];
+
 function generateSlug(title: string, date: string): string {
   return title
     .toLowerCase()
@@ -222,7 +251,7 @@ Return as JSON:
         slug,
         excerpt: blogContent.excerpt,
         content: fullContent,
-        cover_image_url: null,
+        cover_image_url: COVER_IMAGES[dayOfYear % COVER_IMAGES.length],
         category: topic.category,
         author,
         read_time: Math.ceil(fullContent.split(" ").length / 250),
