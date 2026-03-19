@@ -22,6 +22,20 @@ export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const [dbPost, setDbPost] = useState<DbBlogPost | null>(null);
   const [loading, setLoading] = useState(true);
+  const { formatPrice } = useCurrency();
+
+  // Pick random-ish products seeded by slug for consistency
+  const inlineProducts = useMemo(() => {
+    if (!slug) return [];
+    let seed = 0;
+    for (let i = 0; i < slug.length; i++) seed = ((seed << 5) - seed + slug.charCodeAt(i)) | 0;
+    const shuffled = [...products].sort((a, b) => {
+      const ha = ((seed + a.id.charCodeAt(1)) * 2654435761) >>> 0;
+      const hb = ((seed + b.id.charCodeAt(1)) * 2654435761) >>> 0;
+      return ha - hb;
+    });
+    return shuffled.slice(0, 5);
+  }, [slug]);
 
   useEffect(() => {
     async function fetchPost() {
