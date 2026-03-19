@@ -249,6 +249,9 @@ export default function Navbar() {
               <Link to="/blog" onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2.5 font-display text-lg font-medium transition-colors hover:bg-secondary/60">
                 Blog
               </Link>
+              <Link to="/affiliate" onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2.5 font-display text-lg font-bold text-accent transition-colors hover:bg-secondary/60">
+                Affiliate
+              </Link>
             </div>
           </motion.div>
         )}
