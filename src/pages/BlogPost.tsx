@@ -1,8 +1,9 @@
 import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { blogPosts as staticBlogPosts } from "@/data/brands";
+import { blogPosts as staticBlogPosts, products } from "@/data/brands";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 interface DbBlogPost {
   id: string;
