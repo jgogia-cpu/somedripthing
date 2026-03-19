@@ -70,8 +70,20 @@ export default function Index() {
   return (
     <div className="min-h-screen">
       {/* 3D Carousel Hero */}
-      <section className="relative overflow-hidden bg-secondary/30 py-12 md:py-20">
-        <div className="container">
+      <section className="relative overflow-hidden py-12 md:py-20">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-cover"
+            src="/videos/hero-bg.mp4"
+          />
+          <div className="absolute inset-0 bg-background/70" />
+        </div>
+        <div className="container relative z-10">
           <h1 className="mb-1 text-center text-5xl font-bold tracking-tight md:text-7xl" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
             DRIPWAY
           </h1>
