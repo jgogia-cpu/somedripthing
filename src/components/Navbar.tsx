@@ -28,7 +28,7 @@ const SUBCATEGORIES = [
 const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/explore", label: "Explore" },
-  { to: "/collections", label: "Collections", serif: true },
+  { to: "/collections", label: "Collections" },
 ];
 
 function NavItem({ to, label, isActive, serif }: { to: string; label: string; isActive: boolean; serif?: boolean }) {
