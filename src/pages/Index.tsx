@@ -140,59 +140,17 @@ export default function Index() {
           </p>
           {/* 3D Carousel */}
           <div className="relative mx-auto flex items-center justify-center" style={{ perspective: "1200px", height: "440px" }}>
-            {heroProducts.map((product, i) => {
-              const t = getCarouselTransform(i, currentSlide, heroProducts.length);
-              const productBrand = getBrandById(product.brandId);
-              const isActive = i === currentSlide;
-              return (
-                <motion.div
-                  key={product.id}
-                  animate={{
-                    x: t.translateX,
-                    z: t.translateZ,
-                    rotateY: t.rotateY,
-                    scale: t.scale,
-                    opacity: t.opacity,
-                  }}
-                  transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-                  className="absolute cursor-pointer"
-                  style={{
-                    zIndex: t.zIndex,
-                    transformStyle: "preserve-3d",
-                    width: "280px",
-                  }}
-                  onClick={() => setCurrentSlide(i)}
-                >
-                  <div className={`overflow-hidden rounded-2xl bg-card shadow-xl transition-shadow duration-500 ${isActive ? "shadow-2xl ring-2 ring-accent/30" : ""}`}>
-                    {product.brandId === "17" && (
-                      <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
-                        GET 10% OFF WITH CODE DRIPWAYAPPAREL
-                      </div>
-                    )}
-                    <div className="relative">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full object-cover"
-                        style={{ aspectRatio: "3/4", height: "340px" }}
-                      />
-                      {product.newArrival && (
-                        <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-0.5 text-xs font-medium text-accent-foreground">
-                          New
-                        </span>
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                        {productBrand?.name}
-                      </p>
-                      <p className="mt-0.5 truncate text-sm font-semibold">{product.name}</p>
-                      <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+            {heroProducts.map((product, i) => (
+              <HeroCarouselCard
+                key={product.id}
+                product={product}
+                index={i}
+                currentSlide={currentSlide}
+                total={heroProducts.length}
+                onSelect={setCurrentSlide}
+                formatPrice={formatPrice}
+              />
+            ))}
           </div>
 
           {/* Navigation */}
