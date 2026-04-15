@@ -7,6 +7,10 @@ export interface Brand {
   logoFont?: string;
   darkCard?: boolean;
   bio: string;
+  story: string;
+  founded: string;
+  founderNote?: string;
+  vibes: string[];
   origin: string;
   website: string;
   affiliateUrl: string;
