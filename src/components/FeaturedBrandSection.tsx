@@ -56,22 +56,7 @@ export default function FeaturedBrandSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05, duration: 0.4 }}
             >
-              <Link to={`/product/${product.id}`} className="group block">
-                <div className="overflow-hidden rounded-xl bg-black/90 shadow-lg transition-shadow hover:shadow-xl">
-                  <div className="relative">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      loading="lazy"
-                      className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      style={{ aspectRatio: "3/4", height: "360px" }}
-                    />
-                    {product.newArrival && (
-                      <span className="absolute left-3 top-3 rounded-full bg-black px-2.5 py-0.5 text-xs font-bold text-white">
-                        New
-                      </span>
-                    )}
-                  </div>
+              <FeaturedProductCard product={product} />
                   <div className="p-4">
                     <p className="text-[10px] font-semibold uppercase tracking-widest text-white/50">
                       {product.brandName}
