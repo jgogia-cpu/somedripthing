@@ -8,8 +8,72 @@ import BrandCard from "@/components/BrandCard";
 import FeaturedBrandSection from "@/components/FeaturedBrandSection";
 import BlogHeroSection from "@/components/BlogHeroSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/brands";
+import { brands, products, blogPosts, AESTHETICS, getBrandById, Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
+
+function HeroCarouselCard({ product, index, currentSlide, total, onSelect, formatPrice }: {
+  product: Product; index: number; currentSlide: number; total: number;
+  onSelect: (i: number) => void; formatPrice: (p: number) => string;
+}) {
+  const t = getCarouselTransform(index, currentSlide, total);
+  const productBrand = getBrandById(product.brandId);
+  const isActive = index === currentSlide;
+  const allImages = product.images?.length > 0 ? product.images : [product.image];
+  const hasMultiple = allImages.length > 1;
+  const [imgIndex, setImgIndex] = useState(0);
+
+  return (
+    <motion.div
+      animate={{ x: t.translateX, z: t.translateZ, rotateY: t.rotateY, scale: t.scale, opacity: t.opacity }}
+      transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+      className="absolute cursor-pointer group"
+      style={{ zIndex: t.zIndex, transformStyle: "preserve-3d", width: "280px" }}
+      onClick={() => onSelect(index)}
+    >
+      <div className={`overflow-hidden rounded-2xl bg-card shadow-xl transition-shadow duration-500 ${isActive ? "shadow-2xl ring-2 ring-accent/30" : ""}`}>
+        {product.brandId === "17" && (
+          <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
+            GET 10% OFF WITH CODE DRIPWAYAPPAREL
+          </div>
+        )}
+        <div className="relative">
+          <img src={allImages[imgIndex]} alt={product.name} className="w-full object-cover" style={{ aspectRatio: "3/4", height: "340px" }} />
+          {hasMultiple && (
+            <>
+              <button
+                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/70 p-1.5 backdrop-blur-md opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 hover:bg-background/90"
+                onClick={(e) => { e.stopPropagation(); setImgIndex((imgIndex - 1 + allImages.length) % allImages.length); }}
+              >
+                <ChevronLeft className="h-3.5 w-3.5" />
+              </button>
+              <button
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/70 p-1.5 backdrop-blur-md opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 hover:bg-background/90"
+                onClick={(e) => { e.stopPropagation(); setImgIndex((imgIndex + 1) % allImages.length); }}
+              >
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                {allImages.map((_, i) => (
+                  <span key={i} className={`h-1.5 rounded-full transition-all ${i === imgIndex ? "w-4 bg-accent" : "w-1.5 bg-foreground/40"}`} />
+                ))}
+              </div>
+            </>
+          )}
+          {product.newArrival && (
+            <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-0.5 text-xs font-medium text-accent-foreground">New</span>
+          )}
+        </div>
+        <div className="p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{productBrand?.name}</p>
+          <p className="mt-0.5 truncate text-sm font-semibold">{product.name}</p>
+          <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+
 
 const heroProducts = (() => {
   // Exactly 8: 2 Preview Worldwide, 2 SABR, 4 Drip by Rage
@@ -140,59 +204,17 @@ export default function Index() {
           </p>
           {/* 3D Carousel */}
           <div className="relative mx-auto flex items-center justify-center" style={{ perspective: "1200px", height: "440px" }}>
-            {heroProducts.map((product, i) => {
-              const t = getCarouselTransform(i, currentSlide, heroProducts.length);
-              const productBrand = getBrandById(product.brandId);
-              const isActive = i === currentSlide;
-              return (
-                <motion.div
-                  key={product.id}
-                  animate={{
-                    x: t.translateX,
-                    z: t.translateZ,
-                    rotateY: t.rotateY,
-                    scale: t.scale,
-                    opacity: t.opacity,
-                  }}
-                  transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
-                  className="absolute cursor-pointer"
-                  style={{
-                    zIndex: t.zIndex,
-                    transformStyle: "preserve-3d",
-                    width: "280px",
-                  }}
-                  onClick={() => setCurrentSlide(i)}
-                >
-                  <div className={`overflow-hidden rounded-2xl bg-card shadow-xl transition-shadow duration-500 ${isActive ? "shadow-2xl ring-2 ring-accent/30" : ""}`}>
-                    {product.brandId === "17" && (
-                      <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
-                        GET 10% OFF WITH CODE DRIPWAYAPPAREL
-                      </div>
-                    )}
-                    <div className="relative">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full object-cover"
-                        style={{ aspectRatio: "3/4", height: "340px" }}
-                      />
-                      {product.newArrival && (
-                        <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-0.5 text-xs font-medium text-accent-foreground">
-                          New
-                        </span>
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                        {productBrand?.name}
-                      </p>
-                      <p className="mt-0.5 truncate text-sm font-semibold">{product.name}</p>
-                      <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+            {heroProducts.map((product, i) => (
+              <HeroCarouselCard
+                key={product.id}
+                product={product}
+                index={i}
+                currentSlide={currentSlide}
+                total={heroProducts.length}
+                onSelect={setCurrentSlide}
+                formatPrice={formatPrice}
+              />
+            ))}
           </div>
 
           {/* Navigation */}
