@@ -1,10 +1,15 @@
 import { useParams, Link } from "react-router-dom";
-import { ExternalLink, Instagram, ArrowLeft } from "lucide-react";
+import { ExternalLink, Instagram, ArrowLeft, MapPin, Calendar, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { getBrandBySlug, getProductsByBrand, getSimilarBrands } from "@/data/brands";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.6, ease: [0.23, 1, 0.32, 1] } }),
+};
 
 export default function BrandProfile() {
   const { slug } = useParams<{ slug: string }>();
@@ -24,78 +29,224 @@ export default function BrandProfile() {
 
   return (
     <div className="min-h-screen">
-      {/* Banner */}
-      <div className="relative h-64 overflow-hidden md:h-80">
+      {/* Hero Banner */}
+      <div className="relative h-[70vh] min-h-[500px] overflow-hidden">
         <img src={brand.banner} alt={brand.name} className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0">
-          <div className="container pb-8">
-            <Link to="/explore" className="mb-4 inline-flex items-center gap-1 text-sm text-white/70 hover:text-white">
-              <ArrowLeft className="h-3 w-3" /> Back
+          <div className="container pb-12">
+            <Link to="/explore" className="mb-6 inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-white">
+              <ArrowLeft className="h-3.5 w-3.5" /> Back to Explore
             </Link>
-            <h1 className="font-display text-4xl font-bold text-white md:text-5xl">{brand.name}</h1>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="font-display text-5xl font-bold text-white md:text-7xl"
+              style={{ fontFamily: brand.logoFont || undefined }}
+            >
+              {brand.name}
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="mt-4 flex flex-wrap items-center gap-3"
+            >
+              <span className="flex items-center gap-1.5 text-sm text-white/70">
+                <MapPin className="h-3.5 w-3.5" /> {brand.origin}
+              </span>
+              <span className="text-white/30">•</span>
+              <span className="flex items-center gap-1.5 text-sm text-white/70">
+                <Calendar className="h-3.5 w-3.5" /> Est. {brand.founded}
+              </span>
+              <span className="text-white/30">•</span>
+              <span className="flex items-center gap-1.5 text-sm text-white/70">
+                <Star className="h-3.5 w-3.5" /> {brand.rating}
+              </span>
+              <span className="text-white/30">•</span>
+              <span className="text-sm capitalize text-white/70">{brand.priceRange} range</span>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mt-4 flex flex-wrap gap-2"
+            >
               {brand.aesthetics.map(tag => (
-                <span key={tag} className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                <span key={tag} className="rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
                   {tag}
                 </span>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      <div className="container py-12">
-        {/* Info */}
-        <div className="mb-12 grid gap-8 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            <p className="text-lg leading-relaxed text-muted-foreground">{brand.bio}</p>
-            <p className="mt-3 text-sm text-muted-foreground">📍 {brand.origin}</p>
+      {/* The Story Section */}
+      <section className="border-b border-border/40 py-16 md:py-24">
+        <div className="container">
+          <div className="mx-auto max-w-3xl">
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
+            >
+              The Story
+            </motion.p>
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="mt-6 text-xl leading-relaxed text-foreground/80 md:text-2xl md:leading-relaxed"
+            >
+              {brand.story}
+            </motion.p>
+            {brand.founderNote && (
+              <motion.blockquote
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={2}
+                className="mt-10 border-l-2 border-accent pl-6"
+              >
+                <p className="text-lg italic text-muted-foreground" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  {brand.founderNote}
+                </p>
+              </motion.blockquote>
+            )}
           </div>
-          <div className="space-y-4">
+        </div>
+      </section>
+
+      {/* The Vibe Section */}
+      <section className="border-b border-border/40 py-16 md:py-20">
+        <div className="container">
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={0}
+            className="text-center font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
+          >
+            The Vibe
+          </motion.p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {brand.vibes.map((vibe, i) => (
+              <motion.div
+                key={vibe}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i + 1}
+                className="rounded-2xl border border-border/50 bg-card/50 p-6 text-center backdrop-blur-sm"
+              >
+                <p className="text-sm font-semibold text-foreground">{vibe}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="border-b border-border/40 py-12 md:py-16">
+        <div className="container">
+          <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+            <div className="flex items-center gap-6">
+              <a
+                href={`https://instagram.com/${brand.instagram.replace("@", "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <Instagram className="h-5 w-5" /> {brand.instagram}
+              </a>
+              <span className="text-sm text-muted-foreground">
+                {(brand.followers / 1000).toFixed(0)}K followers
+              </span>
+            </div>
             <a href={brand.affiliateUrl} target="_blank" rel="noopener noreferrer">
-              <Button className="w-full gap-2 rounded-full" size="lg">
+              <Button className="gap-2 rounded-full px-8" size="lg">
                 Shop {brand.name} <ExternalLink className="h-4 w-4" />
               </Button>
             </a>
-            <div className="flex gap-3">
-              <a href={`https://instagram.com/${brand.instagram.replace("@", "")}`} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
-                <Instagram className="h-4 w-4" /> {brand.instagram}
-              </a>
-            </div>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <span>{(brand.followers / 1000).toFixed(0)}K followers</span>
-              <span>★ {brand.rating}</span>
-              <span className="capitalize">{brand.priceRange} range</span>
-            </div>
           </div>
         </div>
+      </section>
 
-        {/* Products */}
-        {brandProducts.length > 0 && (
-          <section className="mb-16">
-            <h2 className="mb-6 font-display text-2xl font-bold">Products</h2>
-            <div className="masonry-grid">
+      {/* Products */}
+      {brandProducts.length > 0 && (
+        <section className="py-16 md:py-24">
+          <div className="container">
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="text-center font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
+            >
+              The Collection
+            </motion.p>
+            <motion.h2
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="mt-4 text-center font-display text-3xl font-bold md:text-4xl"
+            >
+              Shop {brand.name}
+            </motion.h2>
+            <div className="masonry-grid mt-10">
               {brandProducts.map((p, i) => (
                 <ProductCard key={p.id} product={p} index={i} />
               ))}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+      )}
 
-        {/* Similar Brands */}
-        {similar.length > 0 && (
-          <section>
-            <h2 className="mb-6 font-display text-2xl font-bold">Similar Brands</h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Similar Brands */}
+      {similar.length > 0 && (
+        <section className="border-t border-border/40 py-16 md:py-24">
+          <div className="container">
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="text-center font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
+            >
+              Discover More
+            </motion.p>
+            <motion.h2
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="mt-4 text-center font-display text-3xl font-bold"
+            >
+              Similar Brands
+            </motion.h2>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {similar.map((b, i) => (
                 <BrandCard key={b.id} brand={b} index={i} />
               ))}
             </div>
-          </section>
-        )}
-      </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
