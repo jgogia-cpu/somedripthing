@@ -23,6 +23,14 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
@@ -32,6 +40,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <div className="bg-accent text-center py-1.5 px-4">
           <a href="https://dripbyrage.com/dripwayapparel" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-wider text-black hover:underline">
             GET 10% OFF DRIPBYRAGE WITH CODE DRIPWAYAPPAREL
