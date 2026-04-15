@@ -72,15 +72,8 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
     </motion.div>
   );
 }
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import ProductCard from "@/components/ProductCard";
-import BrandCard from "@/components/BrandCard";
-import FeaturedBrandSection from "@/components/FeaturedBrandSection";
-import BlogHeroSection from "@/components/BlogHeroSection";
-import NewsletterSignup from "@/components/NewsletterSignup";
-import { brands, products, blogPosts, AESTHETICS, getBrandById } from "@/data/brands";
-import { useCurrency } from "@/contexts/CurrencyContext";
+
+
 
 const heroProducts = (() => {
   // Exactly 8: 2 Preview Worldwide, 2 SABR, 4 Drip by Rage
