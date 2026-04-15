@@ -7,6 +7,10 @@ export interface Brand {
   logoFont?: string;
   darkCard?: boolean;
   bio: string;
+  story: string;
+  founded: string;
+  founderNote?: string;
+  vibes: string[];
   origin: string;
   website: string;
   affiliateUrl: string;
@@ -78,69 +82,104 @@ const IMG = (seed: string, w = 600, h = 800) =>
 export const brands: Brand[] = [
   {
     id: "17", name: "Drip by Rage", slug: "drip-by-rage", logo: "https://dripbyrage.store/cdn/shop/files/log_659ff53a-6e0e-469f-a803-e2a3e8b9eec8.png?v=1686708735&width=200",
-    banner: "https://dripbyrage.store/cdn/shop/files/freepik__enhance__244082254.png?v=1760581903&width=1200", logoFont: "'Rajdhani', sans-serif", darkCard: true, bio: "Streetwear brand rooted in Punjabi culture and the ideology of self-expression. Bold graphics, oversized silhouettes, and sun-faded finishes that merge heritage with modern street style.",
+    banner: "https://dripbyrage.store/cdn/shop/files/freepik__enhance__244082254.png?v=1760581903&width=1200", logoFont: "'Rajdhani', sans-serif", darkCard: true,
+    bio: "Streetwear brand rooted in Punjabi culture and the ideology of self-expression. Bold graphics, oversized silhouettes, and sun-faded finishes that merge heritage with modern street style.",
+    story: "Born from the streets of Canada with deep Punjabi roots, Drip by Rage started as a passion project celebrating cultural identity through fashion. Every hoodie, every varsity jacket tells a story of heritage meeting the hustle — of honouring where you come from while pushing toward where you're going. The brand's sun-faded finishes and oversized cuts aren't just trends, they're a statement: we wear our culture loud and proud.",
+    founded: "2023", founderNote: "\"Fashion is how we tell the world who we are without saying a word.\"",
+    vibes: ["Heritage meets hustle", "Bold self-expression", "Cultural pride", "Unapologetically loud"],
     origin: "Canada", website: "https://dripbyrage.store", affiliateUrl: "https://dripbyrage.store",
     instagram: "@dripbyrage", tiktok: "@dripbyrage", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Outerwear", "Bottoms"],
     priceRange: "mid", followers: 50000, rating: 4.7, featured: true, newDrop: true
   },
   {
     id: "18", name: "Apollo Originals", slug: "apollo-originals", logo: apolloOriginalsLogo,
-    banner: "https://www.apollooriginals.com/cdn/shop/files/DSC04632.jpg?height=500&width=1200&v=1760980219", logoFont: "'Oswald', sans-serif", darkCard: true, bio: "Quality-focused streetwear label blending sports culture with space-age graphics. Custom apparel, heavyweight hoodies, and bold graphic tees designed to stand out.",
+    banner: "https://www.apollooriginals.com/cdn/shop/files/DSC04632.jpg?height=500&width=1200&v=1760980219", logoFont: "'Oswald', sans-serif", darkCard: true,
+    bio: "Quality-focused streetwear label blending sports culture with space-age graphics. Custom apparel, heavyweight hoodies, and bold graphic tees designed to stand out.",
+    story: "Apollo Originals launched with one mission: create apparel that hits as hard on the street as it does on the field. Inspired by the energy of sports culture and the boundless ambition of space exploration, every piece is built with heavyweight construction and graphics that demand attention. From the Crushers hockey line to the Shuttle collection, Apollo bridges the gap between athletic grit and creative expression.",
+    founded: "2022", founderNote: "\"We build for the ones who dream bigger than their circumstances.\"",
+    vibes: ["Sports culture", "Space-age graphics", "Heavyweight quality", "Bold and ambitious"],
     origin: "USA", website: "https://www.apollooriginals.com", affiliateUrl: "https://www.apollooriginals.com",
     instagram: "@apollooriginals", aesthetics: ["Streetwear", "Grunge"], categories: ["Tops", "Outerwear", "Accessories"],
     priceRange: "mid", followers: 12000, rating: 4.4, featured: true, newDrop: true
   },
   {
     id: "19", name: "Touro Studio", slug: "touro-studio", logo: touroLogo,
-    banner: "https://tourostudio.com/cdn/shop/files/touro1.jpg?v=1765346119&width=1200", logoFont: "'Montserrat', sans-serif", bio: "Quiet form. Focused fit. India-made, purpose-led. Touro Studio crafts premium oversized tees with minimalist design and intentional silhouettes.",
+    banner: "https://tourostudio.com/cdn/shop/files/touro1.jpg?v=1765346119&width=1200", logoFont: "'Montserrat', sans-serif",
+    bio: "Quiet form. Focused fit. India-made, purpose-led. Touro Studio crafts premium oversized tees with minimalist design and intentional silhouettes.",
+    story: "Touro Studio believes less is more. Crafted in India with purpose-led design, every tee is an exercise in restraint — premium cotton, intentional silhouettes, and graphics that whisper rather than shout. In a world of noise, Touro is the pause. The brand strips fashion back to its essentials: quality fabric, perfect fit, and designs that let the wearer be the statement.",
+    founded: "2024", founderNote: "\"Quiet form. Focused fit. That's the whole philosophy.\"",
+    vibes: ["Minimal and intentional", "India-made pride", "Quality over quantity", "The art of restraint"],
     origin: "India", website: "https://tourostudio.com", affiliateUrl: "https://tourostudio.com",
     instagram: "@tourostudio", aesthetics: ["Minimalist", "Streetwear"], categories: ["Tops"],
     priceRange: "budget", followers: 8000, rating: 4.3, featured: true, newDrop: true
   },
   {
     id: "20", name: "Kogi Collective", slug: "kogi-collective", logo: kogiBanner,
-    banner: "https://images.squarespace-cdn.com/content/v1/6851f516e7d4385ab11d908c/0afc3ef7-0b9e-4eb7-a4fc-b19bfb1c58d4/May+18%2C+2025-45.jpeg", logoFont: "'Bebas Neue', sans-serif", darkCard: true, bio: "Born from Colombian roots and Canadian streetwear culture, KOGI is a family-driven collective. Named after the Kogi tribe of Santa Marta, Colombia — one of the oldest living cultures — the brand represents connection, heritage, and respect for origins. Keep the family close.",
+    banner: "https://images.squarespace-cdn.com/content/v1/6851f516e7d4385ab11d908c/0afc3ef7-0b9e-4eb7-a4fc-b19bfb1c58d4/May+18%2C+2025-45.jpeg", logoFont: "'Bebas Neue', sans-serif", darkCard: true,
+    bio: "Born from Colombian roots and Canadian streetwear culture, KOGI is a family-driven collective. Named after the Kogi tribe of Santa Marta, Colombia — one of the oldest living cultures — the brand represents connection, heritage, and respect for origins. Keep the family close.",
+    story: "KOGI isn't just a brand — it's a family. Named after the Kogi tribe of Santa Marta, Colombia, one of the oldest living cultures on Earth, this collective was born from the desire to honour roots while building something new in Canada's streetwear scene. Every piece carries the weight of heritage: the love, the struggle, the connection. When you wear KOGI, you're not just wearing a hoodie — you're joining a family that believes in keeping those bonds tight, no matter the distance.",
+    founded: "2024", founderNote: "\"Keep the family close. That's not just a slogan — it's how we live.\"",
+    vibes: ["Family-first mentality", "Colombian heritage", "Emotional storytelling", "Community over clout"],
     origin: "Canada", website: "https://kogicollective.com", affiliateUrl: "https://kogicollective.com/shop",
     instagram: "@kogicollective", aesthetics: ["Streetwear", "Grunge"], categories: ["Tops"],
     priceRange: "mid", followers: 5000, rating: 4.5, featured: true, newDrop: true
   },
   {
     id: "21", name: "Dimito", slug: "dimito", logo: dimitoLogo,
-    banner: "https://www.dimito.com/cdn/shop/files/vert-blurry-logo-hoodie-black-39500119048345.jpg?v=1727188903&width=1200", logoFont: "'Bebas Neue', sans-serif", darkCard: true, bio: "Born in South Korea, Dimito bridges snowboard culture and street fashion. Known for their 'Positive Mind' philosophy, they craft technical outerwear, garment-dyed tees, and bold graphic hoodies with premium cotton and no-twist tentar processing.",
+    banner: "https://www.dimito.com/cdn/shop/files/vert-blurry-logo-hoodie-black-39500119048345.jpg?v=1727188903&width=1200", logoFont: "'Bebas Neue', sans-serif", darkCard: true,
+    bio: "Born in South Korea, Dimito bridges snowboard culture and street fashion. Known for their 'Positive Mind' philosophy, they craft technical outerwear, garment-dyed tees, and bold graphic hoodies with premium cotton and no-twist tentar processing.",
+    story: "From the slopes of South Korea to the streets worldwide, Dimito was born where snowboard culture meets urban fashion. Their 'Positive Mind' philosophy isn't just marketing — it's embedded in every garment-dyed tee, every tentar-processed hoodie that refuses to twist or lose shape. Dimito represents the intersection of technical performance and street-ready style, proving that function and fashion aren't opposites — they're partners.",
+    founded: "2015", founderNote: "\"Positive Mind — it's not just what we print, it's how we build.\"",
+    vibes: ["Snowboard heritage", "Technical meets street", "Positive Mind philosophy", "Korean craftsmanship"],
     origin: "South Korea", website: "https://www.dimito.com", affiliateUrl: "https://www.dimito.com",
     instagram: "@dimito_official", aesthetics: ["Streetwear", "Techwear"], categories: ["Tops", "Outerwear"],
     priceRange: "mid", followers: 95000, rating: 4.6, featured: true, newDrop: true
   },
   {
     id: "22", name: "Christopher Noir", slug: "christopher-noir", logo: christopherNoirLogo,
-    banner: "https://www.christophernoir.com/cdn/shop/files/cnoir-noir-croc-statement-jacket-unisex-4070878.png?v=1766246871&width=1200", logoFont: "'Playfair Display', serif", darkCard: true, bio: "Culture meets couture. Christopher Noir is a London-based luxury label specializing in made-to-order leather jackets, statement bombers, and African-inspired kaftans. Each piece is handcrafted and delivered worldwide — where heritage craftsmanship meets modern edge.",
+    banner: "https://www.christophernoir.com/cdn/shop/files/cnoir-noir-croc-statement-jacket-unisex-4070878.png?v=1766246871&width=1200", logoFont: "'Playfair Display', serif", darkCard: true,
+    bio: "Culture meets couture. Christopher Noir is a London-based luxury label specializing in made-to-order leather jackets, statement bombers, and African-inspired kaftans. Each piece is handcrafted and delivered worldwide — where heritage craftsmanship meets modern edge.",
+    story: "Christopher Noir exists at the intersection of African heritage and London luxury. Every leather jacket is made-to-order, handcrafted with the kind of attention that mass production can never replicate. From crocodile-embossed statement pieces to Isi Agu shirts reimagined for the modern wardrobe, CNOIR proves that culture isn't just an inspiration — it's the foundation. When you invest in a Christopher Noir piece, you're investing in a story that spans continents.",
+    founded: "2021", founderNote: "\"Culture is not decoration. It's the blueprint.\"",
+    vibes: ["London luxury", "African heritage", "Made-to-order exclusivity", "Artisan craftsmanship"],
     origin: "United Kingdom", website: "https://www.christophernoir.com", affiliateUrl: "https://www.christophernoir.com",
     instagram: "@bychristophernoir", aesthetics: ["Avant-Garde", "Old Money"], categories: ["Outerwear", "Tops", "Dresses"],
     priceRange: "luxury", followers: 25000, rating: 4.8, featured: true, newDrop: true
   },
   {
     id: "23", name: "Dovira", slug: "dovira", logo: doviraLogo,
-    banner: "https://doviraclothing.com/cdn/shop/files/01_Mai_Copy_-_Artboard_89_3.png?v=1766357149&width=1200", logoFont: "'Inter', sans-serif", darkCard: true, bio: "Stay Grounded. Dovira creates premium essentials for those who hustle, stay grounded, and trust their vision. From contrast tracksuits to sun-faded hoodies, every piece blends utility with understated street style.",
+    banner: "https://doviraclothing.com/cdn/shop/files/01_Mai_Copy_-_Artboard_89_3.png?v=1766357149&width=1200", logoFont: "'Inter', sans-serif", darkCard: true,
+    bio: "Stay Grounded. Dovira creates premium essentials for those who hustle, stay grounded, and trust their vision. From contrast tracksuits to sun-faded hoodies, every piece blends utility with understated street style.",
+    story: "Dovira means 'trust' — and that's the foundation of everything the brand builds. Born in Canada, Dovira creates for the ones who move in silence but dress with intention. Their contrast tracksuits and reverse-dyed tees aren't chasing trends — they're building a wardrobe for people who trust the process. Stay grounded, stay sharp, stay Dovira.",
+    founded: "2024", founderNote: "\"Trust your vision. The clothes just help you look the part.\"",
+    vibes: ["Stay grounded", "Trust the process", "Understated confidence", "Utility-first design"],
     origin: "Canada", website: "https://doviraclothing.com", affiliateUrl: "https://doviraclothing.com",
     instagram: "@doviraclothing", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 8000, rating: 4.4, featured: true, newDrop: true
   },
   {
     id: "24", name: "Preview Worldwide", slug: "preview-worldwide", logo: previewWorldwideLogo,
-    banner: "https://previewworldwide.com/cdn/shop/files/IMG_7794-removebg-preview.png?v=1771629432&width=600", logoFont: "'Bebas Neue', sans-serif", darkCard: true, bio: "Preview Worldwide is a bold streetwear brand delivering graphic-heavy tees, hoodies, sweatsuits, and accessories. Known for vibrant designs, motorsport-inspired pieces, and statement graphics that blend Y2K energy with modern street culture.",
+    banner: "https://previewworldwide.com/cdn/shop/files/IMG_7794-removebg-preview.png?v=1771629432&width=600", logoFont: "'Bebas Neue', sans-serif", darkCard: true,
+    bio: "Preview Worldwide is a bold streetwear brand delivering graphic-heavy tees, hoodies, sweatsuits, and accessories. Known for vibrant designs, motorsport-inspired pieces, and statement graphics that blend Y2K energy with modern street culture.",
+    story: "Preview Worldwide is for the ones who want to be seen before they even walk in the room. Vibrant, graphic-heavy, and unapologetically bold — this brand pulls from motorsport culture, Y2K nostalgia, and the raw energy of the streets. Every piece is designed to be a preview of what's next, not a reflection of what's been. If subtlety is your thing, keep scrolling.",
+    founded: "2023", founderNote: "\"We don't follow trends. We preview them.\"",
+    vibes: ["Motorsport energy", "Y2K nostalgia", "Graphic-heavy", "Unapologetically bold"],
     origin: "USA", website: "https://previewworldwide.com", affiliateUrl: "https://previewworldwide.com",
     instagram: "@previewworldwide", aesthetics: ["Streetwear", "Y2K", "Grunge"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "budget", followers: 15000, rating: 4.5, featured: true, newDrop: true
   },
   {
     id: "25", name: "SABR", slug: "sabr", logo: sabrLogo,
-    banner: "https://sabrclothing2024.com/cdn/shop/files/IMG_2827.jpg?v=1768525898&width=1200", logoFont: "'Playfair Display', serif", darkCard: true, bio: "SABR Clothing blends cultural heritage with modern streetwear. Known for rhinestone-studded satin tracksuits, reflective skull-caps, and reversible sherpa pieces — bold designs rooted in faith and patience.",
+    banner: "https://sabrclothing2024.com/cdn/shop/files/IMG_2827.jpg?v=1768525898&width=1200", logoFont: "'Playfair Display', serif", darkCard: true,
+    bio: "SABR Clothing blends cultural heritage with modern streetwear. Known for rhinestone-studded satin tracksuits, reflective skull-caps, and reversible sherpa pieces — bold designs rooted in faith and patience.",
+    story: "SABR means patience — and this brand is proof that good things come to those who wait and work. Rooted in faith and cultural heritage, SABR Clothing creates pieces that are as meaningful as they are fresh. Rhinestone-studded satin tracksuits, reflective skull-caps, reversible sherpa jackets — every item is designed to make you feel something. It's not just fashion, it's a reminder: stay patient, stay faithful, stay fly.",
+    founded: "2024", founderNote: "\"Patience is power. The drip is just the bonus.\"",
+    vibes: ["Faith-driven", "Cultural roots", "Premium details", "Patience as power"],
     origin: "USA", website: "https://sabrclothing2024.com", affiliateUrl: "https://sabrclothing2024.com/collections/all",
     instagram: "@sabrclothing", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "mid", followers: 10000, rating: 4.5, featured: true, newDrop: true
   },
 ];
-
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
   { id: "p29", name: "Panjab Varsity Jacket", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/1_7695ffa1-8498-41cb-9a99-16e2d6b50826.png?v=1763858207&width=600", images: ["https://dripbyrage.store/cdn/shop/files/1_7695ffa1-8498-41cb-9a99-16e2d6b50826.png?v=1763858207&width=600", "https://dripbyrage.store/cdn/shop/files/imageye___-_imgi_2_635050820_18042835775724883_1336967576264197782_n_6ff11f83-1611-44a7-ad83-b44b77b683ea.jpg?v=1771781768&width=600"], price: 382, description: "Bold celebration of heritage and modern street style. Embroidered 'Panjab Motherland' design on the back, black fleece body with cream leather sleeves. Intricate embroidery details showcasing craftsmanship and cultural symbolism.", category: "Outerwear", aesthetics: ["Streetwear", "Archive"], sizes: ["S", "M", "L", "XL"], affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-varsity-jacket", trending: true, newArrival: true },

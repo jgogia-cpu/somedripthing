@@ -28,22 +28,10 @@ const SUBCATEGORIES = [
 const NAV_LINKS = [
   { to: "/", label: "Home" },
   { to: "/explore", label: "Explore" },
-  { to: "/collections", label: "Collections", serif: true },
+  { to: "/collections", label: "Collections" },
 ];
 
-function NavItem({ to, label, isActive, serif }: { to: string; label: string; isActive: boolean; serif?: boolean }) {
-  if (serif) {
-    return (
-      <Link
-        to={to}
-        className="group relative rounded-full bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground transition-all duration-300 hover:bg-accent hover:shadow-lg hover:shadow-accent/20"
-        style={{ fontFamily: "'Playfair Display', serif" }}
-      >
-        {label}
-      </Link>
-    );
-  }
-
+function NavItem({ to, label, isActive }: { to: string; label: string; isActive: boolean }) {
   return (
     <Link
       to={to}
@@ -130,7 +118,6 @@ export default function Navbar() {
               to={link.to}
               label={link.label}
               isActive={location.pathname === link.to}
-              serif={link.serif}
             />
           ))}
           <GenderDropdown gender="him" label="Him" />
