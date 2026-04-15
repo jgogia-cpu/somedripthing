@@ -31,7 +31,7 @@ const NAV_LINKS = [
   { to: "/collections", label: "Collections" },
 ];
 
-function NavItem({ to, label, isActive, serif }: { to: string; label: string; isActive: boolean; serif?: boolean }) {
+function NavItem({ to, label, isActive }: { to: string; label: string; isActive: boolean }) {
   if (serif) {
     return (
       <Link
