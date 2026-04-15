@@ -32,18 +32,6 @@ const NAV_LINKS = [
 ];
 
 function NavItem({ to, label, isActive }: { to: string; label: string; isActive: boolean }) {
-  if (serif) {
-    return (
-      <Link
-        to={to}
-        className="group relative rounded-full bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground transition-all duration-300 hover:bg-accent hover:shadow-lg hover:shadow-accent/20"
-        style={{ fontFamily: "'Playfair Display', serif" }}
-      >
-        {label}
-      </Link>
-    );
-  }
-
   return (
     <Link
       to={to}
