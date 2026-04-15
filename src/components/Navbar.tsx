@@ -118,7 +118,6 @@ export default function Navbar() {
               to={link.to}
               label={link.label}
               isActive={location.pathname === link.to}
-              serif={link.serif}
             />
           ))}
           <GenderDropdown gender="him" label="Him" />
