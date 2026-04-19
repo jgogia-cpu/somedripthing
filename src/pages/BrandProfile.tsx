@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { getBrandBySlug, getProductsByBrand, getSimilarBrands } from "@/data/brands";
+import InstagramCTA from "@/components/InstagramCTA";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -214,6 +215,14 @@ export default function BrandProfile() {
           </div>
         </section>
       )}
+
+      {/* Instagram CTA */}
+      <InstagramCTA
+        handle={brand.instagram}
+        followers={brand.followers}
+        label="Follow The Brand"
+        heading={`@${brand.instagram.replace("@", "")}`}
+      />
 
       {/* Similar Brands */}
       {similar.length > 0 && (

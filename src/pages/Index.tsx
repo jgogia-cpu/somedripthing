@@ -8,6 +8,7 @@ import BrandCard from "@/components/BrandCard";
 import FeaturedBrandSection from "@/components/FeaturedBrandSection";
 import BlogHeroSection from "@/components/BlogHeroSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
+import InstagramCTA from "@/components/InstagramCTA";
 import { brands, products, blogPosts, AESTHETICS, getBrandById, Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 
@@ -348,6 +349,9 @@ export default function Index() {
 
       {/* Newsletter */}
       <NewsletterSignup />
+
+      {/* Instagram */}
+      <InstagramCTA handle="@dripwayapparel" label="On The Gram" />
 
     </div>
   );
