@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { PostHogProvider } from "posthog-js/react";
+import posthog from "posthog-js";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Index from "./pages/Index";
@@ -31,7 +33,16 @@ function ScrollToTop() {
   return null;
 }
 
+function PostHogPageView() {
+  const location = useLocation();
+  useEffect(() => {
+    posthog.capture("$pageview");
+  }, [location]);
+  return null;
+}
+
 const App = () => (
+  <PostHogProvider client={posthog}>
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
     <WishlistProvider>
@@ -41,6 +52,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <PostHogPageView />
         <div className="bg-accent text-center py-1.5 px-4">
           <a href="https://dripbyrage.com/dripwayapparel" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-wider text-black hover:underline">
             GET 10% OFF DRIPBYRAGE WITH CODE DRIPWAYAPPAREL
@@ -67,6 +79,7 @@ const App = () => (
     </WishlistProvider>
     </AuthProvider>
   </QueryClientProvider>
+  </PostHogProvider>
 );
 
 export default App;
