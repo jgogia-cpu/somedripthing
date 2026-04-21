@@ -7,8 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { PostHogProvider } from "posthog-js/react";
-import posthog from "posthog-js";
+import { usePostHog } from "posthog-js/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Index from "./pages/Index";
@@ -35,14 +34,22 @@ function ScrollToTop() {
 
 function PostHogPageView() {
   const location = useLocation();
+  const posthog = usePostHog();
+
   useEffect(() => {
-    posthog.capture("$pageview");
-  }, [location]);
+    if (!posthog.__loaded) {
+      return;
+    }
+
+    posthog.capture("$pageview", {
+      $current_url: window.location.href,
+    });
+  }, [location, posthog]);
+
   return null;
 }
 
 const App = () => (
-  <PostHogProvider client={posthog}>
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
     <WishlistProvider>
@@ -79,7 +86,6 @@ const App = () => (
     </WishlistProvider>
     </AuthProvider>
   </QueryClientProvider>
-  </PostHogProvider>
 );
 
 export default App;
