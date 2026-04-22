@@ -113,7 +113,7 @@ export default function Index() {
   const [activePlayer, setActivePlayer] = useState<'A' | 'B'>('A');
   const { formatPrice } = useCurrency();
   const trendingProducts = (() => {
-    const newerBrandIds = ["19", "20", "21", "23", "24", "25"];
+    const newerBrandIds = ["19", "20", "21", "23", "24", "25", "26"];
     const olderBrandIds = ["17", "18"];
     // 2 from each newer brand
     const newerPicks = newerBrandIds.flatMap((brandId) =>
