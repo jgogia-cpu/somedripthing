@@ -8,15 +8,38 @@ import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { brands, products, AESTHETICS, CATEGORIES } from "@/data/brands";
 
-// Per-page-load shuffle seed so order is randomized each visit but stable during the session.
-const SESSION_SEED = Math.random();
-function shuffle<T>(arr: T[]): T[] {
+// Cache shuffled product IDs per-tab so order persists across navigation within
+// a single session but reshuffles on a fresh visit.
+function shuffleArr<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+function sessionOrder(key: string, ids: string[]): string[] {
+  try {
+    const cached = sessionStorage.getItem(key);
+    if (cached) {
+      const parsed: string[] = JSON.parse(cached);
+      const set = new Set(ids);
+      const kept = parsed.filter((id) => set.has(id));
+      const added = ids.filter((id) => !parsed.includes(id));
+      const next = [...kept, ...shuffleArr(added)];
+      if (added.length === 0 && kept.length === parsed.length) return next;
+      sessionStorage.setItem(key, JSON.stringify(next));
+      return next;
+    }
+  } catch { /* ignore */ }
+  const shuffled = shuffleArr(ids);
+  try { sessionStorage.setItem(key, JSON.stringify(shuffled)); } catch { /* ignore */ }
+  return shuffled;
+}
+function applySessionOrder<T extends { id: string }>(key: string, items: T[]): T[] {
+  const order = sessionOrder(key, items.map((i) => i.id));
+  const map = new Map(items.map((i) => [i.id, i] as const));
+  return order.map((id) => map.get(id)!).filter(Boolean);
 }
 
 const PRICE_RANGES = [
@@ -66,13 +89,13 @@ export default function Explore() {
     if (sort === "price-low") result.sort((a, b) => a.price - b.price);
     else if (sort === "price-high") result.sort((a, b) => b.price - a.price);
     else if (sort === "newest") {
-      const newOnes = shuffle(result.filter(p => p.newArrival));
-      const rest = shuffle(result.filter(p => !p.newArrival));
+      const newOnes = applySessionOrder("dw:explore:newest:new", result.filter(p => p.newArrival));
+      const rest = applySessionOrder("dw:explore:newest:rest", result.filter(p => !p.newArrival));
       result = [...newOnes, ...rest];
     } else {
       // Trending (default): shuffle trending first, then the rest — fresh order each visit.
-      const trend = shuffle(result.filter(p => p.trending));
-      const rest = shuffle(result.filter(p => !p.trending));
+      const trend = applySessionOrder("dw:explore:trending:trend", result.filter(p => p.trending));
+      const rest = applySessionOrder("dw:explore:trending:rest", result.filter(p => !p.trending));
       result = [...trend, ...rest];
     }
     // Pin Preview Worldwide Multicolor products to top
