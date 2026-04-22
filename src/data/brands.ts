@@ -179,6 +179,20 @@ export const brands: Brand[] = [
     instagram: "@sabrclothing", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "mid", followers: 10000, rating: 4.5, featured: true, newDrop: true
   },
+  {
+    id: "26", name: "Fortune Fellas Club", slug: "fortune-fellas-club",
+    logo: "https://fortunefellasclub.com/cdn/shop/files/Screenshot_2025-12-17_134756-removebg-preview_2.png?v=1765950637&width=600",
+    banner: "https://fortunefellasclub.com/cdn/shop/files/new_edit_3-7887.jpg?v=1765943889&width=1200",
+    logoFont: "'Playfair Display', serif", darkCard: true,
+    bio: "Take a risk to make a fortune. Fortune Fellas Club is a streetwear label built for those who bet on themselves — heavyweight tracksuits, jackets, and pants designed for movement, intention, and unapologetic ambition.",
+    story: "Fortune Fellas Club was created for people who refuse to sit still and wait — the ones building something from nothing, taking chances before everything feels safe or guaranteed. This brand isn't about perfection, it's about movement. Showing up even when the path isn't clear. Betting on yourself when no one else is watching. From the Crossroads collection to Season 1, every piece is designed for those who trust their instincts and choose progress over comfort. Fortune doesn't come to those who wait — it comes to those who move.",
+    founded: "2025", founderNote: "\"Fortune favors the bold. We just dress the part.\"",
+    vibes: ["Take the risk", "Move with intention", "Bet on yourself", "Fortune favors the bold"],
+    origin: "USA", website: "https://fortunefellasclub.com", affiliateUrl: "https://fortunefellasclub.com/collections/all",
+    instagram: "@fortunefellasclub", tiktok: "@fortunefellasclub",
+    aesthetics: ["Streetwear", "Minimalist", "Old Money"], categories: ["Tops", "Bottoms", "Outerwear"],
+    priceRange: "mid", followers: 7500, rating: 4.6, featured: true, newDrop: true
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
