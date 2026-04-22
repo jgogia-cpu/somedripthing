@@ -12,8 +12,9 @@ import InstagramCTA from "@/components/InstagramCTA";
 import { brands, products, blogPosts, AESTHETICS, getBrandById, Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 
-// Shuffle whose result is cached per-tab in sessionStorage so order stays stable
-// across navigation within one session, but reshuffles on a fresh visit.
+// Shuffle whose result is cached in-memory for the lifetime of this JS module
+// (i.e., the current page load). Navigating between routes inside the SPA
+// keeps the same order, but a hard refresh / new tab reshuffles.
 function shuffleArr<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -22,25 +23,19 @@ function shuffleArr<T>(arr: T[]): T[] {
   }
   return a;
 }
+const __shuffleCache = new Map<string, string[]>();
 function sessionShuffleIds(key: string, ids: string[]): string[] {
-  try {
-    const cached = sessionStorage.getItem(key);
-    if (cached) {
-      const parsed: string[] = JSON.parse(cached);
-      // Reuse cached order; append any new ids that weren't present, drop any removed.
-      const set = new Set(ids);
-      const kept = parsed.filter((id) => set.has(id));
-      const added = ids.filter((id) => !parsed.includes(id));
-      const next = [...kept, ...shuffleArr(added)];
-      if (next.length === parsed.length && added.length === 0) return next;
-      sessionStorage.setItem(key, JSON.stringify(next));
-      return next;
-    }
-  } catch {
-    // ignore storage errors
+  const cached = __shuffleCache.get(key);
+  if (cached) {
+    const set = new Set(ids);
+    const kept = cached.filter((id) => set.has(id));
+    const added = ids.filter((id) => !cached.includes(id));
+    const next = added.length === 0 && kept.length === cached.length ? cached : [...kept, ...shuffleArr(added)];
+    __shuffleCache.set(key, next);
+    return next;
   }
   const shuffled = shuffleArr(ids);
-  try { sessionStorage.setItem(key, JSON.stringify(shuffled)); } catch { /* ignore */ }
+  __shuffleCache.set(key, shuffled);
   return shuffled;
 }
 
