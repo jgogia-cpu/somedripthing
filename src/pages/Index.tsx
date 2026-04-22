@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,6 +11,38 @@ import NewsletterSignup from "@/components/NewsletterSignup";
 import InstagramCTA from "@/components/InstagramCTA";
 import { brands, products, blogPosts, AESTHETICS, getBrandById, Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
+
+// Shuffle whose result is cached per-tab in sessionStorage so order stays stable
+// across navigation within one session, but reshuffles on a fresh visit.
+function shuffleArr<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function sessionShuffleIds(key: string, ids: string[]): string[] {
+  try {
+    const cached = sessionStorage.getItem(key);
+    if (cached) {
+      const parsed: string[] = JSON.parse(cached);
+      // Reuse cached order; append any new ids that weren't present, drop any removed.
+      const set = new Set(ids);
+      const kept = parsed.filter((id) => set.has(id));
+      const added = ids.filter((id) => !parsed.includes(id));
+      const next = [...kept, ...shuffleArr(added)];
+      if (next.length === parsed.length && added.length === 0) return next;
+      sessionStorage.setItem(key, JSON.stringify(next));
+      return next;
+    }
+  } catch {
+    // ignore storage errors
+  }
+  const shuffled = shuffleArr(ids);
+  try { sessionStorage.setItem(key, JSON.stringify(shuffled)); } catch { /* ignore */ }
+  return shuffled;
+}
 
 function HeroCarouselCard({ product, index, currentSlide, total, onSelect, formatPrice }: {
   product: Product; index: number; currentSlide: number; total: number;
@@ -112,56 +144,45 @@ export default function Index() {
   const videoRefB = useRef<HTMLVideoElement>(null);
   const [activePlayer, setActivePlayer] = useState<'A' | 'B'>('A');
   const { formatPrice } = useCurrency();
-  const trendingProducts = (() => {
-    const shuffle = <T,>(arr: T[]): T[] => {
-      const a = [...arr];
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      return a;
-    };
+  const trendingProducts = useMemo(() => {
     const newerBrandIds = ["19", "20", "21", "23", "24", "25", "26"];
     const olderBrandIds = ["17", "18"];
-    // 2 randomized picks from each newer brand
-    const newerPicks = newerBrandIds.flatMap((brandId) =>
-      shuffle(products.filter((p) => p.brandId === brandId && p.trending)).slice(0, 2),
-    );
-    // 1 randomized pick from each older brand
+    // 2 picks per newer brand (shuffled per-session), 1 per older brand
+    const newerPicks = newerBrandIds.flatMap((brandId) => {
+      const pool = products.filter((p) => p.brandId === brandId && p.trending);
+      const order = sessionShuffleIds(`dw:trend:brand:${brandId}`, pool.map((p) => p.id));
+      return order.slice(0, 2).map((id) => pool.find((p) => p.id === id)!).filter(Boolean);
+    });
     const olderPicks = olderBrandIds
-      .map((brandId) => shuffle(products.filter((p) => p.brandId === brandId && p.trending))[0])
+      .map((brandId) => {
+        const pool = products.filter((p) => p.brandId === brandId && p.trending);
+        const order = sessionShuffleIds(`dw:trend:brand:${brandId}`, pool.map((p) => p.id));
+        return pool.find((p) => p.id === order[0]);
+      })
       .filter((p): p is (typeof products)[number] => Boolean(p));
-    const picked = shuffle([...newerPicks, ...olderPicks]);
-    const rest = shuffle(
-      products.filter(
-        (p) => p.trending && !picked.some((g) => g.id === p.id),
-      ),
-    );
+    const pickedPool = [...newerPicks, ...olderPicks];
+    const pickedOrder = sessionShuffleIds("dw:trend:picked", pickedPool.map((p) => p.id));
+    const picked = pickedOrder.map((id) => pickedPool.find((p) => p.id === id)!).filter(Boolean);
+    const restPool = products.filter((p) => p.trending && !picked.some((g) => g.id === p.id));
+    const restOrder = sessionShuffleIds("dw:trend:rest", restPool.map((p) => p.id));
+    const rest = restOrder.map((id) => restPool.find((p) => p.id === id)!).filter(Boolean);
     return [...picked, ...rest].slice(0, 12);
-  })();
+  }, []);
   const newDropBrands = brands.filter(b => b.newDrop);
   const featuredBrands = brands.filter(b => b.featured).slice(0, 6);
 
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
 
-  // Ensure first video plays on mount
-  useEffect(() => {
-    const vid = videoRefA.current;
-    if (vid) {
-      vid.src = HERO_VIDEOS[0];
-      vid.load();
-      vid.play().catch(() => {});
-    }
-  }, []);
-
   // Preload the next video on the inactive player
   useEffect(() => {
     const nextIdx = (currentVideo + 1) % HERO_VIDEOS.length;
     const inactiveVideo = activePlayer === 'A' ? videoRefB.current : videoRefA.current;
     if (inactiveVideo) {
-      inactiveVideo.src = HERO_VIDEOS[nextIdx];
-      inactiveVideo.load();
+      if (inactiveVideo.src !== window.location.origin + HERO_VIDEOS[nextIdx]) {
+        inactiveVideo.src = HERO_VIDEOS[nextIdx];
+        inactiveVideo.load();
+      }
     }
   }, [currentVideo, activePlayer]);
 
@@ -192,8 +213,11 @@ export default function Index() {
         <div className="absolute inset-0 z-0">
           <video
             ref={videoRefA}
+            src={HERO_VIDEOS[0]}
+            autoPlay
             muted
             playsInline
+            preload="auto"
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 'A' ? 'opacity-100' : 'opacity-0'}`}
             onEnded={handleVideoEnded}
           />
@@ -201,6 +225,7 @@ export default function Index() {
             ref={videoRefB}
             muted
             playsInline
+            preload="auto"
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 'B' ? 'opacity-100' : 'opacity-0'}`}
             onEnded={handleVideoEnded}
           />
