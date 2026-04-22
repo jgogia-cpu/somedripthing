@@ -8,6 +8,17 @@ import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { brands, products, AESTHETICS, CATEGORIES } from "@/data/brands";
 
+// Per-page-load shuffle seed so order is randomized each visit but stable during the session.
+const SESSION_SEED = Math.random();
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 const PRICE_RANGES = [
   { label: "Under $100", min: 0, max: 100 },
   { label: "$100–$300", min: 100, max: 300 },
@@ -54,8 +65,16 @@ export default function Explore() {
     }
     if (sort === "price-low") result.sort((a, b) => a.price - b.price);
     else if (sort === "price-high") result.sort((a, b) => b.price - a.price);
-    else if (sort === "newest") result.sort((a, b) => (b.newArrival ? 1 : 0) - (a.newArrival ? 1 : 0));
-    else result.sort((a, b) => (b.trending ? 1 : 0) - (a.trending ? 1 : 0));
+    else if (sort === "newest") {
+      const newOnes = shuffle(result.filter(p => p.newArrival));
+      const rest = shuffle(result.filter(p => !p.newArrival));
+      result = [...newOnes, ...rest];
+    } else {
+      // Trending (default): shuffle trending first, then the rest — fresh order each visit.
+      const trend = shuffle(result.filter(p => p.trending));
+      const rest = shuffle(result.filter(p => !p.trending));
+      result = [...trend, ...rest];
+    }
     // Pin Preview Worldwide Multicolor products to top
     const pinnedIds = ["p92", "p93", "p69", "p70"];
     result.sort((a, b) => {
@@ -67,6 +86,7 @@ export default function Explore() {
       return 0;
     });
     return result;
+    // SESSION_SEED is included so the memo reflects the per-load shuffle.
   }, [search, selectedAesthetics, selectedCategories, selectedPrice, sort]);
 
   const filteredBrands = useMemo(() => {

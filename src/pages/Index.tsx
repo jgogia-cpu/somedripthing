@@ -113,19 +113,29 @@ export default function Index() {
   const [activePlayer, setActivePlayer] = useState<'A' | 'B'>('A');
   const { formatPrice } = useCurrency();
   const trendingProducts = (() => {
+    const shuffle = <T,>(arr: T[]): T[] => {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    };
     const newerBrandIds = ["19", "20", "21", "23", "24", "25", "26"];
     const olderBrandIds = ["17", "18"];
-    // 2 from each newer brand
+    // 2 randomized picks from each newer brand
     const newerPicks = newerBrandIds.flatMap((brandId) =>
-      products.filter((p) => p.brandId === brandId && p.trending).slice(0, 2),
+      shuffle(products.filter((p) => p.brandId === brandId && p.trending)).slice(0, 2),
     );
-    // 1 from each older brand
+    // 1 randomized pick from each older brand
     const olderPicks = olderBrandIds
-      .map((brandId) => products.find((p) => p.brandId === brandId && p.trending))
+      .map((brandId) => shuffle(products.filter((p) => p.brandId === brandId && p.trending))[0])
       .filter((p): p is (typeof products)[number] => Boolean(p));
-    const picked = [...newerPicks, ...olderPicks];
-    const rest = products.filter(
-      (p) => p.trending && !picked.some((g) => g.id === p.id),
+    const picked = shuffle([...newerPicks, ...olderPicks]);
+    const rest = shuffle(
+      products.filter(
+        (p) => p.trending && !picked.some((g) => g.id === p.id),
+      ),
     );
     return [...picked, ...rest].slice(0, 12);
   })();
