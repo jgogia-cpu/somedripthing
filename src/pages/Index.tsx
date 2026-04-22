@@ -174,23 +174,15 @@ export default function Index() {
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
 
-  // Ensure first video plays on mount
-  useEffect(() => {
-    const vid = videoRefA.current;
-    if (vid) {
-      vid.src = HERO_VIDEOS[0];
-      vid.load();
-      vid.play().catch(() => {});
-    }
-  }, []);
-
   // Preload the next video on the inactive player
   useEffect(() => {
     const nextIdx = (currentVideo + 1) % HERO_VIDEOS.length;
     const inactiveVideo = activePlayer === 'A' ? videoRefB.current : videoRefA.current;
     if (inactiveVideo) {
-      inactiveVideo.src = HERO_VIDEOS[nextIdx];
-      inactiveVideo.load();
+      if (inactiveVideo.src !== window.location.origin + HERO_VIDEOS[nextIdx]) {
+        inactiveVideo.src = HERO_VIDEOS[nextIdx];
+        inactiveVideo.load();
+      }
     }
   }, [currentVideo, activePlayer]);
 
@@ -221,8 +213,11 @@ export default function Index() {
         <div className="absolute inset-0 z-0">
           <video
             ref={videoRefA}
+            src={HERO_VIDEOS[0]}
+            autoPlay
             muted
             playsInline
+            preload="auto"
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 'A' ? 'opacity-100' : 'opacity-0'}`}
             onEnded={handleVideoEnded}
           />
@@ -230,6 +225,7 @@ export default function Index() {
             ref={videoRefB}
             muted
             playsInline
+            preload="auto"
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 'B' ? 'opacity-100' : 'opacity-0'}`}
             onEnded={handleVideoEnded}
           />
