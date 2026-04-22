@@ -8,8 +8,9 @@ import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { brands, products, AESTHETICS, CATEGORIES } from "@/data/brands";
 
-// Cache shuffled product IDs per-tab so order persists across navigation within
-// a single session but reshuffles on a fresh visit.
+// Cache shuffled product IDs in-memory for the lifetime of this module so order
+// persists across navigation within a single page load but reshuffles on a
+// fresh page load (refresh / new tab).
 function shuffleArr<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -18,22 +19,19 @@ function shuffleArr<T>(arr: T[]): T[] {
   }
   return a;
 }
+const __shuffleCache = new Map<string, string[]>();
 function sessionOrder(key: string, ids: string[]): string[] {
-  try {
-    const cached = sessionStorage.getItem(key);
-    if (cached) {
-      const parsed: string[] = JSON.parse(cached);
-      const set = new Set(ids);
-      const kept = parsed.filter((id) => set.has(id));
-      const added = ids.filter((id) => !parsed.includes(id));
-      const next = [...kept, ...shuffleArr(added)];
-      if (added.length === 0 && kept.length === parsed.length) return next;
-      sessionStorage.setItem(key, JSON.stringify(next));
-      return next;
-    }
-  } catch { /* ignore */ }
+  const cached = __shuffleCache.get(key);
+  if (cached) {
+    const set = new Set(ids);
+    const kept = cached.filter((id) => set.has(id));
+    const added = ids.filter((id) => !cached.includes(id));
+    const next = added.length === 0 && kept.length === cached.length ? cached : [...kept, ...shuffleArr(added)];
+    __shuffleCache.set(key, next);
+    return next;
+  }
   const shuffled = shuffleArr(ids);
-  try { sessionStorage.setItem(key, JSON.stringify(shuffled)); } catch { /* ignore */ }
+  __shuffleCache.set(key, shuffled);
   return shuffled;
 }
 function applySessionOrder<T extends { id: string }>(key: string, items: T[]): T[] {
