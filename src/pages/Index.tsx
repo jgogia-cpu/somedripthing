@@ -104,8 +104,8 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
 
 
 const heroProducts = (() => {
-  // Exactly 8: 2 Preview Worldwide, 2 SABR, 2 Fortune Fellas Club, 2 House of Kings
-  const fixedIds = ["p69", "p70", "p92", "p93", "p97", "p99", "p104", "p107"];
+  // Exactly 8: 2 Preview Worldwide, 1 SABR, 1 Drip by Rage, 2 Fortune Fellas Club, 2 House of Kings
+  const fixedIds = ["p69", "p75", "p92", "p32", "p97", "p99", "p104", "p107"];
   return fixedIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
 })();
 
