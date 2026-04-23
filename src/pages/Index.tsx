@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -49,6 +49,15 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   const allImages = product.images?.length > 0 ? product.images : [product.image];
   const hasMultiple = allImages.length > 1;
   const [imgIndex, setImgIndex] = useState(0);
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    if (isActive) {
+      navigate(`/product/${product.id}`);
+    } else {
+      onSelect(index);
+    }
+  };
 
   return (
     <motion.div
@@ -56,7 +65,7 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
       transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
       className="absolute cursor-pointer group"
       style={{ zIndex: t.zIndex, transformStyle: "preserve-3d", width: "280px" }}
-      onClick={() => onSelect(index)}
+      onClick={handleCardClick}
     >
       <div className={`overflow-hidden rounded-2xl bg-card shadow-xl transition-shadow duration-500 ${isActive ? "shadow-2xl ring-2 ring-accent/30" : ""}`}>
         {product.brandId === "17" && (
@@ -104,8 +113,8 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
 
 
 const heroProducts = (() => {
-  // Exactly 8: 2 Preview Worldwide, 2 SABR, 2 Fortune Fellas Club, 2 House of Kings
-  const fixedIds = ["p69", "p70", "p92", "p93", "p97", "p99", "p104", "p107"];
+  // Exactly 8: 2 Preview Worldwide, 1 SABR, 1 Drip by Rage, 2 Fortune Fellas Club, 2 House of Kings
+  const fixedIds = ["p69", "p75", "p92", "p32", "p97", "p99", "p104", "p107"];
   return fixedIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
 })();
 
