@@ -21,6 +21,7 @@ import Wishlist from "./pages/Wishlist";
 import Collections from "./pages/Collections";
 import Affiliate from "./pages/Affiliate";
 import NotFound from "./pages/NotFound";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 const queryClient = new QueryClient();
 
@@ -61,9 +62,21 @@ const App = () => (
         <ScrollToTop />
         <PostHogPageView />
         <div className="bg-accent text-center py-1.5 px-4">
-          <a href="https://dripbyrage.com/dripwayapparel" target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-wider text-black hover:underline">
+          <TrackedOutboundLink
+            href="https://dripbyrage.com/dripwayapparel"
+            target="_blank"
+            rel="noopener noreferrer"
+            trackingProperties={{
+              brand_id: "17",
+              brand_name: "Drip by Rage",
+              brand_slug: "drip-by-rage",
+              click_type: "promo",
+              source: "top_promo_banner",
+            }}
+            className="text-xs font-bold uppercase tracking-wider text-black hover:underline"
+          >
             GET 10% OFF DRIPBYRAGE WITH CODE DRIPWAYAPPAREL
-          </a>
+          </TrackedOutboundLink>
         </div>
         <Navbar />
         <Routes>

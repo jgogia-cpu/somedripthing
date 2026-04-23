@@ -1,11 +1,13 @@
 import { Instagram, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 interface InstagramCTAProps {
   handle: string; // e.g. "@dripwayapparel"
   followers?: number;
   label?: string; // section label, defaults to "On The Gram"
   heading?: string; // big heading override
+  trackingProperties?: Record<string, string | number | boolean | null | undefined>;
 }
 
 export default function InstagramCTA({
@@ -13,6 +15,7 @@ export default function InstagramCTA({
   followers,
   label = "On The Gram",
   heading,
+  trackingProperties,
 }: InstagramCTAProps) {
   const cleanHandle = handle.replace("@", "");
   const url = `https://instagram.com/${cleanHandle}`;
@@ -38,10 +41,16 @@ export default function InstagramCTA({
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mx-auto mt-8 max-w-3xl"
         >
-          <a
+          <TrackedOutboundLink
             href={url}
             target="_blank"
             rel="noopener noreferrer"
+            trackingProperties={{
+              click_type: "instagram",
+              instagram_handle: handle,
+              source: "instagram_cta",
+              ...trackingProperties,
+            }}
             className="group relative block overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-card/80 via-card/40 to-card/80 p-10 backdrop-blur-sm transition-all hover:border-accent/50 md:p-14"
           >
             {/* Decorative gradient orb */}
@@ -71,7 +80,7 @@ export default function InstagramCTA({
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </div>
-          </a>
+          </TrackedOutboundLink>
         </motion.div>
       </div>
     </section>

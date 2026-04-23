@@ -8,6 +8,7 @@ import { getProductById, getBrandById, getRelatedProducts } from "@/data/brands"
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useWishlist } from "@/contexts/WishlistContext";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -153,11 +154,25 @@ export default function ProductDetail() {
 
             {/* CTAs */}
             <div className="flex gap-3 pt-2">
-              <a href={product.affiliateUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
+              <TrackedOutboundLink
+                href={product.affiliateUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1"
+                trackingProperties={{
+                  brand_id: product.brandId,
+                  brand_name: product.brandName,
+                  brand_slug: brand?.slug,
+                  click_type: "product",
+                  product_id: product.id,
+                  product_name: product.name,
+                  source: "product_detail_cta",
+                }}
+              >
                 <Button className="w-full gap-2 rounded-full" size="lg">
                   Buy from {product.brandName} <ExternalLink className="h-4 w-4" />
                 </Button>
-              </a>
+              </TrackedOutboundLink>
               <Button
                 variant="outline"
                 size="lg"

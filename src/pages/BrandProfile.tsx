@@ -6,6 +6,7 @@ import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { getBrandBySlug, getProductsByBrand, getSimilarBrands } from "@/data/brands";
 import InstagramCTA from "@/components/InstagramCTA";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -162,23 +163,41 @@ export default function BrandProfile() {
         <div className="container">
           <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
             <div className="flex items-center gap-6">
-              <a
+              <TrackedOutboundLink
                 href={`https://instagram.com/${brand.instagram.replace("@", "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                trackingProperties={{
+                  brand_id: brand.id,
+                  brand_name: brand.name,
+                  brand_slug: brand.slug,
+                  click_type: "instagram",
+                  source: "brand_profile_header",
+                }}
                 className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 <Instagram className="h-5 w-5" /> {brand.instagram}
-              </a>
+              </TrackedOutboundLink>
               <span className="text-sm text-muted-foreground">
                 {(brand.followers / 1000).toFixed(0)}K followers
               </span>
             </div>
-            <a href={brand.affiliateUrl} target="_blank" rel="noopener noreferrer">
+            <TrackedOutboundLink
+              href={brand.affiliateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              trackingProperties={{
+                brand_id: brand.id,
+                brand_name: brand.name,
+                brand_slug: brand.slug,
+                click_type: "shop",
+                source: "brand_profile_cta",
+              }}
+            >
               <Button className="gap-2 rounded-full px-8" size="lg">
                 Shop {brand.name} <ExternalLink className="h-4 w-4" />
               </Button>
-            </a>
+            </TrackedOutboundLink>
           </div>
         </div>
       </section>
@@ -222,6 +241,13 @@ export default function BrandProfile() {
         followers={brand.followers}
         label="Follow The Brand"
         heading={`@${brand.instagram.replace("@", "")}`}
+        trackingProperties={{
+          brand_id: brand.id,
+          brand_name: brand.name,
+          brand_slug: brand.slug,
+          click_type: "instagram",
+          source: "brand_profile_instagram_cta",
+        }}
       />
 
       {/* Similar Brands */}

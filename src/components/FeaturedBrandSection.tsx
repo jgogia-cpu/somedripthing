@@ -5,6 +5,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { products, getBrandById, Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 const dripByRageProducts = products.filter(p => p.brandId === "17").slice(0, 6);
 const brand = getBrandById("17")!;
@@ -80,7 +81,22 @@ export default function FeaturedBrandSection() {
             USE CODE <span style={{ color: "hsl(16, 85%, 60%)" }}>DRIPWAYAPPAREL</span> FOR 10% OFF
           </p>
           <p className="mt-1 text-sm text-white/60">
-            at <a href="https://dripbyrage.com/dripwayapparel" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">DRIPBYRAGE.COM</a>
+            at{" "}
+            <TrackedOutboundLink
+              href="https://dripbyrage.com/dripwayapparel"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-white"
+              trackingProperties={{
+                brand_id: brand.id,
+                brand_name: brand.name,
+                brand_slug: brand.slug,
+                click_type: "promo",
+                source: "featured_brand_promo",
+              }}
+            >
+              DRIPBYRAGE.COM
+            </TrackedOutboundLink>
           </p>
         </motion.div>
 
