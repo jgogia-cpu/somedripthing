@@ -76,7 +76,7 @@ import doviraLogo from "@/assets/dovira-logo.png";
 import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
 import sabrLogo from "@/assets/sabr-logo.png";
 import houseOfKingsLogo from "@/assets/house-of-kings-logo.png";
-import harvxLogo from "@/assets/harvx-logo.png";
+import harvxLogo from "@/assets/harvx-logo.jpg";
 
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
