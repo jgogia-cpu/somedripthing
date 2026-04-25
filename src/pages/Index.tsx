@@ -314,9 +314,6 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Featured Brand */}
-      <FeaturedBrandSection />
-
       {/* Category Chips */}
       <section className="border-b py-6">
         <div className="container">
@@ -373,6 +370,9 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* Featured Brand */}
+      <FeaturedBrandSection />
 
       {/* Featured Brands */}
       <section className="py-16">
