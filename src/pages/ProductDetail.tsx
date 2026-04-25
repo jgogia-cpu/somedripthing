@@ -9,10 +9,13 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
+import { useScrapedProducts } from "@/hooks/useScrapedProducts";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
-  const product = getProductById(id || "");
+  const scraped = useScrapedProducts();
+  const product =
+    getProductById(id || "") ?? scraped.find((p) => p.id === id);
   const { formatPrice } = useCurrency();
   const { user } = useAuth();
   const { isInWishlist, toggleWishlist } = useWishlist();

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { brands, products, AESTHETICS, CATEGORIES } from "@/data/brands";
+import { useScrapedProducts } from "@/hooks/useScrapedProducts";
 
 // Cache shuffled product IDs in-memory for the lifetime of this module so order
 // persists across navigation within a single page load but reshuffles on a
@@ -75,8 +76,11 @@ export default function Explore() {
 
   const activeFilterCount = selectedAesthetics.length + selectedCategories.length + (selectedPrice !== null ? 1 : 0);
 
+  const scraped = useScrapedProducts();
+
   const filteredProducts = useMemo(() => {
-    let result = [...products];
+    // Auto-scraped products from the weekly cron, merged in front of the curated list.
+    let result = [...scraped, ...products];
     if (search) result = result.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.brandName.toLowerCase().includes(search.toLowerCase()));
     if (selectedAesthetics.length) result = result.filter(p => p.aesthetics.some(a => selectedAesthetics.includes(a)));
     if (selectedCategories.length) result = result.filter(p => selectedCategories.includes(p.category));
@@ -108,7 +112,7 @@ export default function Explore() {
     });
     return result;
     // SESSION_SEED is included so the memo reflects the per-load shuffle.
-  }, [search, selectedAesthetics, selectedCategories, selectedPrice, sort]);
+  }, [search, selectedAesthetics, selectedCategories, selectedPrice, sort, scraped]);
 
   const filteredBrands = useMemo(() => {
     let result = [...brands];
