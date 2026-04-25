@@ -77,6 +77,81 @@ export type Database = {
         }
         Relationships: []
       }
+      scraped_products: {
+        Row: {
+          aesthetics: Json
+          affiliate_url: string
+          brand_id: string
+          brand_name: string
+          category: string
+          description: string
+          handle: string
+          id: string
+          image: string
+          images: Json
+          name: string
+          price: number
+          scraped_at: string
+          sizes: Json
+        }
+        Insert: {
+          aesthetics?: Json
+          affiliate_url: string
+          brand_id: string
+          brand_name: string
+          category?: string
+          description?: string
+          handle: string
+          id?: string
+          image: string
+          images?: Json
+          name: string
+          price: number
+          scraped_at?: string
+          sizes?: Json
+        }
+        Update: {
+          aesthetics?: Json
+          affiliate_url?: string
+          brand_id?: string
+          brand_name?: string
+          category?: string
+          description?: string
+          handle?: string
+          id?: string
+          image?: string
+          images?: Json
+          name?: string
+          price?: number
+          scraped_at?: string
+          sizes?: Json
+        }
+        Relationships: []
+      }
+      scraper_runs: {
+        Row: {
+          brands_checked: number
+          id: string
+          notes: string | null
+          products_added: number
+          ran_at: string
+        }
+        Insert: {
+          brands_checked?: number
+          id?: string
+          notes?: string | null
+          products_added?: number
+          ran_at?: string
+        }
+        Update: {
+          brands_checked?: number
+          id?: string
+          notes?: string | null
+          products_added?: number
+          ran_at?: string
+        }
+        Relationships: []
+      }
       wishlists: {
         Row: {
           created_at: string
