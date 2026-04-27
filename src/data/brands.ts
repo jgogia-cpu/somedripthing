@@ -6,6 +6,7 @@ export interface Brand {
   banner: string;
   logoFont?: string;
   darkCard?: boolean;
+  lightCard?: boolean;
   bio: string;
   story: string;
   founded: string;
