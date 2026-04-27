@@ -20,7 +20,7 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
             src={brand.logo}
             alt={brand.name}
             loading="lazy"
-            className="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
+            className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${brand.fullBleedLogo ? "object-cover" : "object-contain p-6"}`}
           />
           <div className={`absolute inset-0 bg-gradient-to-t ${brand.lightCard ? "from-white via-white/40" : "from-black/70 via-black/20"} to-transparent`} />
           <div className="absolute bottom-0 left-0 p-5">
