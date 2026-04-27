@@ -149,6 +149,30 @@ export const brands: Brand[] = [
     instagram: "@houseofkings", aesthetics: ["Streetwear", "Grunge"], categories: ["Tops", "Bottoms", "Outerwear", "Accessories"],
     priceRange: "mid", followers: 18000, rating: 4.6, featured: true, newDrop: true
   },
+  {
+    id: "29", name: "MorteNoir", slug: "mortenoir", logo: mortenoirLogo,
+    banner: "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/back-hood-up-v2_55969606-ecd4-4e81-b231-cafac2b19130.png?v=1777088992&width=1200",
+    logoFont: "'Cormorant Garamond', serif", darkCard: true,
+    bio: "MorteNoir is a UK-based dark streetwear label fusing gothic sigils, sun-faded finishes, and waffle-knit textures. Heavyweight hoodies, studded tees, and flared denim built for the shadows.",
+    story: "MorteNoir translates loosely to 'black death' — a name as dark and uncompromising as the brand itself. Born in the UK, MorteNoir builds garments around occult sigils, hand-distressed sun fades, and heavyweight constructions that feel like armour. From the Heavyweight Sunfade hoodies to the Damned Sigil studded tees and Malefic flared jeans, every piece is designed to look like it's been through a ritual. This isn't streetwear for the spotlight — it's streetwear for the underworld.",
+    founded: "2024", founderNote: "\"Wear it like a rite. Move like a rumour.\"",
+    vibes: ["Gothic sigils", "Sun-faded finishes", "Heavyweight by design", "Wear it like a rite"],
+    origin: "UK", website: "https://mortenoir.co.uk", affiliateUrl: "https://mortenoir.co.uk/collections/all",
+    instagram: "@mortenoir", aesthetics: ["Streetwear", "Grunge", "Dark Academia", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
+    priceRange: "mid", followers: 6500, rating: 4.6, featured: true, newDrop: true
+  },
+  {
+    id: "30", name: "Isolated", slug: "isolated", logo: isolatedLogo,
+    banner: "https://cdn.shopify.com/s/files/1/0685/3715/5868/files/IMG_5755-removebg-preview.png?v=1777066912&width=1200",
+    logoFont: "'Archivo Black', sans-serif", darkCard: true,
+    bio: "Isolated is a streetwear label built on quiet intensity — heavyweight sweatpants, full-zip hoodies, and graphic tees designed for solitude, focus, and self-reliance. Stand alone, dress sharp.",
+    story: "Isolated was built for the ones who do their best work alone — the lone wolves, the late-night grinders, the people who'd rather earn it than be handed it. Every piece, from the Star Struck and Eclipse sweatpant sets to the Intensity and Heartache graphic tees, leans into a quiet, brooding energy. No loud logos, no chasing trends — just strong silhouettes, sharp graphics, and pieces that feel like a uniform for staying focused. Solitude is a flex.",
+    founded: "2023", founderNote: "\"Alone, but never lonely. That's the drip.\"",
+    vibes: ["Quiet intensity", "Lone wolf energy", "Solitude as flex", "Focus over noise"],
+    origin: "USA", website: "https://isolated.shop", affiliateUrl: "https://isolated.shop/collections/all",
+    instagram: "@isolated", aesthetics: ["Streetwear", "Minimalist", "Grunge"], categories: ["Tops", "Bottoms"],
+    priceRange: "budget", followers: 4200, rating: 4.4, featured: true, newDrop: true
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
