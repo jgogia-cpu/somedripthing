@@ -141,7 +141,7 @@ export const brands: Brand[] = [
   {
     id: "27", name: "House of Kings", slug: "house-of-kings", logo: houseOfKingsLogo,
     banner: "https://houseofkings.co/cdn/shop/files/D7A2A840-0DBA-4EE9-A846-BE8B0C2A0030.png?v=1776645971&width=1200",
-    logoFont: "'Playfair Display', serif", darkCard: true,
+    logoFont: "'Playfair Display', serif", darkCard: false, lightCard: true,
     bio: "Welcome to the Kingdom. House of Kings Co. (HOK) releases bi-annual collections of streetwear designed to be royal in message and free from labels — boxy tees, oversized hoodies, washed graphics, and elevated essentials for the community.",
     story: "House of Kings Co. was built on a simple belief: every person carries something royal inside them, and clothing should reflect that without needing a label to prove it. Founded in Spring Valley, New York, HOK releases bi-annual collections that move slowly and intentionally — boxy oversized tees, snow-washed graphics, heavyweight hoodies, and pieces that feel lived-in from day one. From the CRWNSEASON capsule to the Divine Reflection drops, every release is built around community, message, and craftsmanship. The crown isn't given. It's claimed.",
     founded: "2018", founderNote: "\"Royal in message. Free from labels. That's the whole code.\"",
