@@ -1,18 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
-import { products } from "@/data/brands";
-
-const SUBCATEGORY_MAP: Record<string, string[]> = {
-  hoodies: ["Tops"],
-  shirts: ["Tops"],
-  sweaters: ["Knitwear", "Tops"],
-  denim: ["Bottoms"],
-  bottoms: ["Bottoms"],
-  jackets: ["Outerwear"],
-  kicks: ["Footwear"],
-  accessories: ["Accessories", "Bags", "Jewelry"],
-};
+import { products, type Product } from "@/data/brands";
 
 const SUBCATEGORY_LABELS: Record<string, string> = {
   hoodies: "Hoodies",
@@ -25,21 +14,50 @@ const SUBCATEGORY_LABELS: Record<string, string> = {
   accessories: "Accessories",
 };
 
+// Per-subcategory matchers. Use both category and name-keyword heuristics so
+// each section only shows products that actually fit (e.g. Denim must be jeans).
+const MATCHERS: Record<string, (p: Product) => boolean> = {
+  hoodies: (p) => {
+    const n = p.name.toLowerCase();
+    return p.category === "Tops" && (/(hoodie|zip[- ]?up|hooded)/.test(n));
+  },
+  shirts: (p) => {
+    const n = p.name.toLowerCase();
+    if (p.category !== "Tops") return false;
+    if (/(hoodie|zip[- ]?up|hooded|sweater|sweatshirt|crewneck|knit|cardigan)/.test(n)) return false;
+    return /(shirt|tee|t-shirt|polo|jersey|top|blouse|button|long sleeve|longsleeve|long-sleeve|tank)/.test(n) || true;
+  },
+  sweaters: (p) => {
+    const n = p.name.toLowerCase();
+    if (p.category === "Knitwear") return true;
+    return p.category === "Tops" && /(sweater|sweatshirt|crewneck|knit|cardigan|jumper|pullover)/.test(n) && !/(hoodie|zip[- ]?up)/.test(n);
+  },
+  denim: (p) => {
+    const n = p.name.toLowerCase();
+    return p.category === "Bottoms" && /(denim|jean|jeans)/.test(n);
+  },
+  bottoms: (p) => {
+    const n = p.name.toLowerCase();
+    if (p.category !== "Bottoms") return false;
+    // exclude pure denim so it lives in the Denim section
+    return !/(denim|jean|jeans)/.test(n) || /(pant|trouser|jogger|short|cargo|sweatpant|baggy|skirt)/.test(n);
+  },
+  jackets: (p) => {
+    const n = p.name.toLowerCase();
+    return p.category === "Outerwear" || /(jacket|coat|puffer|parka|bomber|vest|windbreaker)/.test(n);
+  },
+  kicks: (p) => p.category === "Footwear" || /(sneaker|shoe|boot|trainer)/.test(p.name.toLowerCase()),
+  accessories: (p) =>
+    ["Accessories", "Bags", "Jewelry"].includes(p.category) ||
+    /(hat|cap|beanie|bag|backpack|belt|scarf|sock|necklace|chain|ring|bracelet|earring|sunglass|wallet)/.test(p.name.toLowerCase()),
+};
+
 export default function Category() {
   const { gender, subcategory } = useParams<{ gender: string; subcategory: string }>();
   const label = SUBCATEGORY_LABELS[subcategory || ""] || subcategory;
   const genderLabel = gender === "him" ? "Him" : "Her";
-  const categories = SUBCATEGORY_MAP[subcategory || ""] || [];
-
-  const filtered = products.filter(p => {
-    if (!categories.length) return false;
-    // Match by category mapping — for hoodies, filter tops that have "hoodie" in name
-    if (subcategory === "hoodies") return p.name.toLowerCase().includes("hoodie") || p.name.toLowerCase().includes("zip-up");
-    if (subcategory === "shirts") return categories.includes(p.category) && !p.name.toLowerCase().includes("hoodie") && !p.name.toLowerCase().includes("zip-up") && p.category === "Tops";
-    if (subcategory === "sweaters") return categories.includes(p.category);
-    if (subcategory === "jackets") return categories.includes(p.category);
-    return categories.includes(p.category);
-  });
+  const matcher = MATCHERS[subcategory || ""];
+  const filtered = matcher ? products.filter(matcher) : [];
 
   return (
     <div className="min-h-screen py-8">
