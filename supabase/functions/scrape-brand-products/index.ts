@@ -14,6 +14,8 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "26", name: "Fortune Fellas Club", site: "https://fortunefellasclub.com" },
   { id: "27", name: "House of Kings", site: "https://houseofkings.co" },
   { id: "28", name: "Harvx", site: "https://harvxclo.com" },
+  { id: "29", name: "MorteNoir", site: "https://mortenoir.co.uk" },
+  { id: "30", name: "Isolated", site: "https://isolated.shop" },
 ];
 
 const SIZES_OK = new Set([
