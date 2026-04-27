@@ -7,6 +7,7 @@ export interface Brand {
   logoFont?: string;
   darkCard?: boolean;
   lightCard?: boolean;
+  fullBleedLogo?: boolean;
   bio: string;
   story: string;
   founded: string;
