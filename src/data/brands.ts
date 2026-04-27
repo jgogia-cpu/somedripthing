@@ -103,7 +103,7 @@ export const brands: Brand[] = [
   },
   {
     id: "25", name: "SABR", slug: "sabr", logo: sabrLogo,
-    banner: "https://sabrclothing2024.com/cdn/shop/files/IMG_2827.jpg?v=1768525898&width=1200", logoFont: "'Playfair Display', serif", darkCard: true,
+    banner: "https://sabrclothing2024.com/cdn/shop/files/IMG_2827.jpg?v=1768525898&width=1200", logoFont: "'Playfair Display', serif", darkCard: false, lightCard: true,
     bio: "SABR Clothing blends cultural heritage with modern streetwear. Known for rhinestone-studded satin tracksuits, reflective skull-caps, and reversible sherpa pieces — bold designs rooted in faith and patience.",
     story: "SABR means patience — and this brand is proof that good things come to those who wait and work. Rooted in faith and cultural heritage, SABR Clothing creates pieces that are as meaningful as they are fresh. Rhinestone-studded satin tracksuits, reflective skull-caps, reversible sherpa jackets — every item is designed to make you feel something. It's not just fashion, it's a reminder: stay patient, stay faithful, stay fly.",
     founded: "2024", founderNote: "\"Patience is power. The drip is just the bonus.\"",
