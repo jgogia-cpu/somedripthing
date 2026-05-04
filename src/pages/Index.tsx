@@ -50,6 +50,11 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   const hasMultiple = allImages.length > 1;
   const [imgIndex, setImgIndex] = useState(0);
   const navigate = useNavigate();
+  const sized = (url: string) => {
+    if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
+    if (url.includes("width=")) return url;
+    return url + (url.includes("?") ? "&" : "?") + "width=600";
+  };
 
   const handleCardClick = () => {
     if (isActive) {
@@ -74,7 +79,15 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
           </div>
         )}
         <div className="relative">
-          <img src={allImages[imgIndex]} alt={product.name} className="w-full object-cover" style={{ aspectRatio: "3/4", height: "340px" }} />
+          <img
+            src={sized(allImages[imgIndex])}
+            alt={product.name}
+            loading={isActive ? "eager" : "lazy"}
+            decoding="async"
+            fetchPriority={isActive ? "high" : "auto"}
+            className="w-full object-cover"
+            style={{ aspectRatio: "3/4", height: "340px" }}
+          />
           {hasMultiple && (
             <>
               <button
