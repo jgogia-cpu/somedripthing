@@ -75,6 +75,7 @@ import houseOfKingsLogo from "@/assets/house-of-kings-logo.png";
 import harvxLogo from "@/assets/harvx-logo.jpg";
 import mortenoirLogo from "@/assets/mortenoir-logo.png";
 import isolatedLogo from "@/assets/isolated-logo.svg";
+import makerLogo from "@/assets/maker-logo.png";
 
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
