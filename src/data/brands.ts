@@ -179,7 +179,7 @@ export const brands: Brand[] = [
   {
     id: "31", name: "Maker Creator", slug: "maker-creator", logo: makerLogo,
     banner: "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_8045.jpg?v=1777016390&width=1200",
-    logoFont: "'Space Grotesk', sans-serif", lightCard: true, fullBleedLogo: true,
+    logoFont: "'Space Grotesk', sans-serif", lightCard: true,
     bio: "Maker Creator is a Canadian streetwear label crafting heavyweight basics with intentional detail — NØIR and GRÏS sweat sets, Levi's-built denim, and waffle knits made for the people who build, design, and create.",
     story: "Maker Creator was born in Canada with a single idea: clothing for the people who make things. Every piece — from the NØIR and GRÏS sweat sets to the Levi's 501-built RAW, BASIC, and DISTRESSED denim, the EXPRESSION crewneck, the CREÄTIVITY zip up, and the MÄTRIX waffle knit — is built around heavyweight fabrics, considered silhouettes, and small details that reward a closer look. No loud branding, no chasing trends — just well-made garments for designers, builders, and creators who'd rather let the work speak.",
     founded: "2024", founderNote: "\"Built for the ones who make.\"",
