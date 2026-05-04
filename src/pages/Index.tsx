@@ -115,7 +115,10 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
 const heroProducts = (() => {
   // 9 picks: 2 Preview Worldwide, 1 Drip by Rage, 2 Fortune Fellas Club, 2 House of Kings, 1 Harvx, 1 MorteNoir, 1 Isolated
   const fixedIds = ["p69", "p75", "p32", "p97", "p99", "p104", "p107", "p166", "p200", "p300"];
-  return fixedIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
+  // Replaced one slot with Maker Creator's NØIR Sweatpants (p400)
+  const _ = fixedIds;
+  const fixedIdsFinal = ["p69", "p75", "p32", "p97", "p99", "p104", "p107", "p200", "p300", "p400"];
+  return fixedIdsFinal.map(id => products.find(p => p.id === id)!).filter(Boolean);
 })();
 
 function getCarouselTransform(index: number, active: number, total: number) {
