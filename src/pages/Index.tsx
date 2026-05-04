@@ -114,7 +114,8 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
 
 const heroProducts = (() => {
   // 9 picks: 2 Preview Worldwide, 1 Drip by Rage, 2 Fortune Fellas Club, 2 House of Kings, 1 Harvx, 1 MorteNoir, 1 Isolated
-  const fixedIds = ["p69", "p75", "p32", "p97", "p99", "p104", "p107", "p166", "p200", "p300"];
+  // 1 each across spotlight brands incl. Maker Creator (p400)
+  const fixedIds = ["p69", "p75", "p32", "p97", "p99", "p104", "p107", "p200", "p300", "p400"];
   return fixedIds.map(id => products.find(p => p.id === id)!).filter(Boolean);
 })();
 
@@ -149,7 +150,7 @@ export default function Index() {
   const [activePlayer, setActivePlayer] = useState<'A' | 'B'>('A');
   const { formatPrice } = useCurrency();
   const trendingProducts = useMemo(() => {
-    const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30"];
+    const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30", "31"];
     const olderBrandIds = ["17"];
     // 2 picks per newer brand (shuffled per-session), 1 per older brand
     const newerPicks = newerBrandIds.flatMap((brandId) => {
