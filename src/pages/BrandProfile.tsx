@@ -38,7 +38,7 @@ export default function BrandProfile() {
           alt={brand.name}
           className={`h-full w-full ${brand.banner === brand.logo ? "object-contain p-12 md:p-24" : "object-cover"}`}
         />
-        <div className={`absolute inset-0 bg-gradient-to-t ${brand.banner === brand.logo && brand.lightCard ? "from-white via-white/30" : "from-black via-black/40"} to-transparent`} />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0">
           <div className="container pb-12">
             <Link to="/explore" className="mb-6 inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-white">
