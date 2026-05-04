@@ -20,6 +20,13 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const allImages = product.images?.length > 0 ? product.images : [product.image];
   const hasMultiple = allImages.length > 1;
   const [imgIndex, setImgIndex] = useState(0);
+  // CDN-resize Shopify images to ~600px to slash payload
+  const sized = (url: string) => {
+    if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
+    if (url.includes("width=")) return url;
+    return url + (url.includes("?") ? "&" : "?") + "width=600";
+  };
+  const eager = index < 4;
 
   return (
     <motion.div
@@ -36,9 +43,11 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </div>
           )}
           <img
-            src={allImages[imgIndex]}
+            src={sized(allImages[imgIndex])}
             alt={product.name}
-            loading="lazy"
+            loading={eager ? "eager" : "lazy"}
+            decoding="async"
+            fetchPriority={eager ? "high" : "auto"}
             className="w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
             style={{ aspectRatio: index % 3 === 0 ? "3/4" : index % 3 === 1 ? "4/5" : "1/1" }}
           />
