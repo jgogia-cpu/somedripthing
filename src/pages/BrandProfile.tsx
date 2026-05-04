@@ -32,9 +32,13 @@ export default function BrandProfile() {
   return (
     <div className="min-h-screen">
       {/* Hero Banner */}
-      <div className="relative h-[70vh] min-h-[500px] overflow-hidden">
-        <img src={brand.banner} alt={brand.name} className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+      <div className={`relative h-[70vh] min-h-[500px] overflow-hidden ${brand.banner === brand.logo ? (brand.lightCard ? "bg-white" : "bg-black") : ""}`}>
+        <img
+          src={brand.banner}
+          alt={brand.name}
+          className={`h-full w-full ${brand.banner === brand.logo ? "object-contain p-12 md:p-24" : "object-cover"}`}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0">
           <div className="container pb-12">
             <Link to="/explore" className="mb-6 inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-white">
