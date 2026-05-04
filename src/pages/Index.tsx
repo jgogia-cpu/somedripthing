@@ -150,7 +150,7 @@ export default function Index() {
   const [activePlayer, setActivePlayer] = useState<'A' | 'B'>('A');
   const { formatPrice } = useCurrency();
   const trendingProducts = useMemo(() => {
-    const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30"];
+    const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30", "31"];
     const olderBrandIds = ["17"];
     // 2 picks per newer brand (shuffled per-session), 1 per older brand
     const newerPicks = newerBrandIds.flatMap((brandId) => {
