@@ -176,6 +176,18 @@ export const brands: Brand[] = [
     instagram: "@isolated", aesthetics: ["Streetwear", "Minimalist", "Grunge"], categories: ["Tops", "Bottoms"],
     priceRange: "budget", followers: 4200, rating: 4.4, featured: true, newDrop: true
   },
+  {
+    id: "31", name: "Maker Creator", slug: "maker-creator", logo: makerLogo,
+    banner: "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_8045.jpg?v=1777016390&width=1200",
+    logoFont: "'Space Grotesk', sans-serif", lightCard: true, fullBleedLogo: true,
+    bio: "Maker Creator is a Canadian streetwear label crafting heavyweight basics with intentional detail — NØIR and GRÏS sweat sets, Levi's-built denim, and waffle knits made for the people who build, design, and create.",
+    story: "Maker Creator was born in Canada with a single idea: clothing for the people who make things. Every piece — from the NØIR and GRÏS sweat sets to the Levi's 501-built RAW, BASIC, and DISTRESSED denim, the EXPRESSION crewneck, the CREÄTIVITY zip up, and the MÄTRIX waffle knit — is built around heavyweight fabrics, considered silhouettes, and small details that reward a closer look. No loud branding, no chasing trends — just well-made garments for designers, builders, and creators who'd rather let the work speak.",
+    founded: "2024", founderNote: "\"Built for the ones who make.\"",
+    vibes: ["Heavyweight basics", "Considered details", "Made in Canada energy", "Quietly elevated"],
+    origin: "Canada", website: "https://makercreator.ca", affiliateUrl: "https://makercreator.ca/collections/all",
+    instagram: "@makercreator", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms"],
+    priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
