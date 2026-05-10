@@ -367,15 +367,15 @@ export default function Index() {
       </section>
 
       {/* Trending Products */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container">
-          <div className="mb-8 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-accent" />
-              <h2 className="font-display text-2xl font-bold">Trending Now</h2>
-            </div>
-            <Link to="/explore?sort=trending" className="text-sm font-medium text-accent hover:underline">
-              View all
+          <div className="mb-10 flex flex-col items-center text-center">
+            <span className="eyebrow mb-3"><TrendingUp className="h-3 w-3" /> Vol. 01</span>
+            <h2 className="font-serif-display text-4xl md:text-5xl">Trending Now</h2>
+            <div className="mt-3 h-px w-16 bg-border" />
+            <p className="mt-3 max-w-md text-sm text-muted-foreground">The pieces moving fastest across our index this week.</p>
+            <Link to="/explore?sort=trending" className="mt-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground">
+              View All →
             </Link>
           </div>
           <div className="masonry-grid">
@@ -390,12 +390,14 @@ export default function Index() {
       <BlogHeroSection />
 
       {/* New Drops */}
-      <section className="border-t bg-secondary/20 py-16">
+      <section className="border-t bg-secondary/20 py-20">
         <div className="container">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="font-display text-2xl font-bold">New Drops 🔥</h2>
-            <Link to="/explore?sort=newest" className="text-sm font-medium text-accent hover:underline">
-              View all
+          <div className="mb-10 flex flex-col items-center text-center">
+            <span className="eyebrow mb-3">Just Landed</span>
+            <h2 className="font-serif-display text-4xl md:text-5xl">New Drops</h2>
+            <div className="mt-3 h-px w-16 bg-border" />
+            <Link to="/explore?sort=newest" className="mt-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground">
+              View All →
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -410,9 +412,13 @@ export default function Index() {
       <FeaturedBrandSection />
 
       {/* Featured Brands */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container">
-          <h2 className="mb-8 font-display text-2xl font-bold">Editor's Picks</h2>
+          <div className="mb-10 flex flex-col items-center text-center">
+            <span className="eyebrow mb-3">Curated</span>
+            <h2 className="font-serif-display text-4xl md:text-5xl">Editor's Picks</h2>
+            <div className="mt-3 h-px w-16 bg-border" />
+          </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {featuredBrands.map((brand, i) => (
               <BrandCard key={brand.id} brand={brand} index={i} />
