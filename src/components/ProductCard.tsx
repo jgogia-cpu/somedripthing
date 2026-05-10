@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
@@ -19,12 +18,11 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const wishlisted = isInWishlist(product.id);
   const allImages = product.images?.length > 0 ? product.images : [product.image];
   const hasMultiple = allImages.length > 1;
-  const [imgIndex, setImgIndex] = useState(0);
   // CDN-resize Shopify images to ~600px to slash payload
   const sized = (url: string) => {
     if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
     if (url.includes("width=")) return url;
-    return url + (url.includes("?") ? "&" : "?") + "width=600";
+    return url + (url.includes("?") ? "&" : "?") + "width=500";
   };
   const eager = index < 4;
 
@@ -42,41 +40,28 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               GET 10% OFF WITH CODE DRIPWAYAPPAREL
             </div>
           )}
-          <img
-            src={sized(allImages[imgIndex])}
-            alt={product.name}
-            loading={eager ? "eager" : "lazy"}
-            decoding="async"
-            fetchPriority={eager ? "high" : "auto"}
-            className="w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
+          <div
+            className="relative w-full"
             style={{ aspectRatio: index % 3 === 0 ? "3/4" : index % 3 === 1 ? "4/5" : "1/1" }}
-          />
-          {/* Image navigation arrows */}
-          {hasMultiple && (
-            <>
-              <button
-                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/70 p-1.5 backdrop-blur-md opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 hover:bg-background/90"
-                onClick={(e) => { e.preventDefault(); setImgIndex((imgIndex - 1 + allImages.length) % allImages.length); }}
-              >
-                <ChevronLeft className="h-3.5 w-3.5" />
-              </button>
-              <button
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/70 p-1.5 backdrop-blur-md opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 hover:bg-background/90"
-                onClick={(e) => { e.preventDefault(); setImgIndex((imgIndex + 1) % allImages.length); }}
-              >
-                <ChevronRight className="h-3.5 w-3.5" />
-              </button>
-              {/* Dot indicators */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                {allImages.map((_, i) => (
-                  <span
-                    key={i}
-                    className={`h-1.5 rounded-full transition-all ${i === imgIndex ? "w-4 bg-accent" : "w-1.5 bg-foreground/40"}`}
-                  />
-                ))}
-              </div>
-            </>
-          )}
+          >
+            <img
+              src={sized(allImages[0])}
+              alt={product.name}
+              loading={eager ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={eager ? "high" : "auto"}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+            />
+            {hasMultiple && (
+              <img
+                src={sized(allImages[1])}
+                alt={product.name}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
+              />
+            )}
+          </div>
           <button
             className={`absolute right-3 top-3 rounded-full bg-background/70 p-2 backdrop-blur-md transition-all duration-300 ${wishlisted ? "opacity-100 scale-100" : "opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100"}`}
             onClick={(e) => { e.preventDefault(); if (user) toggleWishlist(product.id); }}
