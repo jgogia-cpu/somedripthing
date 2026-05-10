@@ -17,14 +17,14 @@ function FeaturedProductCard({ product }: { product: Product }) {
 
   return (
     <Link to={`/product/${product.id}`} className="group block">
-      <div className="overflow-hidden rounded-xl bg-black/90 shadow-lg transition-shadow hover:shadow-xl">
+      <div className="overflow-hidden rounded-md border border-background/15 bg-background/5 transition-colors hover:border-background/40">
         <div className="relative">
           <img
             src={allImages[imgIndex]}
             alt={product.name}
             loading="lazy"
-            className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            style={{ aspectRatio: "3/4", height: "360px" }}
+            className="w-full object-cover"
+            style={{ aspectRatio: "1/1" }}
           />
           {hasMultiple && (
             <>
@@ -53,12 +53,12 @@ function FeaturedProductCard({ product }: { product: Product }) {
             </span>
           )}
         </div>
-        <div className="p-4">
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-white/50">
+        <div className="p-2.5">
+          <p className="truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-background/60">
             {product.brandName}
           </p>
-          <p className="mt-0.5 truncate text-sm font-semibold text-white">{product.name}</p>
-          <p className="mt-0.5 text-sm font-bold text-white">{formatPrice(product.price)}</p>
+          <p className="mt-0.5 truncate text-xs font-medium text-background">{product.name}</p>
+          <p className="mt-0.5 text-xs font-bold tabular-nums text-background">{formatPrice(product.price)}</p>
         </div>
       </div>
     </Link>
