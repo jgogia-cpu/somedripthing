@@ -36,7 +36,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       className="masonry-item group"
     >
       <Link to={`/product/${product.id}`} className="block">
-        <div className="relative overflow-hidden rounded-xl bg-secondary/50 transition-shadow duration-500 group-hover:shadow-xl group-hover:shadow-black/10">
+        <div className="relative overflow-hidden rounded-md bg-secondary/50 transition-shadow duration-500 group-hover:shadow-xl group-hover:shadow-black/10">
           {product.brandId === "17" && (
             <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
               GET 10% OFF WITH CODE DRIPWAYAPPAREL
@@ -89,13 +89,13 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </span>
           )}
         </div>
-        <div className="mt-3 space-y-0.5">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+        <div className="mt-3 space-y-1">
+          <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
             {product.brandName}
           </p>
-          <p className="text-sm font-medium leading-tight text-foreground/90">{product.name}</p>
-          <div className="flex items-center gap-2">
-            <p className="text-sm font-bold">{formatPrice(product.price)}</p>
+          <p className="font-serif-display text-base leading-snug text-foreground">{product.name}</p>
+          <div className="flex items-center gap-2 pt-0.5">
+            <p className="text-sm font-medium tracking-tight">{formatPrice(product.price)}</p>
             {product.originalPrice && (
               <p className="text-xs text-muted-foreground line-through">{formatPrice(product.originalPrice)}</p>
             )}
