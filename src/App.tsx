@@ -73,12 +73,10 @@ const App = () => (
               click_type: "promo",
               source: "top_promo_banner",
             }}
-            className="text-[10px] font-semibold uppercase tracking-[0.22em] text-black/90 hover:text-black"
+            className="text-[11px] font-semibold uppercase tracking-[0.16em] text-black/90 hover:text-black"
           >
-            <span className="font-serif-display italic text-[13px] tracking-normal normal-case">Drip by Rage</span>
-            <span className="mx-2 opacity-60">·</span>
-            10% OFF WITH CODE
-            <span className="ml-2 rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[10px] tracking-[0.18em]">DRIPWAYAPPAREL</span>
+            DRIP BY RAGE — 10% OFF WITH CODE
+            <span className="ml-2 rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[10px] tracking-[0.14em]">DRIPWAYAPPAREL</span>
           </TrackedOutboundLink>
         </div>
         <Navbar />
