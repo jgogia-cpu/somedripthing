@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
@@ -18,6 +19,24 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const wishlisted = isInWishlist(product.id);
   const allImages = product.images?.length > 0 ? product.images : [product.image];
   const hasMultiple = allImages.length > 1;
+  const [hovered, setHovered] = useState(false);
+  const [imgIndex, setImgIndex] = useState(0);
+  const intervalRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (hovered && hasMultiple) {
+      intervalRef.current = window.setInterval(() => {
+        setImgIndex((i) => (i + 1) % allImages.length);
+      }, 900);
+    } else {
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
+      setImgIndex(0);
+    }
+    return () => {
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
+    };
+  }, [hovered, hasMultiple, allImages.length]);
+
   // CDN-resize Shopify images to ~600px to slash payload
   const sized = (url: string) => {
     if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
@@ -33,7 +52,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       transition={{ delay: index * 0.04, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
       className="masonry-item group"
     >
-      <Link to={`/product/${product.id}`} className="block">
+      <Link
+        to={`/product/${product.id}`}
+        className="block"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <div className="relative overflow-hidden rounded-xl bg-secondary/50 transition-shadow duration-500 group-hover:shadow-xl group-hover:shadow-black/10">
           {product.brandId === "17" && (
             <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
@@ -44,22 +68,26 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             className="relative w-full"
             style={{ aspectRatio: index % 3 === 0 ? "3/4" : index % 3 === 1 ? "4/5" : "1/1" }}
           >
-            <img
-              src={sized(allImages[0])}
-              alt={product.name}
-              loading={eager ? "eager" : "lazy"}
-              decoding="async"
-              fetchPriority={eager ? "high" : "auto"}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-            />
-            {hasMultiple && (
+            {allImages.map((src, i) => (
               <img
-                src={sized(allImages[1])}
+                key={i}
+                src={sized(src)}
                 alt={product.name}
-                loading="lazy"
+                loading={eager && i === 0 ? "eager" : "lazy"}
                 decoding="async"
-                className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
+                fetchPriority={eager && i === 0 ? "high" : "auto"}
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-200 ease-out ${i === 0 ? "transition-transform duration-500 group-hover:scale-[1.03]" : ""} ${i === imgIndex ? "opacity-100" : "opacity-0"}`}
               />
+            ))}
+            {hasMultiple && hovered && (
+              <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1">
+                {allImages.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`h-1.5 rounded-full transition-all ${i === imgIndex ? "w-4 bg-accent" : "w-1.5 bg-foreground/40"}`}
+                  />
+                ))}
+              </div>
             )}
           </div>
           <button
