@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useEffect, useCallback, useRef, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -48,12 +48,11 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   const isActive = index === currentSlide;
   const allImages = product.images?.length > 0 ? product.images : [product.image];
   const hasMultiple = allImages.length > 1;
-  const [imgIndex, setImgIndex] = useState(0);
   const navigate = useNavigate();
   const sized = (url: string) => {
     if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
     if (url.includes("width=")) return url;
-    return url + (url.includes("?") ? "&" : "?") + "width=600";
+    return url + (url.includes("?") ? "&" : "?") + "width=500";
   };
 
   const handleCardClick = () => {
@@ -79,36 +78,25 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
           </div>
         )}
         <div className="relative">
-          <img
-            src={sized(allImages[imgIndex])}
-            alt={product.name}
-            loading={isActive ? "eager" : "lazy"}
-            decoding="async"
-            fetchPriority={isActive ? "high" : "auto"}
-            className="w-full object-cover"
-            style={{ aspectRatio: "3/4", height: "340px" }}
-          />
-          {hasMultiple && (
-            <>
-              <button
-                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/70 p-1.5 backdrop-blur-md opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 hover:bg-background/90"
-                onClick={(e) => { e.stopPropagation(); setImgIndex((imgIndex - 1 + allImages.length) % allImages.length); }}
-              >
-                <ChevronLeft className="h-3.5 w-3.5" />
-              </button>
-              <button
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/70 p-1.5 backdrop-blur-md opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 hover:bg-background/90"
-                onClick={(e) => { e.stopPropagation(); setImgIndex((imgIndex + 1) % allImages.length); }}
-              >
-                <ChevronRight className="h-3.5 w-3.5" />
-              </button>
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                {allImages.map((_, i) => (
-                  <span key={i} className={`h-1.5 rounded-full transition-all ${i === imgIndex ? "w-4 bg-accent" : "w-1.5 bg-foreground/40"}`} />
-                ))}
-              </div>
-            </>
-          )}
+          <div className="relative w-full" style={{ height: "340px" }}>
+            <img
+              src={sized(allImages[0])}
+              alt={product.name}
+              loading={isActive ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={isActive ? "high" : "auto"}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            {hasMultiple && (
+              <img
+                src={sized(allImages[1])}
+                alt={product.name}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
+              />
+            )}
+          </div>
           {product.newArrival && (
             <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-0.5 text-xs font-medium text-accent-foreground">New</span>
           )}
