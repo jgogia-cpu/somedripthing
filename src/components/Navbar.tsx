@@ -154,10 +154,9 @@ export default function Navbar() {
           to="/"
           className="group flex items-baseline gap-2 transition-opacity hover:opacity-80"
         >
-          <span className="text-xl font-semibold" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.18em" }}>
+          <span className="text-xl font-bold" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.16em" }}>
             DRIPWAY
           </span>
-          <span className="hidden font-serif-display italic text-sm text-muted-foreground sm:inline">— est. discovery</span>
         </Link>
 
         {/* Desktop Nav */}
