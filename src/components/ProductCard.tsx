@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 import type { Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -28,9 +29,14 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const eager = index < 4;
 
   return (
-    <div className="group">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.04, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+      className="masonry-item group"
+    >
       <Link to={`/product/${product.id}`} className="block">
-        <div className="relative overflow-hidden rounded-md border border-border bg-secondary/40 transition-colors duration-200 group-hover:border-foreground/30">
+        <div className="relative overflow-hidden rounded-xl bg-secondary/50 transition-shadow duration-500 group-hover:shadow-xl group-hover:shadow-black/10">
           {product.brandId === "17" && (
             <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
               GET 10% OFF WITH CODE DRIPWAYAPPAREL
@@ -42,8 +48,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             loading={eager ? "eager" : "lazy"}
             decoding="async"
             fetchPriority={eager ? "high" : "auto"}
-            className="w-full object-cover"
-            style={{ aspectRatio: "1/1" }}
+            className="w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.03]"
+            style={{ aspectRatio: index % 3 === 0 ? "3/4" : index % 3 === 1 ? "4/5" : "1/1" }}
           />
           {/* Image navigation arrows */}
           {hasMultiple && (
@@ -83,19 +89,19 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </span>
           )}
         </div>
-        <div className="mt-2 space-y-0.5">
-          <p className="truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+        <div className="mt-3 space-y-0.5">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
             {product.brandName}
           </p>
-          <p className="truncate text-sm font-medium leading-tight text-foreground">{product.name}</p>
-          <div className="flex items-baseline gap-2 pt-0.5">
-            <p className="text-sm font-bold tabular-nums text-foreground">{formatPrice(product.price)}</p>
+          <p className="text-sm font-medium leading-tight text-foreground/90">{product.name}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-sm font-bold">{formatPrice(product.price)}</p>
             {product.originalPrice && (
-              <p className="text-xs tabular-nums text-muted-foreground line-through">{formatPrice(product.originalPrice)}</p>
+              <p className="text-xs text-muted-foreground line-through">{formatPrice(product.originalPrice)}</p>
             )}
           </div>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 }

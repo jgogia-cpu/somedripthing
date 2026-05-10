@@ -150,13 +150,8 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
       <div className="container flex h-16 items-center justify-between">
-        <Link
-          to="/"
-          className="group flex items-baseline gap-2 transition-opacity hover:opacity-80"
-        >
-          <span className="text-xl font-bold" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.16em" }}>
-            DRIPWAY
-          </span>
+        <Link to="/" className="group text-xl font-bold tracking-tight transition-opacity hover:opacity-80" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
+          DRIPWAY
         </Link>
 
         {/* Desktop Nav */}

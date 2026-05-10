@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { products, getBrandById, Product } from "@/data/brands";
@@ -17,14 +18,14 @@ function FeaturedProductCard({ product }: { product: Product }) {
 
   return (
     <Link to={`/product/${product.id}`} className="group block">
-      <div className="overflow-hidden rounded-md border border-background/15 bg-background/5 transition-colors hover:border-background/40">
+      <div className="overflow-hidden rounded-xl bg-black/90 shadow-lg transition-shadow hover:shadow-xl">
         <div className="relative">
           <img
             src={allImages[imgIndex]}
             alt={product.name}
             loading="lazy"
-            className="w-full object-cover"
-            style={{ aspectRatio: "1/1" }}
+            className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            style={{ aspectRatio: "3/4", height: "360px" }}
           />
           {hasMultiple && (
             <>
@@ -53,12 +54,12 @@ function FeaturedProductCard({ product }: { product: Product }) {
             </span>
           )}
         </div>
-        <div className="p-2.5">
-          <p className="truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-background/60">
+        <div className="p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-white/50">
             {product.brandName}
           </p>
-          <p className="mt-0.5 truncate text-xs font-medium text-background">{product.name}</p>
-          <p className="mt-0.5 text-xs font-bold tabular-nums text-background">{formatPrice(product.price)}</p>
+          <p className="mt-0.5 truncate text-sm font-semibold text-white">{product.name}</p>
+          <p className="mt-0.5 text-sm font-bold text-white">{formatPrice(product.price)}</p>
         </div>
       </div>
     </Link>
@@ -67,40 +68,67 @@ function FeaturedProductCard({ product }: { product: Product }) {
 
 export default function FeaturedBrandSection() {
   return (
-    <section className="border-b bg-foreground py-12 text-background">
+    <section className="py-16" style={{ backgroundColor: "hsl(16, 85%, 60%)" }}>
       <div className="container">
-        <div className="mb-5 flex items-end justify-between gap-4">
+        {/* Promo Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6 rounded-xl border-2 border-black/20 bg-black/90 px-6 py-4 text-center"
+        >
+          <p className="text-sm font-bold uppercase tracking-widest text-white/70">Exclusive Offer</p>
+          <p className="mt-1 text-2xl font-black uppercase tracking-wide text-white md:text-3xl" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
+            USE CODE <span style={{ color: "hsl(16, 85%, 60%)" }}>DRIPWAYAPPAREL</span> FOR 10% OFF
+          </p>
+          <p className="mt-1 text-sm text-white/60">
+            at{" "}
+            <TrackedOutboundLink
+              href="https://dripbyrage.com/dripwayapparel"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-white"
+              trackingProperties={{
+                brand_id: brand.id,
+                brand_name: brand.name,
+                brand_slug: brand.slug,
+                click_type: "promo",
+                source: "featured_brand_promo",
+              }}
+            >
+              DRIPBYRAGE.COM
+            </TrackedOutboundLink>
+          </p>
+        </motion.div>
+
+        {/* Section Header */}
+        <div className="mb-8 flex items-center justify-between">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-background/60">Featured Brand</p>
-            <h2 className="mt-1 text-2xl font-bold uppercase tracking-wide md:text-3xl">{brand.name}</h2>
-            <p className="mt-1 text-xs text-background/70">
-              10% off with code{" "}
-              <TrackedOutboundLink
-                href="https://dripbyrage.com/dripwayapparel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono font-bold text-background underline-offset-2 hover:underline"
-                trackingProperties={{
-                  brand_id: brand.id,
-                  brand_name: brand.name,
-                  brand_slug: brand.slug,
-                  click_type: "promo",
-                  source: "featured_brand_promo",
-                }}
-              >
-                DRIPWAYAPPAREL
-              </TrackedOutboundLink>
-            </p>
+            <p className="text-xs font-bold uppercase tracking-widest text-black/50">Today's Featured Brand</p>
+            <h2
+              className="text-3xl font-black uppercase text-black md:text-4xl"
+              style={{ fontFamily: "'Rajdhani', sans-serif", letterSpacing: "0.05em" }}
+            >
+              {brand.name}
+            </h2>
           </div>
           <Link to={`/brand/${brand.slug}`}>
-            <Button className="gap-2 rounded-md bg-background text-foreground hover:bg-background/90">
+            <Button className="gap-2 rounded-full bg-black text-white hover:bg-black/80">
               View Brand <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {dripByRageProducts.map((product) => (
-            <FeaturedProductCard key={product.id} product={product} />
+
+        {/* Product Grid */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {dripByRageProducts.map((product, i) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05, duration: 0.4 }}
+            >
+              <FeaturedProductCard product={product} />
+            </motion.div>
           ))}
         </div>
       </div>

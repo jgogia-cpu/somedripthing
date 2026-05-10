@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Rajdhani:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=Playfair+Display:wght@700&family=Oswald:wght@600;700&family=Rajdhani:wght@600;700&family=Anton&family=Abril+Fatface&family=Archivo+Black&family=DM+Serif+Display&family=Monoton&family=Permanent+Marker&family=Rubik+Mono+One&family=Russo+One&family=Syne:wght@700;800&family=Unbounded:wght@700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,25 +6,25 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 6%;
+    --background: 0 0% 98%;
+    --foreground: 0 0% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 6%;
+    --card-foreground: 0 0% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 6%;
+    --popover-foreground: 0 0% 8%;
 
-    --primary: 0 0% 6%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 8%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 6%;
+    --secondary: 40 6% 93%;
+    --secondary-foreground: 0 0% 8%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 38%;
+    --muted: 40 6% 93%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 222 83% 47%;
+    --accent: 16 85% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -32,9 +32,9 @@
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 222 83% 47%;
+    --ring: 16 85% 60%;
 
-    --radius: 0.375rem;
+    --radius: 0.75rem;
 
     --drip-coral: 16 85% 60%;
     --drip-sage: 150 20% 65%;
@@ -54,25 +54,33 @@
   }
 
   .dark {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 6%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 6%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 6%;
-    --primary: 0 0% 6%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 6%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 38%;
-    --accent: 222 83% 47%;
+    --background: 0 0% 5%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 5%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 50%;
+
+    --accent: 16 85% 58%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
+
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 222 83% 47%;
+
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 16 85% 58%;
 
     --drip-coral: 16 85% 55%;
     --drip-sage: 150 20% 50%;
@@ -173,19 +181,5 @@
   .gradient-fade-b {
     mask-image: linear-gradient(to bottom, black 60%, transparent);
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent);
-  }
-
-  /* Editorial typography utilities */
-  .eyebrow {
-    @apply inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground;
-  }
-  .hairline {
-    @apply h-px w-full bg-border;
-  }
-  /* legacy alias kept for any leftover usage — now plain sans */
-  .font-serif-display {
-    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
   }
 }

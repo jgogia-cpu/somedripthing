@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import type { Brand } from "@/data/brands";
 
 interface BrandCardProps {
@@ -8,30 +9,38 @@ interface BrandCardProps {
 
 export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05, duration: 0.4 }}
+    >
       <Link to={`/brand/${brand.slug}`} className="group block">
-        <div className={`relative overflow-hidden rounded-md border border-border flex items-center justify-center transition-colors duration-200 group-hover:border-foreground/40 ${brand.lightCard ? "bg-white" : brand.darkCard ? "bg-black" : "bg-secondary"}`} style={{ aspectRatio: "3/2" }}>
+        <div className={`relative overflow-hidden rounded-xl flex items-center justify-center ${brand.lightCard ? "bg-white" : brand.darkCard ? "bg-black" : "bg-secondary"}`} style={{ aspectRatio: "3/2" }}>
           <img
             src={brand.logo}
             alt={brand.name}
             loading="lazy"
             decoding="async"
-            className={`h-full w-full ${brand.fullBleedLogo ? "object-cover" : "object-contain p-8"}`}
+            className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${brand.fullBleedLogo ? "object-cover" : "object-contain p-8"}`}
           />
-        </div>
-        <div className="mt-2.5">
-          <h3 className="truncate text-sm font-semibold text-foreground" style={{ fontFamily: brand.logoFont || undefined }}>
-            {brand.name}
-          </h3>
-          <div className="mt-1 flex flex-wrap gap-1">
-            {brand.aesthetics.slice(0, 2).map(tag => (
-              <span key={tag} className="rounded-sm bg-secondary px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground">
-                {tag}
-              </span>
-            ))}
+          <div className={`absolute inset-0 bg-gradient-to-t ${brand.lightCard ? "from-white via-white/40" : "from-black/70 via-black/20"} to-transparent`} />
+          <div className="absolute bottom-0 left-0 p-5">
+            <h3
+              className={`text-lg font-bold ${brand.lightCard ? "text-black" : "text-white"}`}
+              style={{ fontFamily: brand.logoFont || undefined, letterSpacing: brand.logoFont ? "0.05em" : undefined }}
+            >
+              {brand.name}
+            </h3>
+            <div className="mt-1 flex flex-wrap gap-1.5">
+              {brand.aesthetics.slice(0, 2).map(tag => (
+                <span key={tag} className={`rounded-full px-2 py-0.5 text-[10px] font-medium backdrop-blur-sm ${brand.lightCard ? "bg-black/10 text-black" : "bg-white/20 text-white"}`}>
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 }

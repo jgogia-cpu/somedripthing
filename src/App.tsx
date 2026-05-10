@@ -73,10 +73,9 @@ const App = () => (
               click_type: "promo",
               source: "top_promo_banner",
             }}
-            className="text-[11px] font-semibold uppercase tracking-[0.16em] text-black/90 hover:text-black"
+            className="text-xs font-bold uppercase tracking-wider text-black hover:underline"
           >
-            DRIP BY RAGE — 10% OFF WITH CODE
-            <span className="ml-2 rounded-sm bg-black/10 px-1.5 py-0.5 font-mono text-[10px] tracking-[0.14em]">DRIPWAYAPPAREL</span>
+            GET 10% OFF DRIPBYRAGE WITH CODE DRIPWAYAPPAREL
           </TrackedOutboundLink>
         </div>
         <Navbar />
