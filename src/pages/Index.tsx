@@ -250,11 +250,17 @@ export default function Index() {
           <div className="absolute inset-0 bg-background/70" />
         </div>
         <div className="container relative z-10">
-          <h1 className="mb-1 text-center text-5xl font-bold tracking-tight md:text-7xl" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
-            DRIPWAY
+          <div className="mb-2 flex justify-center">
+            <span className="eyebrow">Issue №01 — This Week</span>
+          </div>
+          <h1
+            className="mb-3 text-center text-6xl font-semibold md:text-8xl"
+            style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.04em" }}
+          >
+            DRIP<span className="font-serif-display italic font-normal text-foreground/90">way</span>
           </h1>
-          <p className="mb-8 text-center text-sm font-medium uppercase tracking-widest text-muted-foreground">
-            Today's Featured Picks
+          <p className="mb-10 text-center font-serif-display italic text-lg text-muted-foreground md:text-xl">
+            A weekly edit of the brands you haven't heard of — yet.
           </p>
           {/* 3D Carousel */}
           <div
@@ -314,17 +320,18 @@ export default function Index() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="mt-6 text-center"
+              className="mx-auto mt-8 max-w-xl text-center"
             >
               {brand && (
-                <Link to={`/brand/${brand.slug}`} className="text-sm font-medium text-accent hover:underline">
+                <Link to={`/brand/${brand.slug}`} className="text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground">
                   {brand.name}
                 </Link>
               )}
-              <h2 className="mt-1 font-display text-2xl font-bold md:text-3xl">{current.name}</h2>
+              <h2 className="mt-2 font-serif-display text-3xl md:text-4xl">{current.name}</h2>
+              <div className="mx-auto mt-3 h-px w-16 bg-border" />
               <div className="mt-2 flex justify-center gap-2">
                 {current.aesthetics.map(a => (
-                  <span key={a} className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+                  <span key={a} className="rounded-full border border-border/60 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
                     {a}
                   </span>
                 ))}
@@ -360,15 +367,15 @@ export default function Index() {
       </section>
 
       {/* Trending Products */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container">
-          <div className="mb-8 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-accent" />
-              <h2 className="font-display text-2xl font-bold">Trending Now</h2>
-            </div>
-            <Link to="/explore?sort=trending" className="text-sm font-medium text-accent hover:underline">
-              View all
+          <div className="mb-10 flex flex-col items-center text-center">
+            <span className="eyebrow mb-3"><TrendingUp className="h-3 w-3" /> Vol. 01</span>
+            <h2 className="font-serif-display text-4xl md:text-5xl">Trending Now</h2>
+            <div className="mt-3 h-px w-16 bg-border" />
+            <p className="mt-3 max-w-md text-sm text-muted-foreground">The pieces moving fastest across our index this week.</p>
+            <Link to="/explore?sort=trending" className="mt-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground">
+              View All →
             </Link>
           </div>
           <div className="masonry-grid">
@@ -383,12 +390,14 @@ export default function Index() {
       <BlogHeroSection />
 
       {/* New Drops */}
-      <section className="border-t bg-secondary/20 py-16">
+      <section className="border-t bg-secondary/20 py-20">
         <div className="container">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="font-display text-2xl font-bold">New Drops 🔥</h2>
-            <Link to="/explore?sort=newest" className="text-sm font-medium text-accent hover:underline">
-              View all
+          <div className="mb-10 flex flex-col items-center text-center">
+            <span className="eyebrow mb-3">Just Landed</span>
+            <h2 className="font-serif-display text-4xl md:text-5xl">New Drops</h2>
+            <div className="mt-3 h-px w-16 bg-border" />
+            <Link to="/explore?sort=newest" className="mt-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground transition-colors hover:text-foreground">
+              View All →
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -403,9 +412,13 @@ export default function Index() {
       <FeaturedBrandSection />
 
       {/* Featured Brands */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="container">
-          <h2 className="mb-8 font-display text-2xl font-bold">Editor's Picks</h2>
+          <div className="mb-10 flex flex-col items-center text-center">
+            <span className="eyebrow mb-3">Curated</span>
+            <h2 className="font-serif-display text-4xl md:text-5xl">Editor's Picks</h2>
+            <div className="mt-3 h-px w-16 bg-border" />
+          </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {featuredBrands.map((brand, i) => (
               <BrandCard key={brand.id} brand={brand} index={i} />

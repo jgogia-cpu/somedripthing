@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=Playfair+Display:wght@700&family=Oswald:wght@600;700&family=Rajdhani:wght@600;700&family=Anton&family=Abril+Fatface&family=Archivo+Black&family=DM+Serif+Display&family=Monoton&family=Permanent+Marker&family=Rubik+Mono+One&family=Russo+One&family=Syne:wght@700;800&family=Unbounded:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -181,5 +182,27 @@
   .gradient-fade-b {
     mask-image: linear-gradient(to bottom, black 60%, transparent);
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent);
+  }
+
+  /* Editorial typography utilities */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "";
+    @apply h-px w-6 bg-border;
+  }
+  .eyebrow.eyebrow-left::after { display: none; }
+  .eyebrow.eyebrow-left::before { @apply w-4; }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+
+  .font-serif-display {
+    font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
 }
