@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Search, Heart, Menu, X, ChevronDown, User, LogOut } from "lucide-react";
+import { Search, Heart, Menu, X, ChevronDown, User, LogOut, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
@@ -95,6 +95,50 @@ function GenderDropdown({ gender, label }: { gender: string; label: string }) {
   );
 }
 
+function MoreDropdown() {
+  const [open, setOpen] = useState(false);
+  const items = [
+    { to: "/blog", label: "Blog" },
+    { to: "/affiliate", label: "Affiliate", accent: true },
+  ];
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button className="group relative flex items-center gap-1 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-all duration-300 hover:text-foreground">
+        <span className="absolute inset-0 rounded-full bg-secondary/0 transition-all duration-300 group-hover:bg-secondary/80" />
+        <span className="relative">More</span>
+        <ChevronDown className={`relative h-3.5 w-3.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.96 }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="absolute left-1/2 top-full z-50 mt-3 w-44 -translate-x-1/2 rounded-xl border border-border/50 bg-card/95 p-1.5 shadow-2xl shadow-black/20 backdrop-blur-xl"
+          >
+            <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 rounded-sm border-l border-t border-border/50 bg-card/95" />
+            {items.map(item => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`block rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-accent/10 hover:pl-4 ${item.accent ? "text-accent" : "text-muted-foreground hover:text-foreground"}`}
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileHimOpen, setMobileHimOpen] = useState(false);
@@ -122,16 +166,11 @@ export default function Navbar() {
           ))}
           <GenderDropdown gender="him" label="Him" />
           <GenderDropdown gender="her" label="Her" />
-          <NavItem to="/blog" label="Blog" isActive={location.pathname === "/blog"} />
+          <MoreDropdown />
         </div>
 
         <div className="flex items-center gap-1">
           <CurrencySelector />
-          <Link to="/affiliate">
-            <Button variant="outline" size="sm" className="hidden rounded-full border-accent/50 px-3 text-xs font-bold uppercase tracking-wider text-accent hover:bg-accent hover:text-accent-foreground md:inline-flex">
-              Affiliate
-            </Button>
-          </Link>
           <Link to="/explore">
             <Button variant="ghost" size="icon" className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105">
               <Search className="h-4 w-4" />

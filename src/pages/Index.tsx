@@ -257,7 +257,21 @@ export default function Index() {
             Today's Featured Picks
           </p>
           {/* 3D Carousel */}
-          <div className="relative mx-auto flex items-center justify-center" style={{ perspective: "1200px", height: "440px" }}>
+          <div
+            className="relative mx-auto flex items-center justify-center touch-pan-y select-none"
+            style={{ perspective: "1200px", height: "440px" }}
+            onTouchStart={(e) => {
+              (e.currentTarget as any)._touchStartX = e.touches[0].clientX;
+            }}
+            onTouchEnd={(e) => {
+              const startX = (e.currentTarget as any)._touchStartX;
+              if (startX == null) return;
+              const dx = e.changedTouches[0].clientX - startX;
+              if (dx > 40) prevSlide();
+              else if (dx < -40) nextSlide();
+              (e.currentTarget as any)._touchStartX = null;
+            }}
+          >
             {heroProducts.map((product, i) => (
               <HeroCarouselCard
                 key={product.id}
