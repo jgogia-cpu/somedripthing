@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { blogPosts as staticBlogPosts } from "@/data/brands";
+import SEO from "@/components/SEO";
 
 interface DbBlogPost {
   id: string;
@@ -56,6 +57,11 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Editorial — Streetwear & Culture | DRIPWAY"
+        description="Daily editorial on streetwear, culture, style, and emerging brands. Trend reports, brand breakdowns, and outfit formulas from DRIPWAY."
+        path="/blog"
+      />
       {/* Minimal header */}
       <div className="border-b border-border/30 py-10">
         <div className="container text-center">

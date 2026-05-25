@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { brands, products, AESTHETICS, CATEGORIES } from "@/data/brands";
 import { useScrapedProducts } from "@/hooks/useScrapedProducts";
+import SEO from "@/components/SEO";
 
 // Cache shuffled product IDs in-memory for the lifetime of this module so order
 // persists across navigation within a single page load but reshuffles on a
@@ -123,6 +124,11 @@ export default function Explore() {
 
   return (
     <div className="min-h-screen py-8">
+      <SEO
+        title="Explore Niche Fashion Brands | DRIPWAY"
+        description="Browse hundreds of underground, emerging, and niche fashion brands. Filter by aesthetic, category, and price to discover your next favorite label."
+        path="/explore"
+      />
       <div className="container">
         {/* Header */}
         <div className="mb-8">

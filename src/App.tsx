@@ -79,6 +79,7 @@ const App = () => (
           </TrackedOutboundLink>
         </div>
         <Navbar />
+        <main>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/explore" element={<Explore />} />
@@ -92,6 +93,7 @@ const App = () => (
           <Route path="/affiliate" element={<Affiliate />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </main>
         <Footer />
       </BrowserRouter>
     </TooltipProvider>

@@ -1,0 +1,16 @@
+# DRIPWAY
+
+> A curated discovery engine for underground, emerging, and niche fashion brands. DRIPWAY helps shoppers find independent streetwear and designer labels that Instagram won't show them.
+
+## Pages
+
+- [Home](/): Featured products, trending picks, and brand spotlights.
+- [Explore](/explore): Browse all brands and products with filters for aesthetic, category, and price.
+- [Collections](/collections): Weekly curated 'Heat Check' selections.
+- [Editorial](/blog): Daily streetwear and fashion editorial articles.
+- [About](/about): About DRIPWAY.
+- [Submit a Brand](/submit): Submit your brand for consideration.
+
+## Optional
+
+- [Affiliate](/affiliate): Affiliate program for brand partners.

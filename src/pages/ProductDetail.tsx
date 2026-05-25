@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { useScrapedProducts } from "@/hooks/useScrapedProducts";
+import SEO from "@/components/SEO";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -35,6 +36,24 @@ export default function ProductDetail() {
   const related = getRelatedProducts(product);
   const wishlisted = isInWishlist(product.id);
 
+  const seoTitle = `${product.name}${brand ? " — " + brand.name : ""} | DRIPWAY`;
+  const seoDesc = (product.description || `${product.name} by ${brand?.name ?? "DRIPWAY"}. Discover niche fashion on DRIPWAY.`).slice(0, 158);
+  const productLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    image: product.images && product.images.length ? product.images : [product.image],
+    description: product.description,
+    brand: brand ? { "@type": "Brand", name: brand.name } : undefined,
+    offers: {
+      "@type": "Offer",
+      price: product.price,
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: `https://thedripway.com/product/${product.id}`,
+    },
+  };
+
   const getStockStatus = (size: string) => {
     if (!product.sizeStock) return true; // assume in stock if no data
     return product.sizeStock[size] !== false;
@@ -46,6 +65,14 @@ export default function ProductDetail() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title={seoTitle.slice(0, 60)}
+        description={seoDesc}
+        path={`/product/${product.id}`}
+        image={product.image}
+        type="product"
+        jsonLd={productLd}
+      />
       <div className="container py-8">
         <Link to="/explore" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeft className="h-3 w-3" /> Back to Explore
