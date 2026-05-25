@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
+import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
 import "./index.css";
 
@@ -22,7 +23,9 @@ if (posthogKey) {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <PostHogProvider client={posthog}>
-    <App />
-  </PostHogProvider>,
+  <HelmetProvider>
+    <PostHogProvider client={posthog}>
+      <App />
+    </PostHogProvider>
+  </HelmetProvider>,
 );
