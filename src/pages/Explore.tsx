@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { brands, products, AESTHETICS, CATEGORIES } from "@/data/brands";
 import { useScrapedProducts } from "@/hooks/useScrapedProducts";
+import SEO from "@/components/SEO";
 
 // Cache shuffled product IDs in-memory for the lifetime of this module so order
 // persists across navigation within a single page load but reshuffles on a

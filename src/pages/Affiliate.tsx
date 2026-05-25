@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Send, CheckCircle } from "lucide-react";
+import SEO from "@/components/SEO";
 
 export default function Affiliate() {
   const [submitted, setSubmitted] = useState(false);
@@ -38,6 +39,11 @@ export default function Affiliate() {
 
   return (
     <div className="min-h-screen py-16">
+      <SEO
+        title="Affiliate Program | DRIPWAY"
+        description="Apply to join the DRIPWAY affiliate program and get your independent fashion brand discovered by Gen Z and Millennial shoppers."
+        path="/affiliate"
+      />
       <div className="container max-w-2xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

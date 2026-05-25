@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { products, getBrandById } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
+import SEO from "@/components/SEO";
 
 /** Return the Monday of the current week as a Date */
 function getCurrentMonday(): Date {
@@ -63,6 +64,11 @@ export default function Collections() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Heat Check — Weekly Collections | DRIPWAY"
+        description="Weekly curated 'Heat Check' collections of the hottest niche fashion picks, refreshed every Monday on DRIPWAY."
+        path="/collections"
+      />
       {/* Hero */}
       <section className="relative bg-primary py-20 text-primary-foreground md:py-28">
         <div className="container">
