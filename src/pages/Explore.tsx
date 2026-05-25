@@ -123,8 +123,11 @@ export default function Explore() {
 
   return (
     <div className="min-h-screen py-8">
-      {/* SEO */}
-      {(() => null)()}
+      <SEO
+        title="Explore Niche Fashion Brands | DRIPWAY"
+        description="Browse hundreds of underground, emerging, and niche fashion brands. Filter by aesthetic, category, and price to discover your next favorite label."
+        path="/explore"
+      />
       <div className="container">
         {/* Header */}
         <div className="mb-8">
