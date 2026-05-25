@@ -169,6 +169,12 @@ export default function BlogPost() {
   if (staticPost) {
     return (
       <div className="min-h-screen">
+        <SEO
+          title={`${staticPost.title} | DRIPWAY Editorial`.slice(0, 60)}
+          description={staticPost.excerpt.slice(0, 158)}
+          path={`/blog/${staticPost.slug}`}
+          type="article"
+        />
         <div className="border-b border-border/30">
           <div className="container max-w-2xl py-10 md:py-16">
             <Link to="/blog" className="mb-6 inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors">
