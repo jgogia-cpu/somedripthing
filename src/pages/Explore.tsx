@@ -123,6 +123,8 @@ export default function Explore() {
 
   return (
     <div className="min-h-screen py-8">
+      {/* SEO */}
+      {(() => null)()}
       <div className="container">
         {/* Header */}
         <div className="mb-8">
