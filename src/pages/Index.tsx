@@ -9,6 +9,7 @@ import FeaturedBrandSection from "@/components/FeaturedBrandSection";
 import BlogHeroSection from "@/components/BlogHeroSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import InstagramCTA from "@/components/InstagramCTA";
+import SEO from "@/components/SEO";
 import { brands, products, blogPosts, AESTHETICS, getBrandById, Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 
@@ -213,6 +214,12 @@ export default function Index() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="DRIPWAY — Discover Niche Fashion Brands"
+        description="Discover the brands Instagram won't show you. DRIPWAY is your curated discovery engine for underground, emerging, and niche streetwear and designer labels."
+        path="/"
+        type="website"
+      />
       {/* 3D Carousel Hero */}
       <section className="relative overflow-hidden py-12 md:py-20">
         {/* Video Background */}

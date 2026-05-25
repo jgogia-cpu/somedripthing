@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { blogPosts as staticBlogPosts, products } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
+import SEO from "@/components/SEO";
 
 interface DbBlogPost {
   id: string;
@@ -77,9 +78,26 @@ export default function BlogPost() {
     const formattedDate = new Date(dbPost.created_at).toLocaleDateString("en-US", {
       month: "long", day: "numeric", year: "numeric"
     });
+    const articleLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: dbPost.title,
+      description: dbPost.excerpt,
+      image: dbPost.cover_image_url || undefined,
+      datePublished: dbPost.created_at,
+      author: { "@type": "Person", name: dbPost.author },
+    };
 
     return (
       <div className="min-h-screen">
+        <SEO
+          title={`${dbPost.title} | DRIPWAY Editorial`.slice(0, 60)}
+          description={dbPost.excerpt.slice(0, 158)}
+          path={`/blog/${dbPost.slug}`}
+          image={dbPost.cover_image_url || undefined}
+          type="article"
+          jsonLd={articleLd}
+        />
         {/* Highsnobiety-style article header */}
         <div className="border-b border-border/30">
           <div className="container max-w-2xl py-10 md:py-16">

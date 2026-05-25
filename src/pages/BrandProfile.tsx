@@ -7,6 +7,7 @@ import BrandCard from "@/components/BrandCard";
 import { getBrandBySlug, getProductsByBrand, getSimilarBrands } from "@/data/brands";
 import InstagramCTA from "@/components/InstagramCTA";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
+import SEO from "@/components/SEO";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -31,6 +32,13 @@ export default function BrandProfile() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title={`${brand.name} — Shop on DRIPWAY`.slice(0, 60)}
+        description={(brand.story || `Discover ${brand.name}, ${brand.aesthetics.join(", ")} from ${brand.origin}.`).slice(0, 158)}
+        path={`/brand/${brand.slug}`}
+        image={typeof brand.banner === "string" ? brand.banner : undefined}
+        type="website"
+      />
       {/* Hero Banner */}
       <div className={`relative h-[70vh] min-h-[500px] overflow-hidden ${brand.banner === brand.logo ? (brand.lightCard ? "bg-white" : "bg-black") : ""}`}>
         <img
