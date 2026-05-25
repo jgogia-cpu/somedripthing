@@ -1,5 +1,5 @@
 // Generates public/sitemap.xml at predev / prebuild time.
-import { writeFileSync } from "fs";
+import { writeFileSync, readFileSync } from "fs";
 import { resolve } from "path";
 
 const BASE_URL = "https://thedripway.com";
@@ -14,12 +14,14 @@ interface Entry {
 }
 
 async function loadBrandsAndProducts(): Promise<Entry[]> {
-  const mod = await import("../src/data/brands.ts");
-  const brands = (mod as any).brands ?? [];
-  const products = (mod as any).products ?? [];
+  // Parse src/data/brands.ts as text to avoid pulling in image asset imports.
+  const src = readFileSync(resolve("src/data/brands.ts"), "utf8");
+  const brandSlugs = Array.from(src.matchAll(/slug:\s*["']([a-z0-9-]+)["']/g)).map((m) => m[1]);
+  const productIds = Array.from(src.matchAll(/\{\s*id:\s*["'](p\d+)["']/g)).map((m) => m[1]);
+  const uniq = (arr: string[]) => Array.from(new Set(arr));
   return [
-    ...brands.map((b: any) => ({ path: `/brand/${b.slug}`, changefreq: "weekly", priority: "0.7" })),
-    ...products.map((p: any) => ({ path: `/product/${p.id}`, changefreq: "weekly", priority: "0.6" })),
+    ...uniq(brandSlugs).map((slug) => ({ path: `/brand/${slug}`, changefreq: "weekly", priority: "0.7" })),
+    ...uniq(productIds).map((id) => ({ path: `/product/${id}`, changefreq: "weekly", priority: "0.6" })),
   ];
 }
 
