@@ -30,6 +30,31 @@ export default function BrandProfile() {
   const brandProducts = getProductsByBrand(brand.id);
   const similar = getSimilarBrands(brand);
 
+  const brandLd = {
+    "@context": "https://schema.org",
+    "@type": "Brand",
+    name: brand.name,
+    url: `https://thedripway.com/brand/${brand.slug}`,
+    logo: brand.logo,
+    image: brand.banner,
+    description: brand.story,
+    sameAs: brand.instagram
+      ? [`https://instagram.com/${brand.instagram.replace("@", "")}`]
+      : undefined,
+    aggregateRating: brand.rating
+      ? { "@type": "AggregateRating", ratingValue: brand.rating, ratingCount: brand.followers || 1 }
+      : undefined,
+  };
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://thedripway.com/" },
+      { "@type": "ListItem", position: 2, name: "Explore", item: "https://thedripway.com/explore" },
+      { "@type": "ListItem", position: 3, name: brand.name, item: `https://thedripway.com/brand/${brand.slug}` },
+    ],
+  };
+
   return (
     <div className="min-h-screen">
       <SEO
@@ -38,6 +63,7 @@ export default function BrandProfile() {
         path={`/brand/${brand.slug}`}
         image={typeof brand.banner === "string" ? brand.banner : undefined}
         type="website"
+        jsonLd={[brandLd, breadcrumbLd]}
       />
       {/* Hero Banner */}
       <div className={`relative h-[70vh] min-h-[500px] overflow-hidden ${brand.banner === brand.logo ? (brand.lightCard ? "bg-white" : "bg-black") : ""}`}>
