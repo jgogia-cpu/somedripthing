@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { usePostHog } from "posthog-js/react";
+import { trackPageview } from "@/lib/analytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Index from "./pages/Index";
@@ -38,6 +39,7 @@ function PostHogPageView() {
   const posthog = usePostHog();
 
   useEffect(() => {
+    trackPageview(location.pathname + location.search);
     if (!posthog.__loaded) {
       return;
     }
