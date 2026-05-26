@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { usePostHog } from "posthog-js/react";
+import { trackPageview } from "@/lib/analytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Index from "./pages/Index";
@@ -21,6 +22,7 @@ import Wishlist from "./pages/Wishlist";
 import Collections from "./pages/Collections";
 import Affiliate from "./pages/Affiliate";
 import NotFound from "./pages/NotFound";
+import AdminSEO from "./pages/AdminSEO";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 const queryClient = new QueryClient();
@@ -38,6 +40,7 @@ function PostHogPageView() {
   const posthog = usePostHog();
 
   useEffect(() => {
+    trackPageview(location.pathname + location.search);
     if (!posthog.__loaded) {
       return;
     }
@@ -91,6 +94,7 @@ const App = () => (
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/collections" element={<Collections />} />
           <Route path="/affiliate" element={<Affiliate />} />
+          <Route path="/admin/seo" element={<AdminSEO />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         </main>
