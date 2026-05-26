@@ -22,6 +22,7 @@ import Wishlist from "./pages/Wishlist";
 import Collections from "./pages/Collections";
 import Affiliate from "./pages/Affiliate";
 import NotFound from "./pages/NotFound";
+import AdminSEO from "./pages/AdminSEO";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 const queryClient = new QueryClient();
@@ -93,6 +94,7 @@ const App = () => (
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/collections" element={<Collections />} />
           <Route path="/affiliate" element={<Affiliate />} />
+          <Route path="/admin/seo" element={<AdminSEO />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         </main>
