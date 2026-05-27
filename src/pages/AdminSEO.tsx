@@ -53,10 +53,18 @@ export default function AdminSEO() {
   }, [user]);
 
   if (authLoading) return null;
+  const ADMIN_EMAIL = "jgogia@ualberta.ca";
   if (!user) {
     return (
       <div className="container py-20 text-center">
         <p>You must be signed in to view the SEO dashboard.</p>
+      </div>
+    );
+  }
+  if (user.email?.toLowerCase() !== ADMIN_EMAIL) {
+    return (
+      <div className="container py-20 text-center">
+        <p>You don't have access to this page.</p>
       </div>
     );
   }
