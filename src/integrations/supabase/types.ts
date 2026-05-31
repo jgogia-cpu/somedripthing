@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      affiliate_clicks: {
+        Row: {
+          brand_id: string | null
+          brand_name: string | null
+          brand_slug: string | null
+          click_type: string | null
+          created_at: string
+          destination_url: string
+          event_name: string
+          id: number
+          product_id: string | null
+          product_name: string | null
+          source: string | null
+          source_path: string | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          brand_id?: string | null
+          brand_name?: string | null
+          brand_slug?: string | null
+          click_type?: string | null
+          created_at?: string
+          destination_url: string
+          event_name?: string
+          id?: number
+          product_id?: string | null
+          product_name?: string | null
+          source?: string | null
+          source_path?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          brand_id?: string | null
+          brand_name?: string | null
+          brand_slug?: string | null
+          click_type?: string | null
+          created_at?: string
+          destination_url?: string
+          event_name?: string
+          id?: number
+          product_id?: string | null
+          product_name?: string | null
+          source?: string | null
+          source_path?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           author: string

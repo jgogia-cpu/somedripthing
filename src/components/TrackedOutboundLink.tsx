@@ -1,6 +1,7 @@
 import type { AnchorHTMLAttributes, MouseEvent } from "react";
 import { usePostHog } from "posthog-js/react";
 import { trackEvent as gaTrackEvent } from "@/lib/analytics";
+import { supabase } from "@/integrations/supabase/client";
 
 type TrackingProperties = Record<string, string | number | boolean | null | undefined>;
 
@@ -34,6 +35,28 @@ export default function TrackedOutboundLink({
     };
 
     if (posthog.__loaded) posthog.capture(eventName, payload);
+
+    // First-party: persist to Supabase so we own the data
+    const tp = trackingProperties || {};
+    const str = (v: unknown) => (v == null ? null : String(v));
+    supabase
+      .from("affiliate_clicks")
+      .insert({
+        event_name: eventName,
+        click_type: str(tp.click_type),
+        brand_id: str(tp.brand_id),
+        brand_name: str(tp.brand_name),
+        brand_slug: str(tp.brand_slug),
+        product_id: str(tp.product_id),
+        product_name: str(tp.product_name),
+        destination_url: href,
+        source_path: window.location.pathname,
+        source: str(tp.source),
+        user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
+      })
+      .then(({ error }) => {
+        if (error) console.warn("[affiliate_clicks] insert failed", error.message);
+      });
 
     // GA4 events
     const clickType = (trackingProperties?.click_type as string | undefined) || "";
