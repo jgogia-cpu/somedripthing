@@ -22,6 +22,7 @@ export default function ProductDetail() {
   const { isInWishlist, toggleWishlist } = useWishlist();
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   if (!product) {
     return (
@@ -35,6 +36,8 @@ export default function ProductDetail() {
   const brand = getBrandById(product.brandId);
   const related = getRelatedProducts(product);
   const wishlisted = isInWishlist(product.id);
+  const activeColor = product.colors?.find((c) => c.name === selectedColor) ?? null;
+  const buyHref = activeColor?.affiliateUrl ?? product.affiliateUrl;
 
   const seoTitle = `${product.name}${brand ? " — " + brand.name : ""} | DRIPWAY`;
   const seoDesc = (product.description || `${product.name} by ${brand?.name ?? "DRIPWAY"}. Discover niche fashion on DRIPWAY.`).slice(0, 158);
@@ -87,7 +90,7 @@ export default function ProductDetail() {
           >
             <div className="overflow-hidden rounded-xl bg-secondary">
               <img
-                src={product.images[selectedImage] || product.image}
+                src={activeColor?.image || product.images[selectedImage] || product.image}
                 alt={product.name}
                 className="w-full object-cover"
                 style={{ aspectRatio: "3/4" }}
@@ -129,6 +132,29 @@ export default function ProductDetail() {
             </div>
 
             <p className="text-muted-foreground">{product.description}</p>
+
+            {product.colors && product.colors.length > 1 && (
+              <div>
+                <p className="mb-2 text-sm font-medium">
+                  Color{selectedColor ? <span className="ml-1 text-muted-foreground font-normal">— {selectedColor}</span> : null}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {product.colors.map((c) => {
+                    const isSel = selectedColor === c.name;
+                    return (
+                      <button
+                        key={c.name}
+                        onClick={() => setSelectedColor(isSel ? null : c.name)}
+                        title={c.name}
+                        className={`overflow-hidden rounded-md ring-2 transition-all ${isSel ? "ring-accent" : "ring-transparent hover:ring-muted-foreground/40"}`}
+                      >
+                        <img src={c.image} alt={c.name} className="h-12 w-12 object-cover" loading="lazy" />
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Sizes with stock */}
             <div>
@@ -185,7 +211,7 @@ export default function ProductDetail() {
             {/* CTAs */}
             <div className="flex gap-3 pt-2">
               <TrackedOutboundLink
-                href={product.affiliateUrl}
+                href={buyHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1"
@@ -197,6 +223,7 @@ export default function ProductDetail() {
                   product_id: product.id,
                   product_name: product.name,
                   source: "product_detail_cta",
+                  color: selectedColor ?? undefined,
                 }}
               >
                 <Button className="w-full gap-2 rounded-full" size="lg">
