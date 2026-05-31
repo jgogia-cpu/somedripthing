@@ -27,7 +27,6 @@ const SUBCATEGORIES = [
 
 const NAV_LINKS = [
   { to: "/", label: "Home" },
-  { to: "/explore", label: "Explore" },
   { to: "/collections", label: "Collections" },
 ];
 
@@ -171,7 +170,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-1">
           <CurrencySelector />
-          <Link to="/explore">
+          <Link to="/collections">
             <Button variant="ghost" size="icon" className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105">
               <Search className="h-4 w-4" />
             </Button>
