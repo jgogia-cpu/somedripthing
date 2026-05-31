@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="600" height="200">
-  <rect width="600" height="200" fill="transparent"/>
-  <text x="300" y="115" font-family="'Helvetica Neue', Arial, sans-serif" font-size="56" font-weight="300" letter-spacing="6" text-anchor="middle" fill="#0a0a0a">NEUTRAL STATE</text>
-  <text x="300" y="155" font-family="'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="400" letter-spacing="8" text-anchor="middle" fill="#666">— EST. 2024 —</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="600" height="160">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&amp;display=swap');
+    .brand { font-family: 'Newsreader', 'Times New Roman', serif; font-size: 76px; font-weight: 400; fill: #0a0a0a; letter-spacing: -1px; }
+    .brand-italic { font-style: italic; }
+  </style>
+  <text x="300" y="100" class="brand" text-anchor="middle">neutral <tspan class="brand-italic">state.</tspan></text>
 </svg>
