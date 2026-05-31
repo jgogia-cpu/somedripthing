@@ -202,6 +202,18 @@ export const brands: Brand[] = [
     instagram: "@justiniano", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops"],
     priceRange: "budget", followers: 2500, rating: 4.5, featured: true, newDrop: true
   },
+  {
+    id: "33", name: "Neutral State", slug: "neutral-state", logo: neutralstateLogo,
+    banner: "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/b1118ce9977d48608b66bdcbab95008c.png?v=1768432236&width=1600",
+    logoFont: "'Helvetica Neue', sans-serif", lightCard: true,
+    bio: "Neutral State is a quiet-luxury streetwear label rooted in heavyweight cotton, sun-faded washes, and pared-back silhouettes — fall/winter essentials built for the wearer who lets the fabric do the talking.",
+    story: "Neutral State was built on a simple idea: clothing that lets you exist without performing. No loud logos, no chasing seasons — just heavyweight washed cotton, raw-edge finishes, and silhouettes that drape with quiet authority. From the Raw Hoodie and Fade Pants to the Signal Jacket and Utility Hoodie, every piece is engineered for layering, longevity, and a wardrobe that holds together year after year. Stay neutral, stay sharp.",
+    founded: "2024", founderNote: "\"Less brand, more wardrobe.\"",
+    vibes: ["Quiet luxury", "Heavyweight basics", "Washed cotton", "Layer ready"],
+    origin: "USA", website: "https://neutralstate.shop", affiliateUrl: "https://neutralstate.shop/collections/all",
+    instagram: "@neutralstate", aesthetics: ["Streetwear", "Minimalist", "Old Money"], categories: ["Tops", "Bottoms", "Outerwear"],
+    priceRange: "mid", followers: 3800, rating: 4.6, featured: true, newDrop: true
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
