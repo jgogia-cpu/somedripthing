@@ -44,6 +44,7 @@ export interface Product {
   affiliateUrl: string;
   trending: boolean;
   newArrival: boolean;
+  colors?: { name: string; image: string; affiliateUrl: string }[];
 }
 
 export interface BlogPost {
