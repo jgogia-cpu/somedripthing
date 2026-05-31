@@ -189,6 +189,18 @@ export const brands: Brand[] = [
     instagram: "@makercreator", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms"],
     priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true
   },
+  {
+    id: "32", name: "Justiniano", slug: "justiniano", logo: justinianoLogo,
+    banner: "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/0F52E802-D53C-4910-ADA3-CB8F8E1078CD.jpg?v=1780084601&width=1600",
+    logoFont: "'Playfair Display', serif", lightCard: true,
+    bio: "Justiniano is a Brazil-inspired streetwear label fusing football heritage with bold graphic tees and crewnecks — verde-ouro pride translated into everyday wearable pieces.",
+    story: "Justiniano takes inspiration from Brazilian football culture, samba color palettes, and the unmistakable verde-ouro energy of the streets. Every drop pulls from heritage — small embroidered crests, bold front graphics, and silhouettes built to be worn loud. It's not nostalgia, it's identity stitched into cotton.",
+    founded: "2024", founderNote: "\"Wear the colors. Carry the country.\"",
+    vibes: ["Verde-ouro pride", "Football heritage", "Bold graphics", "Everyday essentials"],
+    origin: "Brazil", website: "https://justiniano.shop", affiliateUrl: "https://justiniano.shop",
+    instagram: "@justiniano", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops"],
+    priceRange: "budget", followers: 2500, rating: 4.5, featured: true, newDrop: true
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
