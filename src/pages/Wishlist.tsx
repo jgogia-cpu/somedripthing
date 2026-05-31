@@ -33,7 +33,7 @@ export default function Wishlist() {
           <h1 className="mt-4 font-display text-3xl font-bold">Your Wishlist</h1>
           <p className="mt-2 text-muted-foreground">
             Nothing saved yet. Start{" "}
-            <Link to="/explore" className="text-accent hover:underline">exploring</Link>{" "}
+            <Link to="/collections" className="text-accent hover:underline">exploring</Link>{" "}
             to find your next favorite piece.
           </p>
         </div>

@@ -206,12 +206,12 @@ export default function Collections() {
             New collection drops every week. Stay in the loop.
           </p>
           <div className="mt-6 flex justify-center gap-3">
-            <Link to="/explore">
+            <Link to="/collections">
               <Button
                 variant="outline"
                 className="rounded-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
               >
-                Explore All Products
+                Browse Collections
               </Button>
             </Link>
           </div>

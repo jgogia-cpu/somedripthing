@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { motion } from "framer-motion";
@@ -17,33 +17,66 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const { user } = useAuth();
   const { isInWishlist, toggleWishlist } = useWishlist();
   const wishlisted = isInWishlist(product.id);
-  const allImages = product.images?.length > 0 ? product.images : [product.image];
-  const hasMultiple = allImages.length > 1;
-  const [hovered, setHovered] = useState(false);
-  const [imgIndex, setImgIndex] = useState(0);
-  const intervalRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (hovered && hasMultiple) {
-      intervalRef.current = window.setInterval(() => {
-        setImgIndex((i) => (i + 1) % allImages.length);
-      }, 900);
-    } else {
-      if (intervalRef.current) window.clearInterval(intervalRef.current);
-      setImgIndex(0);
-    }
-    return () => {
-      if (intervalRef.current) window.clearInterval(intervalRef.current);
-    };
-  }, [hovered, hasMultiple, allImages.length]);
-
-  // CDN-resize Shopify images to ~600px to slash payload
+  // CDN-resize Shopify images to ~500px to slash payload
   const sized = (url: string) => {
     if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
     if (url.includes("width=")) return url;
     return url + (url.includes("?") ? "&" : "?") + "width=500";
   };
+  const allImages = useMemo(() => {
+    const raw = product.images?.length ? product.images : [product.image];
+    return raw.map(sized);
+  }, [product.images, product.image]);
+  const hasMultiple = allImages.length > 1;
+  const [hovered, setHovered] = useState(false);
+  const [imgIndex, setImgIndex] = useState(0);
+  const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0]));
+  const intervalRef = useRef<number | null>(null);
   const eager = index < 4;
+
+  // Preload the rest of the gallery on first hover so we never crossfade
+  // into an image that hasn't loaded (which causes the black flash).
+  const preloadedRef = useRef(false);
+  useEffect(() => {
+    if (!hovered || preloadedRef.current || !hasMultiple) return;
+    preloadedRef.current = true;
+    allImages.forEach((src, i) => {
+      if (i === 0) return;
+      const img = new Image();
+      img.onload = () => setLoaded((prev) => {
+        if (prev.has(i)) return prev;
+        const next = new Set(prev);
+        next.add(i);
+        return next;
+      });
+      img.src = src;
+    });
+  }, [hovered, hasMultiple, allImages]);
+
+  // Cycle through only the images that are actually loaded — never skip to
+  // an empty slot (that's what caused the flash to dark background).
+  useEffect(() => {
+    if (!hovered || !hasMultiple) {
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
+      intervalRef.current = null;
+      setImgIndex(0);
+      return;
+    }
+    intervalRef.current = window.setInterval(() => {
+      setImgIndex((i) => {
+        // pick the next index in order that is already loaded
+        for (let step = 1; step <= allImages.length; step++) {
+          const candidate = (i + step) % allImages.length;
+          if (loaded.has(candidate)) return candidate;
+        }
+        return i;
+      });
+    }, 1600);
+    return () => {
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    };
+  }, [hovered, hasMultiple, allImages.length, loaded]);
 
   return (
     <motion.div
@@ -65,20 +98,38 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </div>
           )}
           <div
-            className="relative w-full"
+            className="relative w-full bg-secondary/60"
             style={{ aspectRatio: index % 3 === 0 ? "3/4" : index % 3 === 1 ? "4/5" : "1/1" }}
           >
-            {allImages.map((src, i) => (
-              <img
-                key={i}
-                src={sized(src)}
-                alt={product.name}
-                loading={eager && i === 0 ? "eager" : "lazy"}
-                decoding="async"
-                fetchPriority={eager && i === 0 ? "high" : "auto"}
-                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-200 ease-out ${i === 0 ? "transition-transform duration-500 group-hover:scale-[1.03]" : ""} ${i === imgIndex ? "opacity-100" : "opacity-0"}`}
-              />
-            ))}
+            {/* First image is always rendered — stays under crossfades so
+                the background never goes black between transitions. */}
+            <img
+              src={allImages[0]}
+              alt={product.name}
+              loading={eager ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={eager ? "high" : "auto"}
+              onLoad={() => setLoaded((p) => (p.has(0) ? p : new Set(p).add(0)))}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+            {/* Secondary images crossfade on top once loaded */}
+            {allImages.slice(1).map((src, i) => {
+              const realIdx = i + 1;
+              const isActive = imgIndex === realIdx && loaded.has(realIdx);
+              return (
+                <img
+                  key={realIdx}
+                  src={preloadedRef.current ? src : undefined}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                  className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[600ms] ease-out ${
+                    isActive ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              );
+            })}
             {hasMultiple && hovered && (
               <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1">
                 {allImages.map((_, i) => (

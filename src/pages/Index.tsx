@@ -328,8 +328,8 @@ export default function Index() {
                 <Link to={`/product/${current.id}`}>
                   <Button className="gap-2 rounded-full">View Product <ArrowRight className="h-4 w-4" /></Button>
                 </Link>
-                <Link to="/explore">
-                  <Button variant="outline" className="rounded-full">Explore All</Button>
+                <Link to="/collections">
+                  <Button variant="outline" className="rounded-full">Browse Collections</Button>
                 </Link>
               </div>
             </motion.div>
@@ -344,7 +344,7 @@ export default function Index() {
             {AESTHETICS.map(tag => (
               <Link
                 key={tag}
-                to={`/explore?aesthetic=${tag}`}
+                to={`/collections`}
                 className="shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
               >
                 {tag}
@@ -362,7 +362,7 @@ export default function Index() {
               <TrendingUp className="h-5 w-5 text-accent" />
               <h2 className="font-display text-2xl font-bold">Trending Now</h2>
             </div>
-            <Link to="/explore?sort=trending" className="text-sm font-medium text-accent hover:underline">
+            <Link to="/collections" className="text-sm font-medium text-accent hover:underline">
               View all
             </Link>
           </div>
@@ -382,7 +382,7 @@ export default function Index() {
         <div className="container">
           <div className="mb-8 flex items-center justify-between">
             <h2 className="font-display text-2xl font-bold">New Drops 🔥</h2>
-            <Link to="/explore?sort=newest" className="text-sm font-medium text-accent hover:underline">
+            <Link to="/collections" className="text-sm font-medium text-accent hover:underline">
               View all
             </Link>
           </div>

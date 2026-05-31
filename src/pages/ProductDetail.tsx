@@ -27,7 +27,7 @@ export default function ProductDetail() {
     return (
       <div className="container py-20 text-center">
         <p className="text-lg">Product not found.</p>
-        <Link to="/explore" className="mt-4 text-sm text-accent hover:underline">← Back to Explore</Link>
+        <Link to="/collections" className="mt-4 text-sm text-accent hover:underline">← Back to Home</Link>
       </div>
     );
   }
@@ -74,8 +74,8 @@ export default function ProductDetail() {
         jsonLd={productLd}
       />
       <div className="container py-8">
-        <Link to="/explore" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="h-3 w-3" /> Back to Explore
+        <Link to="/collections" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="h-3 w-3" /> Back to Home
         </Link>
 
         <div className="grid gap-12 lg:grid-cols-2">
@@ -175,7 +175,7 @@ export default function ProductDetail() {
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
               {product.aesthetics.map(a => (
-                <Link key={a} to={`/explore?aesthetic=${a}`}
+                <Link key={a} to={`/collections`}
                   className="rounded-full bg-secondary px-3 py-1 text-xs font-medium hover:bg-accent hover:text-accent-foreground transition-colors">
                   {a}
                 </Link>
