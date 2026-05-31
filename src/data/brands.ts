@@ -76,6 +76,7 @@ import harvxLogo from "@/assets/harvx-logo.jpg";
 import mortenoirLogo from "@/assets/mortenoir-logo.png";
 import isolatedLogo from "@/assets/isolated-logo.svg";
 import makerLogo from "@/assets/maker-logo.png";
+import justinianoLogo from "@/assets/justiniano-logo.png";
 
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
@@ -187,6 +188,18 @@ export const brands: Brand[] = [
     origin: "Canada", website: "https://makercreator.ca", affiliateUrl: "https://makercreator.ca/collections/all",
     instagram: "@makercreator", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms"],
     priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true
+  },
+  {
+    id: "32", name: "Justiniano", slug: "justiniano", logo: justinianoLogo,
+    banner: "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/0F52E802-D53C-4910-ADA3-CB8F8E1078CD.jpg?v=1780084601&width=1600",
+    logoFont: "'Playfair Display', serif", lightCard: true,
+    bio: "Justiniano is a Brazil-inspired streetwear label fusing football heritage with bold graphic tees and crewnecks — verde-ouro pride translated into everyday wearable pieces.",
+    story: "Justiniano takes inspiration from Brazilian football culture, samba color palettes, and the unmistakable verde-ouro energy of the streets. Every drop pulls from heritage — small embroidered crests, bold front graphics, and silhouettes built to be worn loud. It's not nostalgia, it's identity stitched into cotton.",
+    founded: "2024", founderNote: "\"Wear the colors. Carry the country.\"",
+    vibes: ["Verde-ouro pride", "Football heritage", "Bold graphics", "Everyday essentials"],
+    origin: "Brazil", website: "https://justiniano.shop", affiliateUrl: "https://justiniano.shop",
+    instagram: "@justiniano", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops"],
+    priceRange: "budget", followers: 2500, rating: 4.5, featured: true, newDrop: true
   },
 ];
 export const products: Product[] = [
@@ -410,6 +423,9 @@ export const products: Product[] = [
   { id: "p407", name: "EXPRESSION CREWNECK", brandId: "31", brandName: "Maker Creator", image: "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5597.heic?v=1773093770&width=900", images: ["https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5597.heic?v=1773093770&width=900", "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5598_2.heic?v=1773224003&width=900", "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5535.jpg?v=1773224003&width=900"], price: 85.0, description: "Crafted from 100% French terry cotton, this piece features a heavyweight 12 oz fabric that delivers both durability and comfort. The garment is finished with a faded wash for a worn-in, vintage look and is pre-shrunk to ", category: "Tops", aesthetics: ["Streetwear", "Minimalist"], sizes: ["S", "M", "L", "XL", "XXL"], affiliateUrl: "https://makercreator.ca/products/expression-crewneck", trending: true, newArrival: true },
   { id: "p408", name: "CREÄTIVITY ZIP UP", brandId: "31", brandName: "Maker Creator", image: "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5601.heic?v=1773093545&width=900", images: ["https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5601.heic?v=1773093545&width=900", "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5602.heic?v=1773093545&width=900", "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5538.jpg?v=1773093545&width=900"], price: 85.0, description: "Elevate your casual wardrobe with the CREÄTIVITY ZIP UP, crafted from 100% French terry cotton for ultimate comfort and durability. This heavyweight 10 oz hoodie features a distinctive faded wash and distressed detailing", category: "Tops", aesthetics: ["Streetwear", "Minimalist"], sizes: ["S", "M", "L", "XL"], affiliateUrl: "https://makercreator.ca/products/creativity-zip-up", trending: true, newArrival: true },
   { id: "p409", name: "MÄTRIX WAFFLE KNÏT", brandId: "31", brandName: "Maker Creator", image: "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5612.heic?v=1773093444&width=900", images: ["https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5612.heic?v=1773093444&width=900", "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5614.heic?v=1773093444&width=900", "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5546.jpg?v=1773093444&width=900"], price: 65.0, description: "The MÄTRIX WAFFLE KNÏT combines comfort and style with a premium fabric blend of 97% cotton and 3% spandex, offering breathability with just the right amount of stretch. This cropped fit piece features eye-catching DTG p", category: "Tops", aesthetics: ["Streetwear", "Minimalist"], sizes: ["S", "M", "L", "XL"], affiliateUrl: "https://makercreator.ca/products/matrix-waffle-knit", trending: true, newArrival: true },
+  // Justiniano
+  { id: "p410", name: "Big Brazil Logo T-Shirt", brandId: "32", brandName: "Justiniano", image: "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/0b75004c90ba4c0894ca0785e41afa4a.png?v=1780029147&width=900", images: ["https://cdn.shopify.com/s/files/1/0796/4341/0466/files/0b75004c90ba4c0894ca0785e41afa4a.png?v=1780029147&width=900", "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/e8c7257af108429cbfee74829467ddb7.png?v=1780029148&width=900", "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/16A24C5B-424F-40C9-8203-25B31B352799.jpg?v=1780084649&width=900"], price: 25.96, description: "Verde-ouro tee featuring a big Brazil logo print across the chest. 100% cotton, mid-weight, regular fit — built for everyday wear with bold national pride.", category: "Tops", aesthetics: ["Streetwear", "Y2K"], sizes: ["S", "M", "L", "XL"], affiliateUrl: "https://justiniano.shop/products/verde-ouro-t-shirt", trending: true, newArrival: true },
+  { id: "p411", name: "Small Brazil Logo Girl Crewneck", brandId: "32", brandName: "Justiniano", image: "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/e95a4c3062f94e688876a97371a5e7d7.png?v=1780029807&width=900", images: ["https://cdn.shopify.com/s/files/1/0796/4341/0466/files/e95a4c3062f94e688876a97371a5e7d7.png?v=1780029807&width=900", "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/2b48ffa2f5664ba1a79dd89f9fdcd037.png?v=1780029807&width=900", "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/0F52E802-D53C-4910-ADA3-CB8F8E1078CD.jpg?v=1780084601&width=900"], price: 25.96, description: "Cropped bodycon crewneck tee with a small embroidered Brazil logo. 92.2% cotton, 7.8% spandex — soft, breathable, and built for a flattering fit.", category: "Tops", aesthetics: ["Streetwear", "Y2K"], sizes: ["S", "M", "L", "XL"], affiliateUrl: "https://justiniano.shop/products/essential-bodycon-crewneck-t-shirt", trending: true, newArrival: true },
 ];
 
 export const blogPosts: BlogPost[] = [];
