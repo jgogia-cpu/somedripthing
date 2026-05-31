@@ -5,25 +5,24 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { WishlistProvider } from "@/contexts/WishlistContext";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useEffect, lazy, Suspense } from "react";
 import { usePostHog } from "posthog-js/react";
 import { trackPageview } from "@/lib/analytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Index from "./pages/Index";
-import Explore from "./pages/Explore";
-import BrandProfile from "./pages/BrandProfile";
-import ProductDetail from "./pages/ProductDetail";
-import Category from "./pages/Category";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import Wishlist from "./pages/Wishlist";
-import Collections from "./pages/Collections";
-import Affiliate from "./pages/Affiliate";
-import NotFound from "./pages/NotFound";
-import AdminSEO from "./pages/AdminSEO";
-import AdminAffiliate from "./pages/AdminAffiliate";
+import Index from "./pages/Index"; // keep home eager for fast LCP
+const BrandProfile = lazy(() => import("./pages/BrandProfile"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const Category = lazy(() => import("./pages/Category"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const Wishlist = lazy(() => import("./pages/Wishlist"));
+const Collections = lazy(() => import("./pages/Collections"));
+const Affiliate = lazy(() => import("./pages/Affiliate"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const AdminSEO = lazy(() => import("./pages/AdminSEO"));
+const AdminAffiliate = lazy(() => import("./pages/AdminAffiliate"));
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 const queryClient = new QueryClient();
@@ -84,9 +83,12 @@ const App = () => (
         </div>
         <Navbar />
         <main>
+        <Suspense fallback={<div className="container py-20 text-center text-sm text-muted-foreground">Loading…</div>}>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/explore" element={<Explore />} />
+          {/* /explore was removed — redirect to /collections to preserve any existing links */}
+          <Route path="/explore" element={<Navigate to="/collections" replace />} />
+          <Route path="/explore/*" element={<Navigate to="/collections" replace />} />
           <Route path="/brand/:slug" element={<BrandProfile />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/shop/:gender/:subcategory" element={<Category />} />
@@ -99,6 +101,7 @@ const App = () => (
           <Route path="/admin/affiliate" element={<AdminAffiliate />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </Suspense>
         </main>
         <Footer />
       </BrowserRouter>
