@@ -18,12 +18,12 @@ export default function Footer() {
           <div>
             <h4 className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Discover</h4>
             <div className="flex flex-col gap-2.5 text-sm">
-              <FooterLink to="/explore">All Brands</FooterLink>
+              <FooterLink to="/collections">All Brands</FooterLink>
               <FooterLink to="/collections">Collections</FooterLink>
               <FooterLink to="/shop/him/hoodies">Shop Him</FooterLink>
               <FooterLink to="/shop/her/hoodies">Shop Her</FooterLink>
-              <FooterLink to="/explore?aesthetic=Streetwear">Streetwear</FooterLink>
-              <FooterLink to="/explore?aesthetic=Minimalist">Minimalist</FooterLink>
+              <FooterLink to="/collections">Streetwear</FooterLink>
+              <FooterLink to="/collections">Minimalist</FooterLink>
             </div>
           </div>
           <div>

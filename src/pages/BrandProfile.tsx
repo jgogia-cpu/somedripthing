@@ -22,7 +22,7 @@ export default function BrandProfile() {
     return (
       <div className="container py-20 text-center">
         <p className="text-lg">Brand not found.</p>
-        <Link to="/explore" className="mt-4 text-sm text-accent hover:underline">← Back to Explore</Link>
+        <Link to="/collections" className="mt-4 text-sm text-accent hover:underline">← Back to Home</Link>
       </div>
     );
   }
@@ -50,7 +50,7 @@ export default function BrandProfile() {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://thedripway.com/" },
-      { "@type": "ListItem", position: 2, name: "Explore", item: "https://thedripway.com/explore" },
+      { "@type": "ListItem", position: 2, name: "Collections", item: "https://thedripway.com/collections" },
       { "@type": "ListItem", position: 3, name: brand.name, item: `https://thedripway.com/brand/${brand.slug}` },
     ],
   };
@@ -75,8 +75,8 @@ export default function BrandProfile() {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0">
           <div className="container pb-12">
-            <Link to="/explore" className="mb-6 inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-white">
-              <ArrowLeft className="h-3.5 w-3.5" /> Back to Explore
+            <Link to="/collections" className="mb-6 inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-white">
+              <ArrowLeft className="h-3.5 w-3.5" /> Back to Home
             </Link>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
