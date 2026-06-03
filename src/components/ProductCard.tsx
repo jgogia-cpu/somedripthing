@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -29,7 +29,41 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   }, [product.images, product.image]);
   const hasMultiple = allImages.length > 1;
   const [imgIndex, setImgIndex] = useState(0);
+  const [visibleSrc, setVisibleSrc] = useState(allImages[0]);
+  const [loadedSrcs, setLoadedSrcs] = useState(() => new Set<string>([allImages[0]]));
   const eager = index < 4;
+
+  useEffect(() => {
+    setImgIndex(0);
+    setVisibleSrc(allImages[0]);
+    setLoadedSrcs(new Set([allImages[0]]));
+  }, [allImages]);
+
+  useEffect(() => {
+    if (!hasMultiple) return;
+
+    const next = (imgIndex + 1) % allImages.length;
+    const prev = (imgIndex - 1 + allImages.length) % allImages.length;
+    [allImages[imgIndex], allImages[next], allImages[prev]].forEach((src) => {
+      if (!src || loadedSrcs.has(src)) return;
+
+      const img = new Image();
+      img.decoding = "async";
+      img.onload = () => {
+        setLoadedSrcs((current) => {
+          if (current.has(src)) return current;
+          const nextSet = new Set(current);
+          nextSet.add(src);
+          return nextSet;
+        });
+      };
+      img.src = src;
+    });
+  }, [allImages, hasMultiple, imgIndex, loadedSrcs]);
+
+  const changeImage = (direction: 1 | -1) => {
+    setImgIndex((i) => (i + direction + allImages.length) % allImages.length);
+  };
 
   return (
     <motion.div
@@ -50,26 +84,37 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             style={{ aspectRatio: index % 3 === 0 ? "3/4" : index % 3 === 1 ? "4/5" : "1/1" }}
           >
             <img
-              src={allImages[imgIndex]}
+              src={visibleSrc}
               alt={product.name}
               loading={eager ? "eager" : "lazy"}
               decoding="async"
               fetchPriority={eager ? "high" : "auto"}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 will-change-transform group-hover:scale-[1.02]"
             />
+            {allImages[imgIndex] !== visibleSrc && (
+              <img
+                key={allImages[imgIndex]}
+                src={allImages[imgIndex]}
+                alt=""
+                loading="eager"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover opacity-0"
+                onLoad={() => setVisibleSrc(allImages[imgIndex])}
+              />
+            )}
             {hasMultiple && (
               <>
                 <button
                   type="button"
                   className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-1.5 opacity-0 backdrop-blur-md transition-all duration-300 scale-90 group-hover:opacity-100 group-hover:scale-100 hover:bg-black/80"
-                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setImgIndex((i) => (i - 1 + allImages.length) % allImages.length); }}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); changeImage(-1); }}
                 >
                   <ChevronLeft className="h-3.5 w-3.5 text-white" />
                 </button>
                 <button
                   type="button"
                   className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-1.5 opacity-0 backdrop-blur-md transition-all duration-300 scale-90 group-hover:opacity-100 group-hover:scale-100 hover:bg-black/80"
-                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); setImgIndex((i) => (i + 1) % allImages.length); }}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); changeImage(1); }}
                 >
                   <ChevronRight className="h-3.5 w-3.5 text-white" />
                 </button>
