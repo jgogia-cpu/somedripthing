@@ -14,42 +14,81 @@ const SUBCATEGORY_LABELS: Record<string, string> = {
   accessories: "Accessories",
 };
 
-// Per-subcategory matchers. Use both category and name-keyword heuristics so
-// each section only shows products that actually fit (e.g. Denim must be jeans).
+/**
+ * Name-first classification. We trust the product NAME over the loosely-typed
+ * `category` field because the dataset has lots of sweatsuits/tracksuits/varsity
+ * tagged as "Tops" or "Bottoms" inconsistently. Each matcher returns true only
+ * when the name unambiguously describes that garment type.
+ */
+const RX = {
+  hoodie: /\b(hoodie|hooded|zip[- ]?up hoodie|zip[- ]?hoodie)\b/,
+  sweater: /\b(sweater|sweatshirt|crewneck|crew neck|knit|knitwear|cardigan|jumper|pullover|turtleneck|mockneck)\b/,
+  shirt: /\b(shirt|t[- ]?shirt|tee|tees|polo|jersey|blouse|button[- ]?(up|down)|long[- ]?sleeve|longsleeve|tank|camisole|halter)\b/,
+  jeans: /\b(jean|jeans|denim)\b/,
+  pants: /\b(pant|pants|trouser|trousers|jogger|joggers|short|shorts|cargo|sweatpant|sweatpants|sweats|trackpant|trackpants|track pant|baggy|skirt|leggings|tights|chino|chinos|bottom|bottoms)\b/,
+  jacket: /\b(jacket|coat|puffer|parka|bomber|vest|windbreaker|gilet|anorak|blazer|varsity|overshirt|shacket|outerwear)\b/,
+  set: /\b(sweatsuit|tracksuit|trackset|two[- ]?piece|set|coord|coordinate)\b/,
+  footwear: /\b(sneaker|sneakers|shoe|shoes|boot|boots|trainer|trainers|loafer|sandal|slide|cleat)\b/,
+  accessory:
+    /\b(hat|cap|beanie|bucket|bag|backpack|tote|belt|scarf|sock|socks|necklace|chain|ring|bracelet|earring|sunglass|sunglasses|wallet|gloves|keychain|patch|sticker|pin)\b/,
+};
+
 const MATCHERS: Record<string, (p: Product) => boolean> = {
   hoodies: (p) => {
     const n = p.name.toLowerCase();
-    return p.category === "Tops" && (/(hoodie|zip[- ]?up|hooded)/.test(n));
-  },
-  shirts: (p) => {
-    const n = p.name.toLowerCase();
-    if (p.category !== "Tops") return false;
-    if (/(hoodie|zip[- ]?up|hooded|sweater|sweatshirt|crewneck|knit|cardigan)/.test(n)) return false;
-    return /(shirt|tee|t-shirt|polo|jersey|top|blouse|button|long sleeve|longsleeve|long-sleeve|tank)/.test(n) || true;
+    if (RX.set.test(n) || RX.jacket.test(n)) return false;
+    return RX.hoodie.test(n);
   },
   sweaters: (p) => {
     const n = p.name.toLowerCase();
+    if (RX.hoodie.test(n)) return false;
+    if (RX.set.test(n) || RX.jacket.test(n)) return false;
     if (p.category === "Knitwear") return true;
-    return p.category === "Tops" && /(sweater|sweatshirt|crewneck|knit|cardigan|jumper|pullover)/.test(n) && !/(hoodie|zip[- ]?up)/.test(n);
+    return RX.sweater.test(n);
+  },
+  shirts: (p) => {
+    const n = p.name.toLowerCase();
+    // Must be an actual shirt-type top — never a hoodie, sweater, jacket,
+    // pants/denim, set, or footwear.
+    if (RX.hoodie.test(n) || RX.sweater.test(n) || RX.jacket.test(n)) return false;
+    if (RX.set.test(n)) return false;
+    if (RX.pants.test(n) || RX.jeans.test(n)) return false;
+    if (RX.footwear.test(n) || RX.accessory.test(n)) return false;
+    return RX.shirt.test(n);
   },
   denim: (p) => {
     const n = p.name.toLowerCase();
-    return p.category === "Bottoms" && /(denim|jean|jeans)/.test(n);
+    if (!RX.jeans.test(n)) return false;
+    // exclude denim jackets, denim shirts, denim accessories
+    if (RX.jacket.test(n) || RX.shirt.test(n) || RX.accessory.test(n)) return false;
+    return true;
   },
   bottoms: (p) => {
     const n = p.name.toLowerCase();
-    if (p.category !== "Bottoms") return false;
-    // exclude pure denim so it lives in the Denim section
-    return !/(denim|jean|jeans)/.test(n) || /(pant|trouser|jogger|short|cargo|sweatpant|baggy|skirt)/.test(n);
+    if (RX.jeans.test(n)) return false; // denim has its own bucket
+    if (RX.jacket.test(n) || RX.hoodie.test(n) || RX.sweater.test(n) || RX.shirt.test(n)) return false;
+    if (RX.footwear.test(n) || RX.accessory.test(n)) return false;
+    // sweatsuits/tracksuits include pants — include here so the set is shoppable
+    if (RX.set.test(n)) return true;
+    return RX.pants.test(n);
   },
   jackets: (p) => {
     const n = p.name.toLowerCase();
-    return p.category === "Outerwear" || /(jacket|coat|puffer|parka|bomber|vest|windbreaker)/.test(n);
+    if (RX.hoodie.test(n) && !RX.jacket.test(n)) return false;
+    return RX.jacket.test(n) || p.category === "Outerwear";
   },
-  kicks: (p) => p.category === "Footwear" || /(sneaker|shoe|boot|trainer)/.test(p.name.toLowerCase()),
-  accessories: (p) =>
-    ["Accessories", "Bags", "Jewelry"].includes(p.category) ||
-    /(hat|cap|beanie|bag|backpack|belt|scarf|sock|necklace|chain|ring|bracelet|earring|sunglass|wallet)/.test(p.name.toLowerCase()),
+  kicks: (p) => {
+    const n = p.name.toLowerCase();
+    return p.category === "Footwear" || RX.footwear.test(n);
+  },
+  accessories: (p) => {
+    const n = p.name.toLowerCase();
+    if (["Accessories", "Bags", "Jewelry"].includes(p.category)) return true;
+    if (RX.hoodie.test(n) || RX.sweater.test(n) || RX.shirt.test(n)) return false;
+    if (RX.pants.test(n) || RX.jeans.test(n) || RX.jacket.test(n)) return false;
+    if (RX.footwear.test(n) || RX.set.test(n)) return false;
+    return RX.accessory.test(n);
+  },
 };
 
 export default function Category() {
