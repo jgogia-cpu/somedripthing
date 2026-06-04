@@ -65,19 +65,86 @@ export default function Collections() {
 
   const searchResults = useMemo(() => {
     if (!query) return null;
-    return products.filter((p) => {
-      const brand = getBrandById(p.brandId);
-      const hay = [
-        p.name,
-        p.description,
-        brand?.name,
-        ...(p.aesthetics || []),
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-      return hay.includes(query);
-    });
+
+    // Levenshtein distance (small, bounded)
+    const lev = (a: string, b: string): number => {
+      if (a === b) return 0;
+      if (!a.length) return b.length;
+      if (!b.length) return a.length;
+      const dp = Array.from({ length: b.length + 1 }, (_, i) => i);
+      for (let i = 1; i <= a.length; i++) {
+        let prev = dp[0];
+        dp[0] = i;
+        for (let j = 1; j <= b.length; j++) {
+          const tmp = dp[j];
+          dp[j] =
+            a[i - 1] === b[j - 1]
+              ? prev
+              : 1 + Math.min(prev, dp[j], dp[j - 1]);
+          prev = tmp;
+        }
+      }
+      return dp[b.length];
+    };
+
+    const normalize = (s: string) =>
+      s
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    const queryTokens = normalize(query).split(" ").filter(Boolean);
+    if (!queryTokens.length) return [];
+
+    const fuzzyTokenMatch = (qTok: string, haystackTokens: string[]) => {
+      // Allow more typos for longer words
+      const tolerance = qTok.length <= 3 ? 0 : qTok.length <= 5 ? 1 : qTok.length <= 8 ? 2 : 3;
+      let best = Infinity;
+      for (const hTok of haystackTokens) {
+        if (hTok.includes(qTok) || qTok.includes(hTok)) return 0; // substring / prefix
+        if (Math.abs(hTok.length - qTok.length) > tolerance + 2) continue;
+        const d = lev(qTok, hTok);
+        if (d < best) best = d;
+        if (best === 0) return 0;
+      }
+      return best <= tolerance ? best : -1;
+    };
+
+    const scored = products
+      .map((p) => {
+        const brand = getBrandById(p.brandId);
+        const text = normalize(
+          [p.name, p.description, brand?.name, ...(p.aesthetics || [])]
+            .filter(Boolean)
+            .join(" "),
+        );
+        const fullPhrase = text;
+        const hayTokens = text.split(" ").filter(Boolean);
+
+        let score = 0;
+        let matchedAll = true;
+
+        // Strong boost for raw substring of the whole query
+        const rawQ = normalize(query);
+        if (rawQ && fullPhrase.includes(rawQ)) score += 50;
+
+        for (const qTok of queryTokens) {
+          const d = fuzzyTokenMatch(qTok, hayTokens);
+          if (d < 0) {
+            matchedAll = false;
+            break;
+          }
+          score += 10 - d * 2; // closer = better
+        }
+
+        return matchedAll ? { p, score } : null;
+      })
+      .filter((x): x is { p: typeof products[number]; score: number } => x !== null)
+      .sort((a, b) => b.score - a.score)
+      .map((x) => x.p);
+
+    return scored;
   }, [query]);
 
   const collectionProducts = searchResults ?? collection.picks;
