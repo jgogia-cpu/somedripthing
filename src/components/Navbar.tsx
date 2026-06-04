@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Search, Heart, Menu, X, ChevronDown, User, LogOut, MoreHorizontal } from "lucide-react";
+import { useState, FormEvent } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Search, Heart, Menu, X, ChevronDown, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
 import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/contexts/AuthContext";
-import dripwayLogo from "@/assets/dripway-logo.jpg";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,11 +24,6 @@ const SUBCATEGORIES = [
   { slug: "accessories", label: "Accessories" },
 ];
 
-const NAV_LINKS = [
-  { to: "/", label: "Home" },
-  { to: "/collections", label: "Collections" },
-];
-
 function NavItem({ to, label, isActive }: { to: string; label: string; isActive: boolean }) {
   return (
     <Link
@@ -38,10 +32,8 @@ function NavItem({ to, label, isActive }: { to: string; label: string; isActive:
         isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
       }`}
     >
-      {/* Hover background pill */}
       <span className="absolute inset-0 rounded-full bg-secondary/0 transition-all duration-300 group-hover:bg-secondary/80" />
       <span className="relative">{label}</span>
-      {/* Active indicator */}
       {isActive && (
         <motion.span
           layoutId="nav-active"
@@ -53,36 +45,98 @@ function NavItem({ to, label, isActive }: { to: string; label: string; isActive:
   );
 }
 
-function GenderDropdown({ gender, label }: { gender: string; label: string }) {
+function ShopMenu() {
   const [open, setOpen] = useState(false);
-
   return (
-    <div
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <button className={`group relative flex items-center gap-1 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-all duration-300 hover:text-foreground`}>
-        <span className="absolute inset-0 rounded-full bg-secondary/0 transition-all duration-300 group-hover:bg-secondary/80" />
-        <span className="relative">{label}</span>
-        <ChevronDown className={`relative h-3.5 w-3.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger asChild>
+        <button className="group relative flex items-center gap-1 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-all duration-300 hover:text-foreground focus:outline-none">
+          <span className="absolute inset-0 rounded-full bg-secondary/0 transition-all duration-300 group-hover:bg-secondary/80" />
+          <span className="relative">Shop</span>
+          <ChevronDown className={`relative h-3.5 w-3.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="start"
+        sideOffset={12}
+        className="w-[28rem] rounded-2xl border-border/50 bg-card/95 p-4 shadow-2xl shadow-black/30 backdrop-blur-xl"
+      >
+        <div className="grid grid-cols-2 gap-4">
+          {(["him", "her"] as const).map((gender) => (
+            <div key={gender}>
+              <div className="mb-2 px-2 text-[10px] font-bold uppercase tracking-[0.18em] text-accent">
+                {gender === "him" ? "Him" : "Her"}
+              </div>
+              <div className="flex flex-col">
+                {SUBCATEGORIES.map((sub) => (
+                  <Link
+                    key={sub.slug}
+                    to={`/shop/${gender}/${sub.slug}`}
+                    onClick={() => setOpen(false)}
+                    className="rounded-lg px-2 py-1.5 text-sm font-medium text-muted-foreground transition-all duration-150 hover:bg-accent/10 hover:text-foreground"
+                  >
+                    {sub.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function SearchBar({ onSubmit, autoFocus = false }: { onSubmit?: () => void; autoFocus?: boolean }) {
+  const [q, setQ] = useState("");
+  const navigate = useNavigate();
+  const handle = (e: FormEvent) => {
+    e.preventDefault();
+    const term = q.trim();
+    if (!term) return;
+    navigate(`/collections?q=${encodeURIComponent(term)}`);
+    setQ("");
+    onSubmit?.();
+  };
+  return (
+    <form onSubmit={handle} className="relative w-full md:w-56">
+      <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+      <input
+        autoFocus={autoFocus}
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        placeholder="Search brands, drops…"
+        className="h-9 w-full rounded-full border border-border/60 bg-secondary/60 pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground/70 focus:border-accent/60 focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-accent/30 transition-colors"
+      />
+    </form>
+  );
+}
+
+const TOP_LINKS = [
+  { to: "/collections", label: "Collections" },
+  { to: "/blog", label: "Blog" },
+];
+
+function MobileSubcatList({ gender, onNavigate }: { gender: "him" | "her"; onNavigate: () => void }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div>
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between rounded-lg px-3 py-3.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60"
+      >
+        Shop {gender === "him" ? "Him" : "Her"}
+        <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
       </button>
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.96 }}
-            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            className="absolute left-1/2 top-full z-50 mt-3 w-48 -translate-x-1/2 rounded-xl border border-border/50 bg-card/95 p-1.5 shadow-2xl shadow-black/20 backdrop-blur-xl"
-          >
-            <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 rounded-sm border-l border-t border-border/50 bg-card/95" />
-            {SUBCATEGORIES.map(sub => (
+          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden pl-4">
+            {SUBCATEGORIES.map((sub) => (
               <Link
                 key={sub.slug}
                 to={`/shop/${gender}/${sub.slug}`}
-                className="block rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-accent/10 hover:text-foreground hover:pl-4"
-                onClick={() => setOpen(false)}
+                onClick={onNavigate}
+                className="block rounded-lg px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-secondary/40 hover:text-foreground"
               >
                 {sub.label}
               </Link>
@@ -94,87 +148,35 @@ function GenderDropdown({ gender, label }: { gender: string; label: string }) {
   );
 }
 
-function MoreDropdown() {
-  const [open, setOpen] = useState(false);
-  const items = [
-    { to: "/blog", label: "Blog" },
-    { to: "/affiliate", label: "Affiliate", accent: true },
-  ];
-  return (
-    <div
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <button className="group relative flex items-center gap-1 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-all duration-300 hover:text-foreground">
-        <span className="absolute inset-0 rounded-full bg-secondary/0 transition-all duration-300 group-hover:bg-secondary/80" />
-        <span className="relative">More</span>
-        <ChevronDown className={`relative h-3.5 w-3.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.96 }}
-            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            className="absolute left-1/2 top-full z-50 mt-3 w-44 -translate-x-1/2 rounded-xl border border-border/50 bg-card/95 p-1.5 shadow-2xl shadow-black/20 backdrop-blur-xl"
-          >
-            <div className="absolute -top-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 rounded-sm border-l border-t border-border/50 bg-card/95" />
-            {items.map(item => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={`block rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 hover:bg-accent/10 hover:pl-4 ${item.accent ? "text-accent" : "text-muted-foreground hover:text-foreground"}`}
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileHimOpen, setMobileHimOpen] = useState(false);
-  const [mobileHerOpen, setMobileHerOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const { user, signOut } = useAuth();
   const location = useLocation();
+  const closeMobile = () => setMobileOpen(false);
 
   return (
     <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-16 items-center gap-4">
         <Link to="/" className="group text-xl font-bold tracking-tight transition-opacity hover:opacity-80" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
           DRIPWAY
         </Link>
 
         {/* Desktop Nav */}
         <div className="hidden items-center gap-1 md:flex">
-          {NAV_LINKS.map(link => (
-            <NavItem
-              key={link.to}
-              to={link.to}
-              label={link.label}
-              isActive={location.pathname === link.to}
-            />
+          <ShopMenu />
+          {TOP_LINKS.map((link) => (
+            <NavItem key={link.to} to={link.to} label={link.label} isActive={location.pathname === link.to} />
           ))}
-          <GenderDropdown gender="him" label="Him" />
-          <GenderDropdown gender="her" label="Her" />
-          <MoreDropdown />
         </div>
 
-        <div className="flex items-center gap-1">
+        {/* Search (desktop) */}
+        <div className="ml-auto hidden flex-1 justify-end md:flex md:max-w-xs">
+          <SearchBar />
+        </div>
+
+        <div className="ml-auto flex items-center gap-1 md:ml-0">
           <CurrencySelector />
-          <Link to="/collections">
-            <Button variant="ghost" size="icon" className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105">
-              <Search className="h-4 w-4" />
-            </Button>
-          </Link>
           <Link to="/wishlist">
             <Button variant="ghost" size="icon" className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105">
               <Heart className="h-4 w-4" />
@@ -190,6 +192,9 @@ export default function Navbar() {
               <DropdownMenuContent align="end" className="rounded-xl border-border/50 bg-card/95 backdrop-blur-xl">
                 <DropdownMenuItem className="text-xs text-muted-foreground" disabled>
                   {user.email}
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/affiliate" className="text-accent">Affiliate program</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => signOut()} className="gap-2">
                   <LogOut className="h-3.5 w-3.5" /> Sign out
@@ -222,59 +227,19 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
             className="overflow-hidden border-t border-border/40 md:hidden"
           >
-            <div className="container flex flex-col gap-1 py-6">
-              {/* HIM mobile */}
-              <button
-                onClick={() => setMobileHimOpen(!mobileHimOpen)}
-                className="flex items-center justify-between rounded-lg px-3 py-2.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60"
-              >
-                Him <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${mobileHimOpen ? "rotate-180" : ""}`} />
-              </button>
-              <AnimatePresence>
-                {mobileHimOpen && (
-                  <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden pl-4">
-                    {SUBCATEGORIES.map(sub => (
-                      <Link key={sub.slug} to={`/shop/him/${sub.slug}`} onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary/40 hover:text-foreground">
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* HER mobile */}
-              <button
-                onClick={() => setMobileHerOpen(!mobileHerOpen)}
-                className="flex items-center justify-between rounded-lg px-3 py-2.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60"
-              >
-                Her <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${mobileHerOpen ? "rotate-180" : ""}`} />
-              </button>
-              <AnimatePresence>
-                {mobileHerOpen && (
-                  <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden pl-4">
-                    {SUBCATEGORIES.map(sub => (
-                      <Link key={sub.slug} to={`/shop/her/${sub.slug}`} onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary/40 hover:text-foreground">
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {NAV_LINKS.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setMobileOpen(false)}
-                  className="rounded-lg px-3 py-2.5 font-display text-lg font-medium transition-colors hover:bg-secondary/60"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <Link to="/blog" onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2.5 font-display text-lg font-medium transition-colors hover:bg-secondary/60">
+            <div className="container flex flex-col gap-1 py-5">
+              <div className="pb-2">
+                <SearchBar onSubmit={closeMobile} />
+              </div>
+              <MobileSubcatList gender="him" onNavigate={closeMobile} />
+              <MobileSubcatList gender="her" onNavigate={closeMobile} />
+              <Link to="/collections" onClick={closeMobile} className="rounded-lg px-3 py-3.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60">
+                Collections
+              </Link>
+              <Link to="/blog" onClick={closeMobile} className="rounded-lg px-3 py-3.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60">
                 Blog
               </Link>
-              <Link to="/affiliate" onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2.5 font-display text-lg font-bold text-accent transition-colors hover:bg-secondary/60">
+              <Link to="/affiliate" onClick={closeMobile} className="rounded-lg px-3 py-3.5 font-display text-lg font-bold text-accent transition-colors hover:bg-secondary/60">
                 Affiliate
               </Link>
             </div>

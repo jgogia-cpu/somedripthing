@@ -1,134 +1,53 @@
+## Goal
+Make DRIPWAY feel lighter and easier to navigate without abandoning the dark aesthetic.
 
-# 🛍️ DRIP — Niche Fashion Discovery Platform
+## 1. Softer dark theme
+Edit `src/index.css` `.dark` tokens (the app runs in dark mode globally):
+- `--background`: `0 0% 5%` → `0 0% 11%` (lifted charcoal)
+- `--card`: `0 0% 8%` → `0 0% 14%`
+- `--popover`: match card
+- `--secondary` / `--muted`: `0 0% 12%` → `0 0% 18%`
+- `--border` / `--input`: `0 0% 14%` → `0 0% 22%` (more visible separators)
+- `--muted-foreground`: `0 0% 50%` → `0 0% 65%` (readable secondary text)
+- `--foreground`: keep `0 0% 95%`
+- Accent coral stays the same so brand color is unchanged.
 
-## Brand Positioning
-- **Name suggestion**: DRIP (or similar — short, memorable, fashion-native)
-- **Value prop**: "Discover the brands Instagram won't show you" — a curated discovery engine for underground, emerging, and niche fashion
-- **Target audience**: Gen Z & young millennials (18-30), trend-conscious, Instagram/TikTok-native shoppers tired of fast fashion but priced out of luxury
-- **Voice**: Confident, editorial, culturally aware — like a cool friend who always finds brands first
+No component changes needed — everything uses semantic tokens, so the whole site lifts in one pass. Spot-check Navbar, ProductCard, BrandCard, Footer for any hardcoded `bg-black` / `bg-[#...]` and swap to tokens.
 
----
+## 2. Navbar restructure (`src/components/Navbar.tsx`)
+Replace fiddly hover dropdowns and consolidate top-level items.
 
-## Website Structure & Pages
+New desktop nav order:
+```
+DRIPWAY | Shop ▾   Brands   Collections   Blog | [search bar] [♥] [👤] [currency]
+```
 
-### 1. Homepage
-- Hero section with rotating featured brand spotlight + editorial imagery
-- "Trending Now" carousel of hot brands/products
-- Category/aesthetic quick-filter chips (Streetwear, Minimalist, Y2K, Avant-Garde, etc.)
-- Pinterest-style masonry grid of curated product picks
-- "New Drops" section highlighting recently added brands
-- Newsletter signup with "Get early access to new brands"
-- Editorial/blog preview section
+- **Shop ▾** — single click-to-open mega menu (Radix `DropdownMenu`, no hover) with two columns: "Him" and "Her", each listing the 8 subcategories. Closes on outside click / route change.
+- **Brands** — new link to `/collections` (or a dedicated brands view if desired later) so brand discovery is one click.
+- **Collections** — keep.
+- **Blog** — promoted from More dropdown to top level.
+- **Affiliate** — moved to footer + a small accent pill in the user dropdown (less prominent, still reachable).
+- Remove the separate Him / Her / More dropdowns and the hover-intent logic.
 
-### 2. Browse/Explore Page
-- Full filtering system: aesthetic, price range, category, culture, location, brand size
-- Search with autocomplete
-- Sort by: trending, newest, price, popularity
-- Infinite scroll product/brand grid
-- Toggle between brand view and product view
+**Visible search bar**
+- Replace the search icon with an inline input (`w-56`, rounded-full, muted background) between nav links and icons on `md+`.
+- Submitting routes to `/collections?q=<term>`; Collections page already filters — extend it to read the `q` param and pre-fill its search field. Icon-only fallback on mobile.
 
-### 3. Brand Profile Page
-- Brand hero image/banner + logo
-- Bio, origin story, social links (Instagram, TikTok)
-- Aesthetic tags and style badges
-- Product grid from that brand
-- "Similar Brands" recommendations
-- Social proof: follower count, community rating
-- Affiliate CTA: "Shop [Brand]" button (redirects to brand site with tracking)
+**Mobile menu**
+- Replace nested Him/Her accordions with a flat list: Shop Him, Shop Her (each opens its own subcategory sheet), Brands, Collections, Blog, Affiliate.
+- Larger tap targets (`py-3.5`), full-width search at the top of the sheet.
 
-### 4. Product Detail Page
-- Large product imagery
-- Price, description, available sizes (pulled from brand)
-- "Buy from [Brand]" affiliate button
-- Save to wishlist
-- Related products from same brand + similar brands
-- User reviews/ratings (community-driven)
+## 3. Routing / supporting edits
+- `src/pages/Collections.tsx`: read `?q=` from `useSearchParams` on mount and seed the existing search state. No other logic changes.
+- No new routes, no backend changes.
 
-### 5. Editorial/Blog Section
-- Brand spotlight articles
-- Trend reports and style guides
-- "How to style" content
-- SEO-optimized long-form content
+## Out of scope
+- No light mode toggle (user picked softer dark).
+- No homepage redesign, no product card changes, no data changes.
+- Affiliate, admin, blog flows untouched beyond nav placement.
 
-### 6. User Dashboard (optional login)
-- Saved/wishlisted brands and products
-- Style preferences quiz results
-- Personalized feed based on taste
-- Purchase history (tracked via affiliate cookies)
-
-### 7. Brand Submission Portal (Phase 2)
-- Application form for brands wanting to be listed
-- Brand dashboard to manage their profile
-
----
-
-## Monetization Model
-- **Affiliate links**: Every "Shop" button carries affiliate tracking (direct partnerships or networks like ShareASale, Impact, Skimlinks)
-- **Featured placements**: Brands pay for homepage spotlight, category page top placement
-- **Sponsored content**: Paid editorial features and brand stories
-- **Premium brand profiles**: Enhanced profiles with analytics for brands (Phase 2)
-
----
-
-## Core Features for MVP
-
-### Phase 1 — Launch
-1. Homepage with featured brands, trending grid, category filters
-2. Browse page with full filtering (aesthetic, price, category, style)
-3. Brand profile pages with product listings
-4. Product detail pages with affiliate redirect buttons
-5. Search with autocomplete
-6. Optional user accounts (wishlist, saved brands)
-7. Mobile-responsive, clean & modern design
-8. Editorial/blog section for SEO and discovery
-9. Newsletter signup
-
-### Phase 2 — Growth
-10. Brand submission portal
-11. Personalized recommendations based on user behavior
-12. Community ratings and reviews
-13. Style quiz for onboarding
-14. Influencer curation pages ("Curated by @username")
-
----
-
-## Design Direction
-- Clean, modern, Pinterest-meets-SSENSE aesthetic
-- Bright, airy backgrounds with bold product photography
-- Masonry/grid layouts for visual browsing
-- Smooth animations and transitions
-- Mobile-first responsive design
-- Accent colors for category tags and CTAs
-
----
-
-## Technical Implementation
-
-### Data Structure (localStorage/Supabase)
-- **Brands**: name, logo, banner, bio, social links, aesthetic tags, website URL, affiliate link
-- **Products**: name, images, price, brand_id, category, tags, affiliate URL, sizes
-- **Categories/Tags**: aesthetic tags, style categories, price tiers
-- **Users**: email, saved brands, wishlisted products, preferences
-- **Editorial**: blog posts, brand spotlights, trend articles
-
-### Pages & Routes
-- `/` — Homepage
-- `/explore` — Browse/filter all brands & products
-- `/brand/:slug` — Brand profile
-- `/product/:id` — Product detail
-- `/blog` — Editorial section
-- `/blog/:slug` — Article page
-- `/wishlist` — User's saved items
-- `/submit` — Brand submission (Phase 2)
-
-### Key Components
-- Masonry product grid with lazy loading
-- Multi-faceted filter sidebar
-- Brand card and product card components
-- Affiliate link tracking wrapper
-- Search with fuzzy matching
-- Newsletter form
-- Mobile navigation with bottom tab bar
-
-### Initial Data
-- Seed with 15-20 curated brands and 50+ products using mock/sample data to demonstrate the platform
+## Files touched
+- `src/index.css` (theme tokens)
+- `src/components/Navbar.tsx` (rewrite desktop + mobile nav)
+- `src/pages/Collections.tsx` (read `q` query param)
+- Minor token swaps in `Footer.tsx` / any component using hardcoded near-black backgrounds (audit during build).
