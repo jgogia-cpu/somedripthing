@@ -79,6 +79,14 @@ import isolatedLogo from "@/assets/isolated-logo.svg";
 import makerLogo from "@/assets/maker-logo.png";
 import justinianoLogo from "@/assets/justiniano-logo.png";
 import neutralstateLogo from "@/assets/neutralstate-logo.svg";
+import redeemordieLogo from "@/assets/redeemordie-logo.png.asset.json";
+import rodPgchmmGreen from "@/assets/rod-pgchmm-green.jpg.asset.json";
+import rodPgchmmWhite from "@/assets/rod-pgchmm-white.jpg.asset.json";
+import rodArmyHoodie from "@/assets/rod-army-hoodie.jpg.asset.json";
+import rodArmySweatpants from "@/assets/rod-army-sweatpants.jpg.asset.json";
+import rodWindbreakerOlive from "@/assets/rod-windbreaker-olive.jpg.asset.json";
+import rodWindbreakerBlack from "@/assets/rod-windbreaker-black.jpg.asset.json";
+import rodTrackpants from "@/assets/rod-trackpants.jpg.asset.json";
 
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
