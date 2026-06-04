@@ -223,6 +223,18 @@ export const brands: Brand[] = [
     instagram: "@neutralstate", aesthetics: ["Streetwear", "Minimalist", "Old Money"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 3800, rating: 4.6, featured: true, newDrop: true
   },
+  {
+    id: "34", name: "RedeemOrDie", slug: "redeemordie", logo: redeemordieLogo.url,
+    banner: redeemordieLogo.url,
+    logoFont: "'Bebas Neue', sans-serif", darkCard: true,
+    bio: "RedeemOrDie (RMD) is a streetwear label where style meets the street — military-inspired silhouettes, washed tones, and bold graphic tees built for the everyday grind.",
+    story: "RedeemOrDie is built on a single mantra: redeem yourself every day, or fade out. The RMD lineup leans into military-inspired cuts — army hoodies, regime windbreakers, trackpants — paired with statement graphic tees that scream more than they whisper. Heavyweight fabrics, washed tones, and details engineered for the street.",
+    founded: "2023", founderNote: "\"Where style meets street.\"",
+    vibes: ["Military-inspired", "Heavyweight basics", "Street-ready", "Earn your fit"],
+    origin: "International", website: "https://www.redeemordie.com", affiliateUrl: "https://www.redeemordie.com/shop",
+    instagram: "@redeemordie", aesthetics: ["Streetwear", "Techwear", "Grunge"], categories: ["Tops", "Bottoms", "Outerwear"],
+    priceRange: "mid", followers: 8000, rating: 4.5, featured: true, newDrop: true
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
