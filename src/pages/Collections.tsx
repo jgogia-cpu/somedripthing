@@ -72,7 +72,6 @@ export default function Collections() {
         p.description,
         brand?.name,
         ...(p.aesthetics || []),
-        ...(p.vibes || []),
       ]
         .filter(Boolean)
         .join(" ")
