@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Search as SearchIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { products, getBrandById, brands } from "@/data/brands";
+import { products, getBrandById } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import SEO from "@/components/SEO";
 
