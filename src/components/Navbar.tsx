@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, Heart, Menu, X, ChevronDown, User, LogOut } from "lucide-react";
+import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
@@ -164,6 +164,13 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden items-center gap-1 md:flex">
+          <Link
+            to="/"
+            aria-label="Home"
+            className={`group relative flex items-center justify-center rounded-full p-2 transition-all duration-200 hover:bg-secondary hover:scale-105 ${location.pathname === "/" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+          >
+            <Home className="h-4 w-4" />
+          </Link>
           <ShopMenu />
           {TOP_LINKS.map((link) => (
             <NavItem key={link.to} to={link.to} label={link.label} isActive={location.pathname === link.to} />
