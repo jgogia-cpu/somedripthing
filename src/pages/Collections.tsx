@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar } from "lucide-react";
+import { ArrowLeft, Calendar, Search as SearchIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { products, getBrandById } from "@/data/brands";
+import { products, getBrandById, brands } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import SEO from "@/components/SEO";
 
@@ -60,13 +60,39 @@ function getWeeklyCollection() {
 export default function Collections() {
   const { formatPrice } = useCurrency();
   const collection = useMemo(() => getWeeklyCollection(), []);
-  const collectionProducts = collection.picks;
+  const [searchParams] = useSearchParams();
+  const query = (searchParams.get("q") || "").trim().toLowerCase();
+
+  const searchResults = useMemo(() => {
+    if (!query) return null;
+    return products.filter((p) => {
+      const brand = getBrandById(p.brandId);
+      const hay = [
+        p.name,
+        p.description,
+        brand?.name,
+        ...(p.aesthetics || []),
+        ...(p.vibes || []),
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+      return hay.includes(query);
+    });
+  }, [query]);
+
+  const collectionProducts = searchResults ?? collection.picks;
+  const isSearching = !!searchResults;
 
   return (
     <div className="min-h-screen">
       <SEO
-        title="Heat Check — Weekly Collections | DRIPWAY"
-        description="Weekly curated 'Heat Check' collections of the hottest niche fashion picks, refreshed every Monday on DRIPWAY."
+        title={isSearching ? `Search: ${query} | DRIPWAY` : "Heat Check — Weekly Collections | DRIPWAY"}
+        description={
+          isSearching
+            ? `Search results for "${query}" across DRIPWAY brands and drops.`
+            : "Weekly curated 'Heat Check' collections of the hottest niche fashion picks, refreshed every Monday on DRIPWAY."
+        }
         path="/collections"
       />
       {/* Hero */}
@@ -83,27 +109,45 @@ export default function Collections() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex items-center gap-2 text-primary-foreground/60">
-              <Calendar className="h-4 w-4" />
-              <span className="text-xs font-medium uppercase tracking-widest">
-                {collection.date}
-              </span>
-            </div>
-            <h1
-              className="mt-3 text-5xl font-bold tracking-tight md:text-7xl"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              {collection.title}
-            </h1>
-            <p
-              className="mt-2 text-2xl font-light text-primary-foreground/80 md:text-3xl"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              {collection.subtitle}
-            </p>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/60">
-              {collection.description}
-            </p>
+            {isSearching ? (
+              <>
+                <div className="flex items-center gap-2 text-primary-foreground/60">
+                  <SearchIcon className="h-4 w-4" />
+                  <span className="text-xs font-medium uppercase tracking-widest">Search results</span>
+                </div>
+                <h1
+                  className="mt-3 text-4xl font-bold tracking-tight md:text-6xl"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  "{query}"
+                </h1>
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/60">
+                  {collectionProducts.length} {collectionProducts.length === 1 ? "result" : "results"} across DRIPWAY brands.
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="flex items-center gap-2 text-primary-foreground/60">
+                  <Calendar className="h-4 w-4" />
+                  <span className="text-xs font-medium uppercase tracking-widest">{collection.date}</span>
+                </div>
+                <h1
+                  className="mt-3 text-5xl font-bold tracking-tight md:text-7xl"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  {collection.title}
+                </h1>
+                <p
+                  className="mt-2 text-2xl font-light text-primary-foreground/80 md:text-3xl"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  {collection.subtitle}
+                </p>
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-primary-foreground/60">
+                  {collection.description}
+                </p>
+              </>
+            )}
           </motion.div>
         </div>
       </section>
@@ -111,6 +155,15 @@ export default function Collections() {
       {/* Collection Grid — blog-style large images */}
       <section className="py-16">
         <div className="container">
+          {isSearching && collectionProducts.length === 0 && (
+            <div className="rounded-2xl border border-border/60 bg-card/40 p-10 text-center">
+              <p className="text-lg font-semibold">No matches for "{query}"</p>
+              <p className="mt-2 text-sm text-muted-foreground">Try a brand name, aesthetic, or category.</p>
+              <Link to="/collections" className="mt-4 inline-block text-sm font-medium text-accent hover:underline">
+                Back to Heat Check →
+              </Link>
+            </div>
+          )}
           <div className="space-y-20">
             {collectionProducts.map((product, i) => {
               const brand = getBrandById(product.brandId);
