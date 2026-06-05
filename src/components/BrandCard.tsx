@@ -25,13 +25,15 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
           />
           <div className={`absolute inset-0 bg-gradient-to-t ${brand.lightCard ? "from-white via-white/40" : "from-black/70 via-black/20"} to-transparent`} />
           <div className="absolute bottom-0 left-0 p-5">
-            <h3
-              className={`text-lg font-bold ${brand.lightCard ? "text-black" : "text-white"}`}
-              style={{ fontFamily: brand.logoFont || undefined, letterSpacing: brand.logoFont ? "0.05em" : undefined }}
-            >
-              {brand.name}
-            </h3>
-            <div className="mt-1 flex flex-wrap gap-1.5">
+            {!brand.useLogoImageHero && (
+              <h3
+                className={`text-lg font-bold ${brand.lightCard ? "text-black" : "text-white"}`}
+                style={{ fontFamily: brand.logoFont || undefined, letterSpacing: brand.logoFont ? "0.05em" : undefined }}
+              >
+                {brand.name}
+              </h3>
+            )}
+            <div className={`${brand.useLogoImageHero ? "" : "mt-1"} flex flex-wrap gap-1.5`}>
               {brand.aesthetics.slice(0, 2).map(tag => (
                 <span key={tag} className={`rounded-full px-2 py-0.5 text-[10px] font-medium backdrop-blur-sm ${brand.lightCard ? "bg-black/10 text-black" : "bg-white/20 text-white"}`}>
                   {tag}
