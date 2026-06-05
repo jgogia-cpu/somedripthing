@@ -274,6 +274,20 @@ export const brands: Brand[] = [
     instagram: "@daewearapparel", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops"],
     priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true
   },
+  {
+    id: "38", name: "PRIESTHOOD", slug: "priesthood",
+    logo: "https://cdn.shopify.com/s/files/1/1002/4091/6822/files/photo_31_2026-05-28_18-51-45.jpg?v=1779990879",
+    banner: "https://cdn.shopify.com/s/files/1/1002/4091/6822/files/photo_31_2026-05-28_18-51-45.jpg?v=1779990879",
+    logoFont: "'Cormorant Garamond', serif", darkCard: true, fullBleedLogo: true,
+    bio: "PRIESTHOOD is a UK luxury streetwear label built on faith, culture and conviction — premium heavyweight pieces with a darker visual identity and meaning stitched into every drop.",
+    story: "PRIESTHOOD launched out of the UK with a clear thesis: streetwear can be luxury, and luxury can carry meaning. The debut Dominion Core drop sets the tone — heavyweight construction, refined silhouettes, signature embroidery and a darker visual identity that leans into faith, culture and conviction. Not loud for attention. Loud in meaning.",
+    founded: "2026", founderNote: "\"Faith in the fabric. Built with conviction.\"",
+    vibes: ["Faith in the fabric", "Luxury heavyweight", "Darker visual identity", "Built with conviction"],
+    origin: "United Kingdom", website: "https://priesthood.uk", affiliateUrl: "https://priesthood.uk",
+    instagram: "@priesthood.uk", tiktok: "@priesthood010",
+    aesthetics: ["Streetwear", "Minimalist", "Dark Academia"], categories: ["Tops", "Bottoms"],
+    priceRange: "premium", followers: 2500, rating: 4.8, featured: true, newDrop: true
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
