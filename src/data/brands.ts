@@ -91,6 +91,10 @@ import rodTrackpants from "@/assets/rod-trackpants.jpg.asset.json";
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
 
+const EVARA_LOGO = "https://shopevara.store/cdn/shop/files/IMG_2114.png?v=1748639705&width=600";
+const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
+const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
+
 export const brands: Brand[] = [
   {
     id: "17", name: "Drip by Rage", slug: "drip-by-rage", logo: "https://dripbyrage.store/cdn/shop/files/log_659ff53a-6e0e-469f-a803-e2a3e8b9eec8.png?v=1686708735&width=200",
