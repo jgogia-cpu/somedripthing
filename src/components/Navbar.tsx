@@ -241,6 +241,9 @@ export default function Navbar() {
               </div>
               <MobileSubcatList gender="him" onNavigate={closeMobile} />
               <MobileSubcatList gender="her" onNavigate={closeMobile} />
+              <Link to="/brands" onClick={closeMobile} className="rounded-lg px-3 py-3.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60">
+                Brands
+              </Link>
               <Link to="/collections" onClick={closeMobile} className="rounded-lg px-3 py-3.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60">
                 Collections
               </Link>
