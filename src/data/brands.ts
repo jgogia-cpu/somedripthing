@@ -92,7 +92,8 @@ import rodTrackpants from "@/assets/rod-trackpants.jpg.asset.json";
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
 
-const EVARA_LOGO = "https://shopevara.store/cdn/shop/files/IMG_2114.png?v=1748639705&width=600";
+import evaraLogoAsset from "@/assets/evara-logo.png.asset.json";
+const EVARA_LOGO = evaraLogoAsset.url;
 const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
 const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
 
@@ -242,7 +243,7 @@ export const brands: Brand[] = [
   },
   {
     id: "35", name: "EVARA", slug: "evara", logo: EVARA_LOGO, banner: EVARA_LOGO,
-    logoFont: "'Cormorant Garamond', serif", lightCard: true, useLogoImageHero: true,
+    logoFont: "'Cormorant Garamond', serif", lightCard: true, fullBleedLogo: true, useLogoImageHero: true,
     bio: "EVARA is a faith-forward streetwear label fusing rhinestone-studded sweatpants, Gift-of-God zip-ups, and denim jorts — wear your faith proudly, inspired by Ephesians 2:8.",
     story: "EVARA was built on a simple belief: clothing can be both an act of worship and a statement of style. Inspired by Ephesians 2:8, every piece — from the rhinestone-encrusted Gift of God Zip-Up to the satin-lined Evara sweatpants and the rhinestone-denim jorts — is designed to let the wearer carry their faith out loud. Heavyweight fabrics, cross detailing on the leg, bible verse embroidery on the back. It's high-quality streetwear that means something.",
     founded: "2024", founderNote: "\"Wear your faith proudly.\"",

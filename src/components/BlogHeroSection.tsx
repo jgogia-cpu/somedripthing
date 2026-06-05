@@ -63,7 +63,7 @@ export default function BlogHeroSection() {
   const rest = latestPosts.slice(1);
 
   return (
-    <section className="border-t border-border/30 py-10">
+    <section className="relative isolate border-t border-border/30 py-10">
       <div className="container">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">The Edit</h2>
