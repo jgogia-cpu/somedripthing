@@ -278,7 +278,7 @@ export const brands: Brand[] = [
     id: "38", name: "PRIESTHOOD", slug: "priesthood",
     logo: "/__l5e/assets-v1/29ca10dd-3bb1-4089-9e50-703d21880667/priesthood-logo.jpg",
     banner: "https://cdn.shopify.com/s/files/1/1002/4091/6822/files/photo_31_2026-05-28_18-51-45.jpg?v=1779990879",
-    logoFont: "'Cormorant Garamond', serif", darkCard: true, fullBleedLogo: true, lightCard: true,
+    logoFont: "'Cormorant Garamond', serif", fullBleedLogo: true,
     bio: "PRIESTHOOD is a UK luxury streetwear label built on faith, culture and conviction — premium heavyweight pieces with a darker visual identity and meaning stitched into every drop.",
     story: "PRIESTHOOD launched out of the UK with a clear thesis: streetwear can be luxury, and luxury can carry meaning. The debut Dominion Core drop sets the tone — heavyweight construction, refined silhouettes, signature embroidery and a darker visual identity that leans into faith, culture and conviction. Not loud for attention. Loud in meaning.",
     founded: "2026", founderNote: "\"Faith in the fabric. Built with conviction.\"",
