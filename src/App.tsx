@@ -19,6 +19,7 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Wishlist = lazy(() => import("./pages/Wishlist"));
 const Collections = lazy(() => import("./pages/Collections"));
+const Brands = lazy(() => import("./pages/Brands"));
 const Affiliate = lazy(() => import("./pages/Affiliate"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AdminSEO = lazy(() => import("./pages/AdminSEO"));
@@ -96,6 +97,7 @@ const App = () => (
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/collections" element={<Collections />} />
+          <Route path="/brands" element={<Brands />} />
           <Route path="/affiliate" element={<Affiliate />} />
           <Route path="/admin/seo" element={<AdminSEO />} />
           <Route path="/admin/affiliate" element={<AdminAffiliate />} />
