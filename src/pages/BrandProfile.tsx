@@ -74,8 +74,8 @@ export default function BrandProfile() {
         <div className="absolute inset-0 flex items-center justify-center px-6">
           <h1
             aria-label={brand.name}
-            className="select-none text-center font-bold leading-none tracking-tight text-foreground/90 [text-wrap:balance] text-[clamp(4rem,18vw,18rem)]"
-            style={{ fontFamily: brand.logoFont || undefined, letterSpacing: brand.logoFont ? "0.02em" : undefined }}
+            className="max-w-full select-none break-words text-center font-bold leading-[0.9] tracking-tight text-foreground/90 [text-wrap:balance] text-[clamp(2.5rem,13vw,11rem)]"
+            style={{ fontFamily: brand.logoFont || undefined }}
           >
             {brand.name}
           </h1>
