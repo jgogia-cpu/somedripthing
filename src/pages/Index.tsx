@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import FeaturedBrandSection from "@/components/FeaturedBrandSection";
-import BlogHeroSection from "@/components/BlogHeroSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import InstagramCTA from "@/components/InstagramCTA";
 import SEO from "@/components/SEO";
@@ -411,9 +410,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
-      {/* Blog / Editorial */}
-      <BlogHeroSection />
 
       {/* New Drops */}
       <section className="border-t bg-secondary/20 py-16">
