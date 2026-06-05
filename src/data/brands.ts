@@ -92,7 +92,8 @@ import rodTrackpants from "@/assets/rod-trackpants.jpg.asset.json";
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
 
-const EVARA_LOGO = "https://shopevara.store/cdn/shop/files/IMG_2114.png?v=1748639705&width=600";
+import evaraLogoAsset from "@/assets/evara-logo.png.asset.json";
+const EVARA_LOGO = evaraLogoAsset.url;
 const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
 const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
 
