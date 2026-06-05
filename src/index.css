@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=Playfair+Display:wght@700&family=Oswald:wght@600;700&family=Rajdhani:wght@600;700&family=Anton&family=Abril+Fatface&family=Archivo+Black&family=DM+Serif+Display&family=Monoton&family=Permanent+Marker&family=Rubik+Mono+One&family=Russo+One&family=Syne:wght@700;800&family=Unbounded:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=Playfair+Display:wght@700&family=Oswald:wght@600;700&family=Rajdhani:wght@600;700&family=Anton&family=Abril+Fatface&family=Archivo+Black&family=DM+Serif+Display&family=Monoton&family=Permanent+Marker&family=Rubik+Mono+One&family=Russo+One&family=Syne:wght@700;800&family=Unbounded:wght@700&family=Cormorant+Garamond:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -175,6 +175,48 @@
     background: hsl(var(--background) / 0.7);
     backdrop-filter: blur(20px) saturate(1.5);
     -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  }
+
+  /* Liquid Glass UI — frosted, saturated, highlighted */
+  .liquid-glass {
+    background:
+      linear-gradient(135deg, hsl(var(--foreground) / 0.08), hsl(var(--foreground) / 0.02) 40%, hsl(var(--foreground) / 0.06));
+    backdrop-filter: blur(24px) saturate(1.8);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    border: 1px solid hsl(var(--foreground) / 0.12);
+    box-shadow:
+      inset 0 1px 0 0 hsl(var(--foreground) / 0.14),
+      inset 0 -1px 0 0 hsl(var(--foreground) / 0.04),
+      0 8px 32px -8px hsl(0 0% 0% / 0.35);
+  }
+  .liquid-glass-strong {
+    background:
+      linear-gradient(135deg, hsl(var(--foreground) / 0.12), hsl(var(--foreground) / 0.04) 45%, hsl(var(--foreground) / 0.10));
+    backdrop-filter: blur(32px) saturate(2);
+    -webkit-backdrop-filter: blur(32px) saturate(2);
+    border: 1px solid hsl(var(--foreground) / 0.18);
+    box-shadow:
+      inset 0 1px 0 0 hsl(var(--foreground) / 0.22),
+      inset 0 -1px 0 0 hsl(var(--foreground) / 0.06),
+      0 12px 48px -10px hsl(0 0% 0% / 0.45);
+  }
+  .glass-pill {
+    background: hsl(var(--foreground) / 0.08);
+    backdrop-filter: blur(16px) saturate(1.6);
+    -webkit-backdrop-filter: blur(16px) saturate(1.6);
+    border: 1px solid hsl(var(--foreground) / 0.14);
+    box-shadow: inset 0 1px 0 0 hsl(var(--foreground) / 0.18);
+  }
+
+  /* Liquid Glass card surface (uses semantic card tokens) */
+  .glass-card {
+    background: hsl(var(--card) / 0.55);
+    backdrop-filter: blur(28px) saturate(1.7);
+    -webkit-backdrop-filter: blur(28px) saturate(1.7);
+    border: 1px solid hsl(var(--foreground) / 0.10);
+    box-shadow:
+      inset 0 1px 0 0 hsl(var(--foreground) / 0.10),
+      0 10px 40px -12px hsl(0 0% 0% / 0.4);
   }
 
   /* Subtle gradient overlays */

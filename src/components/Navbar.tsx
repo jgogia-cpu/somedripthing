@@ -156,7 +156,7 @@ export default function Navbar() {
   const closeMobile = () => setMobileOpen(false);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
+    <nav className="sticky top-0 z-50 liquid-glass !rounded-none border-x-0 border-t-0">
       <div className="container flex h-16 items-center gap-4">
         <Link to="/" className="group text-xl font-bold tracking-tight transition-opacity hover:opacity-80" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
           DRIPWAY

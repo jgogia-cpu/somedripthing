@@ -66,46 +66,42 @@ export default function BrandProfile() {
         jsonLd={[brandLd, breadcrumbLd]}
       />
       {/* Hero Banner */}
-      <div className={`relative h-[70vh] min-h-[500px] overflow-hidden ${brand.banner === brand.logo ? (brand.lightCard ? "bg-white" : "bg-black") : ""}`}>
-        <img
-          src={brand.banner}
-          alt={brand.name}
-          className={`h-full w-full ${brand.banner === brand.logo ? "object-contain p-12 md:p-24" : "object-cover"}`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+      <div className="relative h-[70vh] min-h-[500px] overflow-hidden bg-gradient-to-br from-background via-secondary/40 to-background">
+        {/* Ambient glow orbs for liquid-glass mood */}
+        <div className="pointer-events-none absolute -top-32 -left-24 h-[480px] w-[480px] rounded-full bg-accent/20 blur-[120px]" />
+        <div className="pointer-events-none absolute -bottom-32 -right-24 h-[520px] w-[520px] rounded-full bg-primary/10 blur-[140px]" />
+        {/* Typographic brand name as hero */}
+        <div className="absolute inset-0 flex items-center justify-center px-6">
+          <h1
+            aria-label={brand.name}
+            className="select-none text-center font-bold leading-none tracking-tight text-foreground/90 [text-wrap:balance] text-[clamp(4rem,18vw,18rem)]"
+            style={{ fontFamily: brand.logoFont || undefined, letterSpacing: brand.logoFont ? "0.02em" : undefined }}
+          >
+            {brand.name}
+          </h1>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0">
           <div className="container pb-12">
-            <Link to="/collections" className="mb-6 inline-flex items-center gap-1.5 text-sm text-white/60 transition-colors hover:text-white">
+            <Link to="/collections" className="mb-6 inline-flex items-center gap-1.5 rounded-full glass-pill px-3 py-1.5 text-sm text-foreground/70 transition-colors hover:text-foreground">
               <ArrowLeft className="h-3.5 w-3.5" /> Back to Home
             </Link>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="font-display text-5xl font-bold text-white md:text-7xl"
-              style={{ fontFamily: brand.logoFont || undefined }}
-            >
-              {brand.name}
-            </motion.h1>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="mt-4 flex flex-wrap items-center gap-3"
+              className="flex flex-wrap items-center gap-3"
             >
-              <span className="flex items-center gap-1.5 text-sm text-white/70">
+              <span className="flex items-center gap-1.5 rounded-full glass-pill px-3 py-1.5 text-sm text-foreground/80">
                 <MapPin className="h-3.5 w-3.5" /> {brand.origin}
               </span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-1.5 text-sm text-white/70">
+              <span className="flex items-center gap-1.5 rounded-full glass-pill px-3 py-1.5 text-sm text-foreground/80">
                 <Calendar className="h-3.5 w-3.5" /> Est. {brand.founded}
               </span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-1.5 text-sm text-white/70">
+              <span className="flex items-center gap-1.5 rounded-full glass-pill px-3 py-1.5 text-sm text-foreground/80">
                 <Star className="h-3.5 w-3.5" /> {brand.rating}
               </span>
-              <span className="text-white/30">•</span>
-              <span className="text-sm capitalize text-white/70">{brand.priceRange} range</span>
+              <span className="rounded-full glass-pill px-3 py-1.5 text-sm capitalize text-foreground/80">{brand.priceRange} range</span>
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
@@ -114,7 +110,7 @@ export default function BrandProfile() {
               className="mt-4 flex flex-wrap gap-2"
             >
               {brand.aesthetics.map(tag => (
-                <span key={tag} className="rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                <span key={tag} className="glass-pill rounded-full px-3 py-1 text-xs font-medium text-foreground/90">
                   {tag}
                 </span>
               ))}

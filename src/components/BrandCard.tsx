@@ -15,7 +15,7 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
       transition={{ delay: index * 0.05, duration: 0.4 }}
     >
       <Link to={`/brand/${brand.slug}`} className="group block">
-        <div className={`relative overflow-hidden rounded-xl flex items-center justify-center ${brand.lightCard ? "bg-white" : brand.darkCard ? "bg-black" : "bg-secondary"}`} style={{ aspectRatio: "3/2" }}>
+        <div className={`relative overflow-hidden rounded-2xl glass-card flex items-center justify-center transition-all duration-500 group-hover:-translate-y-0.5 group-hover:shadow-[0_20px_60px_-15px_hsl(var(--accent)/0.3)] ${brand.lightCard ? "bg-white" : brand.darkCard ? "bg-black" : "bg-secondary/60"}`} style={{ aspectRatio: "3/2" }}>
           <img
             src={brand.logo}
             alt={brand.name}
