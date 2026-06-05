@@ -254,7 +254,7 @@ export const brands: Brand[] = [
   },
   {
     id: "36", name: "L'Atelier Santé", slug: "latelier-sante", logo: LATELIER_LOGO, banner: LATELIER_LOGO,
-    logoFont: "'DM Serif Display', serif", lightCard: true, useLogoImageHero: true,
+    logoFont: "'DM Serif Display', serif", lightCard: true, fullBleedLogo: true, useLogoImageHero: true,
     bio: "L'Atelier Santé is a quietly elevated essentials label — waffle-knit hoodies, classic tees, Sante Solstice sunglasses, and snapbacks built around health, craft, and considered minimalism.",
     story: "L'Atelier Santé translates to 'the health workshop' — a name that hints at the label's intention. Every piece, from the Waffle Knit Hoodie and Classic T-Shirt to the Sante Solstice and Zenith sunglasses and the Sante Snapback, is built around clean silhouettes, premium materials, and the kind of details that reward a closer look. Nothing loud, nothing rushed — just well-made essentials and accessories for a wardrobe that lives long.",
     founded: "2023", founderNote: "\"Quiet pieces. Considered details.\"",
@@ -265,7 +265,7 @@ export const brands: Brand[] = [
   },
   {
     id: "37", name: "DAE'WEAR", slug: "daewear", logo: DAEWEAR_LOGO, banner: DAEWEAR_LOGO,
-    logoFont: "'Archivo Black', sans-serif", darkCard: true, useLogoImageHero: true,
+    logoFont: "'Archivo Black', sans-serif", darkCard: true, fullBleedLogo: true, useLogoImageHero: true,
     bio: "DAE'WEAR is a different kind of company making a different kind of everyday wear — varsity tees, signal graphics, and EVERYDAE essentials built for purpose and presence.",
     story: "DAE'WEAR was built on a refusal to do things the usual way — a different kind of company, a different kind of wear. The lineup, anchored by the EVERYDAE TEE, the HUMAN SIGNAL TEE, and the black-and-white VARSITY TEE long sleeves, leans into bold graphics, clean silhouettes, and pieces that feel intentional from the first wear. Daily essentials, designed with weight.",
     founded: "2024", founderNote: "\"A different kind of company. A different kind of dae'wear.\"",
