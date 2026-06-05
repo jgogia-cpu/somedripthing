@@ -242,7 +242,7 @@ export const brands: Brand[] = [
   },
   {
     id: "35", name: "EVARA", slug: "evara", logo: EVARA_LOGO, banner: EVARA_LOGO,
-    logoFont: "'Cormorant Garamond', serif", darkCard: true, useLogoImageHero: true,
+    logoFont: "'Cormorant Garamond', serif", lightCard: true, useLogoImageHero: true,
     bio: "EVARA is a faith-forward streetwear label fusing rhinestone-studded sweatpants, Gift-of-God zip-ups, and denim jorts — wear your faith proudly, inspired by Ephesians 2:8.",
     story: "EVARA was built on a simple belief: clothing can be both an act of worship and a statement of style. Inspired by Ephesians 2:8, every piece — from the rhinestone-encrusted Gift of God Zip-Up to the satin-lined Evara sweatpants and the rhinestone-denim jorts — is designed to let the wearer carry their faith out loud. Heavyweight fabrics, cross detailing on the leg, bible verse embroidery on the back. It's high-quality streetwear that means something.",
     founded: "2024", founderNote: "\"Wear your faith proudly.\"",
