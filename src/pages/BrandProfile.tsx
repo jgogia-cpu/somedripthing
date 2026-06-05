@@ -70,15 +70,24 @@ export default function BrandProfile() {
         {/* Ambient glow orbs for liquid-glass mood */}
         <div className="pointer-events-none absolute -top-32 -left-24 h-[480px] w-[480px] rounded-full bg-accent/20 blur-[120px]" />
         <div className="pointer-events-none absolute -bottom-32 -right-24 h-[520px] w-[520px] rounded-full bg-primary/10 blur-[140px]" />
-        {/* Typographic brand name as hero */}
+        {/* Brand hero: actual logo image when available, otherwise typographic */}
         <div className="absolute inset-0 flex items-center justify-center px-6">
-          <h1
-            aria-label={brand.name}
-            className="select-none text-center font-bold leading-none tracking-tight text-foreground/90 [text-wrap:balance] text-[clamp(4rem,18vw,18rem)]"
-            style={{ fontFamily: brand.logoFont || undefined, letterSpacing: brand.logoFont ? "0.02em" : undefined }}
-          >
-            {brand.name}
-          </h1>
+          {brand.useLogoImageHero ? (
+            <img
+              src={brand.logo}
+              alt={`${brand.name} logo`}
+              className="max-h-[60vh] max-w-[80vw] w-auto h-auto object-contain drop-shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+              loading="eager"
+            />
+          ) : (
+            <h1
+              aria-label={brand.name}
+              className="select-none text-center font-bold leading-none tracking-tight text-foreground/90 [text-wrap:balance] text-[clamp(4rem,18vw,18rem)]"
+              style={{ fontFamily: brand.logoFont || undefined, letterSpacing: brand.logoFont ? "0.02em" : undefined }}
+            >
+              {brand.name}
+            </h1>
+          )}
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0">
