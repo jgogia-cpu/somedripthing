@@ -242,7 +242,7 @@ export const brands: Brand[] = [
   },
   {
     id: "35", name: "EVARA", slug: "evara", logo: EVARA_LOGO, banner: EVARA_LOGO,
-    logoFont: "'Cormorant Garamond', serif", darkCard: true,
+    logoFont: "'Cormorant Garamond', serif", darkCard: true, useLogoImageHero: true,
     bio: "EVARA is a faith-forward streetwear label fusing rhinestone-studded sweatpants, Gift-of-God zip-ups, and denim jorts — wear your faith proudly, inspired by Ephesians 2:8.",
     story: "EVARA was built on a simple belief: clothing can be both an act of worship and a statement of style. Inspired by Ephesians 2:8, every piece — from the rhinestone-encrusted Gift of God Zip-Up to the satin-lined Evara sweatpants and the rhinestone-denim jorts — is designed to let the wearer carry their faith out loud. Heavyweight fabrics, cross detailing on the leg, bible verse embroidery on the back. It's high-quality streetwear that means something.",
     founded: "2024", founderNote: "\"Wear your faith proudly.\"",
@@ -253,7 +253,7 @@ export const brands: Brand[] = [
   },
   {
     id: "36", name: "L'Atelier Santé", slug: "latelier-sante", logo: LATELIER_LOGO, banner: LATELIER_LOGO,
-    logoFont: "'DM Serif Display', serif", lightCard: true,
+    logoFont: "'DM Serif Display', serif", lightCard: true, useLogoImageHero: true,
     bio: "L'Atelier Santé is a quietly elevated essentials label — waffle-knit hoodies, classic tees, Sante Solstice sunglasses, and snapbacks built around health, craft, and considered minimalism.",
     story: "L'Atelier Santé translates to 'the health workshop' — a name that hints at the label's intention. Every piece, from the Waffle Knit Hoodie and Classic T-Shirt to the Sante Solstice and Zenith sunglasses and the Sante Snapback, is built around clean silhouettes, premium materials, and the kind of details that reward a closer look. Nothing loud, nothing rushed — just well-made essentials and accessories for a wardrobe that lives long.",
     founded: "2023", founderNote: "\"Quiet pieces. Considered details.\"",
@@ -264,7 +264,7 @@ export const brands: Brand[] = [
   },
   {
     id: "37", name: "DAE'WEAR", slug: "daewear", logo: DAEWEAR_LOGO, banner: DAEWEAR_LOGO,
-    logoFont: "'Archivo Black', sans-serif", darkCard: true,
+    logoFont: "'Archivo Black', sans-serif", darkCard: true, useLogoImageHero: true,
     bio: "DAE'WEAR is a different kind of company making a different kind of everyday wear — varsity tees, signal graphics, and EVERYDAE essentials built for purpose and presence.",
     story: "DAE'WEAR was built on a refusal to do things the usual way — a different kind of company, a different kind of wear. The lineup, anchored by the EVERYDAE TEE, the HUMAN SIGNAL TEE, and the black-and-white VARSITY TEE long sleeves, leans into bold graphics, clean silhouettes, and pieces that feel intentional from the first wear. Daily essentials, designed with weight.",
     founded: "2024", founderNote: "\"A different kind of company. A different kind of dae'wear.\"",
