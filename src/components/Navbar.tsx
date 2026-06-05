@@ -113,6 +113,7 @@ function SearchBar({ onSubmit, autoFocus = false }: { onSubmit?: () => void; aut
 }
 
 const TOP_LINKS = [
+  { to: "/brands", label: "Brands" },
   { to: "/collections", label: "Collections" },
   { to: "/blog", label: "Blog" },
 ];
