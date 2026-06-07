@@ -53,9 +53,6 @@ export default function InstagramCTA({
             }}
             className="group relative block overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-card/80 via-card/40 to-card/80 p-10 backdrop-blur-sm transition-all hover:border-accent/50 md:p-14"
           >
-            {/* Decorative gradient orb */}
-            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-pink-500/20 via-purple-500/20 to-orange-500/20 blur-3xl transition-opacity group-hover:opacity-80" />
-
             <div className="relative flex flex-col items-center text-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 via-purple-500 to-orange-500 shadow-lg">
                 <Instagram className="h-8 w-8 text-white" />
