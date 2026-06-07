@@ -26,6 +26,7 @@ const Affiliate = lazy(() => import("./pages/Affiliate"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AdminSEO = lazy(() => import("./pages/AdminSEO"));
 const AdminAffiliate = lazy(() => import("./pages/AdminAffiliate"));
+const Auth = lazy(() => import("./pages/Auth"));
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 const queryClient = new QueryClient();
