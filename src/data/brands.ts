@@ -8,6 +8,8 @@ export interface Brand {
   darkCard?: boolean;
   lightCard?: boolean;
   fullBleedLogo?: boolean;
+  /** Override the brand-name color on BrandCard when default white/black is unreadable against the logo art. */
+  nameColor?: "accent" | "white" | "black";
   useLogoImageHero?: boolean;
   bio: string;
   story: string;
@@ -111,7 +113,7 @@ export const brands: Brand[] = [
   },
   {
     id: "24", name: "Preview Worldwide", slug: "preview-worldwide", logo: previewWorldwideLogo,
-    banner: "https://previewworldwide.com/cdn/shop/files/IMG_7794-removebg-preview.png?v=1771629432&width=600", logoFont: "'Bebas Neue', sans-serif", darkCard: true, fullBleedLogo: true,
+    banner: "https://previewworldwide.com/cdn/shop/files/IMG_7794-removebg-preview.png?v=1771629432&width=600", logoFont: "'Bebas Neue', sans-serif", darkCard: true, fullBleedLogo: true, nameColor: "accent",
     bio: "Preview Worldwide is a bold streetwear brand delivering graphic-heavy tees, hoodies, sweatsuits, and accessories. Known for vibrant designs, motorsport-inspired pieces, and statement graphics that blend Y2K energy with modern street culture.",
     story: "Preview Worldwide is for the ones who want to be seen before they even walk in the room. Vibrant, graphic-heavy, and unapologetically bold — this brand pulls from motorsport culture, Y2K nostalgia, and the raw energy of the streets. Every piece is designed to be a preview of what's next, not a reflection of what's been. If subtlety is your thing, keep scrolling.",
     founded: "2023", founderNote: "\"We don't follow trends. We preview them.\"",
@@ -148,7 +150,7 @@ export const brands: Brand[] = [
   {
     id: "28", name: "Harvx", slug: "harvx", logo: harvxLogo,
     banner: "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Bazaart_B0D01DF7-A26D-4B4E-855C-BAD778DE466C.jpg?v=1766970856&width=1200",
-    logoFont: "'Archivo Black', sans-serif", darkCard: false, fullBleedLogo: true,
+    logoFont: "'Archivo Black', sans-serif", darkCard: false, fullBleedLogo: true, nameColor: "accent",
     bio: "Harvx is a heavyweight Canadian streetwear label rooted in handmade screen-printed graphics, oversized silhouettes, and 400+ GSM French terry — built for soul, comfort, and statement.",
     story: "Harvx started as a creative outlet for bold artwork on heavyweight garments — the kind of pieces you reach for first because they feel as good as they look. Every drop is built around handmade screen prints, fade-resistant artwork, and 400-460 GSM fleece and French terry sourced and assembled with care. From the Monarch Butterfly hoodies to the Ember baggy pants and Pure Soul zip-ups, each piece carries imperfections by design — the unique treatment means no two garments are exactly alike. That's the point. Wear what feels like yours.",
     founded: "2024", founderNote: "\"Heavyweight feel, handmade soul. That\u2019s the whole brief.\"",
@@ -254,7 +256,7 @@ export const brands: Brand[] = [
   },
   {
     id: "36", name: "L'Atelier Santé", slug: "latelier-sante", logo: LATELIER_LOGO, banner: LATELIER_LOGO,
-    logoFont: "'DM Serif Display', serif", lightCard: true, fullBleedLogo: true, useLogoImageHero: true,
+    logoFont: "'DM Serif Display', serif", lightCard: true, fullBleedLogo: true, useLogoImageHero: true, nameColor: "accent",
     bio: "L'Atelier Santé is a quietly elevated essentials label — waffle-knit hoodies, classic tees, Sante Solstice sunglasses, and snapbacks built around health, craft, and considered minimalism.",
     story: "L'Atelier Santé translates to 'the health workshop' — a name that hints at the label's intention. Every piece, from the Waffle Knit Hoodie and Classic T-Shirt to the Sante Solstice and Zenith sunglasses and the Sante Snapback, is built around clean silhouettes, premium materials, and the kind of details that reward a closer look. Nothing loud, nothing rushed — just well-made essentials and accessories for a wardrobe that lives long.",
     founded: "2023", founderNote: "\"Quiet pieces. Considered details.\"",
