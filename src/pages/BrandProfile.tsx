@@ -8,6 +8,7 @@ import { getBrandBySlug, getProductsByBrand, getSimilarBrands } from "@/data/bra
 import InstagramCTA from "@/components/InstagramCTA";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import SEO from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -65,6 +66,9 @@ export default function BrandProfile() {
         type="website"
         jsonLd={[brandLd, breadcrumbLd]}
       />
+      <div className="container pt-4">
+        <Breadcrumbs items={[{ label: "Brands", to: "/brands" }, { label: brand.name }]} />
+      </div>
       {/* Hero Banner */}
       <div className="relative h-[70vh] min-h-[500px] overflow-hidden bg-gradient-to-br from-background via-secondary/40 to-background">
         {/* Ambient glow orbs for liquid-glass mood */}

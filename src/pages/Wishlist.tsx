@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { Heart } from "lucide-react";
+import { Heart, Sparkles } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { getProductById } from "@/data/brands";
 import ProductCard from "@/components/ProductCard";
+import { Button } from "@/components/ui/button";
 
 export default function Wishlist() {
   const { user } = useAuth();
@@ -13,13 +14,21 @@ export default function Wishlist() {
 
   if (!user) {
     return (
-      <div className="min-h-screen py-12">
-        <div className="container max-w-2xl text-center">
-          <Heart className="mx-auto h-12 w-12 text-muted-foreground/30" />
-          <h1 className="mt-4 font-display text-3xl font-bold">Your Wishlist</h1>
-          <p className="mt-2 text-muted-foreground">
-            Sign in to save your favorite products and sync across devices.
+      <div className="min-h-[70vh] flex items-center justify-center py-16">
+        <div className="container max-w-md text-center">
+          <div className="relative mx-auto inline-flex">
+            <div className="absolute inset-0 -z-10 rounded-full bg-accent/20 blur-2xl" />
+            <Heart className="h-16 w-16 text-accent/80" strokeWidth={1.2} />
+          </div>
+          <h1 className="mt-6 font-display text-4xl font-bold tracking-tight">Build your wishlist.</h1>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            Save the pieces you're eyeing. Sync across devices. Get notified when prices drop.
           </p>
+          <Link to="/collections" className="mt-6 inline-block">
+            <Button className="gap-2 rounded-full" size="lg">
+              <Sparkles className="h-4 w-4" /> Start exploring
+            </Button>
+          </Link>
         </div>
       </div>
     );
@@ -27,15 +36,21 @@ export default function Wishlist() {
 
   if (wishlistProducts.length === 0) {
     return (
-      <div className="min-h-screen py-12">
-        <div className="container max-w-2xl text-center">
-          <Heart className="mx-auto h-12 w-12 text-muted-foreground/30" />
-          <h1 className="mt-4 font-display text-3xl font-bold">Your Wishlist</h1>
-          <p className="mt-2 text-muted-foreground">
-            Nothing saved yet. Start{" "}
-            <Link to="/collections" className="text-accent hover:underline">exploring</Link>{" "}
-            to find your next favorite piece.
+      <div className="min-h-[70vh] flex items-center justify-center py-16">
+        <div className="container max-w-md text-center">
+          <div className="relative mx-auto inline-flex">
+            <div className="absolute inset-0 -z-10 rounded-full bg-accent/20 blur-2xl" />
+            <Heart className="h-16 w-16 text-accent/80" strokeWidth={1.2} />
+          </div>
+          <h1 className="mt-6 font-display text-4xl font-bold tracking-tight">Nothing saved yet.</h1>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            Tap the heart on anything you love. We'll keep it right here for you.
           </p>
+          <Link to="/collections" className="mt-6 inline-block">
+            <Button className="gap-2 rounded-full" size="lg">
+              <Sparkles className="h-4 w-4" /> Find something fire
+            </Button>
+          </Link>
         </div>
       </div>
     );

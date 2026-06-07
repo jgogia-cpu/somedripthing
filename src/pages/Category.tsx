@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { products, type Product } from "@/data/brands";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const SUBCATEGORY_LABELS: Record<string, string> = {
   hoodies: "Hoodies",
@@ -101,9 +102,13 @@ export default function Category() {
   return (
     <div className="min-h-screen py-8">
       <div className="container">
-        <Link to="/" className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="h-3 w-3" /> Back
-        </Link>
+        <Breadcrumbs
+          className="mb-4"
+          items={[
+            { label: `Shop ${genderLabel}`, to: `/shop/${gender}/hoodies` },
+            { label: label || "" },
+          ]}
+        />
         <h1 className="mb-2 font-display text-3xl font-bold">{label}</h1>
         <p className="mb-8 text-muted-foreground">Shop {label} for {genderLabel}</p>
 

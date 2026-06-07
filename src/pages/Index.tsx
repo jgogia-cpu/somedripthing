@@ -11,6 +11,7 @@ import InstagramCTA from "@/components/InstagramCTA";
 import SEO from "@/components/SEO";
 import { brands, products, blogPosts, AESTHETICS, getBrandById, Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
+import RecentlyViewed from "@/components/RecentlyViewed";
 
 // Shuffle whose result is cached in-memory for the lifetime of this JS module
 // (i.e., the current page load). Navigating between routes inside the SPA
@@ -355,6 +356,8 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      <RecentlyViewed />
 
       {/* Trending Products */}
       <section className="py-16">
