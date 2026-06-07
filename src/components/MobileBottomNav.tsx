@@ -1,7 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Home, Search, Heart, User, LayoutGrid } from "lucide-react";
-import { useState } from "react";
-import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/contexts/AuthContext";
 
 const ITEMS = [
@@ -13,8 +11,8 @@ const ITEMS = [
 
 export default function MobileBottomNav() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { user } = useAuth();
-  const [authOpen, setAuthOpen] = useState(false);
 
   // Hide on admin and auth screens where the bottom bar interferes
   if (pathname.startsWith("/admin")) return null;
@@ -46,7 +44,7 @@ export default function MobileBottomNav() {
           })}
           <li className="flex">
             <button
-              onClick={() => { if (!user) setAuthOpen(true); }}
+              onClick={() => { if (!user) navigate(`/auth?redirect=${encodeURIComponent(pathname)}`); }}
               className={`flex w-full flex-col items-center gap-0.5 rounded-xl py-2 text-[10px] font-semibold uppercase tracking-wider transition-colors ${
                 user ? "text-foreground" : "text-muted-foreground active:text-foreground"
               }`}
@@ -59,7 +57,6 @@ export default function MobileBottomNav() {
       </nav>
       {/* Spacer so fixed bar doesn't cover content */}
       <div className="h-16 md:hidden" aria-hidden />
-      <AuthDialog open={authOpen} onClose={() => setAuthOpen(false)} />
     </>
   );
 }
