@@ -86,6 +86,7 @@ function AnimatedRoutes() {
           <Route path="/affiliate" element={<Affiliate />} />
           <Route path="/admin/seo" element={<AdminSEO />} />
           <Route path="/admin/affiliate" element={<AdminAffiliate />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </motion.div>
