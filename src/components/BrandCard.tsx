@@ -28,7 +28,9 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
           )}
           <div className="absolute bottom-0 left-0 p-5">
             <h3
-              className={`text-lg font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] ${
+              className={`relative inline-block text-lg font-bold ${
+                brand.nameGlow ? "" : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
+              } ${
                 brand.nameColor === "accent"
                   ? "text-accent"
                   : brand.nameColor === "white"
@@ -39,16 +41,34 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
                   ? "text-black"
                   : "text-white"
               }`}
-              style={{ fontFamily: brand.logoFont || undefined, letterSpacing: brand.logoFont ? "0.05em" : undefined }}
+              style={{
+                fontFamily: brand.logoFont || undefined,
+                letterSpacing: brand.logoFont ? "0.05em" : undefined,
+                textShadow: brand.nameGlow
+                  ? "0 0 12px hsl(var(--accent) / 0.7), 0 0 24px hsl(var(--accent) / 0.35), 0 2px 6px rgba(0,0,0,0.5)"
+                  : undefined,
+              }}
             >
               {brand.name}
             </h3>
             <div className="mt-1 flex flex-wrap gap-1.5">
-              {brand.aesthetics.slice(0, 2).map(tag => (
-                <span key={tag} className={`rounded-full px-2 py-0.5 text-[10px] font-medium backdrop-blur-sm ${brand.lightCard ? "bg-black/10 text-black" : "bg-white/20 text-white"}`}>
-                  {tag}
-                </span>
-              ))}
+              {brand.aesthetics.slice(0, 2).map(tag => {
+                const tagClass =
+                  brand.tagColor === "accent"
+                    ? "bg-accent/15 text-accent ring-1 ring-accent/30"
+                    : brand.tagColor === "dark"
+                    ? "bg-black/15 text-black"
+                    : brand.tagColor === "light"
+                    ? "bg-white/20 text-white"
+                    : brand.lightCard
+                    ? "bg-black/10 text-black"
+                    : "bg-white/20 text-white";
+                return (
+                  <span key={tag} className={`rounded-full px-2 py-0.5 text-[10px] font-medium backdrop-blur-sm ${tagClass}`}>
+                    {tag}
+                  </span>
+                );
+              })}
             </div>
           </div>
         </div>
