@@ -71,9 +71,6 @@ export default function BrandProfile() {
       </div>
       {/* Hero Banner */}
       <div className="relative h-[70vh] min-h-[500px] overflow-hidden bg-gradient-to-br from-background via-secondary/40 to-background">
-        {/* Ambient glow orbs for liquid-glass mood */}
-        <div className="pointer-events-none absolute -top-32 -left-24 h-[480px] w-[480px] rounded-full bg-accent/20 blur-[120px]" />
-        <div className="pointer-events-none absolute -bottom-32 -right-24 h-[520px] w-[520px] rounded-full bg-primary/10 blur-[140px]" />
         {/* Typographic brand name as hero */}
         <div className="absolute inset-0 flex items-center justify-center px-6">
           <h1

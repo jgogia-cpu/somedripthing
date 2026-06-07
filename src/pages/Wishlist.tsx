@@ -17,7 +17,6 @@ export default function Wishlist() {
       <div className="min-h-[70vh] flex items-center justify-center py-16">
         <div className="container max-w-md text-center">
           <div className="relative mx-auto inline-flex">
-            <div className="absolute inset-0 -z-10 rounded-full bg-accent/20 blur-2xl" />
             <Heart className="h-16 w-16 text-accent/80" strokeWidth={1.2} />
           </div>
           <h1 className="mt-6 font-display text-4xl font-bold tracking-tight">Build your wishlist.</h1>
@@ -39,7 +38,6 @@ export default function Wishlist() {
       <div className="min-h-[70vh] flex items-center justify-center py-16">
         <div className="container max-w-md text-center">
           <div className="relative mx-auto inline-flex">
-            <div className="absolute inset-0 -z-10 rounded-full bg-accent/20 blur-2xl" />
             <Heart className="h-16 w-16 text-accent/80" strokeWidth={1.2} />
           </div>
           <h1 className="mt-6 font-display text-4xl font-bold tracking-tight">Nothing saved yet.</h1>

@@ -141,7 +141,7 @@ function getCarouselTransform(index: number, active: number, total: number) {
   const translateZ = -absOffset * 200;
   const rotateY = offset * -25;
   const scale = 1 - absOffset * 0.15;
-  const opacity = absOffset > 2 ? 0 : 1 - absOffset * 0.25;
+  const opacity = absOffset > 2 ? 0 : 1;
   const zIndex = 10 - absOffset;
 
   return { translateX, translateZ, rotateY, scale, opacity, zIndex };
