@@ -28,7 +28,17 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
           )}
           <div className="absolute bottom-0 left-0 p-5">
             <h3
-              className={`text-lg font-bold ${brand.lightCard ? "text-black" : "text-white"}`}
+              className={`text-lg font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] ${
+                brand.nameColor === "accent"
+                  ? "text-accent"
+                  : brand.nameColor === "white"
+                  ? "text-white"
+                  : brand.nameColor === "black"
+                  ? "text-black"
+                  : brand.lightCard
+                  ? "text-black"
+                  : "text-white"
+              }`}
               style={{ fontFamily: brand.logoFont || undefined, letterSpacing: brand.logoFont ? "0.05em" : undefined }}
             >
               {brand.name}
