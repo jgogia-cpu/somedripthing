@@ -26,6 +26,7 @@ const Affiliate = lazy(() => import("./pages/Affiliate"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AdminSEO = lazy(() => import("./pages/AdminSEO"));
 const AdminAffiliate = lazy(() => import("./pages/AdminAffiliate"));
+const Auth = lazy(() => import("./pages/Auth"));
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 const queryClient = new QueryClient();
@@ -85,6 +86,7 @@ function AnimatedRoutes() {
           <Route path="/affiliate" element={<Affiliate />} />
           <Route path="/admin/seo" element={<AdminSEO />} />
           <Route path="/admin/affiliate" element={<AdminAffiliate />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </motion.div>
