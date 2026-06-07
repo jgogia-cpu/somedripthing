@@ -49,6 +49,10 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   const isActive = index === currentSlide;
   const allImages = product.images?.length > 0 ? product.images : [product.image];
   const hasMultiple = allImages.length > 1;
+  // Isolated / cut-out PNGs need a lighter backdrop so they don't render as a transparent blob on the dark card.
+  const isCutout =
+    product.brandId === "30" ||
+    /removebg|transparent|cutout|Tee2-/i.test(allImages[0] || "");
   const navigate = useNavigate();
   const sized = (url: string) => {
     if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
@@ -79,14 +83,17 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
           </div>
         )}
         <div className="relative">
-          <div className="relative w-full" style={{ height: "340px" }}>
+          <div
+            className={`relative w-full ${isCutout ? "bg-gradient-to-b from-neutral-200 to-neutral-400" : ""}`}
+            style={{ height: "340px" }}
+          >
             <img
               src={sized(allImages[0])}
               alt={product.name}
               loading={isActive ? "eager" : "lazy"}
               decoding="async"
               fetchPriority={isActive ? "high" : "auto"}
-              className="absolute inset-0 h-full w-full object-cover"
+              className={`absolute inset-0 h-full w-full ${isCutout ? "object-contain p-4" : "object-cover"}`}
             />
             {hasMultiple && (
               <img
@@ -94,7 +101,7 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
                 alt={product.name}
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100"
+                className={`absolute inset-0 h-full w-full opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100 ${isCutout ? "object-contain p-4" : "object-cover"}`}
               />
             )}
           </div>
