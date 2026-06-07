@@ -114,45 +114,10 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
 
 
 const heroProducts = (() => {
-  // Curated pool — shuffled per session so each new visit shows a different lineup.
-  const pool = [
-    "p69", "p75", "p32", "p97", "p99", "p104", "p107", "p502", "p300", "p400", "p410", "p507",
-    "p70", "p72", "p76", "p33", "p98", "p100", "p105", "p108", "p501", "p503", "p301", "p401", "p411", "p508",
-  ];
-  const available = pool
-    .map(id => products.find(p => p.id === id))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
-
-  // Stable per browser session, fresh each new session (new tab / cleared session).
-  let seed: number;
-  try {
-    const KEY = "hero_carousel_seed";
-    const existing = typeof window !== "undefined" ? sessionStorage.getItem(KEY) : null;
-    if (existing) {
-      seed = parseInt(existing, 10);
-    } else {
-      seed = Math.floor(Math.random() * 1_000_000);
-      if (typeof window !== "undefined") sessionStorage.setItem(KEY, String(seed));
-    }
-  } catch {
-    seed = Math.floor(Math.random() * 1_000_000);
-  }
-
-  // Mulberry32 seeded RNG for a deterministic shuffle within the session.
-  const rng = (() => {
-    let s = seed >>> 0;
-    return () => {
-      s = (s + 0x6D2B79F5) >>> 0;
-      let t = s;
-      t = Math.imul(t ^ (t >>> 15), t | 1);
-      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-    };
-  })();
-
-  const shuffled = [...available];
+  // Fully random lineup on every page load — pulls from every product in the catalogue.
+  const shuffled = [...products];
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
+    const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled.slice(0, 12);
