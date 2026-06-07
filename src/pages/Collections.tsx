@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { products, getBrandById } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import SEO from "@/components/SEO";
+import RecentlyViewed from "@/components/RecentlyViewed";
 
 /** Return the Monday of the current week as a Date */
 function getCurrentMonday(): Date {
@@ -217,6 +218,8 @@ export default function Collections() {
           </motion.div>
         </div>
       </section>
+
+      <RecentlyViewed />
 
       {/* Collection Grid — blog-style large images */}
       <section className="py-16">
