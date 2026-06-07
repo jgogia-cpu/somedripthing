@@ -29,7 +29,9 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
           <div className="absolute bottom-0 left-0 p-5">
             <h3
               className={`relative inline-block text-lg font-bold ${
-                brand.nameGlow ? "" : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
+                brand.nameGlow
+                  ? "rounded-full bg-accent/15 ring-1 ring-accent/30 backdrop-blur-sm px-3 py-1"
+                  : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
               } ${
                 brand.nameColor === "accent"
                   ? "text-accent"
@@ -44,9 +46,6 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
               style={{
                 fontFamily: brand.logoFont || undefined,
                 letterSpacing: brand.logoFont ? "0.05em" : undefined,
-                textShadow: brand.nameGlow
-                  ? "0 0 12px hsl(var(--accent) / 0.7), 0 0 24px hsl(var(--accent) / 0.35), 0 2px 6px rgba(0,0,0,0.5)"
-                  : undefined,
               }}
             >
               {brand.name}
