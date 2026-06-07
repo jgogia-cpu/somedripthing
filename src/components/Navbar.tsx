@@ -368,7 +368,18 @@ export default function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="ghost" size="icon" className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105" onClick={() => setAuthOpen(true)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105"
+              onClick={() => {
+                if (typeof window !== "undefined" && window.innerWidth < 768) {
+                  navigate(`/auth?redirect=${encodeURIComponent(location.pathname + location.search)}`);
+                } else {
+                  setAuthOpen(true);
+                }
+              }}
+            >
               <User className="h-4 w-4" />
             </Button>
           )}
