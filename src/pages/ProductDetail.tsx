@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ExternalLink, Heart, ArrowLeft, Check, X } from "lucide-react";
 import { motion } from "framer-motion";
@@ -13,7 +13,6 @@ import { useScrapedProducts } from "@/hooks/useScrapedProducts";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { pushRecentlyViewed } from "@/hooks/useRecentlyViewed";
-import { useEffect } from "react";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
