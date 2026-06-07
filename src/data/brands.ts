@@ -10,6 +10,10 @@ export interface Brand {
   fullBleedLogo?: boolean;
   /** Override the brand-name color on BrandCard when default white/black is unreadable against the logo art. */
   nameColor?: "accent" | "white" | "black";
+  /** Add a soft accent glow behind the brand name on BrandCard (used when the logo art mixes black + white). */
+  nameGlow?: boolean;
+  /** Override aesthetic-tag color on BrandCard when default contrast is poor. */
+  tagColor?: "dark" | "light" | "accent";
   useLogoImageHero?: boolean;
   bio: string;
   story: string;
