@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 interface WishlistContextType {
   wishlist: string[];
@@ -40,9 +41,11 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     if (wishlist.includes(productId)) {
       setWishlist(prev => prev.filter(id => id !== productId));
       await supabase.from("wishlists").delete().eq("user_id", user.id).eq("product_id", productId);
+      toast("Removed from wishlist", { duration: 1800 });
     } else {
       setWishlist(prev => [...prev, productId]);
       await supabase.from("wishlists").insert({ user_id: user.id, product_id: productId });
+      toast("Saved to wishlist ♥", { duration: 1800 });
     }
   }, [user, wishlist]);
 
