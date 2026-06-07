@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useMemo, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
 import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/contexts/AuthContext";
+import { brands, products } from "@/data/brands";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -87,28 +88,185 @@ function ShopMenu() {
   );
 }
 
+const CATEGORY_SUGGESTIONS = [
+  { label: "Hoodies", to: "/shop/him/hoodies" },
+  { label: "Sweaters", to: "/shop/him/sweaters" },
+  { label: "Denim", to: "/shop/him/denim" },
+  { label: "Jackets", to: "/shop/him/jackets" },
+  { label: "Kicks", to: "/shop/him/kicks" },
+  { label: "Accessories", to: "/shop/him/accessories" },
+];
+
 function SearchBar({ onSubmit, autoFocus = false }: { onSubmit?: () => void; autoFocus?: boolean }) {
   const [q, setQ] = useState("");
+  const [open, setOpen] = useState(false);
+  const [highlight, setHighlight] = useState(0);
   const navigate = useNavigate();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const suggestions = useMemo(() => {
+    const term = q.trim().toLowerCase();
+    if (!term) return null;
+    const brandHits = brands
+      .filter((b) => b.name.toLowerCase().includes(term) || b.aesthetics.some((a) => a.toLowerCase().includes(term)))
+      .slice(0, 4)
+      .map((b) => ({ kind: "brand" as const, id: b.id, label: b.name, sub: b.aesthetics.slice(0, 2).join(" · "), to: `/brand/${b.slug}`, image: b.logo }));
+    const categoryHits = CATEGORY_SUGGESTIONS.filter((c) => c.label.toLowerCase().includes(term))
+      .slice(0, 3)
+      .map((c) => ({ kind: "category" as const, id: c.to, label: c.label, sub: "Category", to: c.to, image: undefined }));
+    const productHits = products
+      .filter((p) => p.name.toLowerCase().includes(term) || p.brandName.toLowerCase().includes(term))
+      .slice(0, 5)
+      .map((p) => ({ kind: "product" as const, id: p.id, label: p.name, sub: p.brandName, to: `/product/${p.id}`, image: p.image }));
+    return { brandHits, categoryHits, productHits };
+  }, [q]);
+
+  const flat = useMemo(() => {
+    if (!suggestions) return [];
+    return [
+      ...suggestions.brandHits,
+      ...suggestions.categoryHits,
+      ...suggestions.productHits,
+    ];
+  }, [suggestions]);
+
+  useEffect(() => { setHighlight(0); }, [q]);
+
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (!containerRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  const go = (to: string) => {
+    navigate(to);
+    setQ("");
+    setOpen(false);
+    onSubmit?.();
+  };
+
   const handle = (e: FormEvent) => {
     e.preventDefault();
     const term = q.trim();
     if (!term) return;
-    navigate(`/collections?q=${encodeURIComponent(term)}`);
-    setQ("");
-    onSubmit?.();
+    if (flat.length && highlight >= 0 && highlight < flat.length) {
+      go(flat[highlight].to);
+      return;
+    }
+    go(`/collections?q=${encodeURIComponent(term)}`);
   };
+
+  const onKey = (e: React.KeyboardEvent) => {
+    if (!open || !flat.length) return;
+    if (e.key === "ArrowDown") { e.preventDefault(); setHighlight((h) => (h + 1) % flat.length); }
+    if (e.key === "ArrowUp") { e.preventDefault(); setHighlight((h) => (h - 1 + flat.length) % flat.length); }
+    if (e.key === "Escape") setOpen(false);
+  };
+
+  const showDropdown = open && q.trim().length > 0;
+
   return (
-    <form onSubmit={handle} className="relative w-full md:w-56">
-      <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-      <input
-        autoFocus={autoFocus}
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        placeholder="Search brands, drops…"
-        className="h-9 w-full rounded-full border border-border/60 bg-secondary/60 pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground/70 focus:border-accent/60 focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-accent/30 transition-colors"
-      />
-    </form>
+    <div ref={containerRef} className="relative w-full md:w-64">
+      <form onSubmit={handle} className="relative">
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+        <input
+          autoFocus={autoFocus}
+          value={q}
+          onChange={(e) => { setQ(e.target.value); setOpen(true); }}
+          onFocus={() => setOpen(true)}
+          onKeyDown={onKey}
+          placeholder="Search brands, drops…"
+          className="h-9 w-full rounded-full border border-border/60 bg-secondary/60 pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground/70 focus:border-accent/60 focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-accent/30 transition-colors"
+        />
+      </form>
+      <AnimatePresence>
+        {showDropdown && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15 }}
+            className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] overflow-y-auto rounded-2xl border border-border/60 bg-popover/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl"
+          >
+            {flat.length === 0 ? (
+              <button
+                onClick={() => go(`/collections?q=${encodeURIComponent(q.trim())}`)}
+                className="w-full rounded-lg px-3 py-2.5 text-left text-sm text-muted-foreground transition-colors hover:bg-accent/10 hover:text-foreground"
+              >
+                Search "<span className="font-medium text-foreground">{q.trim()}</span>" everywhere →
+              </button>
+            ) : (
+              <>
+                {suggestions?.brandHits.length ? <SectionLabel>Brands</SectionLabel> : null}
+                {suggestions?.brandHits.map((s, idx) => (
+                  <SuggestionItem key={"b" + s.id} item={s} active={highlight === idx} onSelect={() => go(s.to)} onHover={() => setHighlight(idx)} />
+                ))}
+                {suggestions?.categoryHits.length ? <SectionLabel>Categories</SectionLabel> : null}
+                {suggestions?.categoryHits.map((s, i) => {
+                  const idx = (suggestions.brandHits.length) + i;
+                  return <SuggestionItem key={"c" + s.id} item={s} active={highlight === idx} onSelect={() => go(s.to)} onHover={() => setHighlight(idx)} />;
+                })}
+                {suggestions?.productHits.length ? <SectionLabel>Products</SectionLabel> : null}
+                {suggestions?.productHits.map((s, i) => {
+                  const idx = (suggestions.brandHits.length) + (suggestions.categoryHits.length) + i;
+                  return <SuggestionItem key={"p" + s.id} item={s} active={highlight === idx} onSelect={() => go(s.to)} onHover={() => setHighlight(idx)} />;
+                })}
+                <button
+                  onClick={() => go(`/collections?q=${encodeURIComponent(q.trim())}`)}
+                  className="mt-1 w-full rounded-lg border-t border-border/40 px-3 py-2.5 text-left text-xs font-medium text-accent transition-colors hover:bg-accent/10"
+                >
+                  See all results for "{q.trim()}" →
+                </button>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mt-1 px-3 pb-1 pt-2 text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground/70 first:mt-0 first:pt-1">
+      {children}
+    </div>
+  );
+}
+
+function SuggestionItem({
+  item,
+  active,
+  onSelect,
+  onHover,
+}: {
+  item: { label: string; sub: string; image?: string };
+  active: boolean;
+  onSelect: () => void;
+  onHover: () => void;
+}) {
+  return (
+    <button
+      onClick={onSelect}
+      onMouseEnter={onHover}
+      className={`flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors ${
+        active ? "bg-accent/15 text-foreground" : "text-foreground/90 hover:bg-accent/10"
+      }`}
+    >
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-secondary/80">
+        {item.image ? (
+          <img src={item.image} alt="" loading="lazy" className="h-full w-full object-cover" />
+        ) : (
+          <Search className="h-4 w-4 text-muted-foreground" />
+        )}
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm font-medium">{item.label}</p>
+        <p className="truncate text-[11px] text-muted-foreground">{item.sub}</p>
+      </div>
+    </button>
   );
 }
 

@@ -11,6 +11,9 @@ import { useWishlist } from "@/contexts/WishlistContext";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { useScrapedProducts } from "@/hooks/useScrapedProducts";
 import SEO from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { pushRecentlyViewed } from "@/hooks/useRecentlyViewed";
+import { useEffect } from "react";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -23,6 +26,10 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (product?.id) pushRecentlyViewed(product.id);
+  }, [product?.id]);
 
   if (!product) {
     return (
@@ -77,9 +84,14 @@ export default function ProductDetail() {
         jsonLd={productLd}
       />
       <div className="container py-8">
-        <Link to="/collections" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="h-3 w-3" /> Back to Home
-        </Link>
+        <Breadcrumbs
+          className="mb-6"
+          items={[
+            { label: "Collections", to: "/collections" },
+            ...(brand ? [{ label: brand.name, to: `/brand/${brand.slug}` }] : []),
+            { label: product.name },
+          ]}
+        />
 
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Images */}
