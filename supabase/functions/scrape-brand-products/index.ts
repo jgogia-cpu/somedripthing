@@ -61,6 +61,7 @@ Deno.serve(async (req) => {
   const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
 
   let totalAdded = 0;
+  let totalRemoved = 0;
   const notes: string[] = [];
 
   for (const brand of BRANDS) {
@@ -77,13 +78,45 @@ Deno.serve(async (req) => {
       }
       const json = await res.json() as { products?: Array<Record<string, unknown>> };
       const products = json.products ?? [];
+      const liveHandles = new Set(
+        products.map((p) => String(p.handle ?? "")).filter(Boolean),
+      );
 
       // Existing handles for this brand
       const { data: existing } = await supabase
         .from("scraped_products")
-        .select("handle")
+        .select("handle, image")
         .eq("brand_id", brand.id);
       const have = new Set((existing ?? []).map((r) => r.handle));
+
+      // --- Cleanup: remove products no longer live, or with broken images ---
+      const toDelete: string[] = [];
+      for (const row of existing ?? []) {
+        if (!liveHandles.has(row.handle)) {
+          toDelete.push(row.handle);
+          continue;
+        }
+        // HEAD-check primary image
+        try {
+          const imgRes = await fetch(row.image, { method: "HEAD" });
+          if (!imgRes.ok) toDelete.push(row.handle);
+        } catch {
+          toDelete.push(row.handle);
+        }
+      }
+      if (toDelete.length) {
+        const { error: delErr } = await supabase
+          .from("scraped_products")
+          .delete()
+          .eq("brand_id", brand.id)
+          .in("handle", toDelete);
+        if (delErr) {
+          notes.push(`${brand.name}: delete error ${delErr.message}`);
+        } else {
+          totalRemoved += toDelete.length;
+          toDelete.forEach((h) => have.delete(h));
+        }
+      }
 
       // Sort newest first by published_at
       const sorted = [...products].sort((a, b) => {
@@ -138,10 +171,14 @@ Deno.serve(async (req) => {
           notes.push(`${brand.name}: insert error ${error.message}`);
         } else {
           totalAdded += toInsert.length;
-          notes.push(`${brand.name}: +${toInsert.length}`);
+          notes.push(
+            `${brand.name}: +${toInsert.length}${toDelete.length ? ` / -${toDelete.length}` : ""}`,
+          );
         }
       } else {
-        notes.push(`${brand.name}: 0 new`);
+        notes.push(
+          `${brand.name}: 0 new${toDelete.length ? ` / -${toDelete.length}` : ""}`,
+        );
       }
     } catch (e) {
       notes.push(`${brand.name}: ${(e as Error).message}`);
@@ -151,11 +188,11 @@ Deno.serve(async (req) => {
   await supabase.from("scraper_runs").insert({
     brands_checked: BRANDS.length,
     products_added: totalAdded,
-    notes: notes.join(" | "),
+    notes: `removed:${totalRemoved} | ${notes.join(" | ")}`,
   });
 
   return new Response(
-    JSON.stringify({ ok: true, totalAdded, notes }),
+    JSON.stringify({ ok: true, totalAdded, totalRemoved, notes }),
     { headers: { ...corsHeaders, "Content-Type": "application/json" } },
   );
 });
