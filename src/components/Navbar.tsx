@@ -242,7 +242,7 @@ function SuggestionItem({
   onSelect,
   onHover,
 }: {
-  item: { label: string; sub: string; image?: string };
+  item: { label: string; sub: string; image?: string; kind?: "brand" | "category" | "product" };
   active: boolean;
   onSelect: () => void;
   onHover: () => void;
@@ -257,7 +257,16 @@ function SuggestionItem({
     >
       <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-secondary/80">
         {item.image ? (
-          <img src={item.image} alt="" loading="lazy" className="h-full w-full object-cover" />
+          <img
+            src={item.image}
+            alt=""
+            loading="lazy"
+            className={
+              item.kind === "brand"
+                ? "h-full w-full object-contain p-1"
+                : "h-full w-full object-cover"
+            }
+          />
         ) : (
           <Search className="h-4 w-4 text-muted-foreground" />
         )}
