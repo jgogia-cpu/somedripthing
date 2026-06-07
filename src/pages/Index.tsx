@@ -52,8 +52,7 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   // Isolated / cut-out PNGs need a lighter backdrop so they don't render as a transparent blob on the dark card.
   const isCutout =
     product.brandId === "30" ||
-    /removebg|transparent|cutout/i.test(allImages[0] || "") ||
-    (allImages[0] || "").endsWith(".png");
+    /removebg|transparent|cutout|Tee2-/i.test(allImages[0] || "");
   const navigate = useNavigate();
   const sized = (url: string) => {
     if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
