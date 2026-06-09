@@ -87,6 +87,7 @@ import makerLogo from "@/assets/maker-logo.png";
 import justinianoLogo from "@/assets/justiniano-logo.png";
 import neutralstateLogo from "@/assets/neutralstate-logo.svg";
 import redeemordieLogo from "@/assets/redeemordie-logo.png.asset.json";
+import zerodivisionLogo from "@/assets/zerodivision-logo.png.asset.json";
 import rodPgchmmGreen from "@/assets/rod-pgchmm-green.jpg.asset.json";
 import rodPgchmmWhite from "@/assets/rod-pgchmm-white.jpg.asset.json";
 import rodArmyHoodie from "@/assets/rod-army-hoodie.jpg.asset.json";
@@ -293,6 +294,17 @@ export const brands: Brand[] = [
     instagram: "@priesthood.uk", tiktok: "@priesthood010",
     aesthetics: ["Streetwear", "Minimalist", "Dark Academia"], categories: ["Tops", "Bottoms"],
     priceRange: "premium", followers: 2500, rating: 4.8, featured: true, newDrop: true
+  },
+  {
+    id: "39", name: "ZeroDivision", slug: "zerodivision", logo: zerodivisionLogo.url, banner: zerodivisionLogo.url,
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true, fullBleedLogo: true, useLogoImageHero: true,
+    bio: "ZeroDivision is an anime-rooted streetwear label translating One Piece, Naruto, JJK and Bleach lore into premium suede caps, embroidered hats, fleece sweats, and oversized graphic tees — limited drops for the ones who already know.",
+    story: "ZeroDivision was built for the fans who grew up on anime and never grew out of it. Every drop pulls directly from the source material — Trafalgar Law's Heart Pirates emblem on a structured suede cap, Sasuke's curse mark embroidered all over, Senbonzakura cherry blossoms across a heavyweight zip-up, Ace's flame fist on a fleece sweatpant, Sukuna's Malevolent Shrine across an oversized tee. Limited runs, premium materials, and references that land hardest if you've read the manga. No explaining required.",
+    founded: "2024", founderNote: "\"If you know, you know. No explaining required.\"",
+    vibes: ["Anime-rooted", "Limited drops", "Premium suede & fleece", "If you know, you know"],
+    origin: "Canada", website: "https://zerodvsn.com", affiliateUrl: "https://zerodvsn.com/collections/all",
+    instagram: "@zerodvsn", aesthetics: ["Streetwear", "Y2K", "Archive"], categories: ["Tops", "Bottoms", "Accessories"],
+    priceRange: "mid", followers: 4500, rating: 4.7, featured: true, newDrop: true
   },
 ];
 export const products: Product[] = [
@@ -545,6 +557,12 @@ export const products: Product[] = [
   { id: "p723", name: "VARSITY TEE (Black)", brandId: "37", brandName: "DAE'WEAR", image: "https://static.wixstatic.com/media/8207c6_5ccd849164b94dfca7613abfd0f1d157~mv2.jpg/v1/fill/w_600,h_840,al_c,q_80,enc_avif,quality_auto/8207c6_5ccd849164b94dfca7613abfd0f1d157~mv2.jpg", images: ["https://static.wixstatic.com/media/8207c6_5ccd849164b94dfca7613abfd0f1d157~mv2.jpg/v1/fill/w_600,h_840,al_c,q_80,enc_avif,quality_auto/8207c6_5ccd849164b94dfca7613abfd0f1d157~mv2.jpg", "https://static.wixstatic.com/media/8207c6_e269446947344ecbba4ccde946f770b8~mv2.jpg/v1/fill/w_600,h_840,al_c,q_80,enc_avif,quality_auto/8207c6_e269446947344ecbba4ccde946f770b8~mv2.jpg"], price: 55, description: "DAE'WEAR Varsity Tee in black — long sleeve with contrasting collegiate graphic.", category: "Tops", aesthetics: ["Streetwear"], sizes: ["S", "M", "L", "XL"], affiliateUrl: "https://www.daewearapparel.com/product-page/basic-daewear-crop-white", trending: true, newArrival: true },
   // Priesthood
   { id: "p800", name: "Dominion Core Tracksuit in Navy", brandId: "38", brandName: "PRIESTHOOD", image: "https://cdn.shopify.com/s/files/1/1002/4091/6822/files/7DE82E16-19FF-4D3B-BF7E-0251EAE415BB.png?v=1779540322", images: ["https://cdn.shopify.com/s/files/1/1002/4091/6822/files/7DE82E16-19FF-4D3B-BF7E-0251EAE415BB.png?v=1779540322", "https://cdn.shopify.com/s/files/1/1002/4091/6822/files/IMG-3082.png?v=1778979506", "https://cdn.shopify.com/s/files/1/1002/4091/6822/files/IMG-3363.png?v=1779540596"], price: 130, originalPrice: 150, description: "Engineered for presence, discipline and everyday wear. Soft brushed cotton-poly fleece, relaxed fit, signature Priesthood embroidery across the chest, sleeves and leg. Built to hold its shape through daily wear.", category: "Bottoms", aesthetics: ["Streetwear", "Minimalist"], sizes: ["XS", "S", "M", "L", "XL"], affiliateUrl: "https://priesthood.uk/products/dominion-core-tracksuit-navy", trending: true, newArrival: true },
+  // ZeroDivision
+  { id: "p900", name: "SURGEON Suede Hat", brandId: "39", brandName: "ZeroDivision", image: "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/A058C19038C5AC9450BF254A2F5BE1B4.jpg?v=1777600693", images: ["https://cdn.shopify.com/s/files/1/0671/9681/3553/files/A058C19038C5AC9450BF254A2F5BE1B4.jpg?v=1777600693"], price: 56, description: "White suede structured cap carrying the Heart Pirates emblem with signature script wrapping the panel and spotted brim detail. Limited run of 150 pieces, adjustable strap.", category: "Accessories", aesthetics: ["Streetwear", "Archive"], sizes: ["One Size"], affiliateUrl: "https://zerodvsn.com/products/surgeon-suede-hat", trending: true, newArrival: true },
+  { id: "p901", name: "Curse Mark Suede Hat", brandId: "39", brandName: "ZeroDivision", image: "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/CurseMarkHat.png?v=1777601901", images: ["https://cdn.shopify.com/s/files/1/0671/9681/3553/files/CurseMarkHat.png?v=1777601901"], price: 51, description: "All-over embroidered suede structured cap inspired by Sasuke's curse mark pattern. Two colorways, adjustable strap.", category: "Accessories", aesthetics: ["Streetwear", "Archive", "Grunge"], sizes: ["One Size"], affiliateUrl: "https://zerodvsn.com/products/curse-mark-suede-hat", trending: true, newArrival: true },
+  { id: "p902", name: "Senbonzakura Cherry Blossom Zip Up", brandId: "39", brandName: "ZeroDivision", image: "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/Front.jpg?v=1769017451", images: ["https://cdn.shopify.com/s/files/1/0671/9681/3553/files/Front.jpg?v=1769017451"], price: 168, description: "Heavyweight zip-up with Senbonzakura cherry blossom artwork — Byakuya Kuchiki's bankai rendered across the back. Premium fleece construction.", category: "Outerwear", aesthetics: ["Streetwear", "Archive", "Y2K"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://zerodvsn.com/products/senbonzakura-cherry-blossom-zip-up", trending: true, newArrival: true },
+  { id: "p903", name: "Ace Fleece Sweatpants", brandId: "39", brandName: "ZeroDivision", image: "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/FrontSidePants.png?v=1768602005", images: ["https://cdn.shopify.com/s/files/1/0671/9681/3553/files/FrontSidePants.png?v=1768602005"], price: 94, description: "Heavyweight fleece sweatpants with Flame Fist Ace tribute embroidery down the leg. Relaxed fit, premium construction.", category: "Bottoms", aesthetics: ["Streetwear", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://zerodvsn.com/products/flame-fist-ace-tribute-pants", trending: true, newArrival: true },
+  { id: "p904", name: "Malevolent Shrine Oversized Tee", brandId: "39", brandName: "ZeroDivision", image: "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/BackSukuna.jpg?v=1760138819", images: ["https://cdn.shopify.com/s/files/1/0671/9681/3553/files/BackSukuna.jpg?v=1760138819"], price: 49, description: "Oversized heavyweight tee with Sukuna's Malevolent Shrine artwork across the back. Boxy silhouette, premium cotton.", category: "Tops", aesthetics: ["Streetwear", "Archive", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://zerodvsn.com/products/malevolent-shrine-oversized-tee", trending: true, newArrival: true },
 ];
 
 export const blogPosts: BlogPost[] = [];
