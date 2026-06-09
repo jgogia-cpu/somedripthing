@@ -202,7 +202,7 @@ export const brands: Brand[] = [
   },
   {
     id: "31", name: "Maker Creator", slug: "maker-creator", logo: makerLogo,
-    banner: makerLogo,
+    banner: "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_8045.jpg?v=1777016390&width=1600",
     logoFont: "'Space Grotesk', sans-serif", lightCard: true,
     bio: "Maker Creator is a Canadian streetwear label crafting heavyweight basics with intentional detail — NØIR and GRÏS sweat sets, Levi's-built denim, and waffle knits made for the people who build, design, and create.",
     story: "Maker Creator was born in Canada with a single idea: clothing for the people who make things. Every piece — from the NØIR and GRÏS sweat sets to the Levi's 501-built RAW, BASIC, and DISTRESSED denim, the EXPRESSION crewneck, the CREÄTIVITY zip up, and the MÄTRIX waffle knit — is built around heavyweight fabrics, considered silhouettes, and small details that reward a closer look. No loud branding, no chasing trends — just well-made garments for designers, builders, and creators who'd rather let the work speak.",
@@ -238,7 +238,7 @@ export const brands: Brand[] = [
   },
   {
     id: "34", name: "RedeemOrDie", slug: "redeemordie", logo: redeemordieLogo.url,
-    banner: redeemordieLogo.url,
+    banner: rodPgchmmGreen.url,
     logoFont: "'Bebas Neue', sans-serif", darkCard: true,
     bio: "RedeemOrDie (RMD) is a streetwear label where style meets the street — military-inspired silhouettes, washed tones, and bold graphic tees built for the everyday grind.",
     story: "RedeemOrDie is built on a single mantra: redeem yourself every day, or fade out. The RMD lineup leans into military-inspired cuts — army hoodies, regime windbreakers, trackpants — paired with statement graphic tees that scream more than they whisper. Heavyweight fabrics, washed tones, and details engineered for the street.",
@@ -249,7 +249,8 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 8000, rating: 4.5, featured: true, newDrop: true
   },
   {
-    id: "35", name: "EVARA", slug: "evara", logo: EVARA_LOGO, banner: EVARA_LOGO,
+    id: "35", name: "EVARA", slug: "evara", logo: EVARA_LOGO,
+    banner: "https://shopevara.store/cdn/shop/files/Photoroom_20260525_173219.jpg?v=1779745316&width=1600",
     logoFont: "'Cormorant Garamond', serif", lightCard: true, fullBleedLogo: true, useLogoImageHero: true,
     bio: "EVARA is a faith-forward streetwear label fusing rhinestone-studded sweatpants, Gift-of-God zip-ups, and denim jorts — wear your faith proudly, inspired by Ephesians 2:8.",
     story: "EVARA was built on a simple belief: clothing can be both an act of worship and a statement of style. Inspired by Ephesians 2:8, every piece — from the rhinestone-encrusted Gift of God Zip-Up to the satin-lined Evara sweatpants and the rhinestone-denim jorts — is designed to let the wearer carry their faith out loud. Heavyweight fabrics, cross detailing on the leg, bible verse embroidery on the back. It's high-quality streetwear that means something.",
@@ -260,7 +261,8 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 6500, rating: 5.0, featured: true, newDrop: true
   },
   {
-    id: "36", name: "L'Atelier Santé", slug: "latelier-sante", logo: LATELIER_LOGO, banner: LATELIER_LOGO,
+    id: "36", name: "L'Atelier Santé", slug: "latelier-sante", logo: LATELIER_LOGO,
+    banner: "https://static.wixstatic.com/media/d08e68_71633ffa3e02436ca28e3dd97a4a5ec8~mv2.jpg/v1/fill/w_1600,h_900,al_c,q_85,enc_avif,quality_auto/d08e68_71633ffa3e02436ca28e3dd97a4a5ec8~mv2.jpg",
     logoFont: "'DM Serif Display', serif", lightCard: true, fullBleedLogo: true, useLogoImageHero: true, nameColor: "accent", nameGlow: true, tagColor: "accent",
     bio: "L'Atelier Santé is a quietly elevated essentials label — waffle-knit hoodies, classic tees, Sante Solstice sunglasses, and snapbacks built around health, craft, and considered minimalism.",
     story: "L'Atelier Santé translates to 'the health workshop' — a name that hints at the label's intention. Every piece, from the Waffle Knit Hoodie and Classic T-Shirt to the Sante Solstice and Zenith sunglasses and the Sante Snapback, is built around clean silhouettes, premium materials, and the kind of details that reward a closer look. Nothing loud, nothing rushed — just well-made essentials and accessories for a wardrobe that lives long.",
@@ -271,7 +273,8 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 4200, rating: 4.6, featured: true, newDrop: true
   },
   {
-    id: "37", name: "DAE'WEAR", slug: "daewear", logo: DAEWEAR_LOGO, banner: DAEWEAR_LOGO,
+    id: "37", name: "DAE'WEAR", slug: "daewear", logo: DAEWEAR_LOGO,
+    banner: "https://static.wixstatic.com/media/8207c6_76f928a017e44e329ffcab4edc44966d~mv2.jpg/v1/fill/w_1600,h_900,al_c,q_85,enc_avif,quality_auto/8207c6_76f928a017e44e329ffcab4edc44966d~mv2.jpg",
     logoFont: "'Archivo Black', sans-serif", darkCard: true, fullBleedLogo: true, useLogoImageHero: true,
     bio: "DAE'WEAR is a different kind of company making a different kind of everyday wear — varsity tees, signal graphics, and EVERYDAE essentials built for purpose and presence.",
     story: "DAE'WEAR was built on a refusal to do things the usual way — a different kind of company, a different kind of wear. The lineup, anchored by the EVERYDAE TEE, the HUMAN SIGNAL TEE, and the black-and-white VARSITY TEE long sleeves, leans into bold graphics, clean silhouettes, and pieces that feel intentional from the first wear. Daily essentials, designed with weight.",
@@ -296,7 +299,8 @@ export const brands: Brand[] = [
     priceRange: "premium", followers: 2500, rating: 4.8, featured: true, newDrop: true
   },
   {
-    id: "39", name: "ZeroDivision", slug: "zerodivision", logo: zerodivisionLogo.url, banner: zerodivisionLogo.url,
+    id: "39", name: "ZeroDivision", slug: "zerodivision", logo: zerodivisionLogo.url,
+    banner: "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/Front.jpg?v=1769017451",
     logoFont: "'Space Grotesk', sans-serif", darkCard: true, fullBleedLogo: true, useLogoImageHero: true,
     bio: "ZeroDivision is an anime-rooted streetwear label translating One Piece, Naruto, JJK and Bleach lore into premium suede caps, embroidered hats, fleece sweats, and oversized graphic tees — limited drops for the ones who already know.",
     story: "ZeroDivision was built for the fans who grew up on anime and never grew out of it. Every drop pulls directly from the source material — Trafalgar Law's Heart Pirates emblem on a structured suede cap, Sasuke's curse mark embroidered all over, Senbonzakura cherry blossoms across a heavyweight zip-up, Ace's flame fist on a fleece sweatpant, Sukuna's Malevolent Shrine across an oversized tee. Limited runs, premium materials, and references that land hardest if you've read the manga. No explaining required.",

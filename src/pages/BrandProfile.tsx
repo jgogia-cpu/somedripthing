@@ -70,18 +70,29 @@ export default function BrandProfile() {
         <Breadcrumbs items={[{ label: "Brands", to: "/brands" }, { label: brand.name }]} />
       </div>
       {/* Hero Banner */}
-      <div className="relative h-[70vh] min-h-[500px] overflow-hidden bg-gradient-to-br from-background via-secondary/40 to-background">
-        {/* Typographic brand name as hero */}
+      <div className="relative h-[60vh] min-h-[420px] overflow-hidden bg-background md:h-[70vh] md:min-h-[500px]">
+        {/* Background banner image (horizontal) */}
+        {brand.banner && (
+          <img
+            src={brand.banner}
+            alt={`${brand.name} brand banner`}
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            loading="eager"
+          />
+        )}
+        {/* Darkening overlays for legibility */}
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/10" />
+        {/* Typographic brand name overlaid on banner */}
         <div className="absolute inset-0 flex items-center justify-center px-6">
           <h1
             aria-label={brand.name}
-            className="max-w-full select-none break-words text-center font-bold leading-[0.9] tracking-tight text-foreground/90 [text-wrap:balance] text-[clamp(2.5rem,13vw,11rem)]"
+            className="max-w-full select-none break-words text-center font-bold leading-[0.9] tracking-tight text-white [text-wrap:balance] text-[clamp(2.5rem,13vw,11rem)] drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
             style={{ fontFamily: brand.logoFont || undefined }}
           >
             {brand.name}
           </h1>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0">
           <div className="container pb-12">
             <Link to="/collections" className="mb-6 inline-flex items-center gap-1.5 rounded-full glass-pill px-3 py-1.5 text-sm text-foreground/70 transition-colors hover:text-foreground">
