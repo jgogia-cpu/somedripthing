@@ -87,6 +87,7 @@ import makerLogo from "@/assets/maker-logo.png";
 import justinianoLogo from "@/assets/justiniano-logo.png";
 import neutralstateLogo from "@/assets/neutralstate-logo.svg";
 import redeemordieLogo from "@/assets/redeemordie-logo.png.asset.json";
+import zerodivisionLogo from "@/assets/zerodivision-logo.png.asset.json";
 import rodPgchmmGreen from "@/assets/rod-pgchmm-green.jpg.asset.json";
 import rodPgchmmWhite from "@/assets/rod-pgchmm-white.jpg.asset.json";
 import rodArmyHoodie from "@/assets/rod-army-hoodie.jpg.asset.json";
@@ -293,6 +294,17 @@ export const brands: Brand[] = [
     instagram: "@priesthood.uk", tiktok: "@priesthood010",
     aesthetics: ["Streetwear", "Minimalist", "Dark Academia"], categories: ["Tops", "Bottoms"],
     priceRange: "premium", followers: 2500, rating: 4.8, featured: true, newDrop: true
+  },
+  {
+    id: "39", name: "ZeroDivision", slug: "zerodivision", logo: zerodivisionLogo.url, banner: zerodivisionLogo.url,
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true, fullBleedLogo: true, useLogoImageHero: true,
+    bio: "ZeroDivision is an anime-rooted streetwear label translating One Piece, Naruto, JJK and Bleach lore into premium suede caps, embroidered hats, fleece sweats, and oversized graphic tees — limited drops for the ones who already know.",
+    story: "ZeroDivision was built for the fans who grew up on anime and never grew out of it. Every drop pulls directly from the source material — Trafalgar Law's Heart Pirates emblem on a structured suede cap, Sasuke's curse mark embroidered all over, Senbonzakura cherry blossoms across a heavyweight zip-up, Ace's flame fist on a fleece sweatpant, Sukuna's Malevolent Shrine across an oversized tee. Limited runs, premium materials, and references that land hardest if you've read the manga. No explaining required.",
+    founded: "2024", founderNote: "\"If you know, you know. No explaining required.\"",
+    vibes: ["Anime-rooted", "Limited drops", "Premium suede & fleece", "If you know, you know"],
+    origin: "Canada", website: "https://zerodvsn.com", affiliateUrl: "https://zerodvsn.com/collections/all",
+    instagram: "@zerodvsn", aesthetics: ["Streetwear", "Y2K", "Archive"], categories: ["Tops", "Bottoms", "Accessories"],
+    priceRange: "mid", followers: 4500, rating: 4.7, featured: true, newDrop: true
   },
 ];
 export const products: Product[] = [
