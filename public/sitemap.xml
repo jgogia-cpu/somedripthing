@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thedripway.com/</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -937,16 +937,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p229</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p230</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p231</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1300,6 +1290,24 @@
     <loc>https://thedripway.com/product/p800</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/tiktok-made-this-brand-famous-overnight-but-is-it-actually-g-2026-06-09</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/jordan-dropped-their-most-controversial-shoe-yet-2026-06-08</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-real-reason-vintage-tees-cost-500-now-2026-06-07</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://thedripway.com/blog/why-your-favorite-streetwear-brand-is-dying-2026-06-06</loc>
