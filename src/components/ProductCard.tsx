@@ -31,12 +31,14 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const [imgIndex, setImgIndex] = useState(0);
   const [visibleSrc, setVisibleSrc] = useState(allImages[0]);
   const [loadedSrcs, setLoadedSrcs] = useState(() => new Set<string>([allImages[0]]));
+  const [failed, setFailed] = useState(false);
   const eager = index < 4;
 
   useEffect(() => {
     setImgIndex(0);
     setVisibleSrc(allImages[0]);
     setLoadedSrcs(new Set([allImages[0]]));
+    setFailed(false);
   }, [allImages]);
 
   useEffect(() => {
@@ -65,6 +67,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     setImgIndex((i) => (i + direction + allImages.length) % allImages.length);
   };
 
+  // Hide the card entirely if the primary image can't load — dead/discontinued product.
+  if (failed) return null;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -90,6 +95,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               decoding="async"
               fetchPriority={eager ? "high" : "auto"}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 will-change-transform group-hover:scale-[1.02]"
+              onError={() => setFailed(true)}
             />
             {allImages[imgIndex] !== visibleSrc && (
               <img
