@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { getBrandBySlug, getProductsByBrand, getSimilarBrands } from "@/data/brands";
-import InstagramCTA from "@/components/InstagramCTA";
+import InstagramGrid from "@/components/InstagramGrid";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -281,20 +281,16 @@ export default function BrandProfile() {
         </section>
       )}
 
-      {/* Instagram CTA */}
-      <InstagramCTA
-        handle={brand.instagram}
-        followers={brand.followers}
-        label="Follow The Brand"
-        heading={`@${brand.instagram.replace("@", "")}`}
-        trackingProperties={{
-          brand_id: brand.id,
-          brand_name: brand.name,
-          brand_slug: brand.slug,
-          click_type: "instagram",
-          source: "brand_profile_instagram_cta",
-        }}
-      />
+      {/* Instagram grid */}
+      {brand.instagram && brandProducts.length > 0 && (
+        <InstagramGrid
+          handle={brand.instagram}
+          brandName={brand.name}
+          brandId={brand.id}
+          brandSlug={brand.slug}
+          products={brandProducts}
+        />
+      )}
 
       {/* Similar Brands */}
       {similar.length > 0 && (
