@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thedripway.com/</loc>
-    <lastmod>2026-06-09</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -107,6 +107,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://thedripway.com/brand/zerodivision</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://thedripway.com/product/p28</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -167,11 +172,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p74</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p75</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -217,16 +217,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p84</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p85</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p86</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -252,32 +242,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p91</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p92</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p93</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p94</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p95</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p96</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -312,37 +277,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p103</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p104</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p105</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p106</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p107</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p108</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p109</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -368,11 +308,6 @@
   </url>
   <url>
     <loc>https://thedripway.com/product/p114</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p115</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -407,16 +342,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p122</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p123</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p124</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -427,32 +352,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p126</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p127</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p128</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p129</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p130</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p131</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -472,152 +372,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p135</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p136</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p137</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p138</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p139</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p140</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p141</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p142</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p143</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p144</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p145</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p146</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p147</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p148</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p149</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p150</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p151</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p152</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p153</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p154</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p155</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p156</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p157</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p158</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p159</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p160</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p161</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p162</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p163</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p164</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -792,11 +552,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p199</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p201</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -892,11 +647,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p220</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p221</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -927,27 +677,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p227</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p228</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p231</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://thedripway.com/product/p232</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://thedripway.com/product/p233</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1290,6 +1025,37 @@
     <loc>https://thedripway.com/product/p800</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/product/p900</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/product/p901</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/product/p902</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/product/p903</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/product/p904</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/how-to-build-a-10k-wardrobe-for-under-500-2026-06-10</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://thedripway.com/blog/tiktok-made-this-brand-famous-overnight-but-is-it-actually-g-2026-06-09</loc>
