@@ -18,6 +18,7 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "30", name: "Isolated", site: "https://isolated.shop" },
   { id: "31", name: "Maker Creator", site: "https://makercreator.ca" },
   { id: "39", name: "ZeroDivision", site: "https://zerodvsn.com" },
+  { id: "40", name: "All Dubs", site: "https://www.alldubsofficial.com" },
 ];
 
 const SIZES_OK = new Set([
