@@ -392,6 +392,35 @@ export default function Navbar() {
               <User className="h-4 w-4" />
             </Button>
           )}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="More menu"
+                className="hidden rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105 md:inline-flex"
+              >
+                <Menu className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="rounded-xl border-border/50 bg-card/95 backdrop-blur-xl">
+              <DropdownMenuItem asChild>
+                <Link to="/blog" className="gap-2">
+                  <BookOpen className="h-3.5 w-3.5" /> Blog
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/contact" className="gap-2">
+                  <Mail className="h-3.5 w-3.5" /> Contact Us
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/affiliate" className="gap-2 font-semibold text-accent focus:text-accent">
+                  <Briefcase className="h-3.5 w-3.5" /> For Brands
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button
             variant="ghost"
             size="icon"
