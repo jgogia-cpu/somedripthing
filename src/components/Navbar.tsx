@@ -414,8 +414,8 @@ export default function Navbar() {
                   <Mail className="h-3.5 w-3.5" /> Contact Us
                 </a>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to="/affiliate" className="gap-2 font-semibold text-accent focus:text-accent">
+              <DropdownMenuItem asChild className="focus:bg-secondary focus:text-accent">
+                <Link to="/affiliate" className="gap-2 font-semibold text-accent hover:bg-secondary focus:bg-secondary focus:text-accent">
                   <Briefcase className="h-3.5 w-3.5" /> For Brands
                 </Link>
               </DropdownMenuItem>
