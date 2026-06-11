@@ -320,7 +320,7 @@ export const brands: Brand[] = [
     founded: "2023", founderNote: "\"Real fans deserve better.\"",
     vibes: ["Premium fan sportswear", "City-coded design", "Hand-finished snapbacks", "Heavyweight fleece"],
     origin: "Canada", website: "https://www.alldubsofficial.com", affiliateUrl: "https://www.alldubsofficial.com",
-    instagram: "@alldubsofficial", aesthetics: ["Streetwear", "Sportswear"], categories: ["Tops", "Bottoms", "Accessories"],
+    instagram: "@alldubsinc", aesthetics: ["Streetwear", "Sportswear"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "mid", followers: 5200, rating: 4.7, featured: true, newDrop: true
   },
 ];
