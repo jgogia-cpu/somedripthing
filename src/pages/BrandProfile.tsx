@@ -70,69 +70,84 @@ export default function BrandProfile() {
         <Breadcrumbs items={[{ label: "Brands", to: "/brands" }, { label: brand.name }]} />
       </div>
       {/* Hero Banner */}
-      <div className="relative h-[60vh] min-h-[420px] overflow-hidden bg-background md:h-[70vh] md:min-h-[500px]">
-        {/* Background banner image (horizontal) */}
+      <section className="relative h-[88vh] min-h-[560px] w-full overflow-hidden bg-background">
         {brand.banner && (
-          <img
+          <motion.img
             src={brand.banner}
             alt={`${brand.name} brand banner`}
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            initial={{ scale: 1.08 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0 h-full w-full object-cover object-center opacity-60"
             loading="eager"
           />
         )}
-        {/* Darkening overlays for legibility */}
-        <div className="absolute inset-0 bg-black/45" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/10" />
-        {/* Typographic brand name overlaid on banner */}
-        <div className="absolute inset-0 flex items-center justify-center px-6">
-          <h1
-            aria-label={brand.name}
-            className="max-w-full select-none break-words text-center font-bold leading-[0.9] tracking-tight text-white [text-wrap:balance] text-[clamp(2.5rem,13vw,11rem)] drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
-            style={{ fontFamily: brand.logoFont || undefined }}
-          >
-            {brand.name}
-          </h1>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0">
-          <div className="container pb-12">
-            <Link to="/collections" className="mb-6 inline-flex items-center gap-1.5 rounded-full glass-pill px-3 py-1.5 text-sm text-foreground/70 transition-colors hover:text-foreground">
-              <ArrowLeft className="h-3.5 w-3.5" /> Back to Home
-            </Link>
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-background/80 to-transparent" />
+
+        <div className="relative z-10 flex h-full flex-col justify-end">
+          <div className="container pb-12 md:pb-20">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="flex flex-wrap items-center gap-3"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              <span className="flex items-center gap-1.5 rounded-full glass-pill px-3 py-1.5 text-sm text-foreground/80">
-                <MapPin className="h-3.5 w-3.5" /> {brand.origin}
-              </span>
-              <span className="flex items-center gap-1.5 rounded-full glass-pill px-3 py-1.5 text-sm text-foreground/80">
-                <Calendar className="h-3.5 w-3.5" /> Est. {brand.founded}
-              </span>
-              <span className="flex items-center gap-1.5 rounded-full glass-pill px-3 py-1.5 text-sm text-foreground/80">
-                <Star className="h-3.5 w-3.5" /> {brand.rating}
-              </span>
-              <span className="rounded-full glass-pill px-3 py-1.5 text-sm capitalize text-foreground/80">{brand.priceRange} range</span>
+              <Link
+                to="/brands"
+                className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <ArrowLeft className="h-3 w-3" /> Directory / Brands
+              </Link>
             </motion.div>
+
+            <motion.h1
+              aria-label={brand.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-8 select-none break-words font-bold uppercase leading-[0.82] tracking-tighter text-foreground [text-wrap:balance] text-[clamp(3.5rem,14vw,12rem)]"
+              style={{ fontFamily: brand.logoFont || undefined }}
+            >
+              {brand.name}
+            </motion.h1>
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mt-4 flex flex-wrap gap-2"
+              transition={{ delay: 0.35, duration: 0.6 }}
+              className="mt-10 flex flex-wrap items-center gap-3"
             >
-              {brand.aesthetics.map(tag => (
-                <span key={tag} className="glass-pill rounded-full px-3 py-1 text-xs font-medium text-foreground/90">
-                  {tag}
+              <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                <MapPin className="h-3 w-3" /> {brand.origin}
+              </span>
+              <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md">
+                <Calendar className="h-3 w-3" /> Est. {brand.founded}
+              </span>
+              <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] backdrop-blur-md">
+                <Star className="h-3 w-3" /> {brand.rating} / 5.0
+              </span>
+              <div className="mx-2 hidden h-4 w-px bg-white/20 sm:block" />
+              <div className="flex flex-wrap gap-2">
+                {brand.aesthetics.map(tag => (
+                  <span
+                    key={tag}
+                    className="border border-border/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground"
+                  >
+                    {tag}
+                  </span>
+                ))}
+                <span className="border border-border/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] capitalize text-muted-foreground">
+                  {brand.priceRange} range
                 </span>
-              ))}
+              </div>
             </motion.div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* The Vibe Section */}
-      <section className="border-b border-border/40 py-16 md:py-20">
+      <section className="border-b border-border/40 py-20 md:py-28">
         <div className="container">
           <motion.p
             variants={fadeUp}
@@ -140,11 +155,11 @@ export default function BrandProfile() {
             whileInView="visible"
             viewport={{ once: true }}
             custom={0}
-            className="text-center font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
+            className="font-display text-[10px] font-bold uppercase tracking-[0.4em] text-accent"
           >
             The Vibe
           </motion.p>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border/40 bg-border/40 sm:grid-cols-2 lg:grid-cols-4">
             {brand.vibes.map((vibe, i) => (
               <motion.div
                 key={vibe}
@@ -153,9 +168,14 @@ export default function BrandProfile() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={i + 1}
-                className="rounded-2xl border border-border/50 bg-card/50 p-6 text-center backdrop-blur-sm"
+                className="group relative aspect-[4/5] bg-background p-6 transition-colors duration-500 hover:bg-card/60 sm:p-8"
               >
-                <p className="text-sm font-semibold text-foreground">{vibe}</p>
+                <span className="font-mono text-[11px] italic text-muted-foreground/60">// 0{i + 1}</span>
+                <p
+                  className="absolute bottom-6 left-6 right-6 font-display text-2xl font-bold uppercase leading-[0.95] tracking-tight transition-transform duration-500 group-hover:translate-x-2 sm:bottom-8 sm:left-8 sm:right-8 sm:text-3xl"
+                >
+                  {vibe}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -163,10 +183,10 @@ export default function BrandProfile() {
       </section>
 
       {/* CTA Section */}
-      <section className="border-b border-border/40 py-12 md:py-16">
+      <section className="border-b border-border/40 bg-card/20 py-16">
         <div className="container">
-          <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-            <div className="flex items-center gap-6">
+          <div className="flex flex-col items-center justify-between gap-10 md:flex-row">
+            <div className="flex items-center gap-10 md:gap-14">
               <TrackedOutboundLink
                 href={`https://instagram.com/${brand.instagram.replace("@", "")}`}
                 target="_blank"
@@ -178,13 +198,27 @@ export default function BrandProfile() {
                   click_type: "instagram",
                   source: "brand_profile_header",
                 }}
-                className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="group flex flex-col text-left transition-colors hover:text-foreground"
               >
-                <Instagram className="h-5 w-5" /> {brand.instagram}
+                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground">IG Community</span>
+                <span className="mt-2 font-display text-4xl font-bold tracking-tighter md:text-5xl">
+                  {brand.followers >= 1000 ? `${(brand.followers / 1000).toFixed(1)}K` : brand.followers}
+                </span>
+                <span className="mt-1 inline-flex items-center gap-1 text-[10px] uppercase tracking-widest text-muted-foreground/80 group-hover:text-accent">
+                  <Instagram className="h-3 w-3" /> {brand.instagram}
+                </span>
               </TrackedOutboundLink>
-              <span className="text-sm text-muted-foreground">
-                {(brand.followers / 1000).toFixed(0)}K followers
-              </span>
+              <div className="h-16 w-px bg-border/60" />
+              <div className="flex flex-col">
+                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Drip Rating</span>
+                <span className="mt-2 font-display text-4xl font-bold tracking-tighter md:text-5xl">
+                  {brand.rating}
+                  <span className="text-xl text-muted-foreground/60">/5</span>
+                </span>
+                <span className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80 capitalize">
+                  {brand.priceRange} tier
+                </span>
+              </div>
             </div>
             <TrackedOutboundLink
               href={brand.affiliateUrl}
@@ -197,10 +231,16 @@ export default function BrandProfile() {
                 click_type: "shop",
                 source: "brand_profile_cta",
               }}
+              className="group relative inline-flex items-center justify-center overflow-hidden bg-accent px-14 py-6 text-accent-foreground transition-transform active:scale-95"
             >
-              <Button className="gap-2 rounded-full px-8" size="lg">
-                Shop {brand.name} <ExternalLink className="h-4 w-4" />
-              </Button>
+              <span className="relative z-10 text-[11px] font-bold uppercase tracking-[0.25em]">
+                Shop {brand.name}
+              </span>
+              <ExternalLink className="relative z-10 ml-3 h-4 w-4" />
+              <span className="absolute inset-0 z-0 translate-y-full bg-foreground transition-transform duration-300 group-hover:translate-y-0" />
+              <span className="absolute inset-0 z-10 flex items-center justify-center text-[11px] font-bold uppercase tracking-[0.25em] text-background opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                Visit Site →
+              </span>
             </TrackedOutboundLink>
           </div>
         </div>
@@ -210,26 +250,22 @@ export default function BrandProfile() {
       {brandProducts.length > 0 && (
         <section className="py-16 md:py-24">
           <div className="container">
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              className="text-center font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
-            >
-              The Collection
-            </motion.p>
-            <motion.h2
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="mt-4 text-center font-display text-3xl font-bold md:text-4xl"
-            >
-              Shop {brand.name}
-            </motion.h2>
+            <div className="flex items-baseline justify-between gap-8">
+              <motion.h2
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={0}
+                className="font-display text-4xl font-bold uppercase italic tracking-tighter md:text-6xl"
+              >
+                Drop Selects
+              </motion.h2>
+              <div className="hidden h-px flex-1 bg-border/60 md:block" />
+              <p className="hidden text-[10px] font-bold uppercase tracking-[0.3em] text-accent md:block">
+                {brandProducts.length} Pieces
+              </p>
+            </div>
             <div className="masonry-grid mt-10">
               {brandProducts.map((p, i) => (
                 <ProductCard key={p.id} product={p} index={i} />
@@ -251,71 +287,84 @@ export default function BrandProfile() {
       )}
 
       {/* The Story Section */}
-      <section className="border-t border-border/40 py-16 md:py-24">
+      <section className="border-t border-border/40 py-24 md:py-40">
         <div className="container">
-          <div className="mx-auto max-w-3xl">
-            <motion.p
+          <div className="grid gap-16 lg:grid-cols-[1fr_1.6fr] lg:gap-24">
+            <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               custom={0}
-              className="font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
             >
-              The Story
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="mt-6 text-xl leading-relaxed text-foreground/80 md:text-2xl md:leading-relaxed"
-            >
-              {brand.story}
-            </motion.p>
-            {brand.founderNote && (
-              <motion.blockquote
+              <p className="font-display text-[10px] font-bold uppercase tracking-[0.4em] text-accent">The Story</p>
+              <h2 className="mt-6 font-display text-6xl font-bold uppercase leading-[0.85] tracking-tighter md:text-7xl">
+                The<br />Origin
+              </h2>
+              <div className="mt-8 h-1 w-20 bg-accent" />
+            </motion.div>
+            <div className="space-y-12">
+              <motion.p
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                custom={2}
-                className="mt-10 border-l-2 border-accent pl-6"
+                custom={1}
+                className="text-xl font-light leading-relaxed text-foreground/80 md:text-2xl md:leading-[1.5]"
               >
-                <p className="text-lg italic text-muted-foreground" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  {brand.founderNote}
-                </p>
-              </motion.blockquote>
-            )}
+                {brand.story}
+              </motion.p>
+              {brand.founderNote && (
+                <motion.blockquote
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  custom={2}
+                  className="relative border-l border-border/60 py-6 pl-10"
+                >
+                  <span
+                    className="absolute -left-2 -top-6 select-none font-display text-8xl leading-none text-card"
+                    aria-hidden
+                  >
+                    “
+                  </span>
+                  <p className="font-display text-2xl font-medium italic leading-snug text-foreground md:text-3xl">
+                    {brand.founderNote}
+                  </p>
+                  <div className="mt-6 flex items-center gap-4">
+                    <div className="h-px w-8 bg-accent" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">
+                      Founder — {brand.name}
+                    </span>
+                  </div>
+                </motion.blockquote>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Similar Brands */}
       {similar.length > 0 && (
-        <section className="border-t border-border/40 py-16 md:py-24">
+        <section className="border-t border-border/40 py-20 md:py-28">
           <div className="container">
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              className="text-center font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
-            >
-              Discover More
-            </motion.p>
-            <motion.h2
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="mt-4 text-center font-display text-3xl font-bold"
-            >
-              Similar Brands
-            </motion.h2>
+            <div className="flex items-baseline justify-between gap-8">
+              <motion.h2
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={0}
+                className="font-display text-3xl font-bold uppercase tracking-tighter md:text-5xl"
+              >
+                Cross-Pollination
+              </motion.h2>
+              <div className="hidden h-px flex-1 bg-border/60 md:block" />
+              <p className="hidden text-[10px] font-bold uppercase tracking-[0.3em] text-accent md:block">
+                Similar Aesthetics
+              </p>
+            </div>
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {similar.map((b, i) => (
                 <BrandCard key={b.id} brand={b} index={i} />
