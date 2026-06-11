@@ -282,7 +282,6 @@ function SuggestionItem({
 const TOP_LINKS = [
   { to: "/brands", label: "Brands" },
   { to: "/collections", label: "Collections" },
-  { to: "/blog", label: "Blog" },
 ];
 
 function MobileSubcatList({ gender, onNavigate }: { gender: "him" | "her"; onNavigate: () => void }) {
