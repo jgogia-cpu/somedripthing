@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { ExternalLink, Instagram, ArrowLeft, MapPin, Calendar, Star } from "lucide-react";
+import { useState } from "react";
+import { ExternalLink, Instagram, ArrowLeft, MapPin, Calendar, Star, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
@@ -17,6 +18,7 @@ const fadeUp = {
 export default function BrandProfile() {
   const { slug } = useParams<{ slug: string }>();
   const brand = getBrandBySlug(slug || "");
+  const [storyExpanded, setStoryExpanded] = useState(false);
 
   if (!brand) {
     return (
@@ -145,42 +147,6 @@ export default function BrandProfile() {
         </div>
       </section>
 
-      {/* The Vibe Section */}
-      <section className="border-b border-border/40 py-20 md:py-28">
-        <div className="container">
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="font-display text-[10px] font-bold uppercase tracking-[0.4em] text-accent"
-          >
-            The Vibe
-          </motion.p>
-          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border/40 bg-border/40 sm:grid-cols-2 lg:grid-cols-4">
-            {brand.vibes.map((vibe, i) => (
-              <motion.div
-                key={vibe}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i + 1}
-                className="group relative aspect-[4/5] bg-background p-6 transition-colors duration-500 hover:bg-card/60 sm:p-8"
-              >
-                <span className="font-mono text-[11px] italic text-muted-foreground/60">// 0{i + 1}</span>
-                <p
-                  className="absolute bottom-6 left-6 right-6 font-display text-2xl font-bold uppercase leading-[0.95] tracking-tight transition-transform duration-500 group-hover:translate-x-2 sm:bottom-8 sm:left-8 sm:right-8 sm:text-3xl"
-                >
-                  {vibe}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="border-b border-border/40 bg-card/20 py-16">
         <div className="container">
@@ -303,16 +269,39 @@ export default function BrandProfile() {
               <div className="mt-8 h-1 w-20 bg-accent" />
             </motion.div>
             <div className="space-y-12">
-              <motion.p
+              <motion.div
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={1}
-                className="text-xl font-light leading-relaxed text-foreground/80 md:text-2xl md:leading-[1.5]"
               >
-                {brand.story}
-              </motion.p>
+                <div className="relative">
+                  <p
+                    className={`text-xl font-light leading-relaxed text-foreground/80 md:text-2xl md:leading-[1.5] ${
+                      storyExpanded ? "" : "line-clamp-5"
+                    }`}
+                  >
+                    {brand.story}
+                  </p>
+                  {!storyExpanded && (
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background to-transparent" />
+                  )}
+                </div>
+                {brand.story && brand.story.length > 280 && (
+                  <button
+                    type="button"
+                    onClick={() => setStoryExpanded(v => !v)}
+                    className="mt-6 inline-flex items-center gap-2 border-b border-accent/60 pb-1 text-[10px] font-bold uppercase tracking-[0.3em] text-accent transition-colors hover:text-foreground"
+                    aria-expanded={storyExpanded}
+                  >
+                    {storyExpanded ? "Collapse" : "Read More"}
+                    <ChevronDown
+                      className={`h-3 w-3 transition-transform ${storyExpanded ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                )}
+              </motion.div>
               {brand.founderNote && (
                 <motion.blockquote
                   variants={fadeUp}
