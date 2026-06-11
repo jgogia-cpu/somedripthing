@@ -1,6 +1,6 @@
 import { useState, FormEvent, useMemo, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home } from "lucide-react";
+import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home, Mail, BookOpen, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
