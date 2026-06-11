@@ -131,48 +131,6 @@ export default function BrandProfile() {
         </div>
       </div>
 
-      {/* The Story Section */}
-      <section className="border-b border-border/40 py-16 md:py-24">
-        <div className="container">
-          <div className="mx-auto max-w-3xl">
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={0}
-              className="font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
-            >
-              The Story
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              custom={1}
-              className="mt-6 text-xl leading-relaxed text-foreground/80 md:text-2xl md:leading-relaxed"
-            >
-              {brand.story}
-            </motion.p>
-            {brand.founderNote && (
-              <motion.blockquote
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={2}
-                className="mt-10 border-l-2 border-accent pl-6"
-              >
-                <p className="text-lg italic text-muted-foreground" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  {brand.founderNote}
-                </p>
-              </motion.blockquote>
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* The Vibe Section */}
       <section className="border-b border-border/40 py-16 md:py-20">
         <div className="container">
@@ -291,6 +249,48 @@ export default function BrandProfile() {
           products={brandProducts}
         />
       )}
+
+      {/* The Story Section */}
+      <section className="border-t border-border/40 py-16 md:py-24">
+        <div className="container">
+          <div className="mx-auto max-w-3xl">
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0}
+              className="font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
+            >
+              The Story
+            </motion.p>
+            <motion.p
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={1}
+              className="mt-6 text-xl leading-relaxed text-foreground/80 md:text-2xl md:leading-relaxed"
+            >
+              {brand.story}
+            </motion.p>
+            {brand.founderNote && (
+              <motion.blockquote
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={2}
+                className="mt-10 border-l-2 border-accent pl-6"
+              >
+                <p className="text-lg italic text-muted-foreground" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  {brand.founderNote}
+                </p>
+              </motion.blockquote>
+            )}
+          </div>
+        </div>
+      </section>
 
       {/* Similar Brands */}
       {similar.length > 0 && (
