@@ -410,9 +410,9 @@ export default function Navbar() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/contact" className="gap-2">
+                <a href="mailto:dripwayapparel@gmail.com" className="gap-2">
                   <Mail className="h-3.5 w-3.5" /> Contact Us
-                </Link>
+                </a>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/affiliate" className="gap-2 font-semibold text-accent focus:text-accent">
