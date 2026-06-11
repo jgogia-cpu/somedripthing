@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { ExternalLink, Instagram, ArrowLeft, MapPin, Calendar, Star } from "lucide-react";
+import { useState } from "react";
+import { ExternalLink, Instagram, ArrowLeft, MapPin, Calendar, Star, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
@@ -17,6 +18,7 @@ const fadeUp = {
 export default function BrandProfile() {
   const { slug } = useParams<{ slug: string }>();
   const brand = getBrandBySlug(slug || "");
+  const [storyExpanded, setStoryExpanded] = useState(false);
 
   if (!brand) {
     return (
@@ -141,42 +143,6 @@ export default function BrandProfile() {
                 </span>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* The Vibe Section */}
-      <section className="border-b border-border/40 py-20 md:py-28">
-        <div className="container">
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={0}
-            className="font-display text-[10px] font-bold uppercase tracking-[0.4em] text-accent"
-          >
-            The Vibe
-          </motion.p>
-          <div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border/40 bg-border/40 sm:grid-cols-2 lg:grid-cols-4">
-            {brand.vibes.map((vibe, i) => (
-              <motion.div
-                key={vibe}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                custom={i + 1}
-                className="group relative aspect-[4/5] bg-background p-6 transition-colors duration-500 hover:bg-card/60 sm:p-8"
-              >
-                <span className="font-mono text-[11px] italic text-muted-foreground/60">// 0{i + 1}</span>
-                <p
-                  className="absolute bottom-6 left-6 right-6 font-display text-2xl font-bold uppercase leading-[0.95] tracking-tight transition-transform duration-500 group-hover:translate-x-2 sm:bottom-8 sm:left-8 sm:right-8 sm:text-3xl"
-                >
-                  {vibe}
-                </p>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
