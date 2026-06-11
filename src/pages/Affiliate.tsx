@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, Rocket, TrendingUp, Sparkles, BarChart3 } from "lucide-react";
 import SEO from "@/components/SEO";
 
 export default function Affiliate() {
@@ -119,6 +119,56 @@ export default function Affiliate() {
             </Button>
           </motion.form>
         )}
+
+        {/* Coming Soon: Boost Your Brand */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="relative mt-16 overflow-hidden rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-card to-card p-8 md:p-10"
+        >
+          <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/20 blur-3xl" />
+          <div className="relative">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+              <Sparkles className="h-3 w-3" /> Coming Soon
+            </span>
+            <h2 className="mt-4 font-display text-3xl font-bold tracking-tight md:text-4xl">
+              Boost Your Brand
+            </h2>
+            <p className="mt-3 max-w-xl text-muted-foreground">
+              Get in front of more shoppers. Pay for premium placement, homepage priority, and the analytics to back it up.
+            </p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              <div className="rounded-2xl border border-border/50 bg-background/40 p-5">
+                <Rocket className="h-5 w-5 text-accent" />
+                <p className="mt-3 text-sm font-semibold">Higher Visibility</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Pinned across category and discovery feeds for sustained reach.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-border/50 bg-background/40 p-5">
+                <TrendingUp className="h-5 w-5 text-accent" />
+                <p className="mt-3 text-sm font-semibold">Homepage Priority</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Featured slots in the hero carousel and curated drops.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-border/50 bg-background/40 p-5">
+                <BarChart3 className="h-5 w-5 text-accent" />
+                <p className="mt-3 text-sm font-semibold">Brand Insights</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Real-time clicks, saves, and conversion data on every product.
+                </p>
+              </div>
+            </div>
+
+            <p className="mt-6 text-xs text-muted-foreground">
+              Want early access? Mention "Boost" in your application above.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
