@@ -1,6 +1,6 @@
 import { useState, FormEvent, useMemo, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home } from "lucide-react";
+import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home, Mail, BookOpen, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
@@ -282,7 +282,6 @@ function SuggestionItem({
 const TOP_LINKS = [
   { to: "/brands", label: "Brands" },
   { to: "/collections", label: "Collections" },
-  { to: "/blog", label: "Blog" },
 ];
 
 function MobileSubcatList({ gender, onNavigate }: { gender: "him" | "her"; onNavigate: () => void }) {
@@ -393,6 +392,35 @@ export default function Navbar() {
               <User className="h-4 w-4" />
             </Button>
           )}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="More menu"
+                className="hidden rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105 md:inline-flex"
+              >
+                <Menu className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="rounded-xl border-border/50 bg-card/95 backdrop-blur-xl">
+              <DropdownMenuItem asChild>
+                <Link to="/blog" className="gap-2">
+                  <BookOpen className="h-3.5 w-3.5" /> Blog
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <a href="mailto:dripwayapparel@gmail.com" className="gap-2">
+                  <Mail className="h-3.5 w-3.5" /> Contact Us
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/affiliate" className="gap-2 font-semibold text-accent focus:text-accent">
+                  <Briefcase className="h-3.5 w-3.5" /> For Brands
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button
             variant="ghost"
             size="icon"
