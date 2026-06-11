@@ -269,16 +269,39 @@ export default function BrandProfile() {
               <div className="mt-8 h-1 w-20 bg-accent" />
             </motion.div>
             <div className="space-y-12">
-              <motion.p
+              <motion.div
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={1}
-                className="text-xl font-light leading-relaxed text-foreground/80 md:text-2xl md:leading-[1.5]"
               >
-                {brand.story}
-              </motion.p>
+                <div className="relative">
+                  <p
+                    className={`text-xl font-light leading-relaxed text-foreground/80 md:text-2xl md:leading-[1.5] ${
+                      storyExpanded ? "" : "line-clamp-5"
+                    }`}
+                  >
+                    {brand.story}
+                  </p>
+                  {!storyExpanded && (
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background to-transparent" />
+                  )}
+                </div>
+                {brand.story && brand.story.length > 280 && (
+                  <button
+                    type="button"
+                    onClick={() => setStoryExpanded(v => !v)}
+                    className="mt-6 inline-flex items-center gap-2 border-b border-accent/60 pb-1 text-[10px] font-bold uppercase tracking-[0.3em] text-accent transition-colors hover:text-foreground"
+                    aria-expanded={storyExpanded}
+                  >
+                    {storyExpanded ? "Collapse" : "Read More"}
+                    <ChevronDown
+                      className={`h-3 w-3 transition-transform ${storyExpanded ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                )}
+              </motion.div>
               {brand.founderNote && (
                 <motion.blockquote
                   variants={fadeUp}
