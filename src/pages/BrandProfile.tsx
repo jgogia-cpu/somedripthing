@@ -1,7 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { ExternalLink, Instagram, ArrowLeft, MapPin, Calendar, Star } from "lucide-react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { getBrandBySlug, getProductsByBrand, getSimilarBrands } from "@/data/brands";
