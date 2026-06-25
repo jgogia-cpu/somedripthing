@@ -26,6 +26,12 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
           {!brand.fullBleedLogo && (
             <div className={`absolute inset-0 bg-gradient-to-t ${brand.lightCard ? "from-white via-white/40" : "from-black/70 via-black/20"} to-transparent`} />
           )}
+          {brand.newDrop && (
+            <span className="absolute left-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full bg-accent/95 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-accent-foreground shadow-lg backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-foreground/80" />
+              New
+            </span>
+          )}
           {/* Editorial hover overlay */}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 translate-y-2 p-5 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
