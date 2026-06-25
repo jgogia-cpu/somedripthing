@@ -255,36 +255,10 @@ export default function Index() {
           <div className="absolute inset-0 bg-background/70" />
         </div>
         <div className="container relative z-10">
-          <div className="mx-auto mb-10 max-w-4xl text-center">
-            <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-accent">
-              The Anti-Algorithm Edit
-            </p>
-            <h1
-              className="font-display font-bold leading-[0.95] tracking-tight"
-              style={{ fontSize: "clamp(2.75rem, 8vw, 5.75rem)", letterSpacing: "-0.025em" }}
-            >
-              Discover the brands
-              <br />
-              <span className="italic font-light text-foreground/70">
-                Instagram won't show you.
-              </span>
-            </h1>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-              <Link to="/brands">
-                <Button
-                  size="lg"
-                  className="group h-12 gap-2 rounded-full bg-foreground px-7 text-sm font-semibold uppercase tracking-[0.15em] text-background hover:bg-foreground/90"
-                >
-                  Start Discovering
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </Button>
-              </Link>
-              <span className="hidden text-[11px] uppercase tracking-[0.2em] text-muted-foreground sm:inline">
-                {brands.length} brands · curated weekly
-              </span>
-            </div>
-          </div>
-          <p className="mb-6 text-center text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+          <h1 className="mb-1 text-center text-5xl font-bold tracking-tight md:text-7xl" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
+            DRIPWAY
+          </h1>
+          <p className="mb-8 text-center text-sm font-medium uppercase tracking-widest text-muted-foreground">
             Today's Featured Picks
           </p>
           {/* 3D Carousel */}
