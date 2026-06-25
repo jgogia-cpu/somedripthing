@@ -318,13 +318,27 @@ function MobileSubcatList({ gender, onNavigate }: { gender: "him" | "her"; onNav
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { user, signOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const closeMobile = () => setMobileOpen(false);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className="sticky top-0 z-50 liquid-glass !rounded-none border-x-0 border-t-0">
+    <nav
+      className={`sticky top-0 z-50 !rounded-none border-x-0 border-t-0 transition-all duration-300 ${
+        scrolled
+          ? "border-b border-border/40 bg-background/85 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)]"
+          : "liquid-glass"
+      }`}
+    >
       <div className="container flex h-16 items-center gap-4">
         <Link to="/" className="group text-xl font-bold tracking-tight transition-opacity hover:opacity-80" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
           DRIPWAY
