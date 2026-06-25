@@ -35,9 +35,8 @@ const queryClient = new QueryClient();
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    // Use smooth scroll when user hasn't requested reduced motion
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({ top: 0, left: 0, behavior: reduce ? "auto" : "smooth" });
+    // Instant scroll — smooth scroll on every nav makes the site feel laggy.
+    window.scrollTo(0, 0);
   }, [pathname]);
   return null;
 }
@@ -66,10 +65,10 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={location.pathname}
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -4 }}
-        transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
       >
         <Routes location={location}>
           <Route path="/" element={<Index />} />

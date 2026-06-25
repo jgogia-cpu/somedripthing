@@ -11,9 +11,9 @@ interface BrandCardProps {
 export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05, duration: 0.4 }}
+      transition={{ delay: Math.min(index, 6) * 0.03, duration: 0.3 }}
     >
       <Link to={`/brand/${brand.slug}`} className="group block">
         <div className={`relative overflow-hidden rounded-2xl glass-card flex items-center justify-center transition-shadow duration-500 group-hover:shadow-[0_20px_60px_-15px_hsl(var(--accent)/0.35)] ${brand.lightCard ? "bg-white" : brand.darkCard ? "bg-black" : "bg-secondary/60"}`} style={{ aspectRatio: "3/2" }}>

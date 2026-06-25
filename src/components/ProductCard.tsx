@@ -33,7 +33,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const [visibleSrc, setVisibleSrc] = useState(allImages[0]);
   const [loadedSrcs, setLoadedSrcs] = useState(() => new Set<string>([allImages[0]]));
   const [failed, setFailed] = useState(false);
-  const eager = index < 4;
+  const eager = index < 2;
 
   useEffect(() => {
     setImgIndex(0);
@@ -42,26 +42,23 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     setFailed(false);
   }, [allImages]);
 
+  // Only prefetch the *currently active* alternate image — avoids hammering the
+  // network with every product's full image set on mount.
   useEffect(() => {
     if (!hasMultiple) return;
-
-    const next = (imgIndex + 1) % allImages.length;
-    const prev = (imgIndex - 1 + allImages.length) % allImages.length;
-    [allImages[imgIndex], allImages[next], allImages[prev]].forEach((src) => {
-      if (!src || loadedSrcs.has(src)) return;
-
-      const img = new Image();
-      img.decoding = "async";
-      img.onload = () => {
-        setLoadedSrcs((current) => {
-          if (current.has(src)) return current;
-          const nextSet = new Set(current);
-          nextSet.add(src);
-          return nextSet;
-        });
-      };
-      img.src = src;
-    });
+    const src = allImages[imgIndex];
+    if (!src || loadedSrcs.has(src)) return;
+    const img = new Image();
+    img.decoding = "async";
+    img.onload = () => {
+      setLoadedSrcs((current) => {
+        if (current.has(src)) return current;
+        const nextSet = new Set(current);
+        nextSet.add(src);
+        return nextSet;
+      });
+    };
+    img.src = src;
   }, [allImages, hasMultiple, imgIndex, loadedSrcs]);
 
   const changeImage = (direction: 1 | -1) => {
@@ -73,9 +70,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.04, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+      transition={{ delay: Math.min(index, 6) * 0.03, duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
       className="masonry-item group"
     >
       <Link to={`/product/${product.id}`} className="block">
