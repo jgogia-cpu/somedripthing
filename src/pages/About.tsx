@@ -80,7 +80,7 @@ export default function About() {
         <div className="container grid max-w-4xl grid-cols-3 gap-6 text-center">
           {[
             { value: brands.length, label: "Brands curated" },
-            { value: "Weekly", label: "New drops added" },
+            { value: "Daily", label: "New drops added" },
             { value: "0", label: "Paid placements" },
           ].map((s) => (
             <div key={s.label}>
@@ -116,7 +116,7 @@ export default function About() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </Link>
-          <Link to="/submit-brand">
+          <Link to="/forbrands">
             <Button
               size="lg"
               variant="outline"

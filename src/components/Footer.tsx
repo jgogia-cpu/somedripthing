@@ -88,9 +88,8 @@ export default function Footer() {
             <FooterLink to="/wishlist">Wishlist</FooterLink>
           </FooterColumn>
           <FooterColumn title="Brands">
-            <FooterLink to="/affiliate">Apply to be listed</FooterLink>
-            <FooterLink to="/affiliate">Affiliate program</FooterLink>
-            <FooterLink to="/submit-brand">Submit a brand</FooterLink>
+            <FooterLink to="/forbrands">For Brands</FooterLink>
+            <FooterLink to="/forbrands">Submit a brand</FooterLink>
           </FooterColumn>
           <FooterColumn title="Connect">
             <a
