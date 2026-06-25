@@ -74,10 +74,19 @@ export default function Brands() {
             </button>
           </div>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((brand, i) => (
-              <BrandCard key={brand.id} brand={brand} index={i} />
-            ))}
+          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {filtered.map((brand, i) => {
+              // Editorial rhythm: every 5th card spans 2 columns on desktop
+              const featured = i % 5 === 0;
+              return (
+                <div
+                  key={brand.id}
+                  className={featured ? "lg:col-span-2" : "lg:col-span-1"}
+                >
+                  <BrandCard brand={brand} index={i} />
+                </div>
+              );
+            })}
           </div>
         )}
       </section>
