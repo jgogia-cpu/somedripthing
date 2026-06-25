@@ -46,6 +46,9 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   onSelect: (i: number) => void; formatPrice: (p: number) => string;
 }) {
   const t = getCarouselTransform(index, currentSlide, total);
+  // Don't render off-screen cards at all — they were invisible (opacity 0) but
+  // still spinning framer-motion animations and decoding images.
+  if (t.opacity === 0) return null;
   const productBrand = getBrandById(product.brandId);
   const isActive = index === currentSlide;
   const allImages = product.images?.length > 0 ? product.images : [product.image];
