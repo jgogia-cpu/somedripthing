@@ -17,15 +17,14 @@ export default function Affiliate() {
     const form = e.currentTarget;
     const data = new FormData(form);
     const brandName = data.get("brandName") as string;
-    const contactName = data.get("contactName") as string;
-    const email = data.get("email") as string;
     const website = data.get("website") as string;
     const instagram = data.get("instagram") as string;
-    const message = data.get("message") as string;
+    const category = data.get("category") as string;
+    const why = data.get("why") as string;
 
-    const subject = encodeURIComponent(`Affiliate Request: ${brandName}`);
+    const subject = encodeURIComponent(`Brand submission: ${brandName}`);
     const body = encodeURIComponent(
-      `Brand Name: ${brandName}\nContact Name: ${contactName}\nEmail: ${email}\nWebsite: ${website}\nInstagram: ${instagram}\n\nMessage:\n${message}`
+      `Brand: ${brandName}\nWebsite: ${website}\nInstagram: ${instagram}\nCategory: ${category}\n\nWhy it belongs:\n${why}`
     );
 
     window.location.href = `mailto:dripwayapparel@gmail.com?subject=${subject}&body=${body}`;
@@ -33,16 +32,16 @@ export default function Affiliate() {
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
-      toast.success("Email client opened! Send the email to complete your submission.");
+      toast.success("Email client opened — hit send to complete your submission.");
     }, 500);
   };
 
   return (
     <div className="min-h-screen py-16">
       <SEO
-        title="Affiliate Program | DRIPWAY"
-        description="Apply to join the DRIPWAY affiliate program and get your independent fashion brand discovered by Gen Z and Millennial shoppers."
-        path="/affiliate"
+        title="For Brands | DRIPWAY"
+        description="Submit your independent fashion brand to DRIPWAY — the curated discovery engine for niche, emerging and underground labels."
+        path="/forbrands"
       />
       <div className="container max-w-2xl">
         <motion.div
@@ -51,11 +50,14 @@ export default function Affiliate() {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.3em] text-accent">
+            Tip the curators
+          </p>
           <h1 className="font-display text-4xl font-bold tracking-tight md:text-5xl">
-            Become an Affiliate
+            Submit a brand.
           </h1>
           <p className="mt-3 text-muted-foreground">
-            Got a brand that fits the DRIPWAY aesthetic? We'd love to hear from you. Fill out the form below and we'll be in touch.
+            Know a label that belongs on DRIPWAY — your own or someone else's? Tell us about it. We review every submission by hand.
           </p>
         </motion.div>
 
@@ -66,9 +68,9 @@ export default function Affiliate() {
             className="mt-12 flex flex-col items-center gap-4 rounded-2xl border bg-card p-12 text-center"
           >
             <CheckCircle className="h-12 w-12 text-accent" />
-            <h2 className="font-display text-2xl font-bold">We Got You!</h2>
+            <h2 className="font-display text-2xl font-bold">Sent.</h2>
             <p className="text-muted-foreground">
-              Your email client should have opened with your details. Hit send and we'll review your submission soon.
+              Your email client should have opened. Hit send and we'll review your submission soon.
             </p>
           </motion.div>
         ) : (
@@ -79,44 +81,41 @@ export default function Affiliate() {
             onSubmit={handleSubmit}
             className="mt-12 space-y-5 rounded-2xl border bg-card p-8"
           >
-            <div className="grid gap-5 sm:grid-cols-2">
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Brand Name *</label>
-                <Input name="brandName" required placeholder="Your brand name" className="rounded-xl" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Contact Name *</label>
-                <Input name="contactName" required placeholder="Your name" className="rounded-xl" />
-              </div>
+            <div className="space-y-2">
+              <label className="text-sm font-semibold">Brand Name *</label>
+              <Input name="brandName" required placeholder="Mortenoir" className="rounded-xl" />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-semibold">Email *</label>
-              <Input name="email" type="email" required placeholder="you@brand.com" className="rounded-xl" />
+              <label className="text-sm font-semibold">Website *</label>
+              <Input name="website" type="url" required placeholder="https://" className="rounded-xl" />
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Website</label>
-                <Input name="website" placeholder="https://yourbrand.com" className="rounded-xl" />
-              </div>
               <div className="space-y-2">
                 <label className="text-sm font-semibold">Instagram</label>
-                <Input name="instagram" placeholder="@yourbrand" className="rounded-xl" />
+                <Input name="instagram" placeholder="@handle" className="rounded-xl" />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-semibold">Category</label>
+                <Input name="category" placeholder="Outerwear · Streetwear…" className="rounded-xl" />
               </div>
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-semibold">Tell us about your brand *</label>
+              <label className="text-sm font-semibold">Why it belongs *</label>
               <Textarea
-                name="message"
+                name="why"
                 required
-                rows={5}
-                placeholder="What's your brand about? What aesthetics do you align with? Why DRIPWAY?"
+                rows={4}
+                placeholder="One or two sentences. What makes them worth knowing?"
                 className="rounded-xl"
               />
             </div>
             <Button type="submit" disabled={loading} className="w-full gap-2 rounded-full text-sm font-bold">
               <Send className="h-4 w-4" />
-              {loading ? "Opening email..." : "Submit Application"}
+              {loading ? "Opening email..." : "Send submission"}
             </Button>
+            <p className="text-center text-[11px] text-muted-foreground/70">
+              We never publish your details. Submissions are reviewed by a human, not a bot.
+            </p>
           </motion.form>
         )}
 

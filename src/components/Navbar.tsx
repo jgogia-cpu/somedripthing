@@ -1,6 +1,6 @@
 import { useState, FormEvent, useMemo, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home, Mail, BookOpen, Briefcase } from "lucide-react";
+import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home, Mail, BookOpen, Briefcase, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
@@ -383,7 +383,7 @@ export default function Navbar() {
                   {user.email}
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/affiliate" className="text-accent">Affiliate program</Link>
+                  <Link to="/forbrands" className="text-accent">For Brands</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => signOut()} className="gap-2">
                   <LogOut className="h-3.5 w-3.5" /> Sign out
@@ -424,12 +424,17 @@ export default function Navbar() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
+                <Link to="/about" className="gap-2">
+                  <Sparkles className="h-3.5 w-3.5" /> Manifesto
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
                 <a href="mailto:dripwayapparel@gmail.com" className="gap-2">
                   <Mail className="h-3.5 w-3.5" /> Contact Us
                 </a>
               </DropdownMenuItem>
               <DropdownMenuItem asChild className="focus:bg-secondary focus:text-accent">
-                <Link to="/affiliate" className="gap-2 font-semibold text-accent hover:bg-secondary focus:bg-secondary focus:text-accent">
+                <Link to="/forbrands" className="gap-2 font-semibold text-accent hover:bg-secondary focus:bg-secondary focus:text-accent">
                   <Briefcase className="h-3.5 w-3.5" /> For Brands
                 </Link>
               </DropdownMenuItem>
@@ -446,35 +451,83 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile full-screen overlay menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className="overflow-hidden border-t border-border/40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[60] flex flex-col bg-background/98 backdrop-blur-2xl md:hidden"
           >
-            <div className="container flex flex-col gap-1 py-5">
-              <div className="pb-2">
-                <SearchBar onSubmit={closeMobile} />
-              </div>
-              <MobileSubcatList gender="him" onNavigate={closeMobile} />
-              <MobileSubcatList gender="her" onNavigate={closeMobile} />
-              <Link to="/brands" onClick={closeMobile} className="rounded-lg px-3 py-3.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60">
-                Brands
+            <div className="flex h-16 items-center justify-between px-6">
+              <Link to="/" onClick={closeMobile} className="text-lg font-bold tracking-tight" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
+                DRIPWAY
               </Link>
-              <Link to="/collections" onClick={closeMobile} className="rounded-lg px-3 py-3.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60">
-                Collections
-              </Link>
-              <Link to="/blog" onClick={closeMobile} className="rounded-lg px-3 py-3.5 font-display text-lg font-semibold uppercase transition-colors hover:bg-secondary/60">
-                Blog
-              </Link>
-              <Link to="/affiliate" onClick={closeMobile} className="rounded-lg px-3 py-3.5 font-display text-lg font-bold text-accent transition-colors hover:bg-secondary/60">
-                Affiliate
-              </Link>
+              <button
+                onClick={closeMobile}
+                aria-label="Close menu"
+                className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-secondary/60"
+              >
+                <X className="h-5 w-5" />
+              </button>
             </div>
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{ show: { transition: { staggerChildren: 0.04 } } }}
+              className="flex-1 overflow-y-auto px-6 pb-10 pt-4"
+            >
+              <motion.div
+                variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}
+                className="mb-6"
+              >
+                <SearchBar onSubmit={closeMobile} />
+              </motion.div>
+              {[
+                { Component: <MobileSubcatList gender="him" onNavigate={closeMobile} /> },
+                { Component: <MobileSubcatList gender="her" onNavigate={closeMobile} /> },
+              ].map((row, i) => (
+                <motion.div
+                  key={i}
+                  variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+                >
+                  {row.Component}
+                </motion.div>
+              ))}
+              {[
+                { to: "/brands", label: "Brands" },
+                { to: "/collections", label: "Collections" },
+                { to: "/blog", label: "Blog" },
+                { to: "/about", label: "Manifesto" },
+              ].map((link) => (
+                <motion.div
+                  key={link.to}
+                  variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+                >
+                  <Link
+                    to={link.to}
+                    onClick={closeMobile}
+                    className="block rounded-lg px-3 py-4 font-display text-[2rem] font-bold uppercase leading-none tracking-tight transition-colors hover:text-accent"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+                className="mt-6 border-t border-border/40 pt-6"
+              >
+                <Link
+                  to="/forbrands"
+                  onClick={closeMobile}
+                  className="block rounded-lg px-3 py-4 font-display text-[1.75rem] font-bold uppercase leading-none tracking-tight text-accent transition-colors"
+                >
+                  For Brands →
+                </Link>
+              </motion.div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -255,12 +255,35 @@ export default function Index() {
           <div className="absolute inset-0 bg-background/70" />
         </div>
         <div className="container relative z-10">
-          <h1 className="mb-1 text-center text-5xl font-bold tracking-tight md:text-7xl" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
-            DRIPWAY
-          </h1>
-          <p className="mb-8 text-center text-sm font-medium uppercase tracking-widest text-muted-foreground">
+          <motion.h1
+            initial="hidden"
+            animate="show"
+            variants={{ show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } } }}
+            className="mb-1 flex flex-wrap justify-center gap-x-[0.25em] text-center text-5xl font-bold tracking-tight md:text-7xl"
+            style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}
+          >
+            {"DRIPWAY".split("").map((ch, i) => (
+              <motion.span
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+                  show: { opacity: 1, y: 0, filter: "blur(0px)" },
+                }}
+                transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+                className="inline-block"
+              >
+                {ch}
+              </motion.span>
+            ))}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            className="mb-8 text-center text-sm font-medium uppercase tracking-widest text-muted-foreground"
+          >
             Today's Featured Picks
-          </p>
+          </motion.p>
           {/* 3D Carousel */}
           <div
             className="relative mx-auto flex items-center justify-center touch-pan-y select-none"
