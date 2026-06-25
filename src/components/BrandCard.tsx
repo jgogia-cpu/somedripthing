@@ -36,7 +36,7 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
               View brand →
             </p>
           </div>
-          <div className="absolute bottom-0 left-0 p-5">
+          <div className="absolute bottom-0 left-0 p-5 transition-opacity duration-300 group-hover:opacity-0">
             <h3
               className={`relative inline-block text-lg font-bold ${
                 brand.nameGlow
