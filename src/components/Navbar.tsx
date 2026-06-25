@@ -1,6 +1,6 @@
 import { useState, FormEvent, useMemo, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home, Mail, BookOpen, Briefcase } from "lucide-react";
+import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home, Mail, BookOpen, Briefcase, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
@@ -383,7 +383,7 @@ export default function Navbar() {
                   {user.email}
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/affiliate" className="text-accent">Affiliate program</Link>
+                  <Link to="/forbrands" className="text-accent">For Brands</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => signOut()} className="gap-2">
                   <LogOut className="h-3.5 w-3.5" /> Sign out
@@ -424,12 +424,17 @@ export default function Navbar() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
+                <Link to="/about" className="gap-2">
+                  <Sparkles className="h-3.5 w-3.5" /> Manifesto
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
                 <a href="mailto:dripwayapparel@gmail.com" className="gap-2">
                   <Mail className="h-3.5 w-3.5" /> Contact Us
                 </a>
               </DropdownMenuItem>
               <DropdownMenuItem asChild className="focus:bg-secondary focus:text-accent">
-                <Link to="/affiliate" className="gap-2 font-semibold text-accent hover:bg-secondary focus:bg-secondary focus:text-accent">
+                <Link to="/forbrands" className="gap-2 font-semibold text-accent hover:bg-secondary focus:bg-secondary focus:text-accent">
                   <Briefcase className="h-3.5 w-3.5" /> For Brands
                 </Link>
               </DropdownMenuItem>
