@@ -6,6 +6,7 @@ import type { Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useWishlist } from "@/contexts/WishlistContext";
+import { isRecent } from "@/lib/isRecent";
 
 interface ProductCardProps {
   product: Product;
@@ -141,7 +142,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           >
             <Heart className={`h-4 w-4 transition-colors ${wishlisted ? "fill-accent text-accent" : ""}`} />
           </button>
-          {product.newArrival && (
+          {isRecent(product.addedAt) && (
             <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-0.5 text-xs font-medium text-accent-foreground shadow-lg shadow-accent/30">
               New
             </span>
