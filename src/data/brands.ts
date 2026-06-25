@@ -32,6 +32,8 @@ export interface Brand {
   rating: number;
   featured: boolean;
   newDrop: boolean;
+  /** ISO date (YYYY-MM-DD) when this brand was added to DRIPWAY. Drives the "NEW" badge (last 14 days). */
+  addedAt?: string;
 }
 
 export interface Product {
@@ -51,6 +53,8 @@ export interface Product {
   affiliateUrl: string;
   trending: boolean;
   newArrival: boolean;
+  /** ISO date (YYYY-MM-DD) when this product was fetched/added. Drives the "NEW" badge (last 14 days). */
+  addedAt?: string;
   colors?: { name: string; image: string; affiliateUrl: string }[];
 }
 

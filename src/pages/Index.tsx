@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useRef, useMemo, useState } from "react";
+import { useEffect, useCallback, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,6 +12,7 @@ import SEO from "@/components/SEO";
 import { brands, products, blogPosts, AESTHETICS, getBrandById, Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import RecentlyViewed from "@/components/RecentlyViewed";
+import { isRecent } from "@/lib/isRecent";
 
 // Shuffle whose result is cached in-memory for the lifetime of this JS module
 // (i.e., the current page load). Navigating between routes inside the SPA
@@ -105,7 +106,7 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
               />
             )}
           </div>
-          {product.newArrival && (
+          {isRecent(product.addedAt) && (
             <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-0.5 text-xs font-medium text-accent-foreground">New</span>
           )}
         </div>
@@ -147,19 +148,8 @@ function getCarouselTransform(index: number, active: number, total: number) {
   return { translateX, translateZ, rotateY, scale, opacity, zIndex };
 }
 
-const HERO_VIDEOS = [
-  "/videos/hero-bg.mp4",
-  "/videos/hero-bg-2.mp4",
-  "/videos/hero-bg-3.mp4",
-  "/videos/hero-bg-4.mp4",
-];
-
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentVideo, setCurrentVideo] = useState(0);
-  const videoRefA = useRef<HTMLVideoElement>(null);
-  const videoRefB = useRef<HTMLVideoElement>(null);
-  const [activePlayer, setActivePlayer] = useState<'A' | 'B'>('A');
   const { formatPrice } = useCurrency();
   const trendingProducts = useMemo(() => {
     const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33"];
@@ -191,29 +181,6 @@ export default function Index() {
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
 
-  // Preload the next video on the inactive player
-  useEffect(() => {
-    const nextIdx = (currentVideo + 1) % HERO_VIDEOS.length;
-    const inactiveVideo = activePlayer === 'A' ? videoRefB.current : videoRefA.current;
-    if (inactiveVideo) {
-      if (inactiveVideo.src !== window.location.origin + HERO_VIDEOS[nextIdx]) {
-        inactiveVideo.src = HERO_VIDEOS[nextIdx];
-        inactiveVideo.load();
-      }
-    }
-  }, [currentVideo, activePlayer]);
-
-  const handleVideoEnded = useCallback(() => {
-    const nextIdx = (currentVideo + 1) % HERO_VIDEOS.length;
-    const nextPlayer = activePlayer === 'A' ? 'B' : 'A';
-    const nextVideo = nextPlayer === 'A' ? videoRefA.current : videoRefB.current;
-    if (nextVideo) {
-      nextVideo.play().catch(() => {});
-    }
-    setActivePlayer(nextPlayer);
-    setCurrentVideo(nextIdx);
-  }, [currentVideo, activePlayer]);
-
   useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
@@ -232,28 +199,6 @@ export default function Index() {
       />
       {/* 3D Carousel Hero */}
       <section className="relative overflow-hidden py-12 md:py-20">
-        {/* Video Background */}
-        <div className="absolute inset-0 z-0">
-          <video
-            ref={videoRefA}
-            src={HERO_VIDEOS[0]}
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 'A' ? 'opacity-100' : 'opacity-0'}`}
-            onEnded={handleVideoEnded}
-          />
-          <video
-            ref={videoRefB}
-            muted
-            playsInline
-            preload="auto"
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${activePlayer === 'B' ? 'opacity-100' : 'opacity-0'}`}
-            onEnded={handleVideoEnded}
-          />
-          <div className="absolute inset-0 bg-background/70" />
-        </div>
         <div className="container relative z-10">
           <motion.h1
             initial="hidden"
