@@ -15,18 +15,28 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
       transition={{ delay: index * 0.05, duration: 0.4 }}
     >
       <Link to={`/brand/${brand.slug}`} className="group block">
-        <div className={`relative overflow-hidden rounded-2xl glass-card flex items-center justify-center transition-all duration-500 group-hover:-translate-y-0.5 group-hover:shadow-[0_20px_60px_-15px_hsl(var(--accent)/0.3)] ${brand.lightCard ? "bg-white" : brand.darkCard ? "bg-black" : "bg-secondary/60"}`} style={{ aspectRatio: "3/2" }}>
+        <div className={`relative overflow-hidden rounded-2xl glass-card flex items-center justify-center transition-shadow duration-500 group-hover:shadow-[0_20px_60px_-15px_hsl(var(--accent)/0.35)] ${brand.lightCard ? "bg-white" : brand.darkCard ? "bg-black" : "bg-secondary/60"}`} style={{ aspectRatio: "3/2" }}>
           <img
             src={brand.logo}
             alt={brand.name}
             loading="lazy"
             decoding="async"
-            className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${brand.fullBleedLogo ? "object-cover" : "object-contain p-8"}`}
+            className={`h-full w-full transition-transform duration-700 ease-out ${brand.fullBleedLogo ? "object-cover" : "object-contain p-8"}`}
           />
           {!brand.fullBleedLogo && (
             <div className={`absolute inset-0 bg-gradient-to-t ${brand.lightCard ? "from-white via-white/40" : "from-black/70 via-black/20"} to-transparent`} />
           )}
-          <div className="absolute bottom-0 left-0 p-5">
+          {/* Editorial hover overlay */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 translate-y-2 p-5 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
+              {brand.aesthetics.slice(0, 3).join(" · ")}
+            </p>
+            <p className="mt-1 text-xs uppercase tracking-wider text-white/80">
+              View brand →
+            </p>
+          </div>
+          <div className="absolute bottom-0 left-0 p-5 transition-opacity duration-300 group-hover:opacity-0">
             <h3
               className={`relative inline-block text-lg font-bold ${
                 brand.nameGlow
