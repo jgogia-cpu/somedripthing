@@ -4,6 +4,7 @@ import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
+import { lovable } from "@/integrations/lovable";
 
 export default function Auth() {
   const { signIn, signUp, user } = useAuth();
@@ -20,6 +21,14 @@ export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const handleGoogle = async () => {
+    setError("");
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: window.location.origin,
+    });
+    if (result.error) setError(result.error.message);
+  };
 
   useEffect(() => {
     if (user) navigate(redirect, { replace: true });
