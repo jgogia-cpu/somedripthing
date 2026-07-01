@@ -100,7 +100,6 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
               alt={product.name}
               loading={isActive ? "eager" : "lazy"}
               decoding="async"
-              fetchPriority={isActive ? "high" : "auto"}
               className={`absolute inset-0 h-full w-full ${isCutout ? "object-contain p-4" : "object-cover"}`}
             />
             {hasMultiple && (

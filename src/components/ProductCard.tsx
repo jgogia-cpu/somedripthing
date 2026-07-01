@@ -85,7 +85,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               alt={product.name}
               loading={eager ? "eager" : "lazy"}
               decoding="async"
-              fetchPriority={eager ? "high" : "auto"}
               className="absolute inset-0 h-full w-full object-cover"
               onError={() => setFailed(true)}
             />
