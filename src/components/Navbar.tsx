@@ -2,7 +2,6 @@ import { useState, FormEvent, useMemo, useRef, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, Heart, Menu, X, ChevronDown, User, LogOut, Home, Mail, BookOpen, Briefcase, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
 import CurrencySelector from "@/components/CurrencySelector";
 import AuthDialog from "@/components/AuthDialog";
 import { useAuth } from "@/contexts/AuthContext";
@@ -36,10 +35,8 @@ function NavItem({ to, label, isActive }: { to: string; label: string; isActive:
       <span className="absolute inset-0 rounded-full bg-secondary/0 transition-all duration-300 group-hover:bg-secondary/80" />
       <span className="relative">{label}</span>
       {isActive && (
-        <motion.span
-          layoutId="nav-active"
+        <span
           className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-accent"
-          transition={{ type: "spring", stiffness: 380, damping: 30 }}
         />
       )}
     </Link>
@@ -181,15 +178,8 @@ function SearchBar({ onSubmit, autoFocus = false }: { onSubmit?: () => void; aut
           className="h-9 w-full rounded-full border border-border/60 bg-secondary/60 pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground/70 focus:border-accent/60 focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-accent/30 transition-colors"
         />
       </form>
-      <AnimatePresence>
-        {showDropdown && (
-          <motion.div
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.15 }}
-            className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] overflow-y-auto rounded-2xl border border-border/60 bg-popover p-2 shadow-2xl shadow-black/40"
-          >
+      {showDropdown && (
+        <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] overflow-y-auto rounded-2xl border border-border/60 bg-popover p-2 shadow-2xl shadow-black/40">
             {flat.length === 0 ? (
               <button
                 onClick={() => go(`/collections?q=${encodeURIComponent(q.trim())}`)}
@@ -221,9 +211,8 @@ function SearchBar({ onSubmit, autoFocus = false }: { onSubmit?: () => void; aut
                 </button>
               </>
             )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
     </div>
   );
 }
@@ -295,9 +284,8 @@ function MobileSubcatList({ gender, onNavigate }: { gender: "him" | "her"; onNav
         Shop {gender === "him" ? "Him" : "Her"}
         <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
       </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden pl-4">
+      {open && (
+          <div className="overflow-hidden pl-4">
             {SUBCATEGORIES.map((sub) => (
               <Link
                 key={sub.slug}
@@ -308,9 +296,8 @@ function MobileSubcatList({ gender, onNavigate }: { gender: "him" | "her"; onNav
                 {sub.label}
               </Link>
             ))}
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </div>
   );
 }
@@ -452,15 +439,8 @@ export default function Navbar() {
       </div>
 
       {/* Mobile full-screen overlay menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[60] flex flex-col bg-background md:hidden"
-          >
+      {mobileOpen && (
+          <div className="fixed inset-0 z-[60] flex flex-col bg-background md:hidden">
             <div className="flex h-16 items-center justify-between px-6">
               <Link to="/" onClick={closeMobile} className="text-lg font-bold tracking-tight" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>
                 DRIPWAY
@@ -473,28 +453,17 @@ export default function Navbar() {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <motion.div
-              initial="hidden"
-              animate="show"
-              variants={{ show: { transition: { staggerChildren: 0.04 } } }}
-              className="flex-1 overflow-y-auto px-6 pb-10 pt-4"
-            >
-              <motion.div
-                variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}
-                className="mb-6"
-              >
+            <div className="flex-1 overflow-y-auto px-6 pb-10 pt-4">
+              <div className="mb-6">
                 <SearchBar onSubmit={closeMobile} />
-              </motion.div>
+              </div>
               {[
                 { Component: <MobileSubcatList gender="him" onNavigate={closeMobile} /> },
                 { Component: <MobileSubcatList gender="her" onNavigate={closeMobile} /> },
               ].map((row, i) => (
-                <motion.div
-                  key={i}
-                  variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
-                >
+                <div key={i}>
                   {row.Component}
-                </motion.div>
+                </div>
               ))}
               {[
                 { to: "/brands", label: "Brands" },
@@ -502,10 +471,7 @@ export default function Navbar() {
                 { to: "/blog", label: "Blog" },
                 { to: "/about", label: "Manifesto" },
               ].map((link) => (
-                <motion.div
-                  key={link.to}
-                  variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
-                >
+                <div key={link.to}>
                   <Link
                     to={link.to}
                     onClick={closeMobile}
@@ -513,12 +479,9 @@ export default function Navbar() {
                   >
                     {link.label}
                   </Link>
-                </motion.div>
+                </div>
               ))}
-              <motion.div
-                variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
-                className="mt-6 border-t border-border/40 pt-6"
-              >
+              <div className="mt-6 border-t border-border/40 pt-6">
                 <Link
                   to="/forbrands"
                   onClick={closeMobile}
@@ -526,11 +489,10 @@ export default function Navbar() {
                 >
                   For Brands →
                 </Link>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+              </div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
 
       <AuthDialog open={authOpen} onClose={() => setAuthOpen(false)} />
     </nav>

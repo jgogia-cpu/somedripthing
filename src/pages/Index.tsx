@@ -1,7 +1,6 @@
 import { useEffect, useCallback, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
@@ -73,11 +72,16 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   };
 
   return (
-    <motion.div
-      animate={{ x: t.translateX, z: t.translateZ, rotateY: t.rotateY, scale: t.scale, opacity: t.opacity }}
-      transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+    <div
       className="absolute cursor-pointer group"
-      style={{ zIndex: t.zIndex, transformStyle: "preserve-3d", width: "280px" }}
+      style={{
+        zIndex: t.zIndex,
+        transformStyle: "preserve-3d",
+        width: "280px",
+        opacity: t.opacity,
+        transform: `translate3d(${t.translateX}px, 0, ${t.translateZ}px) rotateY(${t.rotateY}deg) scale(${t.scale})`,
+        transition: "transform 420ms cubic-bezier(0.32, 0.72, 0, 1), opacity 180ms ease",
+      }}
       onClick={handleCardClick}
     >
       <div className={`overflow-hidden rounded-2xl bg-card shadow-xl transition-shadow duration-500 ${isActive ? "shadow-2xl ring-2 ring-accent/30" : ""}`}>
@@ -119,7 +123,7 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
           <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
