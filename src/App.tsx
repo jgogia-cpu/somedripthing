@@ -12,7 +12,6 @@ import { trackPageview } from "@/lib/analytics";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
-import { AnimatePresence, motion } from "framer-motion";
 import Index from "./pages/Index"; // keep home eager for fast LCP
 const BrandProfile = lazy(() => import("./pages/BrandProfile"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
@@ -62,38 +61,28 @@ function PostHogPageView() {
 function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={location.pathname}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.15, ease: "easeOut" }}
-      >
-        <Routes location={location}>
-          <Route path="/" element={<Index />} />
-          {/* /explore was removed — redirect to /collections to preserve any existing links */}
-          <Route path="/explore" element={<Navigate to="/collections" replace />} />
-          <Route path="/explore/*" element={<Navigate to="/collections" replace />} />
-          <Route path="/brand/:slug" element={<BrandProfile />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/shop/:gender/:subcategory" element={<Category />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/collections" element={<Collections />} />
-          <Route path="/brands" element={<Brands />} />
-          <Route path="/forbrands" element={<Affiliate />} />
-          <Route path="/affiliate" element={<Navigate to="/forbrands" replace />} />
-          <Route path="/submit-brand" element={<Navigate to="/forbrands" replace />} />
-          <Route path="/admin/seo" element={<AdminSEO />} />
-          <Route path="/admin/affiliate" element={<AdminAffiliate />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </motion.div>
-    </AnimatePresence>
+    <Routes location={location}>
+      <Route path="/" element={<Index />} />
+      {/* /explore was removed — redirect to /collections to preserve any existing links */}
+      <Route path="/explore" element={<Navigate to="/collections" replace />} />
+      <Route path="/explore/*" element={<Navigate to="/collections" replace />} />
+      <Route path="/brand/:slug" element={<BrandProfile />} />
+      <Route path="/product/:id" element={<ProductDetail />} />
+      <Route path="/shop/:gender/:subcategory" element={<Category />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:slug" element={<BlogPost />} />
+      <Route path="/wishlist" element={<Wishlist />} />
+      <Route path="/collections" element={<Collections />} />
+      <Route path="/brands" element={<Brands />} />
+      <Route path="/forbrands" element={<Affiliate />} />
+      <Route path="/affiliate" element={<Navigate to="/forbrands" replace />} />
+      <Route path="/submit-brand" element={<Navigate to="/forbrands" replace />} />
+      <Route path="/admin/seo" element={<AdminSEO />} />
+      <Route path="/admin/affiliate" element={<AdminAffiliate />} />
+      <Route path="/auth" element={<Auth />} />
+      <Route path="/about" element={<About />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 

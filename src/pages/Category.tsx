@@ -1,5 +1,5 @@
-import { useParams, Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ProductCard from "@/components/ProductCard";
 import { products, type Product } from "@/data/brands";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -92,12 +92,21 @@ const MATCHERS: Record<string, (p: Product) => boolean> = {
   },
 };
 
+const INITIAL_VISIBLE = 24;
+const LOAD_MORE = 24;
+
 export default function Category() {
   const { gender, subcategory } = useParams<{ gender: string; subcategory: string }>();
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   const label = SUBCATEGORY_LABELS[subcategory || ""] || subcategory;
   const genderLabel = gender === "him" ? "Him" : "Her";
   const matcher = MATCHERS[subcategory || ""];
   const filtered = matcher ? products.filter(matcher) : [];
+  const visibleProducts = filtered.slice(0, visibleCount);
+
+  useEffect(() => {
+    setVisibleCount(INITIAL_VISIBLE);
+  }, [gender, subcategory]);
 
   return (
     <div className="min-h-screen py-8">
@@ -113,11 +122,24 @@ export default function Category() {
         <p className="mb-8 text-muted-foreground">Shop {label} for {genderLabel}</p>
 
         {filtered.length > 0 ? (
-          <div className="masonry-grid">
-            {filtered.map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
-            ))}
-          </div>
+          <>
+            <div className="masonry-grid">
+              {visibleProducts.map((product, i) => (
+                <ProductCard key={product.id} product={product} index={i} />
+              ))}
+            </div>
+            {visibleCount < filtered.length && (
+              <div className="mt-8 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount((count) => count + LOAD_MORE)}
+                  className="rounded-full border border-border/60 px-5 py-2 text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:border-accent hover:text-accent"
+                >
+                  Load more
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="py-20 text-center">
             <p className="text-lg font-medium">No products yet</p>

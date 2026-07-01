@@ -36,7 +36,7 @@ export default function RecentlyViewed({ className = "" }: { className?: string 
                   alt={p.name}
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <p className="mt-2 truncate text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{p.brandName}</p>

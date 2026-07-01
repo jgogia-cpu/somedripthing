@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
 import type { Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -69,14 +68,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   if (failed) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: Math.min(index, 6) * 0.03, duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-      className="masonry-item group"
-    >
+    <div className="masonry-item content-auto group">
       <Link to={`/product/${product.id}`} className="block">
-        <div className="relative overflow-hidden rounded-2xl bg-card border border-border/40 transition-all duration-500 group-hover:-translate-y-0.5 group-hover:shadow-[0_20px_50px_-15px_hsl(var(--accent)/0.25)]">
+        <div className="relative overflow-hidden rounded-2xl bg-card border border-border/40 transition-shadow duration-200 group-hover:shadow-[0_12px_34px_-18px_hsl(var(--accent)/0.22)]">
           {product.brandId === "17" && (
             <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
               GET 10% OFF WITH CODE DRIPWAYAPPAREL
@@ -91,8 +85,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               alt={product.name}
               loading={eager ? "eager" : "lazy"}
               decoding="async"
-              fetchPriority={eager ? "high" : "auto"}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 will-change-transform group-hover:scale-[1.02]"
+              className="absolute inset-0 h-full w-full object-cover"
               onError={() => setFailed(true)}
             />
             {allImages[imgIndex] !== visibleSrc && (
@@ -110,14 +103,14 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               <>
                 <button
                   type="button"
-                  className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-1.5 opacity-0 backdrop-blur-md transition-all duration-300 scale-90 group-hover:opacity-100 group-hover:scale-100 hover:bg-black/80"
+                  className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/70 p-1.5 opacity-0 transition-opacity duration-150 group-hover:opacity-100 hover:bg-black/80"
                   onClick={(e) => { e.preventDefault(); e.stopPropagation(); changeImage(-1); }}
                 >
                   <ChevronLeft className="h-3.5 w-3.5 text-white" />
                 </button>
                 <button
                   type="button"
-                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/60 p-1.5 opacity-0 backdrop-blur-md transition-all duration-300 scale-90 group-hover:opacity-100 group-hover:scale-100 hover:bg-black/80"
+                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/70 p-1.5 opacity-0 transition-opacity duration-150 group-hover:opacity-100 hover:bg-black/80"
                   onClick={(e) => { e.preventDefault(); e.stopPropagation(); changeImage(1); }}
                 >
                   <ChevronRight className="h-3.5 w-3.5 text-white" />
@@ -134,7 +127,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             )}
           </div>
           <button
-            className={`absolute right-3 top-3 rounded-full bg-background/70 p-2 backdrop-blur-md transition-all duration-300 ${wishlisted ? "opacity-100 scale-100" : "opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100"}`}
+            className={`absolute right-3 top-3 rounded-full bg-background/90 p-2 transition-opacity duration-150 ${wishlisted ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
             onClick={(e) => { e.preventDefault(); if (user) toggleWishlist(product.id); }}
           >
             <Heart className={`h-4 w-4 transition-colors ${wishlisted ? "fill-accent text-accent" : ""}`} />
@@ -158,6 +151,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
