@@ -7,7 +7,7 @@ interface BrandCardProps {
   index?: number;
 }
 
-export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
+export default function BrandCard({ brand }: BrandCardProps) {
   return (
     <div className="content-auto">
       <Link to={`/brand/${brand.slug}`} className="group block">
