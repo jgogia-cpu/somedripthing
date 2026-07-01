@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { products, getBrandById, Product } from "@/data/brands";
@@ -24,19 +23,19 @@ function FeaturedProductCard({ product }: { product: Product }) {
             src={allImages[imgIndex]}
             alt={product.name}
             loading="lazy"
-            className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full object-cover"
             style={{ aspectRatio: "3/4", height: "360px" }}
           />
           {hasMultiple && (
             <>
               <button
-                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-1.5 backdrop-blur-md opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 hover:bg-black/80"
+                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/70 p-1.5 opacity-0 transition-opacity duration-150 group-hover:opacity-100 hover:bg-black/80"
                 onClick={(e) => { e.preventDefault(); setImgIndex((imgIndex - 1 + allImages.length) % allImages.length); }}
               >
                 <ChevronLeft className="h-3.5 w-3.5 text-white" />
               </button>
               <button
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-1.5 backdrop-blur-md opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 hover:bg-black/80"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/70 p-1.5 opacity-0 transition-opacity duration-150 group-hover:opacity-100 hover:bg-black/80"
                 onClick={(e) => { e.preventDefault(); setImgIndex((imgIndex + 1) % allImages.length); }}
               >
                 <ChevronRight className="h-3.5 w-3.5 text-white" />
@@ -71,9 +70,7 @@ export default function FeaturedBrandSection() {
     <section className="py-16" style={{ backgroundColor: "hsl(16, 85%, 60%)" }}>
       <div className="container">
         {/* Promo Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
+        <div
           className="mb-6 rounded-xl border-2 border-black/20 bg-black/90 px-6 py-4 text-center"
         >
           <p className="text-sm font-bold uppercase tracking-widest text-white/70">Exclusive Offer</p>
@@ -98,7 +95,7 @@ export default function FeaturedBrandSection() {
               DRIPBYRAGE.COM
             </TrackedOutboundLink>
           </p>
-        </motion.div>
+        </div>
 
         {/* Section Header */}
         <div className="mb-8 flex items-center justify-between">
@@ -121,14 +118,9 @@ export default function FeaturedBrandSection() {
         {/* Product Grid */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {dripByRageProducts.map((product, i) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-            >
+            <div key={product.id} className="content-auto">
               <FeaturedProductCard product={product} />
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

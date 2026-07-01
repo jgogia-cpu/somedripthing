@@ -60,7 +60,7 @@ function ShopMenu() {
       <DropdownMenuContent
         align="start"
         sideOffset={12}
-        className="w-[28rem] rounded-2xl border-border/50 bg-card/95 p-4 shadow-2xl shadow-black/30 backdrop-blur-xl"
+        className="w-[28rem] rounded-2xl border-border/50 bg-card p-4 shadow-2xl shadow-black/30"
       >
         <div className="grid grid-cols-2 gap-4">
           {(["him", "her"] as const).map((gender) => (
@@ -188,7 +188,7 @@ function SearchBar({ onSubmit, autoFocus = false }: { onSubmit?: () => void; aut
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.15 }}
-            className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] overflow-y-auto rounded-2xl border border-border/60 bg-popover/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl"
+            className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[70vh] overflow-y-auto rounded-2xl border border-border/60 bg-popover p-2 shadow-2xl shadow-black/40"
           >
             {flat.length === 0 ? (
               <button
@@ -335,8 +335,8 @@ export default function Navbar() {
     <nav
       className={`sticky top-0 z-50 !rounded-none border-x-0 border-t-0 transition-all duration-300 ${
         scrolled
-          ? "border-b border-border/40 bg-background/85 backdrop-blur-xl shadow-[0_8px_30px_-12px_rgba(0,0,0,0.4)]"
-          : "liquid-glass"
+          ? "border-b border-border/40 bg-background/95 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.35)]"
+          : "border-b border-border/30 bg-background/95"
       }`}
     >
       <div className="container flex h-16 items-center gap-4">
@@ -349,7 +349,7 @@ export default function Navbar() {
           <Link
             to="/"
             aria-label="Home"
-            className={`group relative flex items-center justify-center rounded-full p-2 transition-all duration-200 hover:bg-secondary hover:scale-105 ${location.pathname === "/" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            className={`group relative flex items-center justify-center rounded-full p-2 transition-colors duration-150 hover:bg-secondary ${location.pathname === "/" ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
           >
             <Home className="h-4 w-4" />
           </Link>
@@ -367,18 +367,18 @@ export default function Navbar() {
         <div className="ml-auto flex items-center gap-1 md:ml-0">
           <CurrencySelector />
           <Link to="/wishlist">
-            <Button variant="ghost" size="icon" className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105">
+            <Button variant="ghost" size="icon" className="rounded-full transition-colors duration-150 hover:bg-secondary">
               <Heart className="h-4 w-4" />
             </Button>
           </Link>
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105">
+                <Button variant="ghost" size="icon" className="rounded-full transition-colors duration-150 hover:bg-secondary">
                   <User className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="rounded-xl border-border/50 bg-card/95 backdrop-blur-xl">
+              <DropdownMenuContent align="end" className="rounded-xl border-border/50 bg-card">
                 <DropdownMenuItem className="text-xs text-muted-foreground" disabled>
                   {user.email}
                 </DropdownMenuItem>
@@ -394,7 +394,7 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className="rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105"
+              className="rounded-full transition-colors duration-150 hover:bg-secondary"
               onClick={() => {
                 if (typeof window !== "undefined" && window.innerWidth < 768) {
                   navigate(`/auth?redirect=${encodeURIComponent(location.pathname + location.search)}`);
@@ -412,12 +412,12 @@ export default function Navbar() {
                 variant="ghost"
                 size="icon"
                 aria-label="More menu"
-                className="hidden rounded-full transition-all duration-200 hover:bg-secondary hover:scale-105 md:inline-flex"
+                className="hidden rounded-full transition-colors duration-150 hover:bg-secondary md:inline-flex"
               >
                 <Menu className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="rounded-xl border-border/50 bg-card/95 backdrop-blur-xl">
+            <DropdownMenuContent align="end" className="rounded-xl border-border/50 bg-card">
               <DropdownMenuItem asChild>
                 <Link to="/blog" className="gap-2">
                   <BookOpen className="h-3.5 w-3.5" /> Blog
@@ -459,7 +459,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[60] flex flex-col bg-background/98 backdrop-blur-2xl md:hidden"
+            className="fixed inset-0 z-[60] flex flex-col bg-background md:hidden"
           >
             <div className="flex h-16 items-center justify-between px-6">
               <Link to="/" onClick={closeMobile} className="text-lg font-bold tracking-tight" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}>

@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
@@ -203,35 +203,17 @@ export default function Index() {
       {/* 3D Carousel Hero */}
       <section className="relative overflow-hidden py-12 md:py-20">
         <div className="container relative z-10">
-          <motion.h1
-            initial="hidden"
-            animate="show"
-            variants={{ show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } } }}
+          <h1
             className="mb-1 flex flex-wrap justify-center gap-x-[0.25em] text-center text-5xl font-bold tracking-tight md:text-7xl"
             style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}
           >
-            {"DRIPWAY".split("").map((ch, i) => (
-              <motion.span
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
-                  show: { opacity: 1, y: 0, filter: "blur(0px)" },
-                }}
-                transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                className="inline-block"
-              >
-                {ch}
-              </motion.span>
-            ))}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
+            DRIPWAY
+          </h1>
+          <p
             className="mb-8 text-center text-sm font-medium uppercase tracking-widest text-muted-foreground"
           >
             Today's Featured Picks
-          </motion.p>
+          </p>
           {/* 3D Carousel */}
           <div
             className="relative mx-auto flex items-center justify-center touch-pan-y select-none"
@@ -283,15 +265,7 @@ export default function Index() {
           </div>
 
           {/* Active product info */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="mt-6 text-center"
-            >
+          <div className="mt-6 text-center">
               {brand && (
                 <Link to={`/brand/${brand.slug}`} className="text-sm font-medium text-accent hover:underline">
                   {brand.name}
@@ -313,8 +287,7 @@ export default function Index() {
                   <Button variant="outline" className="rounded-full">Browse Collections</Button>
                 </Link>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
         </div>
       </section>
 
@@ -338,7 +311,7 @@ export default function Index() {
       <RecentlyViewed />
 
       {/* Trending Products */}
-      <section className="py-16">
+      <section className="content-auto py-16">
         <div className="container">
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -358,7 +331,7 @@ export default function Index() {
       </section>
 
       {/* New Drops */}
-      <section className="border-t bg-secondary/20 py-16">
+      <section className="content-auto border-t bg-secondary/20 py-16">
         <div className="container">
           <div className="mb-8 flex items-center justify-between">
             <h2 className="font-display text-2xl font-bold">New Drops 🔥</h2>
@@ -378,7 +351,7 @@ export default function Index() {
       <FeaturedBrandSection />
 
       {/* Featured Brands */}
-      <section className="py-16">
+      <section className="content-auto py-16">
         <div className="container">
           <h2 className="mb-8 font-display text-2xl font-bold">Editor's Picks</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

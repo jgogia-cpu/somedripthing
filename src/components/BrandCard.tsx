@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import type { Brand } from "@/data/brands";
 import { isRecent } from "@/lib/isRecent";
 
@@ -10,25 +9,21 @@ interface BrandCardProps {
 
 export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: Math.min(index, 6) * 0.03, duration: 0.3 }}
-    >
+    <div className="content-auto">
       <Link to={`/brand/${brand.slug}`} className="group block">
-        <div className={`relative overflow-hidden rounded-2xl glass-card flex items-center justify-center transition-shadow duration-500 group-hover:shadow-[0_20px_60px_-15px_hsl(var(--accent)/0.35)] ${brand.lightCard ? "bg-white" : brand.darkCard ? "bg-black" : "bg-secondary/60"}`} style={{ aspectRatio: "3/2" }}>
+        <div className={`relative overflow-hidden rounded-2xl flex items-center justify-center border border-border/40 transition-shadow duration-200 group-hover:shadow-[0_12px_34px_-18px_hsl(var(--accent)/0.25)] ${brand.lightCard ? "bg-white" : brand.darkCard ? "bg-black" : "bg-secondary/60"}`} style={{ aspectRatio: "3/2" }}>
           <img
             src={brand.logo}
             alt={brand.name}
             loading="lazy"
             decoding="async"
-            className={`h-full w-full transition-transform duration-700 ease-out ${brand.fullBleedLogo ? "object-cover" : "object-contain p-8"}`}
+            className={`h-full w-full ${brand.fullBleedLogo ? "object-cover" : "object-contain p-8"}`}
           />
           {!brand.fullBleedLogo && (
             <div className={`absolute inset-0 bg-gradient-to-t ${brand.lightCard ? "from-white via-white/40" : "from-black/70 via-black/20"} to-transparent`} />
           )}
           {isRecent(brand.addedAt) && (
-            <span className="absolute left-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full bg-accent/95 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-accent-foreground shadow-lg backdrop-blur-sm">
+              <span className="absolute left-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full bg-accent/95 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-accent-foreground shadow-lg">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-foreground/80" />
               New
             </span>
@@ -47,7 +42,7 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
             <h3
               className={`relative inline-block text-lg font-bold ${
                 brand.nameGlow
-                  ? "rounded-full bg-accent/15 ring-1 ring-accent/30 backdrop-blur-sm px-3 py-1"
+                   ? "rounded-full bg-accent/15 ring-1 ring-accent/30 px-3 py-1"
                   : "drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]"
               } ${
                 brand.nameColor === "accent"
@@ -80,7 +75,7 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
                     ? "bg-black/10 text-black"
                     : "bg-white/20 text-white";
                 return (
-                  <span key={tag} className={`rounded-full px-2 py-0.5 text-[10px] font-medium backdrop-blur-sm ${tagClass}`}>
+                  <span key={tag} className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${tagClass}`}>
                     {tag}
                   </span>
                 );
@@ -89,6 +84,6 @@ export default function BrandCard({ brand, index = 0 }: BrandCardProps) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
