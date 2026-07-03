@@ -327,6 +327,19 @@ export const brands: Brand[] = [
     instagram: "@alldubsinc", aesthetics: ["Streetwear", "Sportswear"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "mid", followers: 5200, rating: 4.7, featured: true, newDrop: true
   },
+  {
+    id: "41", name: "ParrisHighOnFashion", slug: "parrishighonfashion",
+    logo: "https://parrishighonfashion.com/cdn/shop/files/Bazaart_A22DF6EA-39F3-45DF-AFA6-279A4FF63676.png?v=1780815895&width=1200",
+    banner: "https://cdn.shopify.com/s/files/1/0675/0771/6414/files/0ED55459-B9BB-487F-8903-5F1E34140A8E.jpg?v=1782819484",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true, fullBleedLogo: true,
+    bio: "Toronto-born premium streetwear label crafting heavyweight, hand-distressed pieces with rhinestones, embroidery, and lifetime wash guarantees. Every drop is made in Canada.",
+    story: "ParrisHighOnFashion (HOF) is built on obsessive craft — heavyweight European cotton, 500 GSM fleece, hand-set stones, and burnt/distressed finishes done piece by piece in Canada. From varsity-blue tricot pants to gemmed shorts and full sets, HOF turns luxury details loose on the block.",
+    founded: "2024", founderNote: "\"Premium quality, pre-made, made in Canada — no shortcuts.\"",
+    vibes: ["Heavyweight streetwear", "Hand-distressed craft", "Rhinestone luxury", "Made in Canada"],
+    origin: "Canada", website: "https://parrishighonfashion.com", affiliateUrl: "https://parrishighonfashion.com",
+    instagram: "@parrishighonfashion", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Bottoms"],
+    priceRange: "premium", followers: 12000, rating: 4.8, featured: true, newDrop: true, addedAt: "2026-07-03"
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
