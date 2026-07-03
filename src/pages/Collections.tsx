@@ -40,8 +40,13 @@ function getWeeklyCollection() {
   // Seed from the Monday date so it changes each week
   const seed = monday.getFullYear() * 10000 + (monday.getMonth() + 1) * 100 + monday.getDate();
   const shuffled = seededShuffle(products, seed);
-  // No brand binding — any brand, any product, any order, fully randomized weekly
-  const picks = shuffled.slice(0, 8);
+  // No brand binding — any brand, any product, any order, fully randomized weekly.
+  // Guarantee ParrisHighOnFashion (brandId 41) leads the week.
+  const parris = products.filter((p) => p.brandId === "41");
+  const parrisIdx = seed % Math.max(parris.length, 1);
+  const leadParris = parris[parrisIdx];
+  const rest = shuffled.filter((p) => p.id !== leadParris?.id).slice(0, 7);
+  const picks = leadParris ? [leadParris, ...rest] : shuffled.slice(0, 8);
 
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const dateLabel = `Week of ${monthNames[monday.getMonth()]} ${monday.getDate()}, ${monday.getFullYear()}`;

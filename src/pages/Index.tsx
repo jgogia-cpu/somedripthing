@@ -135,7 +135,17 @@ const heroProducts = (() => {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-  return shuffled.slice(0, 12);
+  // Guarantee a ParrisHighOnFashion (brandId 41) product is featured in the carousel.
+  const picks = shuffled.slice(0, 12);
+  const hasParris = picks.some((p) => p.brandId === "41");
+  if (!hasParris) {
+    const parris = products.filter((p) => p.brandId === "41");
+    if (parris.length) {
+      const pick = parris[Math.floor(Math.random() * parris.length)];
+      picks[0] = pick;
+    }
+  }
+  return picks;
 })();
 
 function getCarouselTransform(index: number, active: number, total: number) {
