@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thedripway.com/</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-07-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -113,6 +113,11 @@
   </url>
   <url>
     <loc>https://thedripway.com/brand/all-dubs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/brand/parrishighonfashion</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1165,6 +1170,18 @@
     <loc>https://thedripway.com/product/p926</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-archive-fashion-trend-is-getting-out-of-hand-2026-07-04</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/why-heavyweight-blanks-are-the-future-of-fashion-2026-07-03</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://thedripway.com/blog/travis-scotts-outfit-breakdown-every-piece-identified-2026-07-02</loc>
