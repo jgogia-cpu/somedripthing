@@ -1,23 +1,32 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { products, getBrandById, Product } from "@/data/brands";
+import { brands, products, Product, Brand } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
-import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
-const dripByRageProducts = products.filter(p => p.brandId === "17").slice(0, 6);
-const brand = getBrandById("17")!;
+// Deterministic per-day rotation across all featured brands so every visitor
+// on the same UTC day sees the same "Today's Featured Brand", and it changes
+// automatically at midnight UTC.
+function pickDailyFeaturedBrand(): Brand {
+  const pool = brands.filter((b) => b.featured);
+  const now = new Date();
+  const dayIndex = Math.floor(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) / 86400000
+  );
+  return pool[dayIndex % pool.length];
+}
 
-function FeaturedProductCard({ product }: { product: Product }) {
+function FeaturedProductCard({ product, textTone }: { product: Product; textTone: "light" | "dark" }) {
   const { formatPrice } = useCurrency();
   const allImages = product.images?.length > 0 ? product.images : [product.image];
   const hasMultiple = allImages.length > 1;
   const [imgIndex, setImgIndex] = useState(0);
+  const isLight = textTone === "light";
 
   return (
     <Link to={`/product/${product.id}`} className="group block">
-      <div className="overflow-hidden rounded-xl bg-black/90 shadow-lg transition-shadow hover:shadow-xl">
+      <div className={`overflow-hidden rounded-xl shadow-lg transition-shadow hover:shadow-xl ${isLight ? "bg-black/90" : "bg-white"}`}>
         <div className="relative">
           <img
             src={allImages[imgIndex]}
@@ -54,11 +63,11 @@ function FeaturedProductCard({ product }: { product: Product }) {
           )}
         </div>
         <div className="p-4">
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-white/50">
+          <p className={`text-[10px] font-semibold uppercase tracking-widest ${isLight ? "text-white/50" : "text-black/50"}`}>
             {product.brandName}
           </p>
-          <p className="mt-0.5 truncate text-sm font-semibold text-white">{product.name}</p>
-          <p className="mt-0.5 text-sm font-bold text-white">{formatPrice(product.price)}</p>
+          <p className={`mt-0.5 truncate text-sm font-semibold ${isLight ? "text-white" : "text-black"}`}>{product.name}</p>
+          <p className={`mt-0.5 text-sm font-bold ${isLight ? "text-white" : "text-black"}`}>{formatPrice(product.price)}</p>
         </div>
       </div>
     </Link>
@@ -66,50 +75,38 @@ function FeaturedProductCard({ product }: { product: Product }) {
 }
 
 export default function FeaturedBrandSection() {
-  return (
-    <section className="py-16" style={{ backgroundColor: "hsl(16, 85%, 60%)" }}>
-      <div className="container">
-        {/* Promo Banner */}
-        <div
-          className="mb-6 rounded-xl border-2 border-black/20 bg-black/90 px-6 py-4 text-center"
-        >
-          <p className="text-sm font-bold uppercase tracking-widest text-white/70">Exclusive Offer</p>
-          <p className="mt-1 text-2xl font-black uppercase tracking-wide text-white md:text-3xl" style={{ fontFamily: "'Rajdhani', sans-serif" }}>
-            USE CODE <span style={{ color: "hsl(16, 85%, 60%)" }}>DRIPWAYAPPAREL</span> FOR 10% OFF
-          </p>
-          <p className="mt-1 text-sm text-white/60">
-            at{" "}
-            <TrackedOutboundLink
-              href="https://dripbyrage.com/dripwayapparel"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-white"
-              trackingProperties={{
-                brand_id: brand.id,
-                brand_name: brand.name,
-                brand_slug: brand.slug,
-                click_type: "promo",
-                source: "featured_brand_promo",
-              }}
-            >
-              DRIPBYRAGE.COM
-            </TrackedOutboundLink>
-          </p>
-        </div>
+  const brand = useMemo(() => pickDailyFeaturedBrand(), []);
+  const brandProducts = useMemo(
+    () => products.filter((p) => p.brandId === brand.id).slice(0, 6),
+    [brand.id]
+  );
+  const bg = brand.themeColor ?? "hsl(16, 85%, 60%)";
+  const tone: "light" | "dark" = brand.themeTextTone ?? "dark";
+  const isLight = tone === "light";
+  const headerText = isLight ? "text-white" : "text-black";
+  const headerMuted = isLight ? "text-white/60" : "text-black/50";
+  const btnClass = isLight
+    ? "gap-2 rounded-full bg-white text-black hover:bg-white/90"
+    : "gap-2 rounded-full bg-black text-white hover:bg-black/80";
 
+  if (brandProducts.length === 0) return null;
+
+  return (
+    <section className="py-16 transition-colors" style={{ backgroundColor: bg }}>
+      <div className="container">
         {/* Section Header */}
-        <div className="mb-8 flex items-center justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-black/50">Today's Featured Brand</p>
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div className="min-w-0">
+            <p className={`text-xs font-bold uppercase tracking-widest ${headerMuted}`}>Today's Featured Brand</p>
             <h2
-              className="text-3xl font-black uppercase text-black md:text-4xl"
-              style={{ fontFamily: "'Rajdhani', sans-serif", letterSpacing: "0.05em" }}
+              className={`text-4xl font-black uppercase md:text-6xl ${headerText}`}
+              style={{ fontFamily: brand.logoFont ?? "'Inter', sans-serif", letterSpacing: "0.02em", lineHeight: 1 }}
             >
               {brand.name}
             </h2>
           </div>
-          <Link to={`/brand/${brand.slug}`}>
-            <Button className="gap-2 rounded-full bg-black text-white hover:bg-black/80">
+          <Link to={`/brand/${brand.slug}`} className="shrink-0">
+            <Button className={btnClass}>
               View Brand <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
@@ -117,9 +114,9 @@ export default function FeaturedBrandSection() {
 
         {/* Product Grid */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {dripByRageProducts.map((product, i) => (
+          {brandProducts.map((product) => (
             <div key={product.id} className="content-auto">
-              <FeaturedProductCard product={product} />
+              <FeaturedProductCard product={product} textTone={tone} />
             </div>
           ))}
         </div>
