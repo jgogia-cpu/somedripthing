@@ -8,6 +8,10 @@ export interface Brand {
   darkCard?: boolean;
   lightCard?: boolean;
   fullBleedLogo?: boolean;
+  /** Optional CSS color used as the background for the "Today's Featured Brand" homepage section. */
+  themeColor?: string;
+  /** Text tone to pair with `themeColor` on the featured brand section. Defaults to "dark". */
+  themeTextTone?: "light" | "dark";
   /** Override the brand-name color on BrandCard when default white/black is unreadable against the logo art. */
   nameColor?: "accent" | "white" | "black";
   /** Add a soft accent glow behind the brand name on BrandCard (used when the logo art mixes black + white). */
@@ -119,7 +123,7 @@ export const brands: Brand[] = [
     vibes: ["Heritage meets hustle", "Bold self-expression", "Cultural pride", "Unapologetically loud"],
     origin: "Canada", website: "https://dripbyrage.store", affiliateUrl: "https://dripbyrage.store",
     instagram: "@dripbyrage", tiktok: "@dripbyrage", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Outerwear", "Bottoms"],
-    priceRange: "mid", followers: 50000, rating: 4.7, featured: true, newDrop: true
+    priceRange: "mid", followers: 50000, rating: 4.7, featured: true, newDrop: true, themeColor: "hsl(16, 85%, 60%)", themeTextTone: "dark"
   },
   {
     id: "24", name: "Preview Worldwide", slug: "preview-worldwide", logo: previewWorldwideLogo,
@@ -130,7 +134,7 @@ export const brands: Brand[] = [
     vibes: ["Motorsport energy", "Y2K nostalgia", "Graphic-heavy", "Unapologetically bold"],
     origin: "USA", website: "https://previewworldwide.com", affiliateUrl: "https://previewworldwide.com",
     instagram: "@previewworldwide", aesthetics: ["Streetwear", "Y2K", "Grunge"], categories: ["Tops", "Bottoms", "Accessories"],
-    priceRange: "budget", followers: 15000, rating: 4.5, featured: true, newDrop: true
+    priceRange: "budget", followers: 15000, rating: 4.5, featured: true, newDrop: true, themeColor: "#FF2E63", themeTextTone: "light"
   },
   {
     id: "25", name: "SABR", slug: "sabr", logo: sabrLogo,
@@ -141,7 +145,7 @@ export const brands: Brand[] = [
     vibes: ["Faith-driven", "Cultural roots", "Premium details", "Patience as power"],
     origin: "USA", website: "https://sabrclothing2024.com", affiliateUrl: "https://sabrclothing2024.com/collections/all",
     instagram: "@sabrclothing", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops", "Bottoms", "Accessories"],
-    priceRange: "mid", followers: 10000, rating: 4.5, featured: true, newDrop: true
+    priceRange: "mid", followers: 10000, rating: 4.5, featured: true, newDrop: true, themeColor: "#0F5132", themeTextTone: "light"
   },
   {
     id: "26", name: "Fortune Fellas Club", slug: "fortune-fellas-club",
@@ -155,7 +159,7 @@ export const brands: Brand[] = [
     origin: "USA", website: "https://fortunefellasclub.com", affiliateUrl: "https://fortunefellasclub.com/collections/all",
     instagram: "@fortunefellasclub", tiktok: "@fortunefellasclub",
     aesthetics: ["Streetwear", "Minimalist", "Old Money"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 7500, rating: 4.6, featured: true, newDrop: true
+    priceRange: "mid", followers: 7500, rating: 4.6, featured: true, newDrop: true, themeColor: "#D4A24C", themeTextTone: "dark"
   },
   {
     id: "28", name: "Harvx", slug: "harvx", logo: harvxLogo,
@@ -167,7 +171,7 @@ export const brands: Brand[] = [
     vibes: ["Heavyweight by design", "Handmade screen prints", "Imperfections welcome", "Soul over hype"],
     origin: "Canada", website: "https://harvxclo.com", affiliateUrl: "https://harvxclo.com/collections/all",
     instagram: "@harvxclo", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 5500, rating: 4.6, featured: true, newDrop: true
+    priceRange: "mid", followers: 5500, rating: 4.6, featured: true, newDrop: true, themeColor: "#B91C1C", themeTextTone: "light"
   },
   {
     id: "27", name: "House of Kings", slug: "house-of-kings", logo: houseOfKingsLogo,
@@ -179,7 +183,7 @@ export const brands: Brand[] = [
     vibes: ["Welcome to the Kingdom", "Royal in message", "Free from labels", "Community-driven drops"],
     origin: "USA", website: "https://houseofkings.co", affiliateUrl: "https://houseofkings.co/collections/all",
     instagram: "@houseofkings", aesthetics: ["Streetwear", "Grunge"], categories: ["Tops", "Bottoms", "Outerwear", "Accessories"],
-    priceRange: "mid", followers: 18000, rating: 4.6, featured: true, newDrop: true
+    priceRange: "mid", followers: 18000, rating: 4.6, featured: true, newDrop: true, themeColor: "#3B0764", themeTextTone: "light"
   },
   {
     id: "29", name: "MorteNoir", slug: "mortenoir", logo: mortenoirLogo,
@@ -191,7 +195,7 @@ export const brands: Brand[] = [
     vibes: ["Gothic sigils", "Sun-faded finishes", "Heavyweight by design", "Wear it like a rite"],
     origin: "UK", website: "https://mortenoir.co.uk", affiliateUrl: "https://mortenoir.co.uk/collections/all",
     instagram: "@mortenoir", aesthetics: ["Streetwear", "Grunge", "Dark Academia", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 6500, rating: 4.6, featured: true, newDrop: true
+    priceRange: "mid", followers: 6500, rating: 4.6, featured: true, newDrop: true, themeColor: "#141414", themeTextTone: "light"
   },
   {
     id: "30", name: "Isolated", slug: "isolated", logo: isolatedLogo,
@@ -203,7 +207,7 @@ export const brands: Brand[] = [
     vibes: ["Quiet intensity", "Lone wolf energy", "Solitude as flex", "Focus over noise"],
     origin: "USA", website: "https://isolated.shop", affiliateUrl: "https://isolated.shop/collections/all",
     instagram: "@isolated", aesthetics: ["Streetwear", "Minimalist", "Grunge"], categories: ["Tops", "Bottoms"],
-    priceRange: "budget", followers: 4200, rating: 4.4, featured: true, newDrop: true
+    priceRange: "budget", followers: 4200, rating: 4.4, featured: true, newDrop: true, themeColor: "#334155", themeTextTone: "light"
   },
   {
     id: "31", name: "Maker Creator", slug: "maker-creator", logo: makerLogo,
@@ -215,7 +219,7 @@ export const brands: Brand[] = [
     vibes: ["Heavyweight basics", "Considered details", "Made in Canada energy", "Quietly elevated"],
     origin: "Canada", website: "https://makercreator.ca", affiliateUrl: "https://makercreator.ca/collections/all",
     instagram: "@makercreator", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms"],
-    priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true
+    priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true, themeColor: "#E8DFCF", themeTextTone: "dark"
   },
   {
     id: "32", name: "Justiniano", slug: "justiniano", logo: justinianoLogo,
@@ -227,7 +231,7 @@ export const brands: Brand[] = [
     vibes: ["Verde-ouro pride", "Football heritage", "Bold graphics", "Everyday essentials"],
     origin: "Brazil", website: "https://justiniano.shop", affiliateUrl: "https://justiniano.shop",
     instagram: "@justiniano", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops"],
-    priceRange: "budget", followers: 2500, rating: 4.5, featured: true, newDrop: true
+    priceRange: "budget", followers: 2500, rating: 4.5, featured: true, newDrop: true, themeColor: "#047857", themeTextTone: "light"
   },
   {
     id: "33", name: "Neutral State", slug: "neutral-state", logo: neutralstateLogo,
@@ -239,7 +243,7 @@ export const brands: Brand[] = [
     vibes: ["Quiet luxury", "Heavyweight basics", "Washed cotton", "Layer ready"],
     origin: "USA", website: "https://neutralstate.shop", affiliateUrl: "https://neutralstate.shop/collections/all",
     instagram: "@neutralstate", aesthetics: ["Streetwear", "Minimalist", "Old Money"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 3800, rating: 4.6, featured: true, newDrop: true
+    priceRange: "mid", followers: 3800, rating: 4.6, featured: true, newDrop: true, themeColor: "#C9BFAF", themeTextTone: "dark"
   },
   {
     id: "34", name: "RedeemOrDie", slug: "redeemordie", logo: redeemordieLogo.url,
@@ -251,7 +255,7 @@ export const brands: Brand[] = [
     vibes: ["Military-inspired", "Heavyweight basics", "Street-ready", "Earn your fit"],
     origin: "International", website: "https://www.redeemordie.com", affiliateUrl: "https://www.redeemordie.com/shop",
     instagram: "@redeemordie", aesthetics: ["Streetwear", "Techwear", "Grunge"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 8000, rating: 4.5, featured: true, newDrop: true
+    priceRange: "mid", followers: 8000, rating: 4.5, featured: true, newDrop: true, themeColor: "#4B5320", themeTextTone: "light"
   },
   {
     id: "35", name: "EVARA", slug: "evara", logo: EVARA_LOGO,
@@ -263,7 +267,7 @@ export const brands: Brand[] = [
     vibes: ["Faith-forward", "Rhinestone detailing", "Heavyweight & satin", "Wear it loud"],
     origin: "USA", website: "https://shopevara.store", affiliateUrl: "https://shopevara.store/collections/all",
     instagram: "@shopevara", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 6500, rating: 5.0, featured: true, newDrop: true
+    priceRange: "mid", followers: 6500, rating: 5.0, featured: true, newDrop: true, themeColor: "#F4C7C0", themeTextTone: "dark"
   },
   {
     id: "36", name: "L'Atelier Santé", slug: "latelier-sante", logo: LATELIER_LOGO,
@@ -275,7 +279,7 @@ export const brands: Brand[] = [
     vibes: ["Quietly elevated", "Workshop made", "Considered details", "Health in craft"],
     origin: "Canada", website: "https://www.lateliersante.store", affiliateUrl: "https://www.lateliersante.store/category/all-products",
     instagram: "@lateliersante", aesthetics: ["Minimalist", "Old Money", "Streetwear"], categories: ["Tops", "Accessories"],
-    priceRange: "mid", followers: 4200, rating: 4.6, featured: true, newDrop: true
+    priceRange: "mid", followers: 4200, rating: 4.6, featured: true, newDrop: true, themeColor: "#9CAF88", themeTextTone: "dark"
   },
   {
     id: "37", name: "DAE'WEAR", slug: "daewear", logo: DAEWEAR_LOGO,
@@ -287,7 +291,7 @@ export const brands: Brand[] = [
     vibes: ["A different kind", "Signal graphics", "Daily essentials", "Intentional fits"],
     origin: "USA", website: "https://daewearapparel.com", affiliateUrl: "https://daewearapparel.com/shop",
     instagram: "@daewearapparel", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops"],
-    priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true
+    priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true, themeColor: "#FCD34D", themeTextTone: "dark"
   },
   {
     id: "38", name: "PRIESTHOOD", slug: "priesthood",
@@ -301,7 +305,7 @@ export const brands: Brand[] = [
     origin: "United Kingdom", website: "https://priesthood.uk", affiliateUrl: "https://priesthood.uk",
     instagram: "@priesthood.uk", tiktok: "@priesthood010",
     aesthetics: ["Streetwear", "Minimalist", "Dark Academia"], categories: ["Tops", "Bottoms"],
-    priceRange: "premium", followers: 2500, rating: 4.8, featured: true, newDrop: true
+    priceRange: "premium", followers: 2500, rating: 4.8, featured: true, newDrop: true, themeColor: "#3F1010", themeTextTone: "light"
   },
   {
     id: "39", name: "ZeroDivision", slug: "zerodivision", logo: zerodivisionLogo.url,
@@ -313,7 +317,7 @@ export const brands: Brand[] = [
     vibes: ["Anime-rooted", "Limited drops", "Premium suede & fleece", "If you know, you know"],
     origin: "Canada", website: "https://zerodvsn.com", affiliateUrl: "https://zerodvsn.com/collections/all",
     instagram: "@zerodvsn", aesthetics: ["Streetwear", "Y2K", "Archive"], categories: ["Tops", "Bottoms", "Accessories"],
-    priceRange: "mid", followers: 4500, rating: 4.7, featured: true, newDrop: true
+    priceRange: "mid", followers: 4500, rating: 4.7, featured: true, newDrop: true, themeColor: "#1E3A8A", themeTextTone: "light"
   },
   {
     id: "40", name: "All Dubs", slug: "all-dubs", logo: alldubsLogo.url,
@@ -325,7 +329,7 @@ export const brands: Brand[] = [
     vibes: ["Premium fan sportswear", "City-coded design", "Hand-finished snapbacks", "Heavyweight fleece"],
     origin: "Canada", website: "https://www.alldubsofficial.com", affiliateUrl: "https://www.alldubsofficial.com",
     instagram: "@alldubsinc", aesthetics: ["Streetwear", "Sportswear"], categories: ["Tops", "Bottoms", "Accessories"],
-    priceRange: "mid", followers: 5200, rating: 4.7, featured: true, newDrop: true
+    priceRange: "mid", followers: 5200, rating: 4.7, featured: true, newDrop: true, themeColor: "#1D4ED8", themeTextTone: "light"
   },
   {
     id: "41", name: "ParrisHighOnFashion", slug: "parrishighonfashion",
@@ -338,7 +342,7 @@ export const brands: Brand[] = [
     vibes: ["Heavyweight streetwear", "Hand-distressed craft", "Rhinestone luxury", "Made in Canada"],
     origin: "Canada", website: "https://parrishighonfashion.com", affiliateUrl: "https://parrishighonfashion.com",
     instagram: "@parrishighonfashion", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Bottoms"],
-    priceRange: "premium", followers: 12000, rating: 4.8, featured: true, newDrop: true, addedAt: "2026-07-03"
+    priceRange: "premium", followers: 12000, rating: 4.8, featured: true, newDrop: true, themeColor: "#DB2777", themeTextTone: "light", addedAt: "2026-07-03"
   },
 ];
 export const products: Product[] = [
