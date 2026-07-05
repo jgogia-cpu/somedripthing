@@ -27,8 +27,6 @@ const AdminSEO = lazy(() => import("./pages/AdminSEO"));
 const AdminAffiliate = lazy(() => import("./pages/AdminAffiliate"));
 const Auth = lazy(() => import("./pages/Auth"));
 const About = lazy(() => import("./pages/About"));
-import TrackedOutboundLink from "@/components/TrackedOutboundLink";
-
 const queryClient = new QueryClient();
 
 function ScrollToTop() {
@@ -97,23 +95,6 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <PostHogPageView />
-        <div className="bg-accent text-center py-1.5 px-4">
-          <TrackedOutboundLink
-            href="https://dripbyrage.com/dripwayapparel"
-            target="_blank"
-            rel="noopener noreferrer"
-            trackingProperties={{
-              brand_id: "17",
-              brand_name: "Drip by Rage",
-              brand_slug: "drip-by-rage",
-              click_type: "promo",
-              source: "top_promo_banner",
-            }}
-            className="text-xs font-bold uppercase tracking-wider text-black hover:underline"
-          >
-            GET 10% OFF DRIPBYRAGE WITH CODE DRIPWAYAPPAREL
-          </TrackedOutboundLink>
-        </div>
         <Navbar />
         <main>
         <Suspense fallback={<div className="container py-20 text-center text-sm text-muted-foreground">Loading…</div>}>
