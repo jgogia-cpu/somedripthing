@@ -8,6 +8,10 @@ export interface Brand {
   darkCard?: boolean;
   lightCard?: boolean;
   fullBleedLogo?: boolean;
+  /** Optional CSS color used as the background for the "Today's Featured Brand" homepage section. */
+  themeColor?: string;
+  /** Text tone to pair with `themeColor` on the featured brand section. Defaults to "dark". */
+  themeTextTone?: "light" | "dark";
   /** Override the brand-name color on BrandCard when default white/black is unreadable against the logo art. */
   nameColor?: "accent" | "white" | "black";
   /** Add a soft accent glow behind the brand name on BrandCard (used when the logo art mixes black + white). */
