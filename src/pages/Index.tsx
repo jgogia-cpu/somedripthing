@@ -192,15 +192,6 @@ export default function Index() {
     return [...picked, ...rest].slice(0, 12);
   }, []);
   const newDropBrands = brands.filter(b => b.newDrop);
-  // "Under the Radar" — the lowest-follower brands DRIPWAY covers, so the
-  // section actually delivers on the "found before the algorithm" promise.
-  // Excludes anchor/featured brands so it stays genuinely underground.
-  const underRadarBrands = useMemo(() => {
-    return [...brands]
-      .filter((b) => !b.featured && (b.followers ?? 0) > 0)
-      .sort((a, b) => (a.followers ?? 0) - (b.followers ?? 0))
-      .slice(0, 3);
-  }, []);
 
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
@@ -351,33 +342,8 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Under the Radar — niche brands with the smallest followings */}
-      <section className="content-auto border-t border-white/5 bg-gradient-to-b from-accent/5 via-background to-background py-16">
-        <div className="container">
-          <div className="mb-8 flex items-end justify-between gap-4">
-            <div>
-              <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
-                <span className="h-px w-8 bg-accent" />
-                Under the Radar
-              </div>
-              <h2 className="font-display text-2xl font-bold sm:text-3xl">
-                Found before the algorithm shows you.
-              </h2>
-              <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-                The smallest, most niche labels in our rotation. Cop it before the feed catches on.
-              </p>
-            </div>
-            <Link to="/brands" className="hidden shrink-0 text-sm font-medium text-accent hover:underline sm:inline">
-              All brands →
-            </Link>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {underRadarBrands.map((brand, i) => (
-              <BrandCard key={brand.id} brand={brand} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Featured Brand — rotates daily */}
+      <FeaturedBrandSection />
 
       {/* New Drops */}
       <section className="content-auto border-t bg-secondary/20 py-16">
@@ -395,9 +361,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
-      {/* Featured Brand */}
-      <FeaturedBrandSection />
 
       {/* Newsletter */}
       <NewsletterSignup />
