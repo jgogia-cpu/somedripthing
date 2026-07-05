@@ -27,8 +27,6 @@ const AdminSEO = lazy(() => import("./pages/AdminSEO"));
 const AdminAffiliate = lazy(() => import("./pages/AdminAffiliate"));
 const Auth = lazy(() => import("./pages/Auth"));
 const About = lazy(() => import("./pages/About"));
-import TrackedOutboundLink from "@/components/TrackedOutboundLink";
-
 const queryClient = new QueryClient();
 
 function ScrollToTop() {
