@@ -192,7 +192,15 @@ export default function Index() {
     return [...picked, ...rest].slice(0, 12);
   }, []);
   const newDropBrands = brands.filter(b => b.newDrop);
-  const featuredBrands = brands.filter(b => b.featured).slice(0, 6);
+  // "Under the Radar" — the lowest-follower brands DRIPWAY covers, so the
+  // section actually delivers on the "found before the algorithm" promise.
+  // Excludes anchor/featured brands so it stays genuinely underground.
+  const underRadarBrands = useMemo(() => {
+    return [...brands]
+      .filter((b) => !b.featured && (b.followers ?? 0) > 0)
+      .sort((a, b) => (a.followers ?? 0) - (b.followers ?? 0))
+      .slice(0, 3);
+  }, []);
 
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
