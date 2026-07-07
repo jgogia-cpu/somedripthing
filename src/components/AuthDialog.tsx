@@ -51,19 +51,19 @@ export default function AuthDialog({ open, onClose }: AuthDialogProps) {
   return (
     <AnimatePresence>
       {open && (
-        <>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+          onClick={onClose}
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
-            onClick={onClose}
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="fixed left-1/2 top-1/2 z-[101] max-h-[90vh] w-[calc(100vw-2rem)] max-w-sm -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border bg-card p-5 shadow-2xl sm:p-6"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            onClick={e => e.stopPropagation()}
+            className="relative z-[101] max-h-[90vh] w-full max-w-sm overflow-y-auto rounded-2xl border bg-card p-5 shadow-2xl sm:p-6"
           >
             <button onClick={onClose} className="absolute right-4 top-4 text-muted-foreground hover:text-foreground">
               <X className="h-4 w-4" />
@@ -142,7 +142,7 @@ export default function AuthDialog({ open, onClose }: AuthDialogProps) {
               </button>
             </p>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );
