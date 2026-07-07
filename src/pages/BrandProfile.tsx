@@ -15,6 +15,21 @@ const fadeUp = {
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.6 } }),
 };
 
+const PRICE_TIER_SYMBOLS: Record<string, string> = {
+  budget: "$",
+  mid: "$$",
+  premium: "$$$",
+  luxury: "$$$$",
+};
+const PRICE_TIER_LABELS: Record<string, string> = {
+  budget: "Entry",
+  mid: "Mid",
+  premium: "Premium",
+  luxury: "Luxury",
+};
+const priceTierSymbol = (t: string) => PRICE_TIER_SYMBOLS[t] ?? "$$";
+const priceTierLabel = (t: string) => PRICE_TIER_LABELS[t] ?? "Mid";
+
 export default function BrandProfile() {
   const { slug } = useParams<{ slug: string }>();
   const brand = getBrandBySlug(slug || "");
@@ -138,8 +153,8 @@ export default function BrandProfile() {
                     {tag}
                   </span>
                 ))}
-                <span className="border border-border/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] capitalize text-muted-foreground">
-                  {brand.priceRange} range
+                <span className="border border-border/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                  Price {priceTierSymbol(brand.priceRange)}
                 </span>
               </div>
             </motion.div>
@@ -180,8 +195,8 @@ export default function BrandProfile() {
                   {brand.rating}
                   <span className="text-xl text-muted-foreground/60">/5</span>
                 </span>
-                <span className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80 capitalize">
-                  {brand.priceRange} tier
+                <span className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">
+                  {priceTierLabel(brand.priceRange)} · {priceTierSymbol(brand.priceRange)}
                 </span>
               </div>
             </div>
