@@ -17,6 +17,12 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "29", name: "MorteNoir", site: "https://mortenoir.co.uk" },
   { id: "30", name: "Isolated", site: "https://isolated.shop" },
   { id: "31", name: "Maker Creator", site: "https://makercreator.ca" },
+  { id: "32", name: "Justiniano", site: "https://justiniano.shop" },
+  { id: "33", name: "Neutral State", site: "https://neutralstate.shop" },
+  { id: "35", name: "EVARA", site: "https://shopevara.store" },
+  { id: "38", name: "PRIESTHOOD", site: "https://priesthood.uk" },
+  { id: "41", name: "ParrisHighOnFashion", site: "https://parrishighonfashion.com" },
+  { id: "42", name: "City of Saints", site: "https://cityofsaints.store" },
   { id: "39", name: "ZeroDivision", site: "https://zerodvsn.com" },
   { id: "40", name: "All Dubs", site: "https://www.alldubsofficial.com" },
 ];
@@ -53,7 +59,39 @@ function extractSizes(variants: Array<Record<string, string | null>>): string[] 
   return ["S", "M", "L", "XL"];
 }
 
-const PER_BRAND_CAP = 10; // cap newly-added per brand per run
+const PER_BRAND_CAP = 50; // cap newly-added per brand per run
+const MAX_PAGES = 6; // up to 1,500 products per brand per run
+
+async function fetchAllProducts(site: string): Promise<{
+  products: Array<Record<string, unknown>>;
+  complete: boolean;
+  error?: string;
+}> {
+  const all: Array<Record<string, unknown>> = [];
+  for (let page = 1; page <= MAX_PAGES; page++) {
+    const res = await fetch(
+      `${site}/products.json?limit=250&page=${page}`,
+      {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0 Safari/537.36",
+        },
+      },
+    );
+    if (!res.ok) return { products: all, complete: false, error: `HTTP ${res.status}` };
+    let batch: Array<Record<string, unknown>> = [];
+    try {
+      const json = (await res.json()) as { products?: Array<Record<string, unknown>> };
+      batch = json.products ?? [];
+    } catch {
+      // Non-JSON response (e.g. HTML shop redirect) — treat as end of feed.
+      return { products: all, complete: all.length > 0 };
+    }
+    all.push(...batch);
+    if (batch.length < 250) return { products: all, complete: true };
+  }
+  return { products: all, complete: false, error: "hit MAX_PAGES" };
+}
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
@@ -68,18 +106,11 @@ Deno.serve(async (req) => {
 
   for (const brand of BRANDS) {
     try {
-      const res = await fetch(`${brand.site}/products.json?limit=250`, {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0 Safari/537.36",
-        },
-      });
-      if (!res.ok) {
-        notes.push(`${brand.name}: HTTP ${res.status}`);
+      const { products, complete, error } = await fetchAllProducts(brand.site);
+      if (!complete && products.length === 0) {
+        notes.push(`${brand.name}: ${error ?? "fetch failed"}`);
         continue;
       }
-      const json = await res.json() as { products?: Array<Record<string, unknown>> };
-      const products = json.products ?? [];
       const liveHandles = new Set(
         products.map((p) => String(p.handle ?? "")).filter(Boolean),
       );
@@ -91,19 +122,14 @@ Deno.serve(async (req) => {
         .eq("brand_id", brand.id);
       const have = new Set((existing ?? []).map((r) => r.handle));
 
-      // --- Cleanup: remove products no longer live, or with broken images ---
+      // --- Cleanup: only remove products no longer live, and only when the
+      // brand's live listing was fetched completely (otherwise pagination
+      // gaps would wrongly delete real products). Image validity is handled
+      // by the separate validate-products cron.
       const toDelete: string[] = [];
-      for (const row of existing ?? []) {
-        if (!liveHandles.has(row.handle)) {
-          toDelete.push(row.handle);
-          continue;
-        }
-        // HEAD-check primary image
-        try {
-          const imgRes = await fetch(row.image, { method: "HEAD" });
-          if (!imgRes.ok) toDelete.push(row.handle);
-        } catch {
-          toDelete.push(row.handle);
+      if (complete) {
+        for (const row of existing ?? []) {
+          if (!liveHandles.has(row.handle)) toDelete.push(row.handle);
         }
       }
       if (toDelete.length) {
@@ -168,7 +194,7 @@ Deno.serve(async (req) => {
       if (toInsert.length) {
         const { error } = await supabase
           .from("scraped_products")
-          .insert(toInsert);
+          .upsert(toInsert, { onConflict: "brand_id,handle", ignoreDuplicates: true });
         if (error) {
           notes.push(`${brand.name}: insert error ${error.message}`);
         } else {
