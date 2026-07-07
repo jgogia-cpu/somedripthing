@@ -13,6 +13,7 @@ import { useScrapedProducts } from "@/hooks/useScrapedProducts";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { pushRecentlyViewed } from "@/hooks/useRecentlyViewed";
+import AuthDialog from "@/components/AuthDialog";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -25,6 +26,7 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [authOpen, setAuthOpen] = useState(false);
 
   useEffect(() => {
     if (product?.id) pushRecentlyViewed(product.id);
