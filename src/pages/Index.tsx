@@ -128,34 +128,28 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
 
 
 
-const heroProducts = (() => {
-  // Fully random lineup on every page load — pulls from every product in the catalogue.
+function buildHeroProducts() {
+  // Fully random lineup on every page load — pulls from every product in the
+  // catalogue. Computed at render time (not module load) so hidden products
+  // fetched in main.tsx have already been spliced out of `products`.
   const shuffled = [...products];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-  // Guarantee a ParrisHighOnFashion (brandId 41) product is featured in the carousel.
   const picks = shuffled.slice(0, 12);
   const hasParris = picks.some((p) => p.brandId === "41");
   if (!hasParris) {
     const parris = products.filter((p) => p.brandId === "41");
-    if (parris.length) {
-      const pick = parris[Math.floor(Math.random() * parris.length)];
-      picks[0] = pick;
-    }
+    if (parris.length) picks[0] = parris[Math.floor(Math.random() * parris.length)];
   }
-  // Guarantee a City of Saints (brandId 42) product is featured in the carousel.
   const hasCos = picks.some((p) => p.brandId === "42");
   if (!hasCos) {
     const cos = products.filter((p) => p.brandId === "42");
-    if (cos.length) {
-      const pick = cos[Math.floor(Math.random() * cos.length)];
-      picks[1] = pick;
-    }
+    if (cos.length) picks[1] = cos[Math.floor(Math.random() * cos.length)];
   }
   return picks;
-})();
+}
 
 function getCarouselTransform(index: number, active: number, total: number) {
   let offset = index - active;
@@ -176,6 +170,7 @@ function getCarouselTransform(index: number, active: number, total: number) {
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { formatPrice } = useCurrency();
+  const heroProducts = useMemo(() => buildHeroProducts(), []);
   const trendingProducts = useMemo(() => {
     const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "42"];
     const olderBrandIds = ["17"];
