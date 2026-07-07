@@ -177,7 +177,7 @@ export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { formatPrice } = useCurrency();
   const trendingProducts = useMemo(() => {
-    const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33"];
+    const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "42"];
     const olderBrandIds = ["17"];
     // 2 picks per newer brand (shuffled per-session), 1 per older brand
     const newerPicks = newerBrandIds.flatMap((brandId) => {
