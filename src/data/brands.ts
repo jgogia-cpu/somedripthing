@@ -345,6 +345,19 @@ export const brands: Brand[] = [
     instagram: "@parrishighonfashion", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Bottoms"],
     priceRange: "premium", followers: 12000, rating: 4.8, featured: true, newDrop: true, themeColor: "#DB2777", themeTextTone: "light", addedAt: "2026-07-03"
   },
+  {
+    id: "42", name: "City of Saints", slug: "city-of-saints", logo: cityofsaintsLogo,
+    banner: "https://cityofsaints.store/cdn/shop/files/0570d186be9d43639673e4414ae2ca56.png?v=1778535126&width=1600",
+    logoFont: "'UnifrakturCook', 'Space Grotesk', serif", darkCard: true, fullBleedLogo: true,
+    bio: "Montreal-born streetwear house cutting oversized graphic tees and long sleeves that read like modern religious iconography — panthers, saints, and city devotion in heavyweight cotton.",
+    story: "Born out of Montreal's underground streetwear scene, City of Saints treats every tee like a canvas — bold DTF prints, oversized silhouettes, and cream-toned graphics that turn the block into a cathedral. Each drop mixes house-obsession iconography, panther motifs, and city devotion, printed on 260gsm combed cotton with raw-hem finishes.",
+    founded: "2024", founderNote: "\"For the ones who move like they've already been anointed.\"",
+    vibes: ["Montreal streetwear", "Oversized graphic tees", "Religious iconography", "House obsession"],
+    origin: "Montreal, Canada", website: "https://cityofsaints.store", affiliateUrl: "https://cityofsaints.store",
+    instagram: "@cityofsaints", aesthetics: ["Streetwear", "Grunge"], categories: ["Tops"],
+    priceRange: "mid", followers: 2400, rating: 4.7, featured: true, newDrop: true,
+    themeColor: "#5433EB", themeTextTone: "light", addedAt: "2026-07-07"
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
