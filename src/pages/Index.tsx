@@ -170,6 +170,7 @@ function getCarouselTransform(index: number, active: number, total: number) {
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { formatPrice } = useCurrency();
+  const heroProducts = useMemo(() => buildHeroProducts(), []);
   const trendingProducts = useMemo(() => {
     const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "42"];
     const olderBrandIds = ["17"];
