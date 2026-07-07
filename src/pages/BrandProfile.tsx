@@ -15,6 +15,21 @@ const fadeUp = {
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.6 } }),
 };
 
+const PRICE_TIER_SYMBOLS: Record<string, string> = {
+  budget: "$",
+  mid: "$$",
+  premium: "$$$",
+  luxury: "$$$$",
+};
+const PRICE_TIER_LABELS: Record<string, string> = {
+  budget: "Entry",
+  mid: "Mid",
+  premium: "Premium",
+  luxury: "Luxury",
+};
+const priceTierSymbol = (t: string) => PRICE_TIER_SYMBOLS[t] ?? "$$";
+const priceTierLabel = (t: string) => PRICE_TIER_LABELS[t] ?? "Mid";
+
 export default function BrandProfile() {
   const { slug } = useParams<{ slug: string }>();
   const brand = getBrandBySlug(slug || "");
