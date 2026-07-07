@@ -1,6 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
 import { products } from "@/data/brands";
-import { useScrapedProducts } from "@/hooks/useScrapedProducts";
 import type { Product } from "@/data/brands";
 
 let hiddenIds: Set<string> = new Set();
@@ -40,6 +39,3 @@ export function filterHidden<T extends Pick<Product, "id">>(list: T[]): T[] {
 export function isHiddenProductsReady(): boolean {
   return ready;
 }
-
-// Re-export for convenience so scraped-product consumers can filter too.
-export { useScrapedProducts };
