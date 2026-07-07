@@ -79,8 +79,14 @@ async function fetchAllProducts(site: string): Promise<{
       },
     );
     if (!res.ok) return { products: all, complete: false, error: `HTTP ${res.status}` };
-    const json = (await res.json()) as { products?: Array<Record<string, unknown>> };
-    const batch = json.products ?? [];
+    let batch: Array<Record<string, unknown>> = [];
+    try {
+      const json = (await res.json()) as { products?: Array<Record<string, unknown>> };
+      batch = json.products ?? [];
+    } catch {
+      // Non-JSON response (e.g. HTML shop redirect) — treat as end of feed.
+      return { products: all, complete: all.length > 0 };
+    }
     all.push(...batch);
     if (batch.length < 250) return { products: all, complete: true };
   }
