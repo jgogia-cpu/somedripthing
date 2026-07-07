@@ -104,6 +104,7 @@ import rodArmySweatpants from "@/assets/rod-army-sweatpants.jpg.asset.json";
 import rodWindbreakerOlive from "@/assets/rod-windbreaker-olive.jpg.asset.json";
 import rodWindbreakerBlack from "@/assets/rod-windbreaker-black.jpg.asset.json";
 import rodTrackpants from "@/assets/rod-trackpants.jpg.asset.json";
+import cityofsaintsLogo from "@/assets/cityofsaints-logo.jpg";
 
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
