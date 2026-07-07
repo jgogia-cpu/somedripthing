@@ -17,6 +17,12 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "29", name: "MorteNoir", site: "https://mortenoir.co.uk" },
   { id: "30", name: "Isolated", site: "https://isolated.shop" },
   { id: "31", name: "Maker Creator", site: "https://makercreator.ca" },
+  { id: "32", name: "Justiniano", site: "https://justiniano.shop" },
+  { id: "33", name: "Neutral State", site: "https://neutralstate.shop" },
+  { id: "35", name: "EVARA", site: "https://shopevara.store" },
+  { id: "38", name: "PRIESTHOOD", site: "https://priesthood.uk" },
+  { id: "41", name: "ParrisHighOnFashion", site: "https://parrishighonfashion.com" },
+  { id: "42", name: "City of Saints", site: "https://cityofsaints.store" },
   { id: "39", name: "ZeroDivision", site: "https://zerodvsn.com" },
   { id: "40", name: "All Dubs", site: "https://www.alldubsofficial.com" },
 ];
@@ -53,7 +59,7 @@ function extractSizes(variants: Array<Record<string, string | null>>): string[] 
   return ["S", "M", "L", "XL"];
 }
 
-const PER_BRAND_CAP = 10; // cap newly-added per brand per run
+const PER_BRAND_CAP = 50; // cap newly-added per brand per run
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
