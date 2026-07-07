@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
-import { Heart, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { Heart, Sparkles, LogIn } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { getProductById } from "@/data/brands";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
+import AuthDialog from "@/components/AuthDialog";
 
 export default function Wishlist() {
   const { user } = useAuth();
   const { wishlist } = useWishlist();
+  const [authOpen, setAuthOpen] = useState(false);
 
   const wishlistProducts = wishlist.map(id => getProductById(id)).filter(Boolean);
 
@@ -23,12 +26,25 @@ export default function Wishlist() {
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             Save the pieces you're eyeing. Sync across devices. Get notified when prices drop.
           </p>
-          <Link to="/collections" className="mt-6 inline-block">
-            <Button className="gap-2 rounded-full" size="lg">
-              <Sparkles className="h-4 w-4" /> Start exploring
+          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Button
+              className="gap-2 rounded-full"
+              size="lg"
+              onClick={() => setAuthOpen(true)}
+            >
+              <LogIn className="h-4 w-4" /> Sign in to sync
             </Button>
-          </Link>
+            <Link to="/collections">
+              <Button variant="outline" className="gap-2 rounded-full" size="lg">
+                <Sparkles className="h-4 w-4" /> Start exploring
+              </Button>
+            </Link>
+          </div>
+          <p className="mt-4 text-xs text-muted-foreground/80">
+            Free account. Takes 10 seconds.
+          </p>
         </div>
+        <AuthDialog open={authOpen} onClose={() => setAuthOpen(false)} />
       </div>
     );
   }
