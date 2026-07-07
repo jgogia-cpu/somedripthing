@@ -250,6 +250,9 @@ export default function ProductDetail() {
                 <Heart className={`h-4 w-4 ${wishlisted ? "fill-accent text-accent" : ""}`} />
               </Button>
             </div>
+            <p className="pt-1 text-[11px] text-muted-foreground/80">
+              You'll be redirected to {(() => { try { return new URL(buyHref).hostname.replace(/^www\./, ""); } catch { return `${product.brandName}'s site`; } })()} in a new tab. DRIPWAY may earn a commission.
+            </p>
             {!user && (
               <p className="text-xs text-muted-foreground">Sign in to save to your wishlist</p>
             )}
