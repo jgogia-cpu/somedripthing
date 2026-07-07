@@ -13,6 +13,7 @@ import { useScrapedProducts } from "@/hooks/useScrapedProducts";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { pushRecentlyViewed } from "@/hooks/useRecentlyViewed";
+import AuthDialog from "@/components/AuthDialog";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -25,6 +26,7 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [authOpen, setAuthOpen] = useState(false);
 
   useEffect(() => {
     if (product?.id) pushRecentlyViewed(product.id);
@@ -254,10 +256,17 @@ export default function ProductDetail() {
               You'll be redirected to {(() => { try { return new URL(buyHref).hostname.replace(/^www\./, ""); } catch { return `${product.brandName}'s site`; } })()} in a new tab. DRIPWAY may earn a commission.
             </p>
             {!user && (
-              <p className="text-xs text-muted-foreground">Sign in to save to your wishlist</p>
+              <button
+                type="button"
+                onClick={() => setAuthOpen(true)}
+                className="text-left text-xs text-muted-foreground underline-offset-2 hover:text-accent hover:underline"
+              >
+                Sign in to save to your wishlist →
+              </button>
             )}
           </motion.div>
         </div>
+        <AuthDialog open={authOpen} onClose={() => setAuthOpen(false)} />
 
         {/* Related */}
         {related.length > 0 && (
