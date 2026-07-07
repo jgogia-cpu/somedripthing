@@ -1,0 +1,1193 @@
+{
+  "generatedAt": "2026-07-07T20:08:09.429Z",
+  "products": [
+    {
+      "id": "p29",
+      "brandId": "17",
+      "image": "https://dripbyrage.store/cdn/shop/files/1_7695ffa1-8498-41cb-9a99-16e2d6b50826.png?v=1763858207&width=600",
+      "affiliateUrl": "https://dripbyrage.store/en-us/products/panjab-varsity-jacket"
+    },
+    {
+      "id": "p30",
+      "brandId": "17",
+      "image": "https://dripbyrage.store/cdn/shop/files/gf32wg.png?v=1704196519&width=600",
+      "affiliateUrl": "https://dripbyrage.store/en-us/products/baaj-oversized-faded-hoodie-black"
+    },
+    {
+      "id": "p31",
+      "brandId": "17",
+      "image": "https://dripbyrage.store/cdn/shop/files/117_5b9a8cf9-6648-4076-9889-e24c930562c7.jpg?v=1769113722&width=600",
+      "affiliateUrl": "https://dripbyrage.store/en-us/products/47-red-edition-oversized-faded-hoodie-black"
+    },
+    {
+      "id": "p32",
+      "brandId": "17",
+      "image": "https://dripbyrage.store/cdn/shop/files/26_6e36909a-86af-4c14-953d-af14cb5e028c.jpg?v=1755474900&width=600",
+      "affiliateUrl": "https://dripbyrage.store/en-us/products/gangster-queen-varsity-jacket"
+    },
+    {
+      "id": "p33",
+      "brandId": "17",
+      "image": "https://dripbyrage.store/cdn/shop/files/g4g234.jpg?v=1718818918&width=600",
+      "affiliateUrl": "https://dripbyrage.store/en-us/products/panjab-oversized-faded-t-shirt"
+    },
+    {
+      "id": "p34",
+      "brandId": "17",
+      "image": "https://dripbyrage.store/cdn/shop/files/468357971_18367850734116818_2973765328195243156_n.jpg?v=1735953851&width=600",
+      "affiliateUrl": "https://dripbyrage.store/en-us/products/war-oversized-fleece-hoodie-camel"
+    },
+    {
+      "id": "p69",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_7794-removebg-preview.png?v=1771629432&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/multicolor-logo-hoodie"
+    },
+    {
+      "id": "p70",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_7784-removebg-preview.png?v=1771629399&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/mulitcolor-logo-sweats"
+    },
+    {
+      "id": "p71",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_5253-removebg-preview.png?v=1754594941&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/racing-team-zip-up-hoodie"
+    },
+    {
+      "id": "p72",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_7020-removebg-preview.png?v=1765466296&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/running-man-holographic-sweatsuit"
+    },
+    {
+      "id": "p73",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/AdobeExpress-file.png?v=1759256323&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/big-logo-sweatsuit"
+    },
+    {
+      "id": "p75",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_4823-removebg-preview.png?v=1754594547&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/bad-friends-t-shirt"
+    },
+    {
+      "id": "p76",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_4815-removebg-preview.png?v=1754594795&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/championship-ring-t-shirt"
+    },
+    {
+      "id": "p77",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/C832280A-A1E7-4F25-A472-9278B75BB6FD-removebg-preview.png?v=1717878649&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/chaos-tee"
+    },
+    {
+      "id": "p78",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/35BF428E-72A1-4129-8A08-289177774935-removebg-preview.png?v=1736266881&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/gem-hoodie"
+    },
+    {
+      "id": "p79",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_4811-removebg-preview.png?v=1754594475&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/gem-t-shirt"
+    },
+    {
+      "id": "p80",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_7495-removebg-preview.png?v=1768597744&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/logo-beanie"
+    },
+    {
+      "id": "p81",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_4829-removebg-preview.png?v=1754595142&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/ms-universe-t-shirt"
+    },
+    {
+      "id": "p82",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/BEA0BA74-9A34-4455-8832-0C8872E88A35-removebg-preview.png?v=1717878849&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/player-1-tee"
+    },
+    {
+      "id": "p83",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_6678-removebg-preview.png?v=1765472525&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/quarter-crew-socks-6-pack"
+    },
+    {
+      "id": "p86",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/AF913E56-83D5-4EF3-8500-7FB4519A4981-removebg-preview.png?v=1717878936&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/sky-temple-hoodie"
+    },
+    {
+      "id": "p87",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_4803-removebg-preview.png?v=1754595270&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/sailor-t-shirt"
+    },
+    {
+      "id": "p88",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_5262-removebg-preview.png?v=1754595350&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/sailor-zip-up-hoodie"
+    },
+    {
+      "id": "p89",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/A1DE395F-C9F3-47B1-B0FB-60278EE440C5-removebg-preview.png?v=1717879062&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/villain-hoodie"
+    },
+    {
+      "id": "p90",
+      "brandId": "24",
+      "image": "https://previewworldwide.com/cdn/shop/files/IMG_4801-removebg-preview.png?v=1754594388&width=600",
+      "affiliateUrl": "https://previewworldwide.com/products/wartime-t-shirt"
+    },
+    {
+      "id": "p94",
+      "brandId": "25",
+      "image": "https://sabrclothing2024.com/cdn/shop/files/57DB6CE7-5CEA-4944-A5D8-82CF4BEAB822.jpg?v=1772988824&width=600",
+      "affiliateUrl": "https://sabrclothing2024.com/products/untitled-jan31_11-09"
+    },
+    {
+      "id": "p97",
+      "brandId": "26",
+      "image": "https://fortunefellasclub.com/cdn/shop/files/DSC00557.jpg?v=1768286475&width=600",
+      "affiliateUrl": "https://fortunefellasclub.com/products/tracksuit-pink"
+    },
+    {
+      "id": "p98",
+      "brandId": "26",
+      "image": "https://fortunefellasclub.com/cdn/shop/files/DSC00427_07b85973-1670-4f97-a261-531459970da0.jpg?v=1768287945&width=600",
+      "affiliateUrl": "https://fortunefellasclub.com/products/tracksuit-black"
+    },
+    {
+      "id": "p99",
+      "brandId": "26",
+      "image": "https://fortunefellasclub.com/cdn/shop/files/DSC00656.jpg?v=1768286559&width=600",
+      "affiliateUrl": "https://fortunefellasclub.com/products/tracksuit-pearl-grey"
+    },
+    {
+      "id": "p100",
+      "brandId": "26",
+      "image": "https://fortunefellasclub.com/cdn/shop/files/DSC00402_f6593a3d-d5c6-43fa-95f7-eef9b1c57cb8.jpg?v=1768286685&width=600",
+      "affiliateUrl": "https://fortunefellasclub.com/products/tracksuit-cream"
+    },
+    {
+      "id": "p101",
+      "brandId": "26",
+      "image": "https://fortunefellasclub.com/cdn/shop/files/new_edit_3-7886.jpg?v=1765954017&width=600",
+      "affiliateUrl": "https://fortunefellasclub.com/products/jacket"
+    },
+    {
+      "id": "p102",
+      "brandId": "26",
+      "image": "https://fortunefellasclub.com/cdn/shop/files/pantsffc.jpg?v=1768346581&width=600",
+      "affiliateUrl": "https://fortunefellasclub.com/products/pants"
+    },
+    {
+      "id": "p104",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764201310180-2705406364.png?v=1764201315",
+      "affiliateUrl": "https://houseofkings.co/products/together-were-royal-long-sleeve-shirt"
+    },
+    {
+      "id": "p108",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764201036916-4801841945.png?v=1764201042",
+      "affiliateUrl": "https://houseofkings.co/products/hok-logo-burnt-t-shirt"
+    },
+    {
+      "id": "p110",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764200925469-0058647476.png?v=1764200954",
+      "affiliateUrl": "https://houseofkings.co/products/crwnseason-t-shirt"
+    },
+    {
+      "id": "p111",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764200888231-4032301956.png?v=1764200893",
+      "affiliateUrl": "https://houseofkings.co/products/crwnseason-shorts"
+    },
+    {
+      "id": "p112",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764200804620-3596266952.png?v=1764200809",
+      "affiliateUrl": "https://houseofkings.co/products/blood-of-medusa-lust-t-shirt"
+    },
+    {
+      "id": "p113",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764200751343-2661909611.png?v=1764200756",
+      "affiliateUrl": "https://houseofkings.co/products/king-sh-t-shirt-divine-reflection"
+    },
+    {
+      "id": "p114",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764200706755-4895710204.png?v=1764200713",
+      "affiliateUrl": "https://houseofkings.co/products/crwn-royal-oversized-hoodie"
+    },
+    {
+      "id": "p116",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764200575414-0940501380.png?v=1764200581",
+      "affiliateUrl": "https://houseofkings.co/products/ninja-hoodie-varient-with-logo"
+    },
+    {
+      "id": "p117",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764200505305-6599322842.png?v=1764200511",
+      "affiliateUrl": "https://houseofkings.co/products/logo-summer-breeze-tee"
+    },
+    {
+      "id": "p118",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764200422838-6762597361.png?v=1764200427",
+      "affiliateUrl": "https://houseofkings.co/products/utility-bottoms"
+    },
+    {
+      "id": "p119",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764200383955-5048719597.png?v=1764200389",
+      "affiliateUrl": "https://houseofkings.co/products/summer-breeze-bottoms"
+    },
+    {
+      "id": "p120",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764198967214-3649345019.png?v=1764200116",
+      "affiliateUrl": "https://houseofkings.co/products/summer-breeze-tops"
+    },
+    {
+      "id": "p121",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/store-1764131592705-9805135272.png?v=1764131599",
+      "affiliateUrl": "https://houseofkings.co/products/divine-reflection-shark"
+    },
+    {
+      "id": "p124",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/unisex-organic-ribbed-neck-t-shirt-white-front-68b3195f8f369.jpg?v=1756567917",
+      "affiliateUrl": "https://houseofkings.co/products/seize-your-crwn-unisex-organic-ribbed-neck-t-shirt"
+    },
+    {
+      "id": "p125",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/unisex-staple-t-shirt-soft-cream-front-and-back-67fbca4673abd.jpg?v=1744554576",
+      "affiliateUrl": "https://houseofkings.co/products/dont-lose-sleep-unisex-t-shirt"
+    },
+    {
+      "id": "p129",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/files/foam-trucker-hat-red-one-size-front-652deaba7bfda.jpg?v=1697508175",
+      "affiliateUrl": "https://houseofkings.co/products/foam-trucker-hat"
+    },
+    {
+      "id": "p132",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/products/unisex-eco-sweatshirt-black-front-63f96642acbe8.jpg?v=1677289041",
+      "affiliateUrl": "https://houseofkings.co/products/unisex-eco-sweatshirt"
+    },
+    {
+      "id": "p133",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/products/unisex-fleece-sweatpants-black-front-63f9653ad5db2.jpg?v=1677288778",
+      "affiliateUrl": "https://houseofkings.co/products/upgraded-royalty-unisex-fleece-sweatpants"
+    },
+    {
+      "id": "p134",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/products/foam-trucker-hat-white-royal-red-one-size-front-63f2c20db3940.jpg?v=1676853782",
+      "affiliateUrl": "https://houseofkings.co/products/crwnseason-foam-trucker-hat"
+    },
+    {
+      "id": "p137",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/products/mens-slides-black-front-62e09e0f4673b.jpg?v=1658887703",
+      "affiliateUrl": "https://houseofkings.co/products/men-s-slides-1"
+    },
+    {
+      "id": "p150",
+      "brandId": "27",
+      "image": "https://cdn.shopify.com/s/files/1/1462/2788/products/mockup-45534153.jpg?v=1574508961",
+      "affiliateUrl": "https://houseofkings.co/products/crwnseason-premium-unisex-hoodie"
+    },
+    {
+      "id": "p165",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Photoroom_20260421_212214.png?v=1776824133",
+      "affiliateUrl": "https://harvxclo.com/products/pure-soul-vibe"
+    },
+    {
+      "id": "p166",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Photoroom_20260420_225539.png?v=1776741102",
+      "affiliateUrl": "https://harvxclo.com/products/rebloom-black-hoodie"
+    },
+    {
+      "id": "p167",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Bazaart_17BB753E-948E-446C-8BCA-172E5EACF7D6.jpg?v=1776549250",
+      "affiliateUrl": "https://harvxclo.com/products/moose-tee"
+    },
+    {
+      "id": "p168",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Bazaart_e0694d74-162c-485f-b507-73f8218a032f.jpg?v=1775948822",
+      "affiliateUrl": "https://harvxclo.com/products/brown-caliber-hoodie"
+    },
+    {
+      "id": "p169",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Bazaart_E6482A82-1C39-43BF-96EF-590542444496.jpg?v=1775347119",
+      "affiliateUrl": "https://harvxclo.com/products/doberman-pincher-tee"
+    },
+    {
+      "id": "p170",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Photoroom_20260103_154723.png?v=1767476751",
+      "affiliateUrl": "https://harvxclo.com/products/ember-unisex-straight-fit-baggy-pants"
+    },
+    {
+      "id": "p171",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Bazaart_B0D01DF7-A26D-4B4E-855C-BAD778DE466C.jpg?v=1766970856",
+      "affiliateUrl": "https://harvxclo.com/products/monarch-butterfly-hoodie"
+    },
+    {
+      "id": "p172",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Bazaart_1B0225FC-D721-456E-AAAD-339F83B7BF32.jpg?v=1765751413",
+      "affiliateUrl": "https://harvxclo.com/products/the-killer-wear"
+    },
+    {
+      "id": "p173",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Bazaart_2372DBE9-FA81-4AC1-8021-6DC4B854DDB5.jpg?v=1765751556",
+      "affiliateUrl": "https://harvxclo.com/products/divine-spirit-sweatshirt"
+    },
+    {
+      "id": "p174",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/ChatGPT_Image_Apr_27_2025_at_12_13_00_PM.png?v=1748805838",
+      "affiliateUrl": "https://harvxclo.com/products/butterfly-tshirt-white"
+    },
+    {
+      "id": "p175",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Photoroom_20250920_200350.png?v=1758413695",
+      "affiliateUrl": "https://harvxclo.com/products/favourite-child-tee"
+    },
+    {
+      "id": "p176",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Photoroom_20250901_142742.jpg?v=1756758965",
+      "affiliateUrl": "https://harvxclo.com/products/social-anxiety-green"
+    },
+    {
+      "id": "p177",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Photoroom_20250901_142444.jpg?v=1756758888",
+      "affiliateUrl": "https://harvxclo.com/products/social-anxiety-red"
+    },
+    {
+      "id": "p178",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Photoroom_20250823_184352.jpg?v=1755992341",
+      "affiliateUrl": "https://harvxclo.com/products/essential-comfort-joggers"
+    },
+    {
+      "id": "p179",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Photoroom_20250820_113116.jpg?v=1755721039",
+      "affiliateUrl": "https://harvxclo.com/products/petal-x-wing-tee-1"
+    },
+    {
+      "id": "p180",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Photoroom_20250820_114237.jpg?v=1755704671",
+      "affiliateUrl": "https://harvxclo.com/products/petal-x-wing-tee"
+    },
+    {
+      "id": "p181",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/Black1.jpg?v=1752794626",
+      "affiliateUrl": "https://harvxclo.com/products/warsteed-t-shirt"
+    },
+    {
+      "id": "p182",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/white.jpg?v=1752800381",
+      "affiliateUrl": "https://harvxclo.com/products/goat-2021"
+    },
+    {
+      "id": "p183",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/b3.jpg?v=1748715323",
+      "affiliateUrl": "https://harvxclo.com/products/butterfly-t-shirt-grey"
+    },
+    {
+      "id": "p184",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/CROCK.jpg?v=1753034085",
+      "affiliateUrl": "https://harvxclo.com/products/croc-on-hunt-grey"
+    },
+    {
+      "id": "p185",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/blue.jpg?v=1753034223",
+      "affiliateUrl": "https://harvxclo.com/products/positive-12-t-shirt-blue"
+    },
+    {
+      "id": "p186",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/image.jpg?v=1753034277",
+      "affiliateUrl": "https://harvxclo.com/products/croc-on-hunt-black"
+    },
+    {
+      "id": "p187",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/lion.jpg?v=1749077824",
+      "affiliateUrl": "https://harvxclo.com/products/jungle-king-t-shirt"
+    },
+    {
+      "id": "p188",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/edited.jpg?v=1748736589",
+      "affiliateUrl": "https://harvxclo.com/products/drip-drop-t-shirt"
+    },
+    {
+      "id": "p189",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/imagine.jpg?v=1752541150",
+      "affiliateUrl": "https://harvxclo.com/products/positive-12-t-shirt-red"
+    },
+    {
+      "id": "p190",
+      "brandId": "28",
+      "image": "https://cdn.shopify.com/s/files/1/0851/2471/0700/files/feather-2_e7376f57-de4d-4cc7-b980-e86f3c3d6845.jpg?v=1748805712",
+      "affiliateUrl": "https://harvxclo.com/products/fearless-feather-t-shirt-blue"
+    },
+    {
+      "id": "p191",
+      "brandId": "17",
+      "image": "https://cdn.shopify.com/s/files/1/0573/2591/2273/files/26_f2fd82ff-50af-487b-9dc9-8ebf0397fccc.jpg?v=1773912162",
+      "affiliateUrl": "https://dripbyrage.store/products/47-red-edition-zip-up-hoodie"
+    },
+    {
+      "id": "p192",
+      "brandId": "17",
+      "image": "https://cdn.shopify.com/s/files/1/0573/2591/2273/files/1_b42fa7b4-c5e3-485d-a821-a3892e1bcbf8.jpg?v=1774034838",
+      "affiliateUrl": "https://dripbyrage.store/products/pre-shrunk-boxy-tank-top"
+    },
+    {
+      "id": "p193",
+      "brandId": "17",
+      "image": "https://cdn.shopify.com/s/files/1/0573/2591/2273/files/5_b9a3cf47-bbbf-4096-b9b3-a547851eeebe.jpg?v=1773907531",
+      "affiliateUrl": "https://dripbyrage.store/products/varsity-big-print-boxy-fleece-hoodie"
+    },
+    {
+      "id": "p194",
+      "brandId": "17",
+      "image": "https://cdn.shopify.com/s/files/1/0573/2591/2273/files/8_f95c8e56-a6d1-4545-a05f-f3149f24757d.jpg?v=1773910650",
+      "affiliateUrl": "https://dripbyrage.store/products/blurred-hoodie"
+    },
+    {
+      "id": "p195",
+      "brandId": "17",
+      "image": "https://cdn.shopify.com/s/files/1/0573/2591/2273/files/22_918564ad-9d9d-47f1-a9ca-77a8bb85fe43.jpg?v=1773911286",
+      "affiliateUrl": "https://dripbyrage.store/products/love-birds-boxy-fleece-hoodie"
+    },
+    {
+      "id": "p196",
+      "brandId": "17",
+      "image": "https://cdn.shopify.com/s/files/1/0573/2591/2273/files/23_7380e0be-5e9b-45d6-ad74-b9592db3e057.jpg?v=1773911593",
+      "affiliateUrl": "https://dripbyrage.store/products/madness-boxy-hoodie-black"
+    },
+    {
+      "id": "p197",
+      "brandId": "17",
+      "image": "https://cdn.shopify.com/s/files/1/0573/2591/2273/files/3_852127fe-6cb5-4284-ac08-d564f434fede.jpg?v=1773912018",
+      "affiliateUrl": "https://dripbyrage.store/products/chrome-rage-boxy-hoodie"
+    },
+    {
+      "id": "p198",
+      "brandId": "17",
+      "image": "https://cdn.shopify.com/s/files/1/0573/2591/2273/files/store-1771526528711-2765571507_1.png?v=1771895129",
+      "affiliateUrl": "https://dripbyrage.store/products/fangs-boxy-t-shirt"
+    },
+    {
+      "id": "p201",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/unisex-waffle-raw-edge-t-shirt-full-back-mockup.png?v=1777173438",
+      "affiliateUrl": "https://mortenoir.co.uk/products/thornwing-long-sleeve"
+    },
+    {
+      "id": "p202",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/back-hood-up-v2_55969606-ecd4-4e81-b231-cafac2b19130.png?v=1777088992",
+      "affiliateUrl": "https://mortenoir.co.uk/products/void-relic-boxy-fleece-hoodie"
+    },
+    {
+      "id": "p203",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/hands-in-pockets_3b3852ea-c3fa-49b5-a03e-a88af7489b72.png?v=1776658461",
+      "affiliateUrl": "https://mortenoir.co.uk/products/ashen-sigil-sun-fade-zip-hoodie"
+    },
+    {
+      "id": "p204",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/t-shirt-front-max-zoom.png?v=1776659512",
+      "affiliateUrl": "https://mortenoir.co.uk/products/damned-sigil-studded-t-shirt"
+    },
+    {
+      "id": "p205",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/co-ord-outfit-front-view_b407ac5e-933b-4ab1-b5e4-17660561430b.png?v=1776657369",
+      "affiliateUrl": "https://mortenoir.co.uk/products/malefic-sigil-flared-jeans"
+    },
+    {
+      "id": "p206",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/flower-gray-back-graphic-detail.png?v=1776647255",
+      "affiliateUrl": "https://mortenoir.co.uk/products/mortis-bloom-long-sleeve-waffle-t-shirt"
+    },
+    {
+      "id": "p207",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/grimoire-capri-shorts-zoomed-detail.png?v=1776646231",
+      "affiliateUrl": "https://mortenoir.co.uk/products/grimoire-plaid-capri-shorts"
+    },
+    {
+      "id": "p208",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/grimoire-distressed-boxy-shirt-detail-focus.png?v=1776646502",
+      "affiliateUrl": "https://mortenoir.co.uk/products/grimoire-distressed-boxy-shirt"
+    },
+    {
+      "id": "p209",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/scriptura-obscura-torso-pink-hair-behind.png?v=1776554348",
+      "affiliateUrl": "https://mortenoir.co.uk/products/scriptura-obscura-crop-t-shirt"
+    },
+    {
+      "id": "p210",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/sorona-tee-back-mockup.png?v=1776551981",
+      "affiliateUrl": "https://mortenoir.co.uk/products/hexscript-sorona®-t-shirt"
+    },
+    {
+      "id": "p211",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/coven-black-tie-t-shirt-back-mockup.png?v=1776551951",
+      "affiliateUrl": "https://mortenoir.co.uk/products/coven-black-tie-t-shirt"
+    },
+    {
+      "id": "p212",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/front-close-up.png?v=1776551226",
+      "affiliateUrl": "https://mortenoir.co.uk/products/sepulchre-crewneck-bodysuit"
+    },
+    {
+      "id": "p213",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/gray-camo-front.png?v=1776551204",
+      "affiliateUrl": "https://mortenoir.co.uk/products/dead-ops-cross-t-shirt"
+    },
+    {
+      "id": "p214",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/front-no-pocket.png?v=1776709361",
+      "affiliateUrl": "https://mortenoir.co.uk/products/phantom-wash-boxy-hoodie"
+    },
+    {
+      "id": "p215",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/vintage-boxy-tee-front-retry.png?v=1776551162",
+      "affiliateUrl": "https://mortenoir.co.uk/products/damnatio-boxy-oversized-t-shirt"
+    },
+    {
+      "id": "p216",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/cropped-dolman-arm-raised-sleeve-drama.png?v=1776551147",
+      "affiliateUrl": "https://mortenoir.co.uk/products/morrigan-dolman-crop-t-shirt"
+    },
+    {
+      "id": "p217",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/raw-edge-tee-hand-in-pocket.png?v=1776551128",
+      "affiliateUrl": "https://mortenoir.co.uk/products/hollow-waffle-t-shirt"
+    },
+    {
+      "id": "p218",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/Wraith_Waffle_Knit_Shorts.png?v=1777674811",
+      "affiliateUrl": "https://mortenoir.co.uk/products/wraith-waffle-knit-shorts"
+    },
+    {
+      "id": "p219",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/co-ord-front-product-focus_840224db-9b47-42de-af0f-08e818379aa7.png?v=1776709207",
+      "affiliateUrl": "https://mortenoir.co.uk/products/wraith-waffle-knit-t-shirt"
+    },
+    {
+      "id": "p221",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/mineral-wash-sweater-back-mockup.png?v=1771381530",
+      "affiliateUrl": "https://mortenoir.co.uk/products/dark-sermon-oversized-sweater"
+    },
+    {
+      "id": "p222",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/leaning-pose-cropped-hoodie-skirt.png?v=1770436294",
+      "affiliateUrl": "https://mortenoir.co.uk/products/rebel-stripe-contrast-skirt"
+    },
+    {
+      "id": "p223",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/back-view-polo-collar-sweatshirt-no-necklaces.png?v=1770431590",
+      "affiliateUrl": "https://mortenoir.co.uk/products/noir-polo-collar-sweatshirt"
+    },
+    {
+      "id": "p224",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/front-view-complete-outfit-hoodie-pants-with-design.png?v=1770424328",
+      "affiliateUrl": "https://mortenoir.co.uk/products/burial-hill-straight-leg-pants"
+    },
+    {
+      "id": "p225",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/back-view-adjusting-hood-no-zipper-fleeced-full-zip-boxy-hoodie.png?v=1770423194",
+      "affiliateUrl": "https://mortenoir.co.uk/products/burial-hill-boxy-full-zip-hoodie"
+    },
+    {
+      "id": "p226",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/front-view-unisex-oversized-cotton-t-shirt.png?v=1770393774",
+      "affiliateUrl": "https://mortenoir.co.uk/products/unisex-oversized-cotton-t-shirt"
+    },
+    {
+      "id": "p231",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/front-view-mockup_4b0e474e-50d4-4bb2-afe7-af750ff13579.png?v=1768619143",
+      "affiliateUrl": "https://mortenoir.co.uk/products/contrast-collar-striped-soccer-jersey"
+    },
+    {
+      "id": "p232",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/striped-rugby-polo-front-view.png?v=1777556083",
+      "affiliateUrl": "https://mortenoir.co.uk/products/color-block-stripe-polo-shirt"
+    },
+    {
+      "id": "p234",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/back-view-rich-jet-black-snow-washed-hoodie.png?v=1777555856",
+      "affiliateUrl": "https://mortenoir.co.uk/products/snow-washed-loose-cotton-hoodie-1"
+    },
+    {
+      "id": "p235",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/IMG-1513.png?v=1780191165",
+      "affiliateUrl": "https://mortenoir.co.uk/products/crux-aeterna-wide-leg-sweatpants-unisex-dark-streetwear"
+    },
+    {
+      "id": "p236",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/IMG-1508.png?v=1780190638",
+      "affiliateUrl": "https://mortenoir.co.uk/products/crux-aeterna-cinched-hem-hoodie-unisex-dark-streetwear"
+    },
+    {
+      "id": "p239",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/IMG-1497.png?v=1780188628",
+      "affiliateUrl": "https://mortenoir.co.uk/products/abyssal-dagger-sunfade-hoodie"
+    },
+    {
+      "id": "p240",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/IMG-1479.png?v=1780187294",
+      "affiliateUrl": "https://mortenoir.co.uk/products/dusk-fade-fleece-joggers"
+    },
+    {
+      "id": "p241",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/IMG-1482.png?v=1780184737",
+      "affiliateUrl": "https://mortenoir.co.uk/products/dusk-fade-fleece-tracksuit"
+    },
+    {
+      "id": "p248",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/IMG-1364.png?v=1779937171",
+      "affiliateUrl": "https://mortenoir.co.uk/products/edwardian-noir-distressed-fade-knit-crewneck"
+    },
+    {
+      "id": "p249",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/IMG-1355.png?v=1779936401",
+      "affiliateUrl": "https://mortenoir.co.uk/products/dark-epitaph-distressed-crewneck"
+    },
+    {
+      "id": "p255",
+      "brandId": "29",
+      "image": "https://cdn.shopify.com/s/files/1/0975/4456/9177/files/7AE6DCA7-951F-4FA0-993E-3DB90022D69D.png?v=1779926422",
+      "affiliateUrl": "https://mortenoir.co.uk/products/mortenoir-cloaked-shadow-oversized-hoodie"
+    },
+    {
+      "id": "p400",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_8045.jpg?v=1777016390",
+      "affiliateUrl": "https://makercreator.ca/products/noir-sweatpants"
+    },
+    {
+      "id": "p401",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_8044.jpg?v=1777016057",
+      "affiliateUrl": "https://makercreator.ca/products/noir-crewneck"
+    },
+    {
+      "id": "p402",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/ChatGPTImageApr23_2026at04_39_40PM.png?v=1777015342",
+      "affiliateUrl": "https://makercreator.ca/products/gris-sweatpants"
+    },
+    {
+      "id": "p403",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/ChatGPTImageApr23_2026at04_39_46PM.png?v=1777014876",
+      "affiliateUrl": "https://makercreator.ca/products/gris-zip-up-hoodie"
+    },
+    {
+      "id": "p404",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5564.jpg?v=1773058617",
+      "affiliateUrl": "https://makercreator.ca/products/basic-denim"
+    },
+    {
+      "id": "p405",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5560.jpg?v=1773057040",
+      "affiliateUrl": "https://makercreator.ca/products/raw-denim"
+    },
+    {
+      "id": "p406",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5619.jpg?v=1773096199",
+      "affiliateUrl": "https://makercreator.ca/products/distressed-denim"
+    },
+    {
+      "id": "p407",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5597.heic?v=1773093770&width=900",
+      "affiliateUrl": "https://makercreator.ca/products/expression-crewneck"
+    },
+    {
+      "id": "p408",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5601.heic?v=1773093545&width=900",
+      "affiliateUrl": "https://makercreator.ca/products/creativity-zip-up"
+    },
+    {
+      "id": "p409",
+      "brandId": "31",
+      "image": "https://cdn.shopify.com/s/files/1/0670/1111/7099/files/IMG_5612.heic?v=1773093444&width=900",
+      "affiliateUrl": "https://makercreator.ca/products/matrix-waffle-knit"
+    },
+    {
+      "id": "p410",
+      "brandId": "32",
+      "image": "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/0b75004c90ba4c0894ca0785e41afa4a.png?v=1780029147&width=900",
+      "affiliateUrl": "https://justiniano.shop/products/verde-ouro-t-shirt"
+    },
+    {
+      "id": "p411",
+      "brandId": "32",
+      "image": "https://cdn.shopify.com/s/files/1/0796/4341/0466/files/e95a4c3062f94e688876a97371a5e7d7.png?v=1780029807&width=900",
+      "affiliateUrl": "https://justiniano.shop/products/essential-bodycon-crewneck-t-shirt"
+    },
+    {
+      "id": "p500",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/b1118ce9977d48608b66bdcbab95008c.png?v=1768432236",
+      "affiliateUrl": "https://neutralstate.shop/products/vintage-washed-frayed-fleece-hoodie-2"
+    },
+    {
+      "id": "p501",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/651c73a2c15d409abd3fcc5e644c65eb.png?v=1778739128",
+      "affiliateUrl": "https://neutralstate.shop/products/unisex-vintage-wash-loose-sweatpants"
+    },
+    {
+      "id": "p502",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/1cdf3d5b08134a389e852fff1f1e6256.png?v=1778655531",
+      "affiliateUrl": "https://neutralstate.shop/products/sunfade-zipper-hoodie"
+    },
+    {
+      "id": "p503",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/5158238677bf40f080fa5382b4a7c9ab.png?v=1768711730",
+      "affiliateUrl": "https://neutralstate.shop/products/vintage-washed-waist-pants"
+    },
+    {
+      "id": "p504",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/d602465a5ea348ecbf885fb52e4ad745.png?v=1768433766",
+      "affiliateUrl": "https://neutralstate.shop/products/vintage-washed-frayed-hem-hoodie-1"
+    },
+    {
+      "id": "p505",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/24c25dc3b2d04e7b835655e62b2a9f21.png?v=1768432161",
+      "affiliateUrl": "https://neutralstate.shop/products/sun-fade-raw-edge-straight-leg-sweatpants-2"
+    },
+    {
+      "id": "p506",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/075cf597539f43baa964754c2f85e7dd.png?v=1768433361",
+      "affiliateUrl": "https://neutralstate.shop/products/snow-wash-hand-frayed-heavyweight-hoodie-2"
+    },
+    {
+      "id": "p507",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/cbbcec8b998d40648b47311add1ee130.png?v=1769895470",
+      "affiliateUrl": "https://neutralstate.shop/products/reflection-striped-raglan-sleeve-jacket"
+    },
+    {
+      "id": "p508",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/45171e28cdd042659a396823c464858f.png?v=1770937596",
+      "affiliateUrl": "https://neutralstate.shop/products/heavyweight-hidden-pocket-fleece-hoodie-1"
+    },
+    {
+      "id": "p509",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/c066dda4fc7d40608ca5def182a848d7.png?v=1768431861",
+      "affiliateUrl": "https://neutralstate.shop/products/essential-straight-leg-sweatpants-2"
+    },
+    {
+      "id": "p510",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/4cd78cf5ab11416aa9c57cd637e1177c.png?v=1768433916",
+      "affiliateUrl": "https://neutralstate.shop/products/essential-heavyweight-vest-1"
+    },
+    {
+      "id": "p511",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/9776ed606f0f488cb397cff280ed5458.png?v=1769894691",
+      "affiliateUrl": "https://neutralstate.shop/products/essential-kids-straight-leg-sweatpants"
+    },
+    {
+      "id": "p512",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/4cea24db363144a889137395ff1ae56f.png?v=1768434666",
+      "affiliateUrl": "https://neutralstate.shop/products/essential-heavyweight-cotton-sweatpants-1"
+    },
+    {
+      "id": "p513",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/5f8ccb71ece6431eac1f13d94f1b1ca2.png?v=1768432551",
+      "affiliateUrl": "https://neutralstate.shop/products/essential-fleece-mock-neck-crew-sweatshirt-1"
+    },
+    {
+      "id": "p514",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/3ba4c8203a984b8eb77e497055b86dd9.png?v=1769894466",
+      "affiliateUrl": "https://neutralstate.shop/products/essential-drawstring-straight-leg-sweatpants"
+    },
+    {
+      "id": "p515",
+      "brandId": "33",
+      "image": "https://cdn.shopify.com/s/files/1/0687/8855/1757/files/f067ed8e17a64ab7adbad645d003766a.png?v=1769895036",
+      "affiliateUrl": "https://neutralstate.shop/products/cropped-half-zip-sweatshirt"
+    },
+    {
+      "id": "p700",
+      "brandId": "35",
+      "image": "https://shopevara.store/cdn/shop/files/6f1fc069-BL1-1.png?v=1747415749&width=600",
+      "affiliateUrl": "https://shopevara.store/products/evara-sweatpants"
+    },
+    {
+      "id": "p701",
+      "brandId": "35",
+      "image": "https://shopevara.store/cdn/shop/files/b2c411b4-BL1-2.png?v=1747415749&width=600",
+      "affiliateUrl": "https://shopevara.store/products/evara-sweatpants"
+    },
+    {
+      "id": "p702",
+      "brandId": "35",
+      "image": "https://shopevara.store/cdn/shop/files/Photoroom_20260525_173219.jpg?v=1779745316&width=600",
+      "affiliateUrl": "https://shopevara.store/products/evara-rhinestone-hoodie"
+    },
+    {
+      "id": "p703",
+      "brandId": "35",
+      "image": "https://shopevara.store/cdn/shop/files/Photoroom_20250903_124316_6356f595-644c-4831-8fea-68d9bca5dad1.jpg?v=1756921825&width=600",
+      "affiliateUrl": "https://shopevara.store/products/evara-rhinestone-denim-jorts"
+    },
+    {
+      "id": "p711",
+      "brandId": "36",
+      "image": "https://static.wixstatic.com/media/d08e68_e321a52a325d439fa6229c0c61a389b4~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/d08e68_e321a52a325d439fa6229c0c61a389b4~mv2.png",
+      "affiliateUrl": "https://www.lateliersante.store/product-page/classic-t-shirt"
+    },
+    {
+      "id": "p712",
+      "brandId": "36",
+      "image": "https://static.wixstatic.com/media/d08e68_355b02ed54a8451c9a8b0d500d665b31~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/d08e68_355b02ed54a8451c9a8b0d500d665b31~mv2.png",
+      "affiliateUrl": "https://www.lateliersante.store/product-page/sunglasses"
+    },
+    {
+      "id": "p713",
+      "brandId": "36",
+      "image": "https://static.wixstatic.com/media/d08e68_f7c4103f61794c3593e422be4ec6b449~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,enc_avif,quality_auto/d08e68_f7c4103f61794c3593e422be4ec6b449~mv2.jpg",
+      "affiliateUrl": "https://www.lateliersante.store/product-page/quartz-sunglasses"
+    },
+    {
+      "id": "p714",
+      "brandId": "36",
+      "image": "https://static.wixstatic.com/media/d08e68_c27d47abd9d646cdaf7c85e667f35ee2~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/d08e68_c27d47abd9d646cdaf7c85e667f35ee2~mv2.png",
+      "affiliateUrl": "https://www.lateliersante.store/product-page/sante-solstice-turf"
+    },
+    {
+      "id": "p715",
+      "brandId": "36",
+      "image": "https://static.wixstatic.com/media/d08e68_cab6179e751141078204eca658ef08fd~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/d08e68_cab6179e751141078204eca658ef08fd~mv2.png",
+      "affiliateUrl": "https://www.lateliersante.store/product-page/sante-solstice-amber"
+    },
+    {
+      "id": "p716",
+      "brandId": "36",
+      "image": "https://static.wixstatic.com/media/d08e68_8a8699bff0f943e3a02b903f632d8f3b~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,enc_avif,quality_auto/d08e68_8a8699bff0f943e3a02b903f632d8f3b~mv2.jpg",
+      "affiliateUrl": "https://www.lateliersante.store/product-page/sante-snapback-sage"
+    },
+    {
+      "id": "p717",
+      "brandId": "36",
+      "image": "https://static.wixstatic.com/media/d08e68_6505fcf995914f14b596aa7d4c829fb1~mv2.jpg/v1/fill/w_600,h_600,al_c,q_80,enc_avif,quality_auto/d08e68_6505fcf995914f14b596aa7d4c829fb1~mv2.jpg",
+      "affiliateUrl": "https://www.lateliersante.store/product-page/classic-skully"
+    },
+    {
+      "id": "p720",
+      "brandId": "37",
+      "image": "https://static.wixstatic.com/media/8207c6_76f928a017e44e329ffcab4edc44966d~mv2.jpg/v1/fill/w_600,h_840,al_c,q_80,enc_avif,quality_auto/8207c6_76f928a017e44e329ffcab4edc44966d~mv2.jpg",
+      "affiliateUrl": "https://www.daewearapparel.com/product-page/basic-heartless-drip-crop-black"
+    },
+    {
+      "id": "p721",
+      "brandId": "37",
+      "image": "https://static.wixstatic.com/media/8207c6_61fd9cbf6d0e4887aaaf9d2ca5316bd2~mv2.jpg/v1/fill/w_600,h_840,al_c,q_80,enc_avif,quality_auto/8207c6_61fd9cbf6d0e4887aaaf9d2ca5316bd2~mv2.jpg",
+      "affiliateUrl": "https://www.daewearapparel.com/product-page/basic-heartless-drip-crop-white"
+    },
+    {
+      "id": "p722",
+      "brandId": "37",
+      "image": "https://static.wixstatic.com/media/8207c6_fa10915d0ab34a3b92c7fcb5ea734670~mv2.jpg/v1/fill/w_600,h_840,al_c,q_80,enc_avif,quality_auto/8207c6_fa10915d0ab34a3b92c7fcb5ea734670~mv2.jpg",
+      "affiliateUrl": "https://www.daewearapparel.com/product-page/basic-daewear-crop-black"
+    },
+    {
+      "id": "p723",
+      "brandId": "37",
+      "image": "https://static.wixstatic.com/media/8207c6_5ccd849164b94dfca7613abfd0f1d157~mv2.jpg/v1/fill/w_600,h_840,al_c,q_80,enc_avif,quality_auto/8207c6_5ccd849164b94dfca7613abfd0f1d157~mv2.jpg",
+      "affiliateUrl": "https://www.daewearapparel.com/product-page/basic-daewear-crop-white"
+    },
+    {
+      "id": "p800",
+      "brandId": "38",
+      "image": "https://cdn.shopify.com/s/files/1/1002/4091/6822/files/7DE82E16-19FF-4D3B-BF7E-0251EAE415BB.png?v=1779540322",
+      "affiliateUrl": "https://priesthood.uk/products/dominion-core-tracksuit-navy"
+    },
+    {
+      "id": "p900",
+      "brandId": "39",
+      "image": "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/A058C19038C5AC9450BF254A2F5BE1B4.jpg?v=1777600693",
+      "affiliateUrl": "https://zerodvsn.com/products/surgeon-suede-hat"
+    },
+    {
+      "id": "p901",
+      "brandId": "39",
+      "image": "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/CurseMarkHat.png?v=1777601901",
+      "affiliateUrl": "https://zerodvsn.com/products/curse-mark-suede-hat"
+    },
+    {
+      "id": "p902",
+      "brandId": "39",
+      "image": "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/Front.jpg?v=1769017451",
+      "affiliateUrl": "https://zerodvsn.com/products/senbonzakura-cherry-blossom-zip-up"
+    },
+    {
+      "id": "p903",
+      "brandId": "39",
+      "image": "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/FrontSidePants.png?v=1768602005",
+      "affiliateUrl": "https://zerodvsn.com/products/flame-fist-ace-tribute-pants"
+    },
+    {
+      "id": "p904",
+      "brandId": "39",
+      "image": "https://cdn.shopify.com/s/files/1/0671/9681/3553/files/BackSukuna.jpg?v=1760138819",
+      "affiliateUrl": "https://zerodvsn.com/products/malevolent-shrine-oversized-tee"
+    },
+    {
+      "id": "p905",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/kc1_7dc3b898-2bd1-41d5-beb2-8b27390e15d3.png?v=1764227333",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/kingdom-snapback"
+    },
+    {
+      "id": "p906",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/vbl.png?v=1770464143",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/vancity-dad-hat"
+    },
+    {
+      "id": "p907",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/vb2.png?v=1770462709",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/vancity-black-snapback"
+    },
+    {
+      "id": "p908",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/vb.png?v=1770460924",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/vancity-blue-snapback"
+    },
+    {
+      "id": "p909",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/adprosweats2.png?v=1770453589",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/alldubs-sport-sweatpant"
+    },
+    {
+      "id": "p910",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/adprohoodief2.png?v=1770443571",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/alldubs-sport-hoodie"
+    },
+    {
+      "id": "p911",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/bufpro1.png?v=1766213843",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/mafia-v2-snapback"
+    },
+    {
+      "id": "p912",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/bos1.png?v=1764127057",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/bean-town-snapback"
+    },
+    {
+      "id": "p913",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/lal1.png?v=1764127467",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/show-time-snapback"
+    },
+    {
+      "id": "p914",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/bls_propics.png?v=1763014797",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/bolts-diehard-long-sleeve"
+    },
+    {
+      "id": "p915",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/db1_310061ea-278c-4539-bed4-a2b167b9e957.png?v=1763103886",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/denver-snapback"
+    },
+    {
+      "id": "p916",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/blt1.png?v=1762496264",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/bolt-gang-snapback"
+    },
+    {
+      "id": "p917",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/sampro2.png?v=1692763397",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/sho-time"
+    },
+    {
+      "id": "p918",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/gf11.png?v=1698377270",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/greek-freak-tee"
+    },
+    {
+      "id": "p919",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/pe1_a4b4110d-8740-43dd-90c6-5924cfae65cd.png?v=1737192490",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/phila-eagles-tee"
+    },
+    {
+      "id": "p920",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/lions1.png?v=1737195830",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/motor-city-tee"
+    },
+    {
+      "id": "p921",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/htx1.png?v=1735967076",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/h-town-snapback"
+    },
+    {
+      "id": "p922",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/dl1.png?v=1735966906",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/motor-city-snapback"
+    },
+    {
+      "id": "p923",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/s1.png?v=1735966646",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/niner-gang-v3-snapback"
+    },
+    {
+      "id": "p924",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/la1_da8c5585-d6c5-4288-a09f-874bef126ecb.png?v=1735963824",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/la-rivalry-snapback"
+    },
+    {
+      "id": "p925",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/e4.png?v=1735981424",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/fly-eagles-fly-snapback"
+    },
+    {
+      "id": "p926",
+      "brandId": "40",
+      "image": "https://cdn.shopify.com/s/files/1/0654/8819/1722/files/r1.png?v=1735635172",
+      "affiliateUrl": "https://www.alldubsofficial.com/products/raider-nation-snapback"
+    },
+    {
+      "id": "pcos1",
+      "brandId": "42",
+      "image": "https://cityofsaints.store/cdn/shop/files/Untitled_Project_-_illustrationImage_1_copy_20.png?v=1779556736&width=800",
+      "affiliateUrl": "https://cityofsaints.store/products/driven-panther-tee"
+    },
+    {
+      "id": "pcos2",
+      "brandId": "42",
+      "image": "https://cityofsaints.store/cdn/shop/files/Untitled_Project_-_illustrationImage_2_copy_4.png?v=1780023693&width=800",
+      "affiliateUrl": "https://cityofsaints.store/products/oversized-unisex-long-sleeve-t-shirt"
+    },
+    {
+      "id": "pcos3",
+      "brandId": "42",
+      "image": "https://cityofsaints.store/cdn/shop/files/Untitled_Project_-_illustrationImage_1_copy_5.png?v=1779037912&width=800",
+      "affiliateUrl": "https://cityofsaints.store/products/house-obsession-t-shirt"
+    },
+    {
+      "id": "pcos4",
+      "brandId": "42",
+      "image": "https://cityofsaints.store/cdn/shop/files/Untitled_Project_-_illustrationImage_1_copy_3.png?v=1779037173&width=800",
+      "affiliateUrl": "https://cityofsaints.store/products/sounds-take-over-t-shirt"
+    }
+  ]
+}
