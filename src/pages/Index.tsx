@@ -145,6 +145,15 @@ const heroProducts = (() => {
       picks[0] = pick;
     }
   }
+  // Guarantee a City of Saints (brandId 42) product is featured in the carousel.
+  const hasCos = picks.some((p) => p.brandId === "42");
+  if (!hasCos) {
+    const cos = products.filter((p) => p.brandId === "42");
+    if (cos.length) {
+      const pick = cos[Math.floor(Math.random() * cos.length)];
+      picks[1] = pick;
+    }
+  }
   return picks;
 })();
 
