@@ -77,7 +77,7 @@ export interface BlogPost {
 export const AESTHETICS = [
   "Streetwear", "Minimalist", "Y2K", "Avant-Garde", "Techwear",
   "Cottagecore", "Dark Academia", "Gorpcore", "Coastal Grandmother",
-  "Old Money", "Grunge", "Bohemian", "Brutalist", "Archive"
+  "Old Money", "Grunge", "Bohemian", "Brutalist", "Archive", "Sportswear"
 ] as const;
 
 export const CATEGORIES = [
@@ -123,7 +123,7 @@ export const brands: Brand[] = [
     founded: "2023", founderNote: "\"Fashion is how we tell the world who we are without saying a word.\"",
     vibes: ["Heritage meets hustle", "Bold self-expression", "Cultural pride", "Unapologetically loud"],
     origin: "Canada", website: "https://dripbyrage.store", affiliateUrl: "https://dripbyrage.store",
-    instagram: "@dripbyrage", tiktok: "@dripbyrage", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Outerwear", "Bottoms"],
+    instagram: "@dripbyrage", tiktok: "@dripbyrage", aesthetics: ["Streetwear", "Archive", "Grunge"], categories: ["Tops", "Outerwear", "Bottoms"],
     priceRange: "mid", followers: 50000, rating: 4.7, featured: true, newDrop: true, themeColor: "hsl(16, 85%, 60%)", themeTextTone: "dark"
   },
   {
@@ -134,7 +134,7 @@ export const brands: Brand[] = [
     founded: "2023", founderNote: "\"We don't follow trends. We preview them.\"",
     vibes: ["Motorsport energy", "Y2K nostalgia", "Graphic-heavy", "Unapologetically bold"],
     origin: "USA", website: "https://previewworldwide.com", affiliateUrl: "https://previewworldwide.com",
-    instagram: "@previewworldwide", aesthetics: ["Streetwear", "Y2K", "Grunge"], categories: ["Tops", "Bottoms", "Accessories"],
+    instagram: "@previewworldwide", aesthetics: ["Y2K", "Streetwear", "Archive"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "budget", followers: 15000, rating: 4.5, featured: true, newDrop: true, themeColor: "#FF2E63", themeTextTone: "light"
   },
   {
@@ -145,7 +145,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"Patience is power. The drip is just the bonus.\"",
     vibes: ["Faith-driven", "Cultural roots", "Premium details", "Patience as power"],
     origin: "USA", website: "https://sabrclothing2024.com", affiliateUrl: "https://sabrclothing2024.com/collections/all",
-    instagram: "@sabrclothing", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops", "Bottoms", "Accessories"],
+    instagram: "@sabrclothing", aesthetics: ["Y2K", "Streetwear"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "mid", followers: 10000, rating: 4.5, featured: true, newDrop: true, themeColor: "#0F5132", themeTextTone: "light"
   },
   {
@@ -159,7 +159,7 @@ export const brands: Brand[] = [
     vibes: ["Take the risk", "Move with intention", "Bet on yourself", "Fortune favors the bold"],
     origin: "USA", website: "https://fortunefellasclub.com", affiliateUrl: "https://fortunefellasclub.com/collections/all",
     instagram: "@fortunefellasclub", tiktok: "@fortunefellasclub",
-    aesthetics: ["Streetwear", "Minimalist", "Old Money"], categories: ["Tops", "Bottoms", "Outerwear"],
+    aesthetics: ["Old Money", "Minimalist", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 7500, rating: 4.6, featured: true, newDrop: true, themeColor: "#D4A24C", themeTextTone: "dark"
   },
   {
@@ -171,7 +171,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"Heavyweight feel, handmade soul. That\u2019s the whole brief.\"",
     vibes: ["Heavyweight by design", "Handmade screen prints", "Imperfections welcome", "Soul over hype"],
     origin: "Canada", website: "https://harvxclo.com", affiliateUrl: "https://harvxclo.com/collections/all",
-    instagram: "@harvxclo", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
+    instagram: "@harvxclo", aesthetics: ["Grunge", "Archive", "Brutalist"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 5500, rating: 4.6, featured: true, newDrop: true, themeColor: "#B91C1C", themeTextTone: "light"
   },
   {
@@ -195,7 +195,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"Wear it like a rite. Move like a rumour.\"",
     vibes: ["Gothic sigils", "Sun-faded finishes", "Heavyweight by design", "Wear it like a rite"],
     origin: "UK", website: "https://mortenoir.co.uk", affiliateUrl: "https://mortenoir.co.uk/collections/all",
-    instagram: "@mortenoir", aesthetics: ["Streetwear", "Grunge", "Dark Academia", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
+    instagram: "@mortenoir", aesthetics: ["Dark Academia", "Grunge", "Avant-Garde", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 6500, rating: 4.6, featured: true, newDrop: true, themeColor: "#141414", themeTextTone: "light"
   },
   {
@@ -207,7 +207,7 @@ export const brands: Brand[] = [
     founded: "2023", founderNote: "\"Alone, but never lonely. That's the drip.\"",
     vibes: ["Quiet intensity", "Lone wolf energy", "Solitude as flex", "Focus over noise"],
     origin: "USA", website: "https://isolated.shop", affiliateUrl: "https://isolated.shop/collections/all",
-    instagram: "@isolated", aesthetics: ["Streetwear", "Minimalist", "Grunge"], categories: ["Tops", "Bottoms"],
+    instagram: "@isolated", aesthetics: ["Minimalist", "Grunge", "Brutalist"], categories: ["Tops", "Bottoms"],
     priceRange: "budget", followers: 4200, rating: 4.4, featured: true, newDrop: true, themeColor: "#334155", themeTextTone: "light"
   },
   {
@@ -219,7 +219,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"Built for the ones who make.\"",
     vibes: ["Heavyweight basics", "Considered details", "Made in Canada energy", "Quietly elevated"],
     origin: "Canada", website: "https://makercreator.ca", affiliateUrl: "https://makercreator.ca/collections/all",
-    instagram: "@makercreator", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms"],
+    instagram: "@makercreator", aesthetics: ["Minimalist", "Avant-Garde", "Streetwear"], categories: ["Tops", "Bottoms"],
     priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true, themeColor: "#E8DFCF", themeTextTone: "dark"
   },
   {
@@ -231,7 +231,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"Wear the colors. Carry the country.\"",
     vibes: ["Verde-ouro pride", "Football heritage", "Bold graphics", "Everyday essentials"],
     origin: "Brazil", website: "https://justiniano.shop", affiliateUrl: "https://justiniano.shop",
-    instagram: "@justiniano", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops"],
+    instagram: "@justiniano", aesthetics: ["Y2K", "Archive", "Bohemian"], categories: ["Tops"],
     priceRange: "budget", followers: 2500, rating: 4.5, featured: true, newDrop: true, themeColor: "#047857", themeTextTone: "light"
   },
   {
@@ -243,7 +243,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"Less brand, more wardrobe.\"",
     vibes: ["Quiet luxury", "Heavyweight basics", "Washed cotton", "Layer ready"],
     origin: "USA", website: "https://neutralstate.shop", affiliateUrl: "https://neutralstate.shop/collections/all",
-    instagram: "@neutralstate", aesthetics: ["Streetwear", "Minimalist", "Old Money"], categories: ["Tops", "Bottoms", "Outerwear"],
+    instagram: "@neutralstate", aesthetics: ["Minimalist", "Old Money", "Coastal Grandmother"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 3800, rating: 4.6, featured: true, newDrop: true, themeColor: "#C9BFAF", themeTextTone: "dark"
   },
   {
@@ -255,7 +255,7 @@ export const brands: Brand[] = [
     founded: "2023", founderNote: "\"Where style meets street.\"",
     vibes: ["Military-inspired", "Heavyweight basics", "Street-ready", "Earn your fit"],
     origin: "International", website: "https://www.redeemordie.com", affiliateUrl: "https://www.redeemordie.com/shop",
-    instagram: "@redeemordie", aesthetics: ["Streetwear", "Techwear", "Grunge"], categories: ["Tops", "Bottoms", "Outerwear"],
+    instagram: "@redeemordie", aesthetics: ["Techwear", "Streetwear", "Grunge"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 8000, rating: 4.5, featured: true, newDrop: true, themeColor: "#4B5320", themeTextTone: "light"
   },
   {
@@ -267,7 +267,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"Wear your faith proudly.\"",
     vibes: ["Faith-forward", "Rhinestone detailing", "Heavyweight & satin", "Wear it loud"],
     origin: "USA", website: "https://shopevara.store", affiliateUrl: "https://shopevara.store/collections/all",
-    instagram: "@shopevara", aesthetics: ["Streetwear", "Y2K"], categories: ["Tops", "Bottoms", "Outerwear"],
+    instagram: "@shopevara", aesthetics: ["Y2K", "Bohemian", "Coastal Grandmother"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 6500, rating: 5.0, featured: true, newDrop: true, themeColor: "#F4C7C0", themeTextTone: "dark"
   },
   {
@@ -279,7 +279,7 @@ export const brands: Brand[] = [
     founded: "2023", founderNote: "\"Quiet pieces. Considered details.\"",
     vibes: ["Quietly elevated", "Workshop made", "Considered details", "Health in craft"],
     origin: "Canada", website: "https://www.lateliersante.store", affiliateUrl: "https://www.lateliersante.store/category/all-products",
-    instagram: "@lateliersante", aesthetics: ["Minimalist", "Old Money", "Streetwear"], categories: ["Tops", "Accessories"],
+    instagram: "@lateliersante", aesthetics: ["Old Money", "Minimalist", "Coastal Grandmother"], categories: ["Tops", "Accessories"],
     priceRange: "mid", followers: 4200, rating: 4.6, featured: true, newDrop: true, themeColor: "#9CAF88", themeTextTone: "dark"
   },
   {
@@ -291,7 +291,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"A different kind of company. A different kind of dae'wear.\"",
     vibes: ["A different kind", "Signal graphics", "Daily essentials", "Intentional fits"],
     origin: "USA", website: "https://daewearapparel.com", affiliateUrl: "https://daewearapparel.com/shop",
-    instagram: "@daewearapparel", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops"],
+    instagram: "@daewearapparel", aesthetics: ["Minimalist", "Brutalist"], categories: ["Tops"],
     priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true, themeColor: "#FCD34D", themeTextTone: "dark"
   },
   {
@@ -305,7 +305,7 @@ export const brands: Brand[] = [
     vibes: ["Faith in the fabric", "Luxury heavyweight", "Darker visual identity", "Built with conviction"],
     origin: "United Kingdom", website: "https://priesthood.uk", affiliateUrl: "https://priesthood.uk",
     instagram: "@priesthood.uk", tiktok: "@priesthood010",
-    aesthetics: ["Streetwear", "Minimalist", "Dark Academia"], categories: ["Tops", "Bottoms"],
+    aesthetics: ["Dark Academia", "Minimalist", "Avant-Garde"], categories: ["Tops", "Bottoms"],
     priceRange: "premium", followers: 2500, rating: 4.8, featured: true, newDrop: true, themeColor: "#3F1010", themeTextTone: "light"
   },
   {
@@ -317,7 +317,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"If you know, you know. No explaining required.\"",
     vibes: ["Anime-rooted", "Limited drops", "Premium suede & fleece", "If you know, you know"],
     origin: "Canada", website: "https://zerodvsn.com", affiliateUrl: "https://zerodvsn.com/collections/all",
-    instagram: "@zerodvsn", aesthetics: ["Streetwear", "Y2K", "Archive"], categories: ["Tops", "Bottoms", "Accessories"],
+    instagram: "@zerodvsn", aesthetics: ["Y2K", "Archive", "Techwear"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "mid", followers: 4500, rating: 4.7, featured: true, newDrop: true, themeColor: "#1E3A8A", themeTextTone: "light"
   },
   {
@@ -329,7 +329,7 @@ export const brands: Brand[] = [
     founded: "2023", founderNote: "\"Real fans deserve better.\"",
     vibes: ["Premium fan sportswear", "City-coded design", "Hand-finished snapbacks", "Heavyweight fleece"],
     origin: "Canada", website: "https://www.alldubsofficial.com", affiliateUrl: "https://www.alldubsofficial.com",
-    instagram: "@alldubsinc", aesthetics: ["Streetwear", "Sportswear"], categories: ["Tops", "Bottoms", "Accessories"],
+    instagram: "@alldubsinc", aesthetics: ["Sportswear", "Streetwear", "Archive"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "mid", followers: 5200, rating: 4.7, featured: true, newDrop: true, themeColor: "#1D4ED8", themeTextTone: "light"
   },
   {
@@ -354,7 +354,7 @@ export const brands: Brand[] = [
     founded: "2024", founderNote: "\"For the ones who move like they've already been anointed.\"",
     vibes: ["Montreal streetwear", "Oversized graphic tees", "Religious iconography", "House obsession"],
     origin: "Montreal, Canada", website: "https://cityofsaints.store", affiliateUrl: "https://cityofsaints.store",
-    instagram: "@cityofsaints", aesthetics: ["Streetwear", "Grunge"], categories: ["Tops"],
+    instagram: "@cityofsaints", aesthetics: ["Streetwear", "Grunge", "Dark Academia"], categories: ["Tops"],
     priceRange: "mid", followers: 2400, rating: 4.7, featured: true, newDrop: true,
     themeColor: "#5433EB", themeTextTone: "light", addedAt: "2026-07-07"
   },
