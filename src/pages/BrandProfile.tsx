@@ -138,8 +138,8 @@ export default function BrandProfile() {
                     {tag}
                   </span>
                 ))}
-                <span className="border border-border/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] capitalize text-muted-foreground">
-                  {brand.priceRange} range
+                <span className="border border-border/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                  Price {priceTierSymbol(brand.priceRange)}
                 </span>
               </div>
             </motion.div>
@@ -180,8 +180,8 @@ export default function BrandProfile() {
                   {brand.rating}
                   <span className="text-xl text-muted-foreground/60">/5</span>
                 </span>
-                <span className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80 capitalize">
-                  {brand.priceRange} tier
+                <span className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">
+                  {priceTierLabel(brand.priceRange)} · {priceTierSymbol(brand.priceRange)}
                 </span>
               </div>
             </div>
