@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Product } from "@/data/brands";
+import { filterHidden } from "@/lib/hiddenProducts";
 
 interface ScrapedRow {
   id: string;
@@ -51,7 +52,7 @@ export function useScrapedProducts(): Product[] {
         .select("*")
         .order("scraped_at", { ascending: false });
       if (error || !data || cancelled) return;
-      const products = (data as ScrapedRow[]).map(rowToProduct);
+      const products = filterHidden((data as ScrapedRow[]).map(rowToProduct));
       cache = products;
       setItems(products);
     })();
