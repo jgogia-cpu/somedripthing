@@ -9,7 +9,12 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 // on the same UTC day sees the same "Today's Featured Brand", and it changes
 // automatically at midnight UTC.
 function pickDailyFeaturedBrand(): Brand {
-  const pool = brands.filter((b) => b.featured);
+  // Sort by id so the pool order is fixed regardless of future edits to the
+  // brands array — guarantees the same brand shows for the entire UTC day.
+  const pool = brands
+    .filter((b) => b.featured)
+    .slice()
+    .sort((a, b) => a.id.localeCompare(b.id));
   const now = new Date();
   const dayIndex = Math.floor(
     Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) / 86400000
