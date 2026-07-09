@@ -43,7 +43,7 @@ function sessionShuffleIds(key: string, ids: string[]): string[] {
 
 function HeroCarouselCard({ product, index, currentSlide, total, onSelect, formatPrice }: {
   product: Product; index: number; currentSlide: number; total: number;
-  onSelect: (i: number) => void; formatPrice: (p: number) => string;
+  onSelect: (i: number) => void; formatPrice: (p: number, native?: Product["prices"]) => string;
 }) {
   const [failedImage, setFailedImage] = useState(false);
   const t = getCarouselTransform(index, currentSlide, total);
