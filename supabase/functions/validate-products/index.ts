@@ -27,6 +27,7 @@ async function checkImageUrl(url: string): Promise<{ ok: boolean; status: number
       method: "HEAD",
       headers: { "User-Agent": UA, Accept: "*/*" },
       redirect: "follow",
+      signal: AbortSignal.timeout(6000),
     });
     if (head.status < 400) {
       const type = head.headers.get("content-type") ?? "";
@@ -42,38 +43,12 @@ async function checkImageUrl(url: string): Promise<{ ok: boolean; status: number
       method: "GET",
       headers: { "User-Agent": UA, Accept: "*/*", Range: "bytes=0-1024" },
       redirect: "follow",
+      signal: AbortSignal.timeout(6000),
     });
     // Drain small body so the connection can close cleanly.
     try { await res.arrayBuffer(); } catch { /* ignore */ }
     const type = res.headers.get("content-type") ?? "";
     return { ok: res.status < 400 && (type.startsWith("image/") || type.includes("octet-stream")), status: res.status };
-  } catch {
-    return { ok: false, status: 0 };
-  }
-}
-
-async function checkPageUrl(url: string): Promise<{ ok: boolean; status: number }> {
-  if (!url || !/^https?:\/\//i.test(url)) return { ok: false, status: 0 };
-  try {
-    const head = await fetch(url, {
-      method: "HEAD",
-      headers: { "User-Agent": UA, Accept: "text/html,*/*" },
-      redirect: "follow",
-    });
-    if (head.status < 400) return { ok: true, status: head.status };
-    if (head.status !== 405 && head.status !== 403 && head.status !== 429) {
-      return { ok: false, status: head.status };
-    }
-  } catch { /* fall through to GET */ }
-
-  try {
-    const res = await fetch(url, {
-      method: "GET",
-      headers: { "User-Agent": UA, Accept: "text/html,*/*", Range: "bytes=0-1024" },
-      redirect: "follow",
-    });
-    try { await res.arrayBuffer(); } catch { /* ignore */ }
-    return { ok: res.status < 400, status: res.status };
   } catch {
     return { ok: false, status: 0 };
   }
@@ -144,13 +119,8 @@ Deno.serve(async (req) => {
 
   const results = await mapWithLimit(manifest, 8, async (p) => {
     const img = await checkImageUrl(p.image);
-    // Only check affiliate URL when image passes — dead image alone is enough.
-    const aff = img.ok
-      ? await checkPageUrl(p.affiliateUrl)
-      : { ok: false, status: 0 };
     let reason: string | null = null;
     if (!img.ok) reason = `image_${img.status}`;
-    else if (!aff.ok) reason = `affiliate_${aff.status}`;
     return { id: p.id, reason };
   });
 
@@ -166,12 +136,8 @@ Deno.serve(async (req) => {
       ? p.images.filter((url): url is string => typeof url === "string")
       : [p.image].filter((url): url is string => typeof url === "string");
     const img = await firstLiveImage(imageUrls);
-    const aff = img.ok && p.affiliate_url
-      ? await checkPageUrl(p.affiliate_url)
-      : { ok: false, status: 0 };
     let reason: string | null = null;
     if (!img.ok) reason = `image_${img.status}`;
-    else if (!aff.ok) reason = `affiliate_${aff.status}`;
     return { id: p.id, reason };
   });
 

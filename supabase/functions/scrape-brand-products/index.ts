@@ -66,6 +66,7 @@ async function checkUrl(url: string): Promise<boolean> {
       method: "HEAD",
       headers: { "User-Agent": UA, Accept: "image/avif,image/webp,image/*,*/*" },
       redirect: "follow",
+      signal: AbortSignal.timeout(6000),
     });
     if (head.ok) {
       const type = head.headers.get("content-type") ?? "";
@@ -83,6 +84,7 @@ async function checkUrl(url: string): Promise<boolean> {
         Range: "bytes=0-1024",
       },
       redirect: "follow",
+      signal: AbortSignal.timeout(6000),
     });
     try { await res.arrayBuffer(); } catch { /* ignore */ }
     const type = res.headers.get("content-type") ?? "";
