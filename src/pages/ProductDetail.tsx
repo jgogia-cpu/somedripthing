@@ -140,7 +140,7 @@ export default function ProductDetail() {
             <h1 className="font-display text-3xl font-bold md:text-4xl">{product.name}</h1>
 
             <div className="flex items-center gap-3">
-              <span className="text-2xl font-bold">{formatPrice(product.price)}</span>
+              <span className="text-2xl font-bold">{formatPrice(product.price, product.prices)}</span>
               {product.originalPrice && (
                 <span className="text-lg text-muted-foreground line-through">{formatPrice(product.originalPrice)}</span>
               )}

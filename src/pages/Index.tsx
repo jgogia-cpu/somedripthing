@@ -125,7 +125,7 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
         <div className="p-4">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{productBrand?.name}</p>
           <p className="mt-0.5 truncate text-sm font-semibold">{product.name}</p>
-          <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
+          <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price, product.prices)}</p>
         </div>
       </div>
     </div>
