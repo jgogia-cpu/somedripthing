@@ -71,18 +71,17 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
   const formatPrice = useCallback((usdPrice: number, nativePrices?: Partial<Record<CurrencyCode, number>>) => {
     const native = nativePrices?.[currency.code];
     const value = native ?? usdPrice * currency.rate;
-    const prefix = native ? "" : "~";
     if (currency.code === "JPY") {
-      return `${prefix}${currency.symbol}${(Math.round(value / 100) * 100).toLocaleString()}`;
+      return `${currency.symbol}${(Math.round(value / 100) * 100).toLocaleString()}`;
     }
     if (currency.code === "NGN") {
-      return `${prefix}${currency.symbol}${(Math.round(value / 500) * 500).toLocaleString()}`;
+      return `${currency.symbol}${(Math.round(value / 500) * 500).toLocaleString()}`;
     }
     // Native prices often include decimals (e.g. 39.99); preserve them.
     const formatted = native
       ? value.toLocaleString(undefined, { minimumFractionDigits: value % 1 === 0 ? 0 : 2, maximumFractionDigits: 2 })
       : Math.round(value).toLocaleString();
-    return `${prefix}${currency.symbol}${formatted}`;
+    return `${currency.symbol}${formatted}`;
   }, [currency]);
 
   return (
