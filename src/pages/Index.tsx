@@ -46,6 +46,7 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   onSelect: (i: number) => void; formatPrice: (p: number, native?: Product["prices"]) => string;
 }) {
   const [failedImage, setFailedImage] = useState(false);
+  const navigate = useNavigate();
   const t = getCarouselTransform(index, currentSlide, total);
   // Don't render off-screen cards at all — they were invisible (opacity 0) but
   // still spinning framer-motion animations and decoding images.
@@ -58,7 +59,6 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   const isCutout =
     product.brandId === "30" ||
     /removebg|transparent|cutout|Tee2-/i.test(allImages[0] || "");
-  const navigate = useNavigate();
   const sized = (url: string) => {
     if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
     if (url.includes("width=")) return url;
