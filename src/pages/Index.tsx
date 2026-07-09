@@ -203,8 +203,6 @@ export default function Index() {
   }, []);
   const newDropBrands = brands.filter(b => b.newDrop);
 
-  if (heroProducts.length === 0) return null;
-
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
 
@@ -212,6 +210,8 @@ export default function Index() {
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, [nextSlide]);
+
+  if (heroProducts.length === 0) return null;
 
   const current = heroProducts[currentSlide % heroProducts.length];
   const brand = getBrandById(current.brandId);
