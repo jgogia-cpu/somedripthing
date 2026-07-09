@@ -7,6 +7,7 @@ import { products, getBrandById } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import SEO from "@/components/SEO";
 import RecentlyViewed from "@/components/RecentlyViewed";
+import { hideProductLocally } from "@/lib/hiddenProducts";
 
 /** Return the Monday of the current week as a Date */
 function getCurrentMonday(): Date {
@@ -260,6 +261,10 @@ export default function Collections() {
                       src={product.image}
                       alt={product.name}
                       className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      onError={(e) => {
+                        hideProductLocally(product.id);
+                        e.currentTarget.closest("article")?.remove();
+                      }}
                     />
                   </Link>
 

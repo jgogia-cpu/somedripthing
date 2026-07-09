@@ -6,6 +6,7 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { isRecent } from "@/lib/isRecent";
+import { hideProductLocally } from "@/lib/hiddenProducts";
 
 interface ProductCardProps {
   product: Product;
@@ -86,7 +87,10 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               loading={eager ? "eager" : "lazy"}
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover"
-              onError={() => setFailed(true)}
+              onError={() => {
+                hideProductLocally(product.id);
+                setFailed(true);
+              }}
             />
             {allImages[imgIndex] !== visibleSrc && (
               <img

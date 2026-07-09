@@ -12,6 +12,7 @@ import { brands, products, blogPosts, AESTHETICS, getBrandById, Product } from "
 import { useCurrency } from "@/contexts/CurrencyContext";
 import RecentlyViewed from "@/components/RecentlyViewed";
 import { isRecent } from "@/lib/isRecent";
+import { hideProductLocally, isHidden } from "@/lib/hiddenProducts";
 
 // Shuffle whose result is cached in-memory for the lifetime of this JS module
 // (i.e., the current page load). Navigating between routes inside the SPA
@@ -44,10 +45,11 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
   product: Product; index: number; currentSlide: number; total: number;
   onSelect: (i: number) => void; formatPrice: (p: number) => string;
 }) {
+  const [failedImage, setFailedImage] = useState(false);
   const t = getCarouselTransform(index, currentSlide, total);
   // Don't render off-screen cards at all — they were invisible (opacity 0) but
   // still spinning framer-motion animations and decoding images.
-  if (t.opacity === 0) return null;
+  if (t.opacity === 0 || failedImage || isHidden(product.id)) return null;
   const productBrand = getBrandById(product.brandId);
   const isActive = index === currentSlide;
   const allImages = product.images?.length > 0 ? product.images : [product.image];
@@ -101,6 +103,10 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
               loading={isActive ? "eager" : "lazy"}
               decoding="async"
               className={`absolute inset-0 h-full w-full ${isCutout ? "object-contain p-4" : "object-cover"}`}
+              onError={() => {
+                hideProductLocally(product.id);
+                setFailedImage(true);
+              }}
             />
             {hasMultiple && (
               <img
@@ -197,6 +203,8 @@ export default function Index() {
   }, []);
   const newDropBrands = brands.filter(b => b.newDrop);
 
+  if (heroProducts.length === 0) return null;
+
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
 
@@ -205,7 +213,7 @@ export default function Index() {
     return () => clearInterval(timer);
   }, [nextSlide]);
 
-  const current = heroProducts[currentSlide];
+  const current = heroProducts[currentSlide % heroProducts.length];
   const brand = getBrandById(current.brandId);
 
   return (

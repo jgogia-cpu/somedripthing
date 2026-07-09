@@ -61,6 +61,48 @@ function extractSizes(variants: Array<Record<string, string | null>>): string[] 
 
 const PER_BRAND_CAP = 50; // cap newly-added per brand per run
 const MAX_PAGES = 6; // up to 1,500 products per brand per run
+const UA =
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0 Safari/537.36";
+
+async function checkUrl(url: string): Promise<boolean> {
+  if (!url || !/^https?:\/\//i.test(url)) return false;
+  try {
+    const head = await fetch(url, {
+      method: "HEAD",
+      headers: { "User-Agent": UA, Accept: "image/avif,image/webp,image/*,*/*" },
+      redirect: "follow",
+    });
+    if (head.ok) {
+      const type = head.headers.get("content-type") ?? "";
+      return !type || type.startsWith("image/") || type.includes("octet-stream");
+    }
+    if (![403, 405, 429].includes(head.status)) return false;
+  } catch { /* fall through to ranged GET */ }
+
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "User-Agent": UA,
+        Accept: "image/avif,image/webp,image/*,*/*",
+        Range: "bytes=0-1024",
+      },
+      redirect: "follow",
+    });
+    try { await res.arrayBuffer(); } catch { /* ignore */ }
+    const type = res.headers.get("content-type") ?? "";
+    return res.ok && (type.startsWith("image/") || type.includes("octet-stream"));
+  } catch {
+    return false;
+  }
+}
+
+async function firstLiveImage(urls: string[]): Promise<string | null> {
+  for (const url of urls) {
+    if (await checkUrl(url)) return url;
+  }
+  return null;
+}
 
 async function fetchAllProducts(site: string): Promise<{
   products: Array<Record<string, unknown>>;
@@ -74,7 +116,7 @@ async function fetchAllProducts(site: string): Promise<{
       {
         headers: {
           "User-Agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0 Safari/537.36",
+            UA,
         },
       },
     );
@@ -118,7 +160,7 @@ Deno.serve(async (req) => {
       // Existing handles for this brand
       const { data: existing } = await supabase
         .from("scraped_products")
-        .select("handle, image")
+        .select("handle, image, images")
         .eq("brand_id", brand.id);
       const have = new Set((existing ?? []).map((r) => r.handle));
 
@@ -130,6 +172,14 @@ Deno.serve(async (req) => {
       if (complete) {
         for (const row of existing ?? []) {
           if (!liveHandles.has(row.handle)) toDelete.push(row.handle);
+        }
+      }
+      for (const row of existing ?? []) {
+        const imageUrls = Array.isArray(row.images) && row.images.length
+          ? row.images.filter((url): url is string => typeof url === "string")
+          : [row.image].filter((url): url is string => typeof url === "string");
+        if (imageUrls.length === 0 || !(await firstLiveImage(imageUrls))) {
+          toDelete.push(row.handle);
         }
       }
       if (toDelete.length) {
@@ -160,7 +210,10 @@ Deno.serve(async (req) => {
         if (!handle || have.has(handle)) continue;
         const images = (p.images as Array<{ src: string }> | undefined) ?? [];
         if (!images.length) continue;
-        const imgs = images.slice(0, 4).map((i) => i.src);
+        const imgs = images.slice(0, 4).map((i) => i.src).filter(Boolean);
+        const liveImage = await firstLiveImage(imgs);
+        if (!liveImage) continue;
+        const orderedImgs = [liveImage, ...imgs.filter((img) => img !== liveImage)];
         const variants =
           (p.variants as Array<Record<string, string | null>> | undefined) ?? [];
         const price = parseFloat(String(variants[0]?.price ?? "0"));
@@ -180,8 +233,8 @@ Deno.serve(async (req) => {
           brand_name: brand.name,
           handle,
           name: title,
-          image: imgs[0],
-          images: imgs,
+          image: liveImage,
+          images: orderedImgs,
           price,
           description: desc,
           category,
