@@ -1,10 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
 // Curated list of brands to keep in sync. Mirrors src/data/brands.ts (id, name, site).
 const BRANDS: Array<{ id: string; name: string; site: string }> = [
@@ -164,14 +159,14 @@ Deno.serve(async (req) => {
         .eq("brand_id", brand.id);
       const have = new Set((existing ?? []).map((r) => r.handle));
 
-      // --- Cleanup: only remove products no longer live, and only when the
-      // brand's live listing was fetched completely (otherwise pagination
-      // gaps would wrongly delete real products). Image validity is handled
-      // by the separate validate-products cron.
-      const toDelete: string[] = [];
+      // --- Cleanup: remove products no longer live, and remove anything whose
+      // images are missing. Live-listing deletes only run when the brand feed
+      // was fetched completely, otherwise pagination gaps could delete real
+      // products.
+      const toDelete = new Set<string>();
       if (complete) {
         for (const row of existing ?? []) {
-          if (!liveHandles.has(row.handle)) toDelete.push(row.handle);
+          if (!liveHandles.has(row.handle)) toDelete.add(row.handle);
         }
       }
       for (const row of existing ?? []) {
@@ -179,20 +174,21 @@ Deno.serve(async (req) => {
           ? row.images.filter((url): url is string => typeof url === "string")
           : [row.image].filter((url): url is string => typeof url === "string");
         if (imageUrls.length === 0 || !(await firstLiveImage(imageUrls))) {
-          toDelete.push(row.handle);
+          toDelete.add(row.handle);
         }
       }
-      if (toDelete.length) {
+      const toDeleteHandles = Array.from(toDelete).filter(Boolean);
+      if (toDeleteHandles.length) {
         const { error: delErr } = await supabase
           .from("scraped_products")
           .delete()
           .eq("brand_id", brand.id)
-          .in("handle", toDelete);
+          .in("handle", toDeleteHandles);
         if (delErr) {
           notes.push(`${brand.name}: delete error ${delErr.message}`);
         } else {
-          totalRemoved += toDelete.length;
-          toDelete.forEach((h) => have.delete(h));
+          totalRemoved += toDeleteHandles.length;
+          toDeleteHandles.forEach((h) => have.delete(h));
         }
       }
 

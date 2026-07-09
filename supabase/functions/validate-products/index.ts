@@ -1,10 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36";
@@ -23,7 +18,7 @@ interface ScrapedProductRow {
   affiliate_url: string | null;
 }
 
-async function checkUrl(url: string): Promise<{ ok: boolean; status: number }> {
+async function checkImageUrl(url: string): Promise<{ ok: boolean; status: number }> {
   if (!url || !/^https?:\/\//i.test(url)) return { ok: false, status: 0 };
   // Try HEAD first (cheap). If the server rejects HEAD (405/403), fall back to
   // a GET with a small range so we don't download the whole page/image.
@@ -57,6 +52,33 @@ async function checkUrl(url: string): Promise<{ ok: boolean; status: number }> {
   }
 }
 
+async function checkPageUrl(url: string): Promise<{ ok: boolean; status: number }> {
+  if (!url || !/^https?:\/\//i.test(url)) return { ok: false, status: 0 };
+  try {
+    const head = await fetch(url, {
+      method: "HEAD",
+      headers: { "User-Agent": UA, Accept: "text/html,*/*" },
+      redirect: "follow",
+    });
+    if (head.status < 400) return { ok: true, status: head.status };
+    if (head.status !== 405 && head.status !== 403 && head.status !== 429) {
+      return { ok: false, status: head.status };
+    }
+  } catch { /* fall through to GET */ }
+
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: { "User-Agent": UA, Accept: "text/html,*/*", Range: "bytes=0-1024" },
+      redirect: "follow",
+    });
+    try { await res.arrayBuffer(); } catch { /* ignore */ }
+    return { ok: res.status < 400, status: res.status };
+  } catch {
+    return { ok: false, status: 0 };
+  }
+}
+
 async function loadManifest(): Promise<ManifestItem[]> {
   // Fetch the manifest generated at build time from the published site.
   const candidates = [
@@ -79,7 +101,7 @@ async function firstLiveImage(urls: string[]): Promise<{ ok: boolean; status: nu
   if (!urls.length) return { ok: false, status: 0 };
   let last = 0;
   for (const url of urls) {
-    const result = await checkUrl(url);
+    const result = await checkImageUrl(url);
     if (result.ok) return result;
     last = result.status;
   }
@@ -121,10 +143,10 @@ Deno.serve(async (req) => {
   }
 
   const results = await mapWithLimit(manifest, 8, async (p) => {
-    const img = await checkUrl(p.image);
+    const img = await checkImageUrl(p.image);
     // Only check affiliate URL when image passes — dead image alone is enough.
     const aff = img.ok
-      ? await checkUrl(p.affiliateUrl)
+      ? await checkPageUrl(p.affiliateUrl)
       : { ok: false, status: 0 };
     let reason: string | null = null;
     if (!img.ok) reason = `image_${img.status}`;
@@ -145,7 +167,7 @@ Deno.serve(async (req) => {
       : [p.image].filter((url): url is string => typeof url === "string");
     const img = await firstLiveImage(imageUrls);
     const aff = img.ok && p.affiliate_url
-      ? await checkUrl(p.affiliate_url)
+      ? await checkPageUrl(p.affiliate_url)
       : { ok: false, status: 0 };
     let reason: string | null = null;
     if (!img.ok) reason = `image_${img.status}`;
