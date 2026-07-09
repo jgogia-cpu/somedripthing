@@ -49,6 +49,8 @@ export interface Product {
   images: string[];
   price: number;
   originalPrice?: number;
+  /** Native prices scraped directly from the brand's site, keyed by currency. */
+  prices?: Partial<Record<"USD" | "EUR" | "GBP" | "CAD" | "AUD" | "JPY" | "NGN", number>>;
   description: string;
   category: string;
   aesthetics: string[];

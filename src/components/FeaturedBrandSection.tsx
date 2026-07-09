@@ -80,7 +80,7 @@ function FeaturedProductCard({ product, textTone }: { product: Product; textTone
             {product.brandName}
           </p>
           <p className={`mt-0.5 truncate text-sm font-semibold ${isLight ? "text-white" : "text-black"}`}>{product.name}</p>
-          <p className={`mt-0.5 text-sm font-bold ${isLight ? "text-white" : "text-black"}`}>{formatPrice(product.price)}</p>
+          <p className={`mt-0.5 text-sm font-bold ${isLight ? "text-white" : "text-black"}`}>{formatPrice(product.price, product.prices)}</p>
         </div>
       </div>
     </Link>

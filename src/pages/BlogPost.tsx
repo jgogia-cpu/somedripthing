@@ -151,7 +151,7 @@ export default function BlogPost() {
                           <div className="mt-2.5">
                             <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{product.brandName}</p>
                             <p className="mt-0.5 text-sm font-semibold text-foreground">{product.name}</p>
-                            <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
+                            <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price, product.prices)}</p>
                           </div>
                         </Link>
                       ))}

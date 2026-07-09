@@ -288,7 +288,7 @@ export default function Collections() {
                       {product.name}
                     </h2>
                     <p className="mt-3 text-lg font-bold text-accent">
-                      {formatPrice(product.price)}
+                      {formatPrice(product.price, product.prices)}
                       {product.originalPrice && (
                         <span className="ml-2 text-sm font-normal text-muted-foreground line-through">
                           {formatPrice(product.originalPrice)}

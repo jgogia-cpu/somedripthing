@@ -17,6 +17,7 @@ interface ScrapedRow {
   aesthetics: string[];
   sizes: string[];
   affiliate_url: string;
+  prices?: Record<string, number>;
 }
 
 function rowToProduct(r: ScrapedRow): Product {
@@ -33,6 +34,7 @@ function rowToProduct(r: ScrapedRow): Product {
     aesthetics: r.aesthetics,
     sizes: r.sizes,
     affiliateUrl: r.affiliate_url,
+    prices: r.prices as Product["prices"],
     trending: true,
     newArrival: true,
   };

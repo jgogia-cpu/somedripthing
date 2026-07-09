@@ -24,7 +24,12 @@ interface CurrencyContextType {
   currency: CurrencyInfo;
   currencies: CurrencyInfo[];
   setCurrency: (code: CurrencyCode) => void;
-  formatPrice: (usdPrice: number) => string;
+  /**
+   * Format a price for display. Pass `nativePrices` (from the scraped product)
+   * to use the brand's exact quoted price when available. Falls back to a
+   * live-rate USD conversion prefixed with "~" to signal it's an estimate.
+   */
+  formatPrice: (usdPrice: number, nativePrices?: Partial<Record<CurrencyCode, number>>) => string;
   isLive: boolean;
 }
 
@@ -63,18 +68,21 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
     setSelectedCode(code);
   }, []);
 
-  const formatPrice = useCallback((usdPrice: number) => {
-    const converted = usdPrice * currency.rate;
+  const formatPrice = useCallback((usdPrice: number, nativePrices?: Partial<Record<CurrencyCode, number>>) => {
+    const native = nativePrices?.[currency.code];
+    const value = native ?? usdPrice * currency.rate;
+    const prefix = native ? "" : "~";
     if (currency.code === "JPY") {
-      // Round to nearest 100 for yen
-      return `${currency.symbol}${(Math.round(converted / 100) * 100).toLocaleString()}`;
+      return `${prefix}${currency.symbol}${(Math.round(value / 100) * 100).toLocaleString()}`;
     }
     if (currency.code === "NGN") {
-      // Round to nearest 500 for naira
-      return `${currency.symbol}${(Math.round(converted / 500) * 500).toLocaleString()}`;
+      return `${prefix}${currency.symbol}${(Math.round(value / 500) * 500).toLocaleString()}`;
     }
-    // Round to nearest whole number for all other currencies
-    return `${currency.symbol}${Math.round(converted).toLocaleString()}`;
+    // Native prices often include decimals (e.g. 39.99); preserve them.
+    const formatted = native
+      ? value.toLocaleString(undefined, { minimumFractionDigits: value % 1 === 0 ? 0 : 2, maximumFractionDigits: 2 })
+      : Math.round(value).toLocaleString();
+    return `${prefix}${currency.symbol}${formatted}`;
   }, [currency]);
 
   return (

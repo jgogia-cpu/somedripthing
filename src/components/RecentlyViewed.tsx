@@ -41,7 +41,7 @@ export default function RecentlyViewed({ className = "" }: { className?: string 
               </div>
               <p className="mt-2 truncate text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{p.brandName}</p>
               <p className="truncate text-xs font-medium text-foreground/90">{p.name}</p>
-              <p className="text-xs font-bold">{formatPrice(p.price)}</p>
+              <p className="text-xs font-bold">{formatPrice(p.price, p.prices)}</p>
             </Link>
           ))}
         </div>

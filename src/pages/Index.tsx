@@ -43,7 +43,7 @@ function sessionShuffleIds(key: string, ids: string[]): string[] {
 
 function HeroCarouselCard({ product, index, currentSlide, total, onSelect, formatPrice }: {
   product: Product; index: number; currentSlide: number; total: number;
-  onSelect: (i: number) => void; formatPrice: (p: number) => string;
+  onSelect: (i: number) => void; formatPrice: (p: number, native?: Product["prices"]) => string;
 }) {
   const [failedImage, setFailedImage] = useState(false);
   const t = getCarouselTransform(index, currentSlide, total);
@@ -125,7 +125,7 @@ function HeroCarouselCard({ product, index, currentSlide, total, onSelect, forma
         <div className="p-4">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{productBrand?.name}</p>
           <p className="mt-0.5 truncate text-sm font-semibold">{product.name}</p>
-          <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price)}</p>
+          <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price, product.prices)}</p>
         </div>
       </div>
     </div>
@@ -203,8 +203,6 @@ export default function Index() {
   }, []);
   const newDropBrands = brands.filter(b => b.newDrop);
 
-  if (heroProducts.length === 0) return null;
-
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
 
@@ -212,6 +210,8 @@ export default function Index() {
     const timer = setInterval(nextSlide, 5000);
     return () => clearInterval(timer);
   }, [nextSlide]);
+
+  if (heroProducts.length === 0) return null;
 
   const current = heroProducts[currentSlide % heroProducts.length];
   const brand = getBrandById(current.brandId);
