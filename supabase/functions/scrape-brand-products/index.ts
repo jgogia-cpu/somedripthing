@@ -56,6 +56,8 @@ function extractSizes(variants: Array<Record<string, string | null>>): string[] 
 
 const PER_BRAND_CAP = 50; // cap newly-added per brand per run
 const MAX_PAGES = 6; // up to 1,500 products per brand per run
+const CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD"] as const;
+type Currency = typeof CURRENCIES[number];
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0 Safari/537.36";
 
@@ -132,6 +134,49 @@ async function fetchAllProducts(site: string): Promise<{
   return { products: all, complete: false, error: "hit MAX_PAGES" };
 }
 
+// Fetch a currency-scoped copy of the brand's product feed and return a
+// handle -> price map for the requested currency. Shopify Markets stores
+// honor the `?currency=` query on /products.json; stores without Markets
+// simply return the same shop-currency price for every request, so the
+// caller compares against the USD baseline before persisting.
+async function fetchPricesForCurrency(
+  site: string,
+  currency: Currency,
+): Promise<Map<string, number>> {
+  const map = new Map<string, number>();
+  for (let page = 1; page <= MAX_PAGES; page++) {
+    let res: Response;
+    try {
+      res = await fetch(
+        `${site}/products.json?limit=250&page=${page}&currency=${currency}`,
+        {
+          headers: { "User-Agent": UA, "Accept-Language": "en" },
+          signal: AbortSignal.timeout(15000),
+        },
+      );
+    } catch {
+      return map;
+    }
+    if (!res.ok) return map;
+    let batch: Array<Record<string, unknown>> = [];
+    try {
+      const json = (await res.json()) as { products?: Array<Record<string, unknown>> };
+      batch = json.products ?? [];
+    } catch {
+      return map;
+    }
+    for (const p of batch) {
+      const handle = String(p.handle ?? "");
+      if (!handle) continue;
+      const variants = (p.variants as Array<Record<string, string | null>> | undefined) ?? [];
+      const price = parseFloat(String(variants[0]?.price ?? "0"));
+      if (price > 0) map.set(handle, price);
+    }
+    if (batch.length < 250) return map;
+  }
+  return map;
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
@@ -154,10 +199,20 @@ Deno.serve(async (req) => {
         products.map((p) => String(p.handle ?? "")).filter(Boolean),
       );
 
+      // Fetch per-currency price maps in parallel. USD map doubles as the
+      // baseline for detecting whether the shop actually honored `?currency=`.
+      const currencyMaps: Record<Currency, Map<string, number>> = {
+        USD: new Map(), EUR: new Map(), GBP: new Map(), CAD: new Map(), AUD: new Map(),
+      };
+      const fetched = await Promise.all(
+        CURRENCIES.map((c) => fetchPricesForCurrency(brand.site, c).catch(() => new Map<string, number>())),
+      );
+      CURRENCIES.forEach((c, i) => { currencyMaps[c] = fetched[i]; });
+
       // Existing handles for this brand
       const { data: existing } = await supabase
         .from("scraped_products")
-        .select("handle, image, images")
+        .select("handle, image, images, prices")
         .eq("brand_id", brand.id);
       const have = new Set((existing ?? []).map((r) => r.handle));
 
@@ -216,6 +271,17 @@ Deno.serve(async (req) => {
           (p.variants as Array<Record<string, string | null>> | undefined) ?? [];
         const price = parseFloat(String(variants[0]?.price ?? "0"));
         if (!price) continue;
+        // Build native-price map. Skip currencies whose price equals the shop
+        // default (Shopify without Markets returns the same number for every
+        // `?currency=` request) — those aren't real conversions.
+        const baseline = currencyMaps.USD.get(handle) ?? price;
+        const prices: Partial<Record<Currency, number>> = {};
+        for (const c of CURRENCIES) {
+          const v = currencyMaps[c].get(handle);
+          if (v && v > 0 && (c === "USD" || Math.abs(v - baseline) > 0.01)) {
+            prices[c] = v;
+          }
+        }
         const title = String(p.title ?? "Untitled");
         const { category, aesthetics } = categorize(title);
         const desc =
@@ -234,12 +300,39 @@ Deno.serve(async (req) => {
           image: liveImage,
           images: orderedImgs,
           price,
+          prices,
           description: desc,
           category,
           aesthetics,
           sizes: extractSizes(variants),
           affiliate_url: `${brand.site}/products/${handle}`,
         });
+      }
+
+      // Backfill: refresh `prices` on existing rows whose native-currency data
+      // is empty so the same daily run enriches the whole catalog over time.
+      const backfillUpdates: Array<{ handle: string; prices: Record<string, number> }> = [];
+      for (const row of existing ?? []) {
+        const current = (row as { prices?: Record<string, number> }).prices ?? {};
+        const hasExtras = Object.keys(current).some((k) => k !== "USD");
+        if (hasExtras) continue;
+        const baseline = currencyMaps.USD.get(row.handle);
+        if (!baseline) continue;
+        const next: Record<string, number> = {};
+        for (const c of CURRENCIES) {
+          const v = currencyMaps[c].get(row.handle);
+          if (v && v > 0 && (c === "USD" || Math.abs(v - baseline) > 0.01)) {
+            next[c] = v;
+          }
+        }
+        if (Object.keys(next).length > 1) backfillUpdates.push({ handle: row.handle, prices: next });
+      }
+      for (const u of backfillUpdates.slice(0, 200)) {
+        await supabase
+          .from("scraped_products")
+          .update({ prices: u.prices })
+          .eq("brand_id", brand.id)
+          .eq("handle", u.handle);
       }
 
       if (toInsert.length) {
