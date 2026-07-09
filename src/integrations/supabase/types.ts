@@ -247,6 +247,7 @@ export type Database = {
           images: Json
           name: string
           price: number
+          prices: Json
           scraped_at: string
           sizes: Json
         }
@@ -263,6 +264,7 @@ export type Database = {
           images?: Json
           name: string
           price: number
+          prices?: Json
           scraped_at?: string
           sizes?: Json
         }
@@ -279,6 +281,7 @@ export type Database = {
           images?: Json
           name?: string
           price?: number
+          prices?: Json
           scraped_at?: string
           sizes?: Json
         }
