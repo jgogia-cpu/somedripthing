@@ -1,10 +1,5 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
 // Curated list of brands to keep in sync. Mirrors src/data/brands.ts (id, name, site).
 const BRANDS: Array<{ id: string; name: string; site: string }> = [
@@ -61,6 +56,50 @@ function extractSizes(variants: Array<Record<string, string | null>>): string[] 
 
 const PER_BRAND_CAP = 50; // cap newly-added per brand per run
 const MAX_PAGES = 6; // up to 1,500 products per brand per run
+const UA =
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0 Safari/537.36";
+
+async function checkUrl(url: string): Promise<boolean> {
+  if (!url || !/^https?:\/\//i.test(url)) return false;
+  try {
+    const head = await fetch(url, {
+      method: "HEAD",
+      headers: { "User-Agent": UA, Accept: "image/avif,image/webp,image/*,*/*" },
+      redirect: "follow",
+      signal: AbortSignal.timeout(6000),
+    });
+    if (head.ok) {
+      const type = head.headers.get("content-type") ?? "";
+      return !type || type.startsWith("image/") || type.includes("octet-stream");
+    }
+    if (![403, 405, 429].includes(head.status)) return false;
+  } catch { /* fall through to ranged GET */ }
+
+  try {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "User-Agent": UA,
+        Accept: "image/avif,image/webp,image/*,*/*",
+        Range: "bytes=0-1024",
+      },
+      redirect: "follow",
+      signal: AbortSignal.timeout(6000),
+    });
+    try { await res.arrayBuffer(); } catch { /* ignore */ }
+    const type = res.headers.get("content-type") ?? "";
+    return res.ok && (type.startsWith("image/") || type.includes("octet-stream"));
+  } catch {
+    return false;
+  }
+}
+
+async function firstLiveImage(urls: string[]): Promise<string | null> {
+  for (const url of urls) {
+    if (await checkUrl(url)) return url;
+  }
+  return null;
+}
 
 async function fetchAllProducts(site: string): Promise<{
   products: Array<Record<string, unknown>>;
@@ -74,7 +113,7 @@ async function fetchAllProducts(site: string): Promise<{
       {
         headers: {
           "User-Agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0 Safari/537.36",
+            UA,
         },
       },
     );
@@ -118,31 +157,40 @@ Deno.serve(async (req) => {
       // Existing handles for this brand
       const { data: existing } = await supabase
         .from("scraped_products")
-        .select("handle, image")
+        .select("handle, image, images")
         .eq("brand_id", brand.id);
       const have = new Set((existing ?? []).map((r) => r.handle));
 
-      // --- Cleanup: only remove products no longer live, and only when the
-      // brand's live listing was fetched completely (otherwise pagination
-      // gaps would wrongly delete real products). Image validity is handled
-      // by the separate validate-products cron.
-      const toDelete: string[] = [];
+      // --- Cleanup: remove products no longer live, and remove anything whose
+      // images are missing. Live-listing deletes only run when the brand feed
+      // was fetched completely, otherwise pagination gaps could delete real
+      // products.
+      const toDelete = new Set<string>();
       if (complete) {
         for (const row of existing ?? []) {
-          if (!liveHandles.has(row.handle)) toDelete.push(row.handle);
+          if (!liveHandles.has(row.handle)) toDelete.add(row.handle);
         }
       }
-      if (toDelete.length) {
+      for (const row of existing ?? []) {
+        const imageUrls = Array.isArray(row.images) && row.images.length
+          ? row.images.filter((url): url is string => typeof url === "string")
+          : [row.image].filter((url): url is string => typeof url === "string");
+        if (imageUrls.length === 0 || !(await firstLiveImage(imageUrls))) {
+          toDelete.add(row.handle);
+        }
+      }
+      const toDeleteHandles = Array.from(toDelete).filter(Boolean);
+      if (toDeleteHandles.length) {
         const { error: delErr } = await supabase
           .from("scraped_products")
           .delete()
           .eq("brand_id", brand.id)
-          .in("handle", toDelete);
+          .in("handle", toDeleteHandles);
         if (delErr) {
           notes.push(`${brand.name}: delete error ${delErr.message}`);
         } else {
-          totalRemoved += toDelete.length;
-          toDelete.forEach((h) => have.delete(h));
+          totalRemoved += toDeleteHandles.length;
+          toDeleteHandles.forEach((h) => have.delete(h));
         }
       }
 
@@ -160,7 +208,10 @@ Deno.serve(async (req) => {
         if (!handle || have.has(handle)) continue;
         const images = (p.images as Array<{ src: string }> | undefined) ?? [];
         if (!images.length) continue;
-        const imgs = images.slice(0, 4).map((i) => i.src);
+        const imgs = images.slice(0, 4).map((i) => i.src).filter(Boolean);
+        const liveImage = await firstLiveImage(imgs);
+        if (!liveImage) continue;
+        const orderedImgs = [liveImage, ...imgs.filter((img) => img !== liveImage)];
         const variants =
           (p.variants as Array<Record<string, string | null>> | undefined) ?? [];
         const price = parseFloat(String(variants[0]?.price ?? "0"));
@@ -180,8 +231,8 @@ Deno.serve(async (req) => {
           brand_name: brand.name,
           handle,
           name: title,
-          image: imgs[0],
-          images: imgs,
+          image: liveImage,
+          images: orderedImgs,
           price,
           description: desc,
           category,
@@ -200,12 +251,12 @@ Deno.serve(async (req) => {
         } else {
           totalAdded += toInsert.length;
           notes.push(
-            `${brand.name}: +${toInsert.length}${toDelete.length ? ` / -${toDelete.length}` : ""}`,
+            `${brand.name}: +${toInsert.length}${toDeleteHandles.length ? ` / -${toDeleteHandles.length}` : ""}`,
           );
         }
       } else {
         notes.push(
-          `${brand.name}: 0 new${toDelete.length ? ` / -${toDelete.length}` : ""}`,
+          `${brand.name}: 0 new${toDeleteHandles.length ? ` / -${toDeleteHandles.length}` : ""}`,
         );
       }
     } catch (e) {

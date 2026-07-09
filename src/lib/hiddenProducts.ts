@@ -31,6 +31,13 @@ export function isHidden(id: string): boolean {
   return hiddenIds.has(id);
 }
 
+export function hideProductLocally(id: string): void {
+  hiddenIds.add(id);
+  for (let i = products.length - 1; i >= 0; i--) {
+    if (products[i].id === id) products.splice(i, 1);
+  }
+}
+
 export function filterHidden<T extends Pick<Product, "id">>(list: T[]): T[] {
   if (!hiddenIds.size) return list;
   return list.filter((p) => !hiddenIds.has(p.id));

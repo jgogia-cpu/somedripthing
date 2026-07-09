@@ -37,9 +37,6 @@ function mount() {
 }
 
 // Filter out products whose image or affiliate URL is dead before first render
-// (populated daily by the validate-products edge function). Guarded with a
-// short timeout so a slow network never blocks the app from mounting.
-Promise.race([
-  loadHiddenProducts(),
-  new Promise((r) => setTimeout(r, 800)),
-]).finally(mount);
+// (populated daily by the validate-products edge function) so hidden products
+// can never be selected into fixed per-page carousel/listing snapshots.
+loadHiddenProducts().finally(mount);

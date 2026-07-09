@@ -4,6 +4,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { brands, products, Product, Brand } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
+import { hideProductLocally, isHidden } from "@/lib/hiddenProducts";
 
 // Deterministic per-day rotation across all featured brands so every visitor
 // on the same UTC day sees the same "Today's Featured Brand", and it changes
@@ -27,7 +28,10 @@ function FeaturedProductCard({ product, textTone }: { product: Product; textTone
   const allImages = product.images?.length > 0 ? product.images : [product.image];
   const hasMultiple = allImages.length > 1;
   const [imgIndex, setImgIndex] = useState(0);
+  const [failedImage, setFailedImage] = useState(false);
   const isLight = textTone === "light";
+
+  if (failedImage || isHidden(product.id)) return null;
 
   return (
     <Link to={`/product/${product.id}`} className="group block">
@@ -39,6 +43,10 @@ function FeaturedProductCard({ product, textTone }: { product: Product; textTone
             loading="lazy"
             className="w-full object-cover"
             style={{ aspectRatio: "3/4", height: "360px" }}
+            onError={() => {
+              hideProductLocally(product.id);
+              setFailedImage(true);
+            }}
           />
           {hasMultiple && (
             <>
@@ -82,7 +90,7 @@ function FeaturedProductCard({ product, textTone }: { product: Product; textTone
 export default function FeaturedBrandSection() {
   const brand = useMemo(() => pickDailyFeaturedBrand(), []);
   const brandProducts = useMemo(
-    () => products.filter((p) => p.brandId === brand.id).slice(0, 6),
+    () => products.filter((p) => p.brandId === brand.id && !isHidden(p.id)).slice(0, 6),
     [brand.id]
   );
   const bg = brand.themeColor ?? "hsl(16, 85%, 60%)";

@@ -14,6 +14,7 @@ import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { pushRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import AuthDialog from "@/components/AuthDialog";
+import { hideProductLocally, isHidden } from "@/lib/hiddenProducts";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -32,7 +33,7 @@ export default function ProductDetail() {
     if (product?.id) pushRecentlyViewed(product.id);
   }, [product?.id]);
 
-  if (!product) {
+  if (!product || isHidden(product.id)) {
     return (
       <div className="container py-20 text-center">
         <p className="text-lg">Product not found.</p>
@@ -107,6 +108,7 @@ export default function ProductDetail() {
                 alt={product.name}
                 className="w-full object-cover"
                 style={{ aspectRatio: "3/4" }}
+                  onError={() => hideProductLocally(product.id)}
               />
             </div>
             {product.images.length > 1 && (
@@ -117,7 +119,7 @@ export default function ProductDetail() {
                     onClick={() => setSelectedImage(i)}
                     className={`overflow-hidden rounded-lg bg-secondary ring-2 transition-all ${selectedImage === i ? "ring-accent" : "ring-transparent"}`}
                   >
-                    <img src={img} alt="" className="aspect-square w-full object-cover" />
+                    <img src={img} alt="" className="aspect-square w-full object-cover" onError={() => hideProductLocally(product.id)} />
                   </button>
                 ))}
               </div>
