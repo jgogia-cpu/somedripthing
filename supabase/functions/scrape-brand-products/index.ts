@@ -249,12 +249,12 @@ Deno.serve(async (req) => {
         } else {
           totalAdded += toInsert.length;
           notes.push(
-            `${brand.name}: +${toInsert.length}${toDelete.length ? ` / -${toDelete.length}` : ""}`,
+            `${brand.name}: +${toInsert.length}${toDeleteHandles.length ? ` / -${toDeleteHandles.length}` : ""}`,
           );
         }
       } else {
         notes.push(
-          `${brand.name}: 0 new${toDelete.length ? ` / -${toDelete.length}` : ""}`,
+          `${brand.name}: 0 new${toDeleteHandles.length ? ` / -${toDeleteHandles.length}` : ""}`,
         );
       }
     } catch (e) {
