@@ -847,11 +847,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://thedripway.com/product/p411</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://thedripway.com/product/p500</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1175,6 +1170,12 @@
     <loc>https://thedripway.com/product/p926</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/how-resellers-ruined-streetwear-and-how-brands-fight-back-2026-07-09</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://thedripway.com/blog/the-best-streetwear-under-50-that-doesnt-look-cheap-2026-07-08</loc>
