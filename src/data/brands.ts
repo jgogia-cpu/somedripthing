@@ -148,6 +148,14 @@ import ph7 from "@/assets/priesthood/ph7.jpg.asset.json";
 import ph8 from "@/assets/priesthood/ph8.jpg.asset.json";
 const PRIESTHOOD_LOOKBOOK = [ph1, ph2, ph3, ph4, ph5, ph6, ph7, ph8].map(a => a.url);
 
+import rd1 from "@/assets/redeemordie/rd1.jpg.asset.json";
+import rd2 from "@/assets/redeemordie/rd2.jpg.asset.json";
+import rd3 from "@/assets/redeemordie/rd3.jpg.asset.json";
+import rd4 from "@/assets/redeemordie/rd4.jpg.asset.json";
+import rd5 from "@/assets/redeemordie/rd5.jpg.asset.json";
+import rd6 from "@/assets/redeemordie/rd6.jpg.asset.json";
+const REDEEMORDIE_LOOKBOOK = [rd1, rd2, rd3, rd4, rd5, rd6].map(a => a.url);
+
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
 
@@ -299,7 +307,8 @@ export const brands: Brand[] = [
     vibes: ["Military-inspired", "Heavyweight basics", "Street-ready", "Earn your fit"],
     origin: "International", website: "https://www.redeemordie.com", affiliateUrl: "https://www.redeemordie.com/shop",
     instagram: "@redeemordie", aesthetics: ["Techwear", "Streetwear", "Grunge"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 8000, rating: 4.5, featured: true, newDrop: true, themeColor: "#4B5320", themeTextTone: "light"
+    priceRange: "mid", followers: 8000, rating: 4.5, featured: true, newDrop: true, themeColor: "#4B5320", themeTextTone: "light",
+    lookbook: REDEEMORDIE_LOOKBOOK
   },
   {
     id: "35", name: "EVARA", slug: "evara", logo: EVARA_LOGO,
