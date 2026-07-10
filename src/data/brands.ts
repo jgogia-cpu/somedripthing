@@ -199,6 +199,13 @@ import ls5 from "@/assets/latelier/ls5.jpg.asset.json";
 import ls6 from "@/assets/latelier/ls6.jpg.asset.json";
 import ls7 from "@/assets/latelier/ls7.jpg.asset.json";
 const LATELIER_LOOKBOOK = [ls1, ls2, ls3, ls4, ls5, ls6, ls7].map(a => a.url);
+
+import zd1 from "@/assets/zerodvsn/zd1.jpg.asset.json";
+import zd2 from "@/assets/zerodvsn/zd2.jpg.asset.json";
+import zd3 from "@/assets/zerodvsn/zd3.jpg.asset.json";
+import zd4 from "@/assets/zerodvsn/zd4.jpg.asset.json";
+import zd5 from "@/assets/zerodvsn/zd5.jpg.asset.json";
+const ZERODVSN_LOOKBOOK = [zd1, zd2, zd3, zd4, zd5].map(a => a.url);
 const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
 const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
 
@@ -415,7 +422,8 @@ export const brands: Brand[] = [
     vibes: ["Anime-rooted", "Limited drops", "Premium suede & fleece", "If you know, you know"],
     origin: "Canada", website: "https://zerodvsn.com", affiliateUrl: "https://zerodvsn.com/collections/all",
     instagram: "@zerodvsn", aesthetics: ["Y2K", "Archive", "Techwear"], categories: ["Tops", "Bottoms", "Accessories"],
-    priceRange: "mid", followers: 4500, rating: 4.7, featured: true, newDrop: true, themeColor: "#1E3A8A", themeTextTone: "light"
+    priceRange: "mid", followers: 4500, rating: 4.7, featured: true, newDrop: true, themeColor: "#1E3A8A", themeTextTone: "light",
+    lookbook: ZERODVSN_LOOKBOOK
   },
   {
     id: "40", name: "All Dubs", slug: "all-dubs", logo: alldubsLogo.url,
