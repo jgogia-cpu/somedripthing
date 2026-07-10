@@ -161,6 +161,12 @@ const IMG = (seed: string, w = 600, h = 800) =>
 
 import evaraLogoAsset from "@/assets/evara-logo-new.jpg.asset.json";
 const EVARA_LOGO = evaraLogoAsset.url;
+import ev1 from "@/assets/evara/ev_1591.jpg.asset.json";
+import ev2 from "@/assets/evara/ev_1592.jpg.asset.json";
+import ev3 from "@/assets/evara/ev_1595.jpg.asset.json";
+import ev4 from "@/assets/evara/ev_1596.jpg.asset.json";
+import ev5 from "@/assets/evara/ev_1603.jpg.asset.json";
+const EVARA_LOOKBOOK = [ev1, ev3, ev2, ev4, ev5].map(a => a.url);
 const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
 const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
 
@@ -320,7 +326,8 @@ export const brands: Brand[] = [
     vibes: ["Faith-forward", "Rhinestone detailing", "Heavyweight & satin", "Wear it loud"],
     origin: "USA", website: "https://shopevara.store", affiliateUrl: "https://shopevara.store/collections/all",
     instagram: "@shopevara", aesthetics: ["Y2K", "Bohemian", "Coastal Grandmother"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 6500, rating: 5.0, featured: true, newDrop: true, themeColor: "#F4C7C0", themeTextTone: "dark"
+    priceRange: "mid", followers: 6500, rating: 5.0, featured: true, newDrop: true, themeColor: "#F4C7C0", themeTextTone: "dark",
+    lookbook: EVARA_LOOKBOOK
   },
   {
     id: "36", name: "L'Atelier Santé", slug: "latelier-sante", logo: LATELIER_LOGO,
