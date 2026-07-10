@@ -268,7 +268,8 @@ export const brands: Brand[] = [
     origin: "USA", website: "https://fortunefellasclub.com", affiliateUrl: "https://fortunefellasclub.com/collections/all",
     instagram: "@fortunefellasclub", tiktok: "@fortunefellasclub",
     aesthetics: ["Old Money", "Minimalist", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 7500, rating: 4.6, featured: true, newDrop: true, themeColor: "#D4A24C", themeTextTone: "dark"
+    priceRange: "mid", followers: 7500, rating: 4.6, featured: true, newDrop: true, themeColor: "#D4A24C", themeTextTone: "dark",
+    lookbook: FORTUNEFELLAS_LOOKBOOK
   },
   {
     id: "28", name: "Harvx", slug: "harvx", logo: harvxLogo,
