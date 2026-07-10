@@ -266,6 +266,51 @@ export default function BrandProfile() {
         />
       )}
 
+      {/* Lookbook Gallery */}
+      {brand.lookbook && brand.lookbook.length > 0 && (
+        <section className="border-t border-border/40 py-20 md:py-28">
+          <div className="container">
+            <div className="flex items-baseline justify-between gap-8">
+              <motion.h2
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={0}
+                className="font-display text-4xl font-bold uppercase italic tracking-tighter md:text-6xl"
+              >
+                Lookbook
+              </motion.h2>
+              <div className="hidden h-px flex-1 bg-border/60 md:block" />
+              <p className="hidden text-[10px] font-bold uppercase tracking-[0.3em] text-accent md:block">
+                Campaign Imagery
+              </p>
+            </div>
+            <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+              {brand.lookbook.map((src, i) => (
+                <motion.div
+                  key={src}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  custom={i % 4}
+                  className="group relative overflow-hidden bg-card"
+                  style={{ aspectRatio: "3/4" }}
+                >
+                  <img
+                    src={src}
+                    alt={`${brand.name} lookbook ${i + 1}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* The Story Section */}
       <section className="border-t border-border/40 py-24 md:py-40">
         <div className="container">
