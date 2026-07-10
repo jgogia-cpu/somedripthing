@@ -190,6 +190,15 @@ import ev3 from "@/assets/evara/ev_1595.jpg.asset.json";
 import ev4 from "@/assets/evara/ev_1596.jpg.asset.json";
 import ev5 from "@/assets/evara/ev_1603.jpg.asset.json";
 const EVARA_LOOKBOOK = [ev1, ev3, ev2, ev4, ev5].map(a => a.url);
+
+import ls1 from "@/assets/latelier/ls1.jpg.asset.json";
+import ls2 from "@/assets/latelier/ls2.jpg.asset.json";
+import ls3 from "@/assets/latelier/ls3.jpg.asset.json";
+import ls4 from "@/assets/latelier/ls4.jpg.asset.json";
+import ls5 from "@/assets/latelier/ls5.jpg.asset.json";
+import ls6 from "@/assets/latelier/ls6.jpg.asset.json";
+import ls7 from "@/assets/latelier/ls7.jpg.asset.json";
+const LATELIER_LOOKBOOK = [ls1, ls2, ls3, ls4, ls5, ls6, ls7].map(a => a.url);
 const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
 const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
 
@@ -365,7 +374,8 @@ export const brands: Brand[] = [
     vibes: ["Quietly elevated", "Workshop made", "Considered details", "Health in craft"],
     origin: "Canada", website: "https://www.lateliersante.store", affiliateUrl: "https://www.lateliersante.store/category/all-products",
     instagram: "@lateliersante", aesthetics: ["Old Money", "Minimalist", "Coastal Grandmother"], categories: ["Tops", "Accessories"],
-    priceRange: "mid", followers: 4200, rating: 4.6, featured: true, newDrop: true, themeColor: "#9CAF88", themeTextTone: "dark"
+    priceRange: "mid", followers: 4200, rating: 4.6, featured: true, newDrop: true, themeColor: "#9CAF88", themeTextTone: "dark",
+    lookbook: LATELIER_LOOKBOOK
   },
   {
     id: "37", name: "DAE'WEAR", slug: "daewear", logo: DAEWEAR_LOGO,
