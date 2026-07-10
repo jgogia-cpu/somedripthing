@@ -218,6 +218,14 @@ import ff8 from "@/assets/fortunefellas/ff8.jpg.asset.json";
 import ff9 from "@/assets/fortunefellas/ff9.jpg.asset.json";
 import ff10 from "@/assets/fortunefellas/ff10.jpg.asset.json";
 const FORTUNEFELLAS_LOOKBOOK = [ff1, ff2, ff3, ff4, ff5, ff6, ff7, ff8, ff9, ff10].map(a => a.url);
+import cos1 from "@/assets/cityofsaints/cos1.jpg.asset.json";
+import cos2 from "@/assets/cityofsaints/cos2.jpg.asset.json";
+import cos3 from "@/assets/cityofsaints/cos3.jpg.asset.json";
+import cos4 from "@/assets/cityofsaints/cos4.jpg.asset.json";
+import cos5 from "@/assets/cityofsaints/cos5.jpg.asset.json";
+import cos6 from "@/assets/cityofsaints/cos6.jpg.asset.json";
+import cos7 from "@/assets/cityofsaints/cos7.jpg.asset.json";
+const CITYOFSAINTS_LOOKBOOK = [cos1, cos2, cos3, cos4, cos5, cos6, cos7].map(a => a.url);
 const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
 const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
 
@@ -476,6 +484,7 @@ export const brands: Brand[] = [
     instagram: "@cityofsaints", aesthetics: ["Streetwear", "Grunge", "Dark Academia"], categories: ["Tops"],
     priceRange: "mid", followers: 2400, rating: 4.7, featured: true, newDrop: true,
     themeColor: "#5433EB", themeTextTone: "light", addedAt: "2026-07-07"
+    , lookbook: CITYOFSAINTS_LOOKBOOK
   },
 ];
 export const products: Product[] = [
