@@ -213,6 +213,7 @@ export const brands: Brand[] = [
     origin: "UK", website: "https://mortenoir.co.uk", affiliateUrl: "https://mortenoir.co.uk/collections/all",
     instagram: "@mortenoir", aesthetics: ["Dark Academia", "Grunge", "Avant-Garde", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 6500, rating: 4.6, featured: true, newDrop: true, themeColor: "#141414", themeTextTone: "light"
+    , lookbook: MORTENOIR_LOOKBOOK
   },
   {
     id: "30", name: "Isolated", slug: "isolated", logo: isolatedLogo,
