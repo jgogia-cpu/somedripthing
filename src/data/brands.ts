@@ -96,6 +96,12 @@ import harvxLogo from "@/assets/harvx-logo.jpg";
 import mortenoirLogo from "@/assets/mortenoir-logo.png";
 import isolatedLogo from "@/assets/isolated-logo.svg";
 import makerLogo from "@/assets/maker-logo.png";
+import mk1 from "@/assets/maker/mk1.jpg.asset.json";
+import mk2 from "@/assets/maker/mk2.jpg.asset.json";
+import mk3 from "@/assets/maker/mk3.jpg.asset.json";
+import mk4 from "@/assets/maker/mk4.png.asset.json";
+import mk5 from "@/assets/maker/mk5.png.asset.json";
+const MAKER_LOOKBOOK = [mk1, mk2, mk3, mk4, mk5].map(a => a.url);
 import justinianoLogo from "@/assets/justiniano-logo.png";
 import neutralstateLogo from "@/assets/neutralstate-logo.svg";
 import redeemordieLogo from "@/assets/redeemordie-logo.png.asset.json";
@@ -277,7 +283,8 @@ export const brands: Brand[] = [
     vibes: ["Heavyweight basics", "Considered details", "Made in Canada energy", "Quietly elevated"],
     origin: "Canada", website: "https://makercreator.ca", affiliateUrl: "https://makercreator.ca/collections/all",
     instagram: "@makercreator", aesthetics: ["Minimalist", "Avant-Garde", "Streetwear"], categories: ["Tops", "Bottoms"],
-    priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true, themeColor: "#E8DFCF", themeTextTone: "dark"
+    priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true, themeColor: "#E8DFCF", themeTextTone: "dark",
+    lookbook: MAKER_LOOKBOOK
   },
   {
     id: "32", name: "Justiniano", slug: "justiniano", logo: justinianoLogo,
