@@ -90,6 +90,11 @@ export const CATEGORIES = [
 ] as const;
 
 import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
+import pv1 from "@/assets/preview/pv1.jpg.asset.json";
+import pv2 from "@/assets/preview/pv2.jpg.asset.json";
+import pv3 from "@/assets/preview/pv3.jpg.asset.json";
+import pv4 from "@/assets/preview/pv4.jpg.asset.json";
+const PREVIEW_LOOKBOOK = [pv1, pv2, pv3, pv4].map(a => a.url);
 import sabrLogo from "@/assets/sabr-logo.png";
 import houseOfKingsLogo from "@/assets/house-of-kings-logo.png";
 import harvxLogo from "@/assets/harvx-logo.jpg";
@@ -209,7 +214,8 @@ export const brands: Brand[] = [
     vibes: ["Motorsport energy", "Y2K nostalgia", "Graphic-heavy", "Unapologetically bold"],
     origin: "USA", website: "https://previewworldwide.com", affiliateUrl: "https://previewworldwide.com",
     instagram: "@previewworldwide", aesthetics: ["Y2K", "Streetwear", "Archive"], categories: ["Tops", "Bottoms", "Accessories"],
-    priceRange: "budget", followers: 15000, rating: 4.5, featured: true, newDrop: true, themeColor: "#FF2E63", themeTextTone: "light"
+    priceRange: "budget", followers: 15000, rating: 4.5, featured: true, newDrop: true, themeColor: "#FF2E63", themeTextTone: "light",
+    lookbook: PREVIEW_LOOKBOOK
   },
   {
     id: "25", name: "SABR", slug: "sabr", logo: sabrLogo,
