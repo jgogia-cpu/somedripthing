@@ -110,6 +110,18 @@ import rodWindbreakerBlack from "@/assets/rod-windbreaker-black.jpg.asset.json";
 import rodTrackpants from "@/assets/rod-trackpants.jpg.asset.json";
 import cityofsaintsLogo from "@/assets/cityofsaints-logo.jpg";
 
+import mn1 from "@/assets/mortenoir/mn1.jpeg.asset.json";
+import mn2 from "@/assets/mortenoir/mn2.png.asset.json";
+import mn3 from "@/assets/mortenoir/mn3.jpeg.asset.json";
+import mn4 from "@/assets/mortenoir/mn4.jpeg.asset.json";
+import mn5 from "@/assets/mortenoir/mn5.jpeg.asset.json";
+import mn6 from "@/assets/mortenoir/mn6.jpeg.asset.json";
+import mn7 from "@/assets/mortenoir/mn7.jpeg.asset.json";
+import mn8 from "@/assets/mortenoir/mn8.jpeg.asset.json";
+import mn9 from "@/assets/mortenoir/mn9.jpeg.asset.json";
+import mn10 from "@/assets/mortenoir/mn10.jpeg.asset.json";
+const MORTENOIR_LOOKBOOK = [mn1, mn2, mn3, mn4, mn5, mn6, mn7, mn8, mn9, mn10].map(a => a.url);
+
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
 
