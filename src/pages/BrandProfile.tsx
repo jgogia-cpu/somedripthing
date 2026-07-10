@@ -1,10 +1,11 @@
 import { useParams, Link } from "react-router-dom";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ExternalLink, Instagram, ArrowLeft, MapPin, Calendar, Star, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
 import { getBrandBySlug, getProductsByBrand, getSimilarBrands } from "@/data/brands";
+import { useScrapedProducts } from "@/hooks/useScrapedProducts";
 import InstagramGrid from "@/components/InstagramGrid";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import SEO from "@/components/SEO";
@@ -44,7 +45,19 @@ export default function BrandProfile() {
     );
   }
 
-  const brandProducts = getProductsByBrand(brand.id);
+  const scraped = useScrapedProducts();
+  const brandProducts = useMemo(() => {
+    const staticProducts = getProductsByBrand(brand.id);
+    const scrapedForBrand = scraped.filter((p) => p.brandId === brand.id);
+    const seen = new Set(staticProducts.map((p) => p.name.toLowerCase().trim()));
+    const extras = scrapedForBrand.filter((p) => {
+      const key = p.name.toLowerCase().trim();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    return [...staticProducts, ...extras];
+  }, [brand.id, scraped]);
   const similar = getSimilarBrands(brand);
 
   const brandLd = {
