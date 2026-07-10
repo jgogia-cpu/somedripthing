@@ -93,6 +93,12 @@ import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
 import sabrLogo from "@/assets/sabr-logo.png";
 import houseOfKingsLogo from "@/assets/house-of-kings-logo.png";
 import harvxLogo from "@/assets/harvx-logo.jpg";
+import hx1 from "@/assets/harvx/hx1.jpg.asset.json";
+import hx2 from "@/assets/harvx/hx2.jpg.asset.json";
+import hx3 from "@/assets/harvx/hx3.jpg.asset.json";
+import hx4 from "@/assets/harvx/hx4.jpg.asset.json";
+import hx5 from "@/assets/harvx/hx5.jpg.asset.json";
+const HARVX_LOOKBOOK = [hx1, hx2, hx3, hx4, hx5].map(a => a.url);
 import mortenoirLogo from "@/assets/mortenoir-logo.png";
 import isolatedLogo from "@/assets/isolated-logo.svg";
 import makerLogo from "@/assets/maker-logo.png";
@@ -240,7 +246,8 @@ export const brands: Brand[] = [
     vibes: ["Heavyweight by design", "Handmade screen prints", "Imperfections welcome", "Soul over hype"],
     origin: "Canada", website: "https://harvxclo.com", affiliateUrl: "https://harvxclo.com/collections/all",
     instagram: "@harvxclo", aesthetics: ["Grunge", "Archive", "Brutalist"], categories: ["Tops", "Bottoms", "Outerwear"],
-    priceRange: "mid", followers: 5500, rating: 4.6, featured: true, newDrop: true, themeColor: "#B91C1C", themeTextTone: "light"
+    priceRange: "mid", followers: 5500, rating: 4.6, featured: true, newDrop: true, themeColor: "#B91C1C", themeTextTone: "light",
+    lookbook: HARVX_LOOKBOOK
   },
   {
     id: "27", name: "House of Kings", slug: "house-of-kings", logo: houseOfKingsLogo,
