@@ -38,6 +38,8 @@ export interface Brand {
   newDrop: boolean;
   /** ISO date (YYYY-MM-DD) when this brand was added to DRIPWAY. Drives the "NEW" badge (last 14 days). */
   addedAt?: string;
+  /** Optional lookbook/campaign image URLs shown as a gallery on the brand profile. */
+  lookbook?: string[];
 }
 
 export interface Product {
@@ -107,6 +109,18 @@ import rodWindbreakerOlive from "@/assets/rod-windbreaker-olive.jpg.asset.json";
 import rodWindbreakerBlack from "@/assets/rod-windbreaker-black.jpg.asset.json";
 import rodTrackpants from "@/assets/rod-trackpants.jpg.asset.json";
 import cityofsaintsLogo from "@/assets/cityofsaints-logo.jpg";
+
+import mn1 from "@/assets/mortenoir/mn1.jpeg.asset.json";
+import mn2 from "@/assets/mortenoir/mn2.png.asset.json";
+import mn3 from "@/assets/mortenoir/mn3.jpeg.asset.json";
+import mn4 from "@/assets/mortenoir/mn4.jpeg.asset.json";
+import mn5 from "@/assets/mortenoir/mn5.jpeg.asset.json";
+import mn6 from "@/assets/mortenoir/mn6.jpeg.asset.json";
+import mn7 from "@/assets/mortenoir/mn7.jpeg.asset.json";
+import mn8 from "@/assets/mortenoir/mn8.jpeg.asset.json";
+import mn9 from "@/assets/mortenoir/mn9.jpeg.asset.json";
+import mn10 from "@/assets/mortenoir/mn10.jpeg.asset.json";
+const MORTENOIR_LOOKBOOK = [mn1, mn2, mn3, mn4, mn5, mn6, mn7, mn8, mn9, mn10].map(a => a.url);
 
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
@@ -199,6 +213,7 @@ export const brands: Brand[] = [
     origin: "UK", website: "https://mortenoir.co.uk", affiliateUrl: "https://mortenoir.co.uk/collections/all",
     instagram: "@mortenoir", aesthetics: ["Dark Academia", "Grunge", "Avant-Garde", "Archive"], categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 6500, rating: 4.6, featured: true, newDrop: true, themeColor: "#141414", themeTextTone: "light"
+    , lookbook: MORTENOIR_LOOKBOOK
   },
   {
     id: "30", name: "Isolated", slug: "isolated", logo: isolatedLogo,
