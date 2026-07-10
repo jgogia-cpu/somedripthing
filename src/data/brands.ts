@@ -122,6 +122,14 @@ import mn9 from "@/assets/mortenoir/mn9.jpeg.asset.json";
 import mn10 from "@/assets/mortenoir/mn10.jpeg.asset.json";
 const MORTENOIR_LOOKBOOK = [mn1, mn2, mn3, mn4, mn5, mn6, mn7, mn8, mn9, mn10].map(a => a.url);
 
+import ad1 from "@/assets/alldubs/ad_718854.jpg.asset.json";
+import ad2 from "@/assets/alldubs/ad_718893.png.asset.json";
+import ad3 from "@/assets/alldubs/ad_720048.jpg.asset.json";
+import ad4 from "@/assets/alldubs/ad_720539.jpg.asset.json";
+import ad5 from "@/assets/alldubs/ad_721289.jpg.asset.json";
+import ad6 from "@/assets/alldubs/ad_721816.jpg.asset.json";
+const ALLDUBS_LOOKBOOK = [ad1, ad2, ad3, ad4, ad5, ad6].map(a => a.url);
+
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
 
@@ -348,6 +356,7 @@ export const brands: Brand[] = [
     origin: "Canada", website: "https://www.alldubsofficial.com", affiliateUrl: "https://www.alldubsofficial.com",
     instagram: "@alldubsinc", aesthetics: ["Sportswear", "Streetwear", "Archive"], categories: ["Tops", "Bottoms", "Accessories"],
     priceRange: "mid", followers: 5200, rating: 4.7, featured: true, newDrop: true, themeColor: "#1D4ED8", themeTextTone: "light"
+    , lookbook: ALLDUBS_LOOKBOOK
   },
   {
     id: "41", name: "ParrisHighOnFashion", slug: "parrishighonfashion",
