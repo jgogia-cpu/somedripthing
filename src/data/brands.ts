@@ -130,6 +130,24 @@ import ad5 from "@/assets/alldubs/ad_721289.jpg.asset.json";
 import ad6 from "@/assets/alldubs/ad_721816.jpg.asset.json";
 const ALLDUBS_LOOKBOOK = [ad1, ad2, ad3, ad4, ad5, ad6].map(a => a.url);
 
+import dw1 from "@/assets/daewear/dw1.jpg.asset.json";
+import dw2 from "@/assets/daewear/dw2.jpg.asset.json";
+import dw3 from "@/assets/daewear/dw3.jpg.asset.json";
+import dw4 from "@/assets/daewear/dw4.png.asset.json";
+import dw5 from "@/assets/daewear/dw5.png.asset.json";
+import dw6 from "@/assets/daewear/dw6.jpg.asset.json";
+const DAEWEAR_LOOKBOOK = [dw1, dw2, dw3, dw4, dw5, dw6].map(a => a.url);
+
+import ph1 from "@/assets/priesthood/ph1.jpg.asset.json";
+import ph2 from "@/assets/priesthood/ph2.jpg.asset.json";
+import ph3 from "@/assets/priesthood/ph3.jpg.asset.json";
+import ph4 from "@/assets/priesthood/ph4.jpg.asset.json";
+import ph5 from "@/assets/priesthood/ph5.jpg.asset.json";
+import ph6 from "@/assets/priesthood/ph6.jpg.asset.json";
+import ph7 from "@/assets/priesthood/ph7.jpg.asset.json";
+import ph8 from "@/assets/priesthood/ph8.jpg.asset.json";
+const PRIESTHOOD_LOOKBOOK = [ph1, ph2, ph3, ph4, ph5, ph6, ph7, ph8].map(a => a.url);
+
 const IMG = (seed: string, w = 600, h = 800) =>
   `https://images.unsplash.com/photo-${seed}?w=${w}&h=${h}&fit=crop&auto=format`;
 
@@ -317,7 +335,8 @@ export const brands: Brand[] = [
     vibes: ["A different kind", "Signal graphics", "Daily essentials", "Intentional fits"],
     origin: "USA", website: "https://daewearapparel.com", affiliateUrl: "https://daewearapparel.com/shop",
     instagram: "@daewearapparel", aesthetics: ["Minimalist", "Brutalist"], categories: ["Tops"],
-    priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true, themeColor: "#FCD34D", themeTextTone: "dark"
+    priceRange: "mid", followers: 3200, rating: 4.5, featured: true, newDrop: true, themeColor: "#FCD34D", themeTextTone: "dark",
+    lookbook: DAEWEAR_LOOKBOOK
   },
   {
     id: "38", name: "PRIESTHOOD", slug: "priesthood",
@@ -331,7 +350,8 @@ export const brands: Brand[] = [
     origin: "United Kingdom", website: "https://priesthood.uk", affiliateUrl: "https://priesthood.uk",
     instagram: "@priesthood.uk", tiktok: "@priesthood010",
     aesthetics: ["Dark Academia", "Minimalist", "Avant-Garde"], categories: ["Tops", "Bottoms"],
-    priceRange: "premium", followers: 2500, rating: 4.8, featured: true, newDrop: true, themeColor: "#3F1010", themeTextTone: "light"
+    priceRange: "premium", followers: 2500, rating: 4.8, featured: true, newDrop: true, themeColor: "#3F1010", themeTextTone: "light",
+    lookbook: PRIESTHOOD_LOOKBOOK
   },
   {
     id: "39", name: "ZeroDivision", slug: "zerodivision", logo: zerodivisionLogo.url,
