@@ -126,7 +126,13 @@ import mn7 from "@/assets/mortenoir/mn7.jpeg.asset.json";
 import mn8 from "@/assets/mortenoir/mn8.jpeg.asset.json";
 import mn9 from "@/assets/mortenoir/mn9.jpeg.asset.json";
 import mn10 from "@/assets/mortenoir/mn10.jpeg.asset.json";
-const MORTENOIR_LOOKBOOK = [mn1, mn2, mn3, mn4, mn5, mn6, mn7, mn8, mn9, mn10].map(a => a.url);
+import mnLb1 from "@/assets/mortenoir/mn_lb1.jpg.asset.json";
+import mnLb2 from "@/assets/mortenoir/mn_lb2.jpg.asset.json";
+import mnLb3 from "@/assets/mortenoir/mn_lb3.jpg.asset.json";
+import mnLb4 from "@/assets/mortenoir/mn_lb4.jpg.asset.json";
+import mnLb5 from "@/assets/mortenoir/mn_lb5.jpg.asset.json";
+import mnLb6 from "@/assets/mortenoir/mn_lb6.jpg.asset.json";
+const MORTENOIR_LOOKBOOK = [mnLb1, mnLb2, mnLb3, mnLb4, mnLb5, mnLb6, mn1, mn2, mn3, mn4, mn5, mn6, mn7, mn8, mn9, mn10].map(a => a.url);
 
 import ad1 from "@/assets/alldubs/ad_718854.jpg.asset.json";
 import ad2 from "@/assets/alldubs/ad_718893.png.asset.json";
