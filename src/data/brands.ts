@@ -38,6 +38,8 @@ export interface Brand {
   newDrop: boolean;
   /** ISO date (YYYY-MM-DD) when this brand was added to DRIPWAY. Drives the "NEW" badge (last 14 days). */
   addedAt?: string;
+  /** Optional lookbook/campaign image URLs shown as a gallery on the brand profile. */
+  lookbook?: string[];
 }
 
 export interface Product {
