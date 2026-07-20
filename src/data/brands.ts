@@ -486,6 +486,20 @@ export const brands: Brand[] = [
     themeColor: "#5433EB", themeTextTone: "light", addedAt: "2026-07-07"
     , lookbook: CITYOFSAINTS_LOOKBOOK
   },
+  {
+    id: "43", name: "Driven By Success", slug: "driven-by-success",
+    logo: "https://drivenbysuccess.store/cdn/shop/files/DBS_globe_logo.jpg?v=1765412702&width=1200",
+    banner: "https://drivenbysuccess.store/cdn/shop/files/DBS_globe_logo.jpg?v=1765412702&width=1600",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "DBS — Driven By Success. Mindset-driven streetwear built around heavyweight fall essentials, worker denim, sherpa track sets, and embroidered rugby jerseys.",
+    story: "Founded on the belief that success is a mindset before it's a wardrobe, Driven By Success cuts premium fall essentials, worker denim, sherpa track sets and rugby jerseys designed to feel earned. Every piece — from the sun-faded worker jorts to the embroidered rugby jerseys — is built on heavyweight, movement-first fabrics with signature DBS embroidery.",
+    founded: "2024", founderNote: "\"It's a Mindset.\"",
+    vibes: ["Mindset-driven", "Heavyweight essentials", "Worker denim", "Embroidered rugby"],
+    origin: "Canada", website: "https://drivenbysuccess.store", affiliateUrl: "https://drivenbysuccess.store",
+    instagram: "@drivenbysuccess", aesthetics: ["Streetwear", "Sportswear"], categories: ["Tops", "Bottoms", "Outerwear", "Accessories"],
+    priceRange: "mid", followers: 3200, rating: 4.7, featured: true, newDrop: true,
+    themeColor: "#0F172A", themeTextTone: "light", addedAt: "2026-07-20"
+  },
 ];
 export const products: Product[] = [
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
