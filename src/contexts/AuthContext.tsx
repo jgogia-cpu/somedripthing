@@ -6,7 +6,7 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signUp: (email: string, password: string, displayName: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, displayName: string, subscribeNewsletter?: boolean) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string, displayName: string) => {
+  const signUp = async (email: string, password: string, displayName: string, subscribeNewsletter = false) => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -43,6 +43,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         emailRedirectTo: window.location.origin,
       },
     });
+    if (!error && subscribeNewsletter) {
+      const value = email.trim().toLowerCase();
+      await supabase
+        .from("newsletter_subscribers")
+        .upsert(
+          { email: value, source: "signup", unsubscribed_at: null },
+          { onConflict: "email" }
+        );
+    }
     return { error };
   };
 
