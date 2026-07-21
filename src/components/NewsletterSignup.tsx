@@ -3,14 +3,31 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    const value = email.trim().toLowerCase();
+    if (!value || !/^\S+@\S+\.\S+$/.test(value)) {
+      toast({ title: "Enter a valid email", variant: "destructive" });
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase
+      .from("newsletter_subscribers")
+      .upsert({ email: value, source: "homepage", unsubscribed_at: null }, { onConflict: "email" });
+    setLoading(false);
+    if (error) {
+      toast({ title: "Couldn't subscribe", description: error.message, variant: "destructive" });
+      return;
+    }
+    setSubmitted(true);
   };
 
   if (submitted) {
@@ -50,8 +67,8 @@ export default function NewsletterSignup() {
               className="h-12 rounded-xl border-primary-foreground/10 bg-primary-foreground/5 text-primary-foreground placeholder:text-primary-foreground/30 focus:border-accent/50 focus:ring-accent/20"
               required
             />
-            <Button type="submit" variant="secondary" className="h-12 shrink-0 gap-1.5 rounded-xl px-6 font-semibold transition-all hover:shadow-lg">
-              Subscribe <ArrowRight className="h-4 w-4" />
+            <Button type="submit" disabled={loading} variant="secondary" className="h-12 shrink-0 gap-1.5 rounded-xl px-6 font-semibold transition-all hover:shadow-lg">
+              {loading ? "…" : "Subscribe"} <ArrowRight className="h-4 w-4" />
             </Button>
           </form>
         </motion.div>

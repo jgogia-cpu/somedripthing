@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { Instagram, ArrowUpRight, Mail } from "lucide-react";
 import dripwayLogo from "@/assets/dripway-logo.jpg";
 import { brands } from "@/data/brands";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 /**
  * Editorial footer: oversized wordmark, anchored newsletter, brand index
@@ -13,6 +15,30 @@ export default function Footer() {
     () => brands.filter((b) => b.featured).slice(0, 10),
     []
   );
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const value = email.trim().toLowerCase();
+    if (!value || !/^\S+@\S+\.\S+$/.test(value)) {
+      toast({ title: "Enter a valid email", variant: "destructive" });
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase
+      .from("newsletter_subscribers")
+      .upsert({ email: value, source: "footer", unsubscribed_at: null }, { onConflict: "email" });
+    setLoading(false);
+    if (error) {
+      toast({ title: "Couldn't subscribe", description: error.message, variant: "destructive" });
+      return;
+    }
+    setSubscribed(true);
+    setEmail("");
+    toast({ title: "You're on the list 🔥", description: "Monday Heat Check incoming." });
+  };
 
   return (
     <footer className="relative mt-20 overflow-hidden border-t border-border/40 bg-secondary/15">
@@ -41,24 +67,28 @@ export default function Footer() {
             <p className="mt-2 text-sm text-muted-foreground">
               The Monday edit — one email, the freshest drops we co-signed this week.
             </p>
-            <form
-              action="#"
-              onSubmit={(e) => e.preventDefault()}
-              className="mt-4 flex gap-2"
-            >
-              <input
-                type="email"
-                placeholder="you@something.com"
-                className="h-10 flex-1 rounded-full border border-border bg-background px-4 text-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
-                aria-label="Email address"
-              />
-              <button
-                type="submit"
-                className="rounded-full bg-accent px-5 text-xs font-bold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02] active:scale-100"
-              >
-                Join
-              </button>
-            </form>
+            {subscribed ? (
+              <p className="mt-4 text-sm text-accent">You're in. Watch your inbox Monday.</p>
+            ) : (
+              <form onSubmit={handleSubscribe} className="mt-4 flex gap-2">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@something.com"
+                  className="h-10 flex-1 rounded-full border border-border bg-background px-4 text-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
+                  aria-label="Email address"
+                />
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="rounded-full bg-accent px-5 text-xs font-bold uppercase tracking-wider text-accent-foreground transition-transform hover:scale-[1.02] active:scale-100 disabled:opacity-60"
+                >
+                  {loading ? "…" : "Join"}
+                </button>
+              </form>
+            )}
           </div>
         </div>
 

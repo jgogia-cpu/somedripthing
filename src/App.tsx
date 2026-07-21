@@ -27,6 +27,7 @@ const AdminSEO = lazy(() => import("./pages/AdminSEO"));
 const AdminAffiliate = lazy(() => import("./pages/AdminAffiliate"));
 const Auth = lazy(() => import("./pages/Auth"));
 const About = lazy(() => import("./pages/About"));
+const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 const queryClient = new QueryClient();
 
 function ScrollToTop() {
@@ -79,6 +80,7 @@ function AnimatedRoutes() {
       <Route path="/admin/affiliate" element={<AdminAffiliate />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/about" element={<About />} />
+      <Route path="/unsubscribe" element={<Unsubscribe />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
