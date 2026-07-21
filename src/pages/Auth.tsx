@@ -21,6 +21,7 @@ export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [subscribe, setSubscribe] = useState(true);
 
   const handleOAuth = async (provider: "google" | "apple") => {
     setError("");
@@ -40,7 +41,7 @@ export default function Auth() {
     setSuccess("");
     setLoading(true);
     if (mode === "signup") {
-      const { error } = await signUp(email, password, displayName);
+      const { error } = await signUp(email, password, displayName, subscribe);
       if (error) setError(error.message);
       else setSuccess("Check your email to confirm your account!");
     } else {
@@ -93,6 +94,20 @@ export default function Auth() {
             required
             minLength={6}
           />
+
+          {mode === "signup" && (
+            <label className="flex cursor-pointer items-start gap-2.5 rounded-lg border border-border/60 bg-secondary/30 p-3 text-left text-xs leading-relaxed text-muted-foreground">
+              <input
+                type="checkbox"
+                checked={subscribe}
+                onChange={(e) => setSubscribe(e.target.checked)}
+                className="mt-0.5 h-4 w-4 accent-[--accent]"
+              />
+              <span>
+                Send me the <span className="font-semibold text-foreground">Monday Heat Check</span> newsletter — one email a week, the freshest drops we co-signed.
+              </span>
+            </label>
+          )}
 
           {error && <p className="text-sm text-destructive">{error}</p>}
           {success && <p className="text-sm text-accent">{success}</p>}
