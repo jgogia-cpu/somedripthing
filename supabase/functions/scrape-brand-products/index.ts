@@ -12,7 +12,6 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "29", name: "MorteNoir", site: "https://mortenoir.co.uk" },
   { id: "30", name: "Isolated", site: "https://isolated.shop" },
   { id: "31", name: "Maker Creator", site: "https://makercreator.ca" },
-  { id: "32", name: "Justiniano", site: "https://justiniano.shop" },
   { id: "33", name: "Neutral State", site: "https://neutralstate.shop" },
   { id: "35", name: "EVARA", site: "https://shopevara.store" },
   { id: "38", name: "PRIESTHOOD", site: "https://priesthood.uk" },
