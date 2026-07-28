@@ -20,6 +20,7 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "39", name: "ZeroDivision", site: "https://zerodvsn.com" },
   { id: "40", name: "All Dubs", site: "https://www.alldubsofficial.com" },
   { id: "43", name: "Driven By Success", site: "https://drivenbysuccess.store" },
+  { id: "44", name: "DREKN", site: "https://drekn.com" },
 ];
 
 const SIZES_OK = new Set([
