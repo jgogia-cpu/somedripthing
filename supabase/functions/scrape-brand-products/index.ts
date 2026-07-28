@@ -21,7 +21,7 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "40", name: "All Dubs", site: "https://www.alldubsofficial.com" },
   { id: "43", name: "Driven By Success", site: "https://drivenbysuccess.store" },
   { id: "44", name: "DREKN", site: "https://drekn.com" },
-  { id: "45", name: "Don't Be Last Brand", site: "https://dontbelastbrand.com" },
+  { id: "45", name: "Don't Be Last", site: "https://dontbelastbrand.com" },
 ];
 
 const SIZES_OK = new Set([
