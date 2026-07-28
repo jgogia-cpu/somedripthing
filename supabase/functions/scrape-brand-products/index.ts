@@ -186,11 +186,18 @@ Deno.serve(async (req) => {
   const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
   const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
 
+  const url = new URL(req.url);
+  const brandFilter = url.searchParams.get("brand");
+  const skipImageCheck = url.searchParams.get("skipImageCheck") === "1";
+  const targets = brandFilter
+    ? BRANDS.filter((b) => b.id === brandFilter || b.name.toLowerCase() === brandFilter.toLowerCase())
+    : BRANDS;
+
   let totalAdded = 0;
   let totalRemoved = 0;
   const notes: string[] = [];
 
-  for (const brand of BRANDS) {
+  for (const brand of targets) {
     try {
       const { products, complete, error } = await fetchAllProducts(brand.site);
       if (!complete && products.length === 0) {
@@ -228,7 +235,7 @@ Deno.serve(async (req) => {
           if (!liveHandles.has(row.handle)) toDelete.add(row.handle);
         }
       }
-      for (const row of existing ?? []) {
+      if (!skipImageCheck) for (const row of existing ?? []) {
         const imageUrls = Array.isArray(row.images) && row.images.length
           ? row.images.filter((url): url is string => typeof url === "string")
           : [row.image].filter((url): url is string => typeof url === "string");
