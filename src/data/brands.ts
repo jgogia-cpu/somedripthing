@@ -502,12 +502,12 @@ export const brands: Brand[] = [
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-07-28"
   },
   {
-    id: "45", name: "Don't Be Last Brand", slug: "dontbelastbrand",
-    logo: "https://dontbelastbrand.com/cdn/shop/files/DBL_LOGO.png?v=1700000000&width=1200",
-    banner: "https://dontbelastbrand.com/cdn/shop/files/DBL_LOGO.png?v=1700000000&width=2048",
-    logoFont: "'Space Grotesk', sans-serif", darkCard: true, fullBleedLogo: true,
+    id: "45", name: "Don't Be Last", slug: "dontbelastbrand",
+    logo: "https://cdn.shopify.com/s/files/1/0402/5447/2360/files/png_logo_1200x.png?v=1613537921",
+    banner: "https://cdn.shopify.com/s/files/1/0402/5447/2360/files/png_logo_2048x.png?v=1613537921",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
     bio: "Don't Be Last is a movement-driven streetwear label built on the mantra of showing up first — bold graphics, heavyweight fabrics, and cut-and-sew silhouettes for the ones who move ahead of the pack.",
-    story: "Don't Be Last Brand exists to push wearers to the front — of the drop, the line, the culture. Every release is engineered on heavyweight construction with statement graphics and clean cut-and-sew details, made for people who refuse to be caught trailing.",
+    story: "Don't Be Last exists to push wearers to the front — of the drop, the line, the culture. Every release is engineered on heavyweight construction with statement graphics and clean cut-and-sew details, made for people who refuse to be caught trailing.",
     founded: "2022", founderNote: "\"Don't be last. Ever.\"",
     vibes: ["Statement graphics", "Heavyweight construction", "Cut-and-sew", "Movement-driven"],
     origin: "USA", website: "https://dontbelastbrand.com", affiliateUrl: "https://dontbelastbrand.com",
