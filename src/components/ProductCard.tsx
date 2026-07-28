@@ -33,7 +33,11 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const [visibleSrc, setVisibleSrc] = useState(allImages[0]);
   const [loadedSrcs, setLoadedSrcs] = useState(() => new Set<string>([allImages[0]]));
   const [failed, setFailed] = useState(false);
-  const eager = index < 2;
+  // Load the first row eagerly with high priority, and load ALL other product
+  // images immediately (loading="eager") instead of lazy so cards don't
+  // pop in as the user scrolls. `fetchpriority="low"` keeps the network
+  // polite for below-the-fold cards.
+  const eager = index < 4;
 
   useEffect(() => {
     setImgIndex(0);
@@ -84,7 +88,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             <img
               src={visibleSrc}
               alt={product.name}
-              loading={eager ? "eager" : "lazy"}
+              loading="eager"
+              // @ts-expect-error - fetchpriority is a valid HTML attribute
+              fetchpriority={eager ? "high" : "low"}
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover"
               onError={() => {
