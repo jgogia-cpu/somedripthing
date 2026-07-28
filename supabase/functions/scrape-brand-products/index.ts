@@ -21,6 +21,7 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "40", name: "All Dubs", site: "https://www.alldubsofficial.com" },
   { id: "43", name: "Driven By Success", site: "https://drivenbysuccess.store" },
   { id: "44", name: "DREKN", site: "https://drekn.com" },
+  { id: "45", name: "Don't Be Last Brand", site: "https://dontbelastbrand.com" },
 ];
 
 const SIZES_OK = new Set([
@@ -55,8 +56,8 @@ function extractSizes(variants: Array<Record<string, string | null>>): string[] 
   return ["S", "M", "L", "XL"];
 }
 
-const PER_BRAND_CAP = 50; // cap newly-added per brand per run
-const MAX_PAGES = 6; // up to 1,500 products per brand per run
+const PER_BRAND_CAP = 1500; // effectively "all products"
+const MAX_PAGES = 8; // up to 2,000 products per brand per run
 const CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD"] as const;
 type Currency = typeof CURRENCIES[number];
 const UA =
