@@ -189,15 +189,17 @@ Deno.serve(async (req) => {
   const url = new URL(req.url);
   const brandFilter = url.searchParams.get("brand");
   const skipImageCheck = url.searchParams.get("skipImageCheck") === "1";
+  const fast = url.searchParams.get("fast") === "1" || skipImageCheck;
+  const background = url.searchParams.get("background") === "1";
   const targets = brandFilter
     ? BRANDS.filter((b) => b.id === brandFilter || b.name.toLowerCase() === brandFilter.toLowerCase())
     : BRANDS;
 
-  let totalAdded = 0;
-  let totalRemoved = 0;
-  const notes: string[] = [];
-
-  for (const brand of targets) {
+  const run = async () => {
+    let totalAdded = 0;
+    let totalRemoved = 0;
+    const notes: string[] = [];
+    for (const brand of targets) {
     try {
       const { products, complete, error } = await fetchAllProducts(brand.site);
       if (!complete && products.length === 0) {
@@ -208,15 +210,18 @@ Deno.serve(async (req) => {
         products.map((p) => String(p.handle ?? "")).filter(Boolean),
       );
 
-      // Fetch per-currency price maps in parallel. USD map doubles as the
-      // baseline for detecting whether the shop actually honored `?currency=`.
+      // Fetch per-currency price maps in parallel. Skipped in `fast` mode
+      // (used for large / bot-protected shops) — currency conversion falls
+      // back to the live exchange-rate edge function on the client.
       const currencyMaps: Record<Currency, Map<string, number>> = {
         USD: new Map(), EUR: new Map(), GBP: new Map(), CAD: new Map(), AUD: new Map(),
       };
-      const fetched = await Promise.all(
-        CURRENCIES.map((c) => fetchPricesForCurrency(brand.site, c).catch(() => new Map<string, number>())),
-      );
-      CURRENCIES.forEach((c, i) => { currencyMaps[c] = fetched[i]; });
+      if (!fast) {
+        const fetched = await Promise.all(
+          CURRENCIES.map((c) => fetchPricesForCurrency(brand.site, c).catch(() => new Map<string, number>())),
+        );
+        CURRENCIES.forEach((c, i) => { currencyMaps[c] = fetched[i]; });
+      }
 
       // Existing handles for this brand
       const { data: existing } = await supabase
@@ -273,7 +278,7 @@ Deno.serve(async (req) => {
         const images = (p.images as Array<{ src: string }> | undefined) ?? [];
         if (!images.length) continue;
         const imgs = images.slice(0, 4).map((i) => i.src).filter(Boolean);
-        const liveImage = await firstLiveImage(imgs);
+        const liveImage = fast ? imgs[0] ?? null : await firstLiveImage(imgs);
         if (!liveImage) continue;
         const orderedImgs = [liveImage, ...imgs.filter((img) => img !== liveImage)];
         const variants =
@@ -364,16 +369,27 @@ Deno.serve(async (req) => {
     } catch (e) {
       notes.push(`${brand.name}: ${(e as Error).message}`);
     }
+    }
+    await supabase.from("scraper_runs").insert({
+      brands_checked: targets.length,
+      products_added: totalAdded,
+      notes: `removed:${totalRemoved} | ${notes.join(" | ")}`,
+    });
+    return { totalAdded, totalRemoved, notes };
+  };
+
+  if (background) {
+    // deno-lint-ignore no-explicit-any
+    (globalThis as any).EdgeRuntime?.waitUntil?.(run());
+    return new Response(
+      JSON.stringify({ ok: true, background: true, brands: targets.map((b) => b.name) }),
+      { status: 202, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+    );
   }
 
-  await supabase.from("scraper_runs").insert({
-    brands_checked: BRANDS.length,
-    products_added: totalAdded,
-    notes: `removed:${totalRemoved} | ${notes.join(" | ")}`,
-  });
-
+  const result = await run();
   return new Response(
-    JSON.stringify({ ok: true, totalAdded, totalRemoved, notes }),
+    JSON.stringify({ ok: true, ...result }),
     { headers: { ...corsHeaders, "Content-Type": "application/json" } },
   );
 });
