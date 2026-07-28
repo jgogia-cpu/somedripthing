@@ -501,6 +501,20 @@ export const brands: Brand[] = [
     priceRange: "premium", followers: 5400, rating: 4.8, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-07-28"
   },
+  {
+    id: "45", name: "Don't Be Last Brand", slug: "dontbelastbrand",
+    logo: "https://dontbelastbrand.com/cdn/shop/files/DBL_LOGO.png?v=1700000000&width=1200",
+    banner: "https://dontbelastbrand.com/cdn/shop/files/DBL_LOGO.png?v=1700000000&width=2048",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true, fullBleedLogo: true,
+    bio: "Don't Be Last is a movement-driven streetwear label built on the mantra of showing up first — bold graphics, heavyweight fabrics, and cut-and-sew silhouettes for the ones who move ahead of the pack.",
+    story: "Don't Be Last Brand exists to push wearers to the front — of the drop, the line, the culture. Every release is engineered on heavyweight construction with statement graphics and clean cut-and-sew details, made for people who refuse to be caught trailing.",
+    founded: "2022", founderNote: "\"Don't be last. Ever.\"",
+    vibes: ["Statement graphics", "Heavyweight construction", "Cut-and-sew", "Movement-driven"],
+    origin: "USA", website: "https://dontbelastbrand.com", affiliateUrl: "https://dontbelastbrand.com",
+    instagram: "@dontbelastbrand", aesthetics: ["Streetwear", "Grunge"], categories: ["Tops", "Bottoms", "Outerwear", "Accessories"],
+    priceRange: "mid", followers: 4100, rating: 4.7, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-07-28"
+  },
 ];
 export const products: Product[] = [
   { id: "p-drekn1", name: "Mahakaal Singh Sun Faded Distressed Hoodie", brandId: "44", brandName: "DREKN", image: "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074264-0080285647.png?v=1782943077", images: ["https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074264-0080285647.png?v=1782943077", "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074265-5685449159.png?v=1782943077"], price: 181, description: "Oversized sun-faded distressed hoodie featuring Mahakaal Singh iconography. Heavyweight combed cotton with washed, distressed finish and drop-shoulder boxy fit.", category: "Tops", aesthetics: ["Streetwear", "Grunge", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://drekn.com/products/mahakaal-singh-sun-faded-distressed-hoodie", trending: true, newArrival: true, addedAt: "2026-07-28" },
