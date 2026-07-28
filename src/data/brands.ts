@@ -505,7 +505,7 @@ export const brands: Brand[] = [
     id: "45", name: "Don't Be Last", slug: "dontbelastbrand",
     logo: "https://cdn.shopify.com/s/files/1/0402/5447/2360/files/png_logo_1200x.png?v=1613537921",
     banner: "https://cdn.shopify.com/s/files/1/0402/5447/2360/files/png_logo_2048x.png?v=1613537921",
-    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    logoFont: "'Space Grotesk', sans-serif", lightCard: true,
     bio: "Don't Be Last is a movement-driven streetwear label built on the mantra of showing up first — bold graphics, heavyweight fabrics, and cut-and-sew silhouettes for the ones who move ahead of the pack.",
     story: "Don't Be Last exists to push wearers to the front — of the drop, the line, the culture. Every release is engineered on heavyweight construction with statement graphics and clean cut-and-sew details, made for people who refuse to be caught trailing.",
     founded: "2022", founderNote: "\"Don't be last. Ever.\"",
