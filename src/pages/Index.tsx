@@ -154,6 +154,17 @@ function buildHeroProducts() {
     const cos = products.filter((p) => p.brandId === "42");
     if (cos.length) picks[1] = cos[Math.floor(Math.random() * cos.length)];
   }
+  const hasDrekn = picks.some((p) => p.brandId === "44");
+  if (!hasDrekn) {
+    const drekn = products.filter((p) => p.brandId === "44");
+    if (drekn.length) {
+      picks[2] = drekn[Math.floor(Math.random() * drekn.length)];
+      if (drekn.length > 1) {
+        const other = drekn.find((p) => p.id !== picks[2].id);
+        if (other) picks[3] = other;
+      }
+    }
+  }
   return picks;
 }
 
