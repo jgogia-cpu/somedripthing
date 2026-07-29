@@ -1,6 +1,18 @@
 {
-  "generatedAt": "2026-07-28T02:45:04.084Z",
+  "generatedAt": "2026-07-29T05:12:04.189Z",
   "products": [
+    {
+      "id": "p-drekn1",
+      "brandId": "44",
+      "image": "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074264-0080285647.png?v=1782943077",
+      "affiliateUrl": "https://drekn.com/products/mahakaal-singh-sun-faded-distressed-hoodie"
+    },
+    {
+      "id": "p-drekn2",
+      "brandId": "44",
+      "image": "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782942549009-8566875111.png?v=1782942552",
+      "affiliateUrl": "https://drekn.com/products/ustaad-nusrat-fateh-ali-khan-v2-classic-boxy-hoodie"
+    },
     {
       "id": "p28",
       "brandId": "17",
