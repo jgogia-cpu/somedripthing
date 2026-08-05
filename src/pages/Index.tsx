@@ -239,7 +239,7 @@ export default function Index() {
       {/* 3D Carousel Hero */}
       <section
         className="relative overflow-hidden bg-cover bg-center bg-no-repeat py-12 md:py-20"
-        style={{ backgroundImage: `url(${heroCarouselBg.url})` }}
+        style={{ backgroundImage: "url(/hero-carousel-bg.png)" }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/40 to-background/80" />
         <div className="container relative z-10">
