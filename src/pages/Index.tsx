@@ -238,7 +238,11 @@ export default function Index() {
         type="website"
       />
       {/* 3D Carousel Hero */}
-      <section className="relative overflow-hidden py-12 md:py-20">
+      <section
+        className="relative overflow-hidden bg-cover bg-center bg-no-repeat py-12 md:py-20"
+        style={{ backgroundImage: `url(${heroCarouselBg.url})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
         <div className="container relative z-10">
           <h1
             className="mb-1 flex flex-wrap justify-center gap-x-[0.25em] text-center text-5xl font-bold tracking-tight md:text-7xl"
