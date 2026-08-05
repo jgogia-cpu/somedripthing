@@ -13,7 +13,6 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import RecentlyViewed from "@/components/RecentlyViewed";
 import { isRecent } from "@/lib/isRecent";
 import { hideProductLocally, isHidden } from "@/lib/hiddenProducts";
-import heroCarouselBg from "@/assets/hero-carousel-bg.png.asset.json";
 
 
 // Shuffle whose result is cached in-memory for the lifetime of this JS module
