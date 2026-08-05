@@ -226,13 +226,4 @@
     mask-image: linear-gradient(to bottom, black 60%, transparent);
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent);
   }
-
-  /* DW wallpaper — tiles vertically down the whole page */
-  .dw-wallpaper {
-    background-image: url("/hero-carousel-bg.png");
-    background-repeat: repeat-y;
-    background-size: 100% auto;
-    background-position: top center;
-    background-attachment: scroll;
-  }
 }
