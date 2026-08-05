@@ -156,7 +156,7 @@ export default function Collections() {
   const isSearching = !!searchResults;
 
   return (
-    <div className="dw-wallpaper min-h-screen">
+    <div className="min-h-screen bg-background">
       <SEO
         title={isSearching ? `Search: ${query} | DRIPWAY` : "Heat Check — Weekly Collections | DRIPWAY"}
         description={
