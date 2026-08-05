@@ -14,6 +14,7 @@ import RecentlyViewed from "@/components/RecentlyViewed";
 import { isRecent } from "@/lib/isRecent";
 import { hideProductLocally, isHidden } from "@/lib/hiddenProducts";
 
+
 // Shuffle whose result is cached in-memory for the lifetime of this JS module
 // (i.e., the current page load). Navigating between routes inside the SPA
 // keeps the same order, but a hard refresh / new tab reshuffles.
@@ -236,7 +237,11 @@ export default function Index() {
         type="website"
       />
       {/* 3D Carousel Hero */}
-      <section className="relative overflow-hidden py-12 md:py-20">
+      <section
+        className="relative overflow-hidden bg-cover bg-center bg-no-repeat py-12 md:py-20"
+        style={{ backgroundImage: "url(/hero-carousel-bg.png)" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/40 to-background/80" />
         <div className="container relative z-10">
           <h1
             className="mb-1 flex flex-wrap justify-center gap-x-[0.25em] text-center text-5xl font-bold tracking-tight md:text-7xl"
