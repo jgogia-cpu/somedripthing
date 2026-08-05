@@ -17,7 +17,7 @@ export default function Brands() {
   );
 
   return (
-    <div className="min-h-screen">
+    <div className="dw-wallpaper min-h-screen">
       <SEO
         title="Brands — DRIPWAY"
         description="Browse every niche fashion brand on DRIPWAY. Discover emerging streetwear, designer and underground labels in one place."
