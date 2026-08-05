@@ -229,7 +229,7 @@ export default function Index() {
   const brand = getBrandById(current.brandId);
 
   return (
-    <div className="min-h-screen">
+    <div className="dw-wallpaper min-h-screen">
       <SEO
         title="DRIPWAY — Discover Niche Fashion Brands"
         description="Discover the brands Instagram won't show you. DRIPWAY is your curated discovery engine for underground, emerging, and niche streetwear and designer labels."
@@ -238,10 +238,9 @@ export default function Index() {
       />
       {/* 3D Carousel Hero */}
       <section
-        className="relative overflow-hidden bg-cover bg-center bg-no-repeat py-12 md:py-20"
-        style={{ backgroundImage: "url(/hero-carousel-bg.png)" }}
+        className="relative overflow-hidden py-12 md:py-20"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/40 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/25 to-background/50" />
         <div className="container relative z-10">
           <h1
             className="mb-1 flex flex-wrap justify-center gap-x-[0.25em] text-center text-5xl font-bold tracking-tight md:text-7xl"
@@ -374,7 +373,7 @@ export default function Index() {
       <FeaturedBrandSection />
 
       {/* New Drops */}
-      <section className="content-auto border-t bg-secondary/20 py-16">
+      <section className="content-auto border-t bg-background/40 py-16">
         <div className="container">
           <div className="mb-8 flex items-center justify-between">
             <h2 className="font-display text-2xl font-bold">New Drops 🔥</h2>
