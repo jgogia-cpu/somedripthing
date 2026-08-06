@@ -226,4 +226,12 @@
     mask-image: linear-gradient(to bottom, black 60%, transparent);
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent);
   }
+
+  /* Repeating DW monogram wallpaper */
+  .dw-wallpaper {
+    background-image: url("/hero-carousel-bg.png");
+    background-repeat: repeat;
+    background-size: 760px auto;
+    background-position: top center;
+  }
 }
