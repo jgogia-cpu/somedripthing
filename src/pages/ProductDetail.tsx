@@ -224,6 +224,18 @@ export default function ProductDetail() {
             </div>
 
             {/* CTAs */}
+            {isMadeToOrder && (
+              <div className="rounded-2xl border border-accent/30 bg-accent/5 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Made to order</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Every {product.name} piece is hand-illustrated and made individually — there's no online checkout.
+                  DM {brand?.instagram ?? "the studio"} on Instagram with the piece name and your size, and {product.brandName} will confirm price, timeline and payment.
+                </p>
+                <p className="mt-2 break-all text-xs text-muted-foreground/80">
+                  Order link: <span className="text-foreground">{buyHref.replace(/^https?:\/\//, "")}</span>
+                </p>
+              </div>
+            )}
             <div className="flex gap-3 pt-2">
               <TrackedOutboundLink
                 href={buyHref}
@@ -242,7 +254,7 @@ export default function ProductDetail() {
                 }}
               >
                 <Button className="w-full gap-2 rounded-full" size="lg">
-                  Buy from {product.brandName} <ExternalLink className="h-4 w-4" />
+                  {isMadeToOrder ? "Order on Instagram" : `Buy from ${product.brandName}`} <ExternalLink className="h-4 w-4" />
                 </Button>
               </TrackedOutboundLink>
               <Button
@@ -255,7 +267,9 @@ export default function ProductDetail() {
               </Button>
             </div>
             <p className="pt-1 text-[11px] text-muted-foreground/80">
-              You'll be redirected to {(() => { try { return new URL(buyHref).hostname.replace(/^www\./, ""); } catch { return `${product.brandName}'s site`; } })()} in a new tab. DRIPWAY may earn a commission.
+              {isMadeToOrder
+                ? `Opens ${product.brandName}'s Instagram in a new tab — send a DM to place your made-to-order request.`
+                : `You'll be redirected to ${(() => { try { return new URL(buyHref).hostname.replace(/^www\./, ""); } catch { return `${product.brandName}'s site`; } })()} in a new tab. DRIPWAY may earn a commission.`}
             </p>
             {!user && (
               <button
