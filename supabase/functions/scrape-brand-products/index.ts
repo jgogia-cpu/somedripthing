@@ -206,6 +206,9 @@ Deno.serve(async (req) => {
   const targets = brandFilter
     ? BRANDS.filter((b) => b.id === brandFilter || b.name.toLowerCase() === brandFilter.toLowerCase())
     : BRANDS;
+  const ikasTargets = brandFilter
+    ? IKAS_BRANDS.filter((b) => b.id === brandFilter || b.name.toLowerCase() === brandFilter.toLowerCase())
+    : IKAS_BRANDS;
 
   const run = async () => {
     let totalAdded = 0;
