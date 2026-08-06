@@ -385,8 +385,97 @@ Deno.serve(async (req) => {
       notes.push(`${brand.name}: ${(e as Error).message}`);
     }
     }
+
+    // ---- ikas-platform brands (sitemap + JSON-LD) ----
+    for (const brand of ikasTargets) {
+      try {
+        const res = await fetch(`${brand.sitemapHost}/products.xml`, {
+          headers: { "User-Agent": UA },
+          signal: AbortSignal.timeout(20000),
+        });
+        if (!res.ok) {
+          notes.push(`${brand.name}: sitemap HTTP ${res.status}`);
+          continue;
+        }
+        const xml = await res.text();
+        const urls = Array.from(xml.matchAll(/<loc>(.*?)<\/loc>/g)).map((m) => m[1]);
+        if (!urls.length) {
+          notes.push(`${brand.name}: no products in sitemap`);
+          continue;
+        }
+        const liveHandles = new Set(
+          urls.map((u) => u.split("/").filter(Boolean).pop() ?? "").filter(Boolean),
+        );
+
+        const { data: existing } = await supabase
+          .from("scraped_products")
+          .select("handle")
+          .eq("brand_id", brand.id);
+        const have = new Set((existing ?? []).map((r) => r.handle));
+
+        const stale = (existing ?? [])
+          .map((r) => r.handle)
+          .filter((h) => !liveHandles.has(h));
+        if (stale.length) {
+          await supabase
+            .from("scraped_products")
+            .delete()
+            .eq("brand_id", brand.id)
+            .in("handle", stale);
+          totalRemoved += stale.length;
+          stale.forEach((h) => have.delete(h));
+        }
+
+        const usdRate = await tryToUsdRate();
+        const toInsert: Array<Record<string, unknown>> = [];
+        for (const url of urls.slice(0, PER_BRAND_CAP)) {
+          const handle = url.split("/").filter(Boolean).pop() ?? "";
+          if (!handle || have.has(handle)) continue;
+          const ld = await fetchIkasProduct(url);
+          if (!ld) continue;
+          const images = ld.images.slice(0, 4);
+          if (!images.length) continue;
+          const priceUsd = Math.round(ld.price * (ld.currency === "TRY" ? usdRate : 1));
+          if (!priceUsd) continue;
+          const { category, aesthetics } = categorize(ld.name);
+          toInsert.push({
+            brand_id: brand.id,
+            brand_name: brand.name,
+            handle,
+            name: ld.name,
+            image: images[0],
+            images,
+            price: priceUsd,
+            prices: {},
+            description:
+              ld.description ||
+              `${ld.name} from ${brand.name} — limited-run streetwear piece.`,
+            category,
+            aesthetics,
+            sizes: ld.sizes.length ? ld.sizes : ["S", "M", "L", "XL"],
+            affiliate_url: `${brand.site}/${handle}`,
+          });
+        }
+
+        if (toInsert.length) {
+          const { error } = await supabase
+            .from("scraped_products")
+            .upsert(toInsert, { onConflict: "brand_id,handle", ignoreDuplicates: true });
+          if (error) notes.push(`${brand.name}: insert error ${error.message}`);
+          else {
+            totalAdded += toInsert.length;
+            notes.push(`${brand.name}: +${toInsert.length}${stale.length ? ` / -${stale.length}` : ""}`);
+          }
+        } else {
+          notes.push(`${brand.name}: 0 new${stale.length ? ` / -${stale.length}` : ""}`);
+        }
+      } catch (e) {
+        notes.push(`${brand.name}: ${(e as Error).message}`);
+      }
+    }
+
     await supabase.from("scraper_runs").insert({
-      brands_checked: targets.length,
+      brands_checked: targets.length + ikasTargets.length,
       products_added: totalAdded,
       notes: `removed:${totalRemoved} | ${notes.join(" | ")}`,
     });
