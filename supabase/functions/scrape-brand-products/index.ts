@@ -191,6 +191,82 @@ async function fetchPricesForCurrency(
   return map;
 }
 
+// --- ikas helpers -----------------------------------------------------------
+const SIZE_MAP: Record<string, string> = {
+  xs: "XS", s: "S", m: "M", l: "L", xl: "XL", xxl: "2XL", "2xl": "2XL", "3xl": "3XL",
+};
+
+async function tryToUsdRate(): Promise<number> {
+  try {
+    const res = await fetch("https://api.frankfurter.app/latest?from=TRY&to=USD", {
+      signal: AbortSignal.timeout(8000),
+    });
+    if (res.ok) {
+      const json = (await res.json()) as { rates?: { USD?: number } };
+      if (json.rates?.USD && json.rates.USD > 0) return json.rates.USD;
+    }
+  } catch { /* fall through */ }
+  return 0.024;
+}
+
+interface IkasProduct {
+  name: string;
+  description: string;
+  images: string[];
+  price: number;
+  currency: string;
+  sizes: string[];
+}
+
+async function fetchIkasProduct(url: string): Promise<IkasProduct | null> {
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA },
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const blocks = Array.from(
+      html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g),
+    ).map((m) => m[1]);
+    for (const raw of blocks) {
+      let data: Record<string, unknown>;
+      try { data = JSON.parse(raw); } catch { continue; }
+      if (data["@type"] !== "Product") continue;
+      const offers = (Array.isArray(data.offers) ? data.offers : data.offers ? [data.offers] : []) as
+        Array<{ price?: string; priceCurrency?: string; url?: string }>;
+      const prices = offers
+        .map((o) => parseFloat(String(o.price ?? "0")))
+        .filter((p) => p > 0);
+      if (!prices.length) continue;
+      const sizes = Array.from(
+        new Set(
+          offers
+            .map((o) => decodeURIComponent(o.url ?? "").match(/[?&](beden|size)=([^&?]+)/i)?.[2] ?? "")
+            .map((s) => SIZE_MAP[s.toLowerCase()] ?? "")
+            .filter(Boolean),
+        ),
+      ).sort((a, b) => SIZE_ORDER.indexOf(a) - SIZE_ORDER.indexOf(b));
+      return {
+        name: String(data.name ?? "Untitled").replace(/\s+/g, " ").trim(),
+        description: String(data.description ?? "")
+          .replace(/<[^>]+>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 220),
+        images: (Array.isArray(data.image) ? data.image : [data.image])
+          .filter((i): i is string => typeof i === "string" && /^https?:\/\//.test(i)),
+        price: Math.min(...prices),
+        currency: String(offers[0]?.priceCurrency ?? "USD"),
+        sizes,
+      };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
