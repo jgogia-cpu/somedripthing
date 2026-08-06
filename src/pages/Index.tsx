@@ -348,10 +348,10 @@ export default function Index() {
         </div>
       </section>
 
-      <RecentlyViewed />
+      <RecentlyViewed className="dw-wallpaper" />
 
       {/* Trending Products */}
-      <section className="content-auto py-16">
+      <section className="content-auto dw-wallpaper py-16">
         <div className="container">
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -374,7 +374,7 @@ export default function Index() {
       <FeaturedBrandSection />
 
       {/* New Drops */}
-      <section className="content-auto border-t bg-background/40 py-16">
+      <section className="content-auto dw-wallpaper border-t py-16">
         <div className="container">
           <div className="mb-8 flex items-center justify-between">
             <h2 className="font-display text-2xl font-bold">New Drops 🔥</h2>
