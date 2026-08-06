@@ -515,9 +515,36 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 4100, rating: 4.7, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-07-28"
   },
+  {
+    id: "46", name: "Ritual One", slug: "ritual-one",
+    logo: "https://ritualone.ca/cdn/shop/files/Untitled-1_383a5420-483e-482f-973c-750751ecbbb8.png?v=1783313913&width=1200",
+    banner: "https://ritualone.ca/cdn/shop/files/Untitled-1_383a5420-483e-482f-973c-750751ecbbb8.png?v=1783313913&width=2048",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Ritual One turns everyday moments into ritual — riviera-inspired graphic tees built around slow living, travel and the good life.",
+    story: "Ritual One is built on the idea that style is a daily ritual. The label cuts clean, heavyweight graphic tees pulled from Mediterranean summers, Monaco waterfronts and late Aperol afternoons — statements like Blessed, La Dolce Vita and The World Is Yours printed on soft, relaxed silhouettes made to be lived in.",
+    founded: "2025", founderNote: "\"Everything happens for a reason.\"",
+    vibes: ["Riviera-inspired", "Slow living", "Graphic tees", "Relaxed fits"],
+    origin: "Canada", website: "https://ritualone.ca", affiliateUrl: "https://ritualone.ca",
+    instagram: "@ritualone", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops"],
+    priceRange: "affordable", followers: 1800, rating: 4.6, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-06"
+  },
+  {
+    id: "47", name: "Vision", slug: "vision-tr",
+    logo: "https://cdn.myikas.com/images/theme-images/bc70c30c-018d-43ed-8539-d86889f86f26/image_1080.webp",
+    banner: "https://cdn.myikas.com/images/theme-images/9ebb2522-5987-4501-a5ac-5a723ef4d7ee/image_1080.jpg",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Istanbul-born streetwear label cutting washed sets, flared joggers and raglan silhouettes under the 'Close Your Eyes' ethos.",
+    story: "Vision builds full-look streetwear out of Turkey — matching zip-up and flared jogger sets, cloudline and swamp-dyed tees, and frost raglans. Every capsule is released in tight, numbered drops with heavyweight fabrics and a washed, tonal palette.",
+    founded: "2024", founderNote: "\"Close your eyes.\"",
+    vibes: ["Washed tonal", "Full sets", "Flared silhouettes", "Limited drops"],
+    origin: "Istanbul, Turkey", website: "https://snmzx-visiontr.myikas.com", affiliateUrl: "https://snmzx-visiontr.myikas.com",
+    instagram: "@visiontr", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms", "Outerwear"],
+    priceRange: "mid", followers: 2100, rating: 4.6, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-06"
+  },
 ];
 export const products: Product[] = [
-  // placeholder-anchor
   { id: "p-drekn1", name: "Mahakaal Singh Sun Faded Distressed Hoodie", brandId: "44", brandName: "DREKN", image: "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074264-0080285647.png?v=1782943077", images: ["https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074264-0080285647.png?v=1782943077", "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074265-5685449159.png?v=1782943077"], price: 181, description: "Oversized sun-faded distressed hoodie featuring Mahakaal Singh iconography. Heavyweight combed cotton with washed, distressed finish and drop-shoulder boxy fit.", category: "Tops", aesthetics: ["Streetwear", "Grunge", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://drekn.com/products/mahakaal-singh-sun-faded-distressed-hoodie", trending: true, newArrival: true, addedAt: "2026-07-28" },
   { id: "p-drekn2", name: "Ustaad Nusrat Fateh Ali Khan V2 Classic Boxy Hoodie", brandId: "44", brandName: "DREKN", image: "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782942549009-8566875111.png?v=1782942552", images: ["https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782942549009-8566875111.png?v=1782942552", "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782942549031-6680361238.png?v=1782942552"], price: 180, description: "Classic boxy hoodie tribute to Ustaad Nusrat Fateh Ali Khan. Heavyweight fleece with oversized boxy silhouette and archival graphic print.", category: "Tops", aesthetics: ["Streetwear", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://drekn.com/products/ustaad-nusrat-fateh-ali-khan-v2-classic-boxy-hoodie", trending: true, newArrival: true, addedAt: "2026-07-28" },
   { id: "p28", name: "Panjab Oversized Faded Hoodie", brandId: "17", brandName: "Drip by Rage", image: "https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", images: ["https://dripbyrage.store/cdn/shop/files/ghy234wg2w.png?v=1762457556&width=600", "https://dripbyrage.store/cdn/shop/files/405264004_218481821281220_279562461490352271_n_710adddf-665f-4a65-9024-c0840fa1eda5.jpg?v=1739224612&width=600"], price: 140, description: "Oversized faded hoodie with snug collar for wind protection, kangaroo pockets, drop shoulders, and washed effect. 100% combed cotton, 440g/m², pre-shrunk with binding taped neck and shoulders.", category: "Tops", aesthetics: ["Streetwear", "Grunge"], sizes: ["S", "M", "L", "XL", "2XL"], sizeStock: { "S": true, "M": true, "L": false, "XL": true, "2XL": false }, affiliateUrl: "https://dripbyrage.store/en-us/products/panjab-oversized-faded-hoodie", trending: true, newArrival: false },
