@@ -22,6 +22,18 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "43", name: "Driven By Success", site: "https://drivenbysuccess.store" },
   { id: "44", name: "DREKN", site: "https://drekn.com" },
   { id: "45", name: "Don't Be Last", site: "https://dontbelastbrand.com" },
+  { id: "46", name: "Ritual One", site: "https://ritualone.ca" },
+];
+
+// Non-Shopify stores (ikas platform). Products are discovered through the
+// store sitemap and parsed from each product page's JSON-LD block.
+const IKAS_BRANDS: Array<{ id: string; name: string; site: string; sitemapHost: string }> = [
+  {
+    id: "47",
+    name: "Vision",
+    site: "https://snmzx-visiontr.myikas.com",
+    sitemapHost: "https://visiontr.myikas.com",
+  },
 ];
 
 const SIZES_OK = new Set([
