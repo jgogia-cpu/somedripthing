@@ -47,6 +47,7 @@ export default function ProductDetail() {
   const wishlisted = isInWishlist(product.id);
   const activeColor = product.colors?.find((c) => c.name === selectedColor) ?? null;
   const buyHref = activeColor?.affiliateUrl ?? product.affiliateUrl;
+  const isMadeToOrder = product.brandId === "48";
 
   const seoTitle = `${product.name}${brand ? " — " + brand.name : ""} | DRIPWAY`;
   const seoDesc = (product.description || `${product.name} by ${brand?.name ?? "DRIPWAY"}. Discover niche fashion on DRIPWAY.`).slice(0, 158);
