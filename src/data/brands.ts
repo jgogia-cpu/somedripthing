@@ -515,6 +515,34 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 4100, rating: 4.7, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-07-28"
   },
+  {
+    id: "46", name: "Ritual One", slug: "ritual-one",
+    logo: "https://ritualone.ca/cdn/shop/files/Untitled-1_383a5420-483e-482f-973c-750751ecbbb8.png?v=1783313913&width=1200",
+    banner: "https://ritualone.ca/cdn/shop/files/Untitled-1_383a5420-483e-482f-973c-750751ecbbb8.png?v=1783313913&width=2048",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Ritual One turns everyday moments into ritual — riviera-inspired graphic tees built around slow living, travel and the good life.",
+    story: "Ritual One is built on the idea that style is a daily ritual. The label cuts clean, heavyweight graphic tees pulled from Mediterranean summers, Monaco waterfronts and late Aperol afternoons — statements like Blessed, La Dolce Vita and The World Is Yours printed on soft, relaxed silhouettes made to be lived in.",
+    founded: "2025", founderNote: "\"Everything happens for a reason.\"",
+    vibes: ["Riviera-inspired", "Slow living", "Graphic tees", "Relaxed fits"],
+    origin: "Canada", website: "https://ritualone.ca", affiliateUrl: "https://ritualone.ca",
+    instagram: "@ritualone", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops"],
+    priceRange: "budget", followers: 1800, rating: 4.6, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-06"
+  },
+  {
+    id: "47", name: "Vision", slug: "vision-tr",
+    logo: "https://cdn.myikas.com/images/theme-images/bc70c30c-018d-43ed-8539-d86889f86f26/image_1080.webp",
+    banner: "https://cdn.myikas.com/images/theme-images/9ebb2522-5987-4501-a5ac-5a723ef4d7ee/image_1080.jpg",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Istanbul-born streetwear label cutting washed sets, flared joggers and raglan silhouettes under the 'Close Your Eyes' ethos.",
+    story: "Vision builds full-look streetwear out of Turkey — matching zip-up and flared jogger sets, cloudline and swamp-dyed tees, and frost raglans. Every capsule is released in tight, numbered drops with heavyweight fabrics and a washed, tonal palette.",
+    founded: "2024", founderNote: "\"Close your eyes.\"",
+    vibes: ["Washed tonal", "Full sets", "Flared silhouettes", "Limited drops"],
+    origin: "Istanbul, Turkey", website: "https://snmzx-visiontr.myikas.com", affiliateUrl: "https://snmzx-visiontr.myikas.com",
+    instagram: "@visiontr", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops", "Bottoms", "Outerwear"],
+    priceRange: "mid", followers: 2100, rating: 4.6, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-06"
+  },
 ];
 export const products: Product[] = [
   { id: "p-drekn1", name: "Mahakaal Singh Sun Faded Distressed Hoodie", brandId: "44", brandName: "DREKN", image: "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074264-0080285647.png?v=1782943077", images: ["https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074264-0080285647.png?v=1782943077", "https://cdn.shopify.com/s/files/1/0743/7382/4745/files/store-1782943074265-5685449159.png?v=1782943077"], price: 181, description: "Oversized sun-faded distressed hoodie featuring Mahakaal Singh iconography. Heavyweight combed cotton with washed, distressed finish and drop-shoulder boxy fit.", category: "Tops", aesthetics: ["Streetwear", "Grunge", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://drekn.com/products/mahakaal-singh-sun-faded-distressed-hoodie", trending: true, newArrival: true, addedAt: "2026-07-28" },

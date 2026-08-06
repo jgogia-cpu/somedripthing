@@ -22,6 +22,18 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "43", name: "Driven By Success", site: "https://drivenbysuccess.store" },
   { id: "44", name: "DREKN", site: "https://drekn.com" },
   { id: "45", name: "Don't Be Last", site: "https://dontbelastbrand.com" },
+  { id: "46", name: "Ritual One", site: "https://ritualone.ca" },
+];
+
+// Non-Shopify stores (ikas platform). Products are discovered through the
+// store sitemap and parsed from each product page's JSON-LD block.
+const IKAS_BRANDS: Array<{ id: string; name: string; site: string; sitemapHost: string }> = [
+  {
+    id: "47",
+    name: "Vision",
+    site: "https://snmzx-visiontr.myikas.com",
+    sitemapHost: "https://visiontr.myikas.com",
+  },
 ];
 
 const SIZES_OK = new Set([
@@ -179,6 +191,82 @@ async function fetchPricesForCurrency(
   return map;
 }
 
+// --- ikas helpers -----------------------------------------------------------
+const SIZE_MAP: Record<string, string> = {
+  xs: "XS", s: "S", m: "M", l: "L", xl: "XL", xxl: "2XL", "2xl": "2XL", "3xl": "3XL",
+};
+
+async function tryToUsdRate(): Promise<number> {
+  try {
+    const res = await fetch("https://api.frankfurter.app/latest?from=TRY&to=USD", {
+      signal: AbortSignal.timeout(8000),
+    });
+    if (res.ok) {
+      const json = (await res.json()) as { rates?: { USD?: number } };
+      if (json.rates?.USD && json.rates.USD > 0) return json.rates.USD;
+    }
+  } catch { /* fall through */ }
+  return 0.024;
+}
+
+interface IkasProduct {
+  name: string;
+  description: string;
+  images: string[];
+  price: number;
+  currency: string;
+  sizes: string[];
+}
+
+async function fetchIkasProduct(url: string): Promise<IkasProduct | null> {
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": UA },
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const blocks = Array.from(
+      html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g),
+    ).map((m) => m[1]);
+    for (const raw of blocks) {
+      let data: Record<string, unknown>;
+      try { data = JSON.parse(raw); } catch { continue; }
+      if (data["@type"] !== "Product") continue;
+      const offers = (Array.isArray(data.offers) ? data.offers : data.offers ? [data.offers] : []) as
+        Array<{ price?: string; priceCurrency?: string; url?: string }>;
+      const prices = offers
+        .map((o) => parseFloat(String(o.price ?? "0")))
+        .filter((p) => p > 0);
+      if (!prices.length) continue;
+      const sizes = Array.from(
+        new Set(
+          offers
+            .map((o) => decodeURIComponent(o.url ?? "").match(/[?&](beden|size)=([^&?]+)/i)?.[2] ?? "")
+            .map((s) => SIZE_MAP[s.toLowerCase()] ?? "")
+            .filter(Boolean),
+        ),
+      ).sort((a, b) => SIZE_ORDER.indexOf(a) - SIZE_ORDER.indexOf(b));
+      return {
+        name: String(data.name ?? "Untitled").replace(/\s+/g, " ").trim(),
+        description: String(data.description ?? "")
+          .replace(/<[^>]+>/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 220),
+        images: (Array.isArray(data.image) ? data.image : [data.image])
+          .filter((i): i is string => typeof i === "string" && /^https?:\/\//.test(i)),
+        price: Math.min(...prices),
+        currency: String(offers[0]?.priceCurrency ?? "USD"),
+        sizes,
+      };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
@@ -194,6 +282,9 @@ Deno.serve(async (req) => {
   const targets = brandFilter
     ? BRANDS.filter((b) => b.id === brandFilter || b.name.toLowerCase() === brandFilter.toLowerCase())
     : BRANDS;
+  const ikasTargets = brandFilter
+    ? IKAS_BRANDS.filter((b) => b.id === brandFilter || b.name.toLowerCase() === brandFilter.toLowerCase())
+    : IKAS_BRANDS;
 
   const run = async () => {
     let totalAdded = 0;
@@ -370,8 +461,97 @@ Deno.serve(async (req) => {
       notes.push(`${brand.name}: ${(e as Error).message}`);
     }
     }
+
+    // ---- ikas-platform brands (sitemap + JSON-LD) ----
+    for (const brand of ikasTargets) {
+      try {
+        const res = await fetch(`${brand.sitemapHost}/products.xml`, {
+          headers: { "User-Agent": UA },
+          signal: AbortSignal.timeout(20000),
+        });
+        if (!res.ok) {
+          notes.push(`${brand.name}: sitemap HTTP ${res.status}`);
+          continue;
+        }
+        const xml = await res.text();
+        const urls = Array.from(xml.matchAll(/<loc>(.*?)<\/loc>/g)).map((m) => m[1]);
+        if (!urls.length) {
+          notes.push(`${brand.name}: no products in sitemap`);
+          continue;
+        }
+        const liveHandles = new Set(
+          urls.map((u) => u.split("/").filter(Boolean).pop() ?? "").filter(Boolean),
+        );
+
+        const { data: existing } = await supabase
+          .from("scraped_products")
+          .select("handle")
+          .eq("brand_id", brand.id);
+        const have = new Set((existing ?? []).map((r) => r.handle));
+
+        const stale = (existing ?? [])
+          .map((r) => r.handle)
+          .filter((h) => !liveHandles.has(h));
+        if (stale.length) {
+          await supabase
+            .from("scraped_products")
+            .delete()
+            .eq("brand_id", brand.id)
+            .in("handle", stale);
+          totalRemoved += stale.length;
+          stale.forEach((h) => have.delete(h));
+        }
+
+        const usdRate = await tryToUsdRate();
+        const toInsert: Array<Record<string, unknown>> = [];
+        for (const url of urls.slice(0, PER_BRAND_CAP)) {
+          const handle = url.split("/").filter(Boolean).pop() ?? "";
+          if (!handle || have.has(handle)) continue;
+          const ld = await fetchIkasProduct(url);
+          if (!ld) continue;
+          const images = ld.images.slice(0, 4);
+          if (!images.length) continue;
+          const priceUsd = Math.round(ld.price * (ld.currency === "TRY" ? usdRate : 1));
+          if (!priceUsd) continue;
+          const { category, aesthetics } = categorize(ld.name);
+          toInsert.push({
+            brand_id: brand.id,
+            brand_name: brand.name,
+            handle,
+            name: ld.name,
+            image: images[0],
+            images,
+            price: priceUsd,
+            prices: {},
+            description:
+              ld.description ||
+              `${ld.name} from ${brand.name} — limited-run streetwear piece.`,
+            category,
+            aesthetics,
+            sizes: ld.sizes.length ? ld.sizes : ["S", "M", "L", "XL"],
+            affiliate_url: `${brand.site}/${handle}`,
+          });
+        }
+
+        if (toInsert.length) {
+          const { error } = await supabase
+            .from("scraped_products")
+            .upsert(toInsert, { onConflict: "brand_id,handle", ignoreDuplicates: true });
+          if (error) notes.push(`${brand.name}: insert error ${error.message}`);
+          else {
+            totalAdded += toInsert.length;
+            notes.push(`${brand.name}: +${toInsert.length}${stale.length ? ` / -${stale.length}` : ""}`);
+          }
+        } else {
+          notes.push(`${brand.name}: 0 new${stale.length ? ` / -${stale.length}` : ""}`);
+        }
+      } catch (e) {
+        notes.push(`${brand.name}: ${(e as Error).message}`);
+      }
+    }
+
     await supabase.from("scraper_runs").insert({
-      brands_checked: targets.length,
+      brands_checked: targets.length + ikasTargets.length,
       products_added: totalAdded,
       notes: `removed:${totalRemoved} | ${notes.join(" | ")}`,
     });
