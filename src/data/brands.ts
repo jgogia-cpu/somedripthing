@@ -543,6 +543,30 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 2100, rating: 4.6, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-06"
   },
+  {
+    id: "48", name: "ARCYNIC by ARCY", slug: "arcynic",
+    logo: "/__l5e/assets-v1/8d98506e-4ecf-47b7-9291-2e8f2acadc97/arcynic-logo.png",
+    banner: "/__l5e/assets-v1/8bcbcfa2-8bb2-474e-9aa1-4d3f7830d0ce/venom1.jpg",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Made-to-order hand-illustrated hoodies — krakens, koi, vipers and spiders drawn straight onto heavyweight fleece. Every piece is built to order through Instagram.",
+    story: "ARCYNIC by ARCY is a one-of-one, made-to-order label. Each hoodie is hand-illustrated and finished individually — sprawling kraken tentacles, bronze koi, striking vipers, rhinestone-set teeth and full spider webs rendered across heavyweight fleece. Nothing is mass produced: you DM the studio, pick a piece and a size, and it gets made for you.",
+    founded: "2025", founderNote: "\"Made for you, one at a time.\"",
+    vibes: ["Made to order", "Hand-illustrated", "One of one", "Heavyweight fleece"],
+    origin: "Canada", website: "https://instagram.com/arcynic_byarcy", affiliateUrl: "https://instagram.com/arcynic_byarcy",
+    instagram: "@arcynic_byarcy", aesthetics: ["Streetwear", "Grunge", "Archive"], categories: ["Tops"],
+    priceRange: "mid", followers: 1200, rating: 4.9, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-06",
+    lookbook: [
+      "/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg",
+      "/__l5e/assets-v1/9b495bc1-0a8d-4011-9153-a7ff31f595e7/pure-luck.jpg",
+      "/__l5e/assets-v1/79b6b062-5d12-4fd1-862f-2d6232a358e0/the-viper.jpg",
+      "/__l5e/assets-v1/0d0362be-5bcb-4249-9d49-f9782c359200/bigdawg1.jpg",
+      "/__l5e/assets-v1/262fefbf-6870-4647-8302-d69e534c996e/bigdawg2.jpg",
+      "/__l5e/assets-v1/7eeaac03-ac0f-4e43-afcd-367630768507/bigdawg3.jpg",
+      "/__l5e/assets-v1/8bcbcfa2-8bb2-474e-9aa1-4d3f7830d0ce/venom1.jpg",
+      "/__l5e/assets-v1/5b4b365a-2fa1-411e-a6d2-b43fb929c36e/venom2.jpg",
+    ],
+  },
 ];
 export const products: Product[] = [
   { id: "p-arcynic1", name: "KRAKEN", brandId: "48", brandName: "ARCYNIC by ARCY", image: "/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg", images: ["/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg"], price: 150, description: "Made-to-order hoodie with a hand-drawn kraken sprawling across the back and inked tentacle sleeves. Heavyweight fleece, oversized drop-shoulder fit. Order direct via Instagram DM.", category: "Tops", aesthetics: ["Streetwear", "Grunge", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://instagram.com/arcynic_byarcy", trending: true, newArrival: true, addedAt: "2026-08-06" },
