@@ -526,7 +526,7 @@ export const brands: Brand[] = [
     vibes: ["Riviera-inspired", "Slow living", "Graphic tees", "Relaxed fits"],
     origin: "Canada", website: "https://ritualone.ca", affiliateUrl: "https://ritualone.ca",
     instagram: "@ritualone", aesthetics: ["Streetwear", "Minimalist"], categories: ["Tops"],
-    priceRange: "affordable", followers: 1800, rating: 4.6, featured: true, newDrop: true,
+    priceRange: "budget", followers: 1800, rating: 4.6, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-06"
   },
   {
