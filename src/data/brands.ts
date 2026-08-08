@@ -567,6 +567,21 @@ export const brands: Brand[] = [
       "/__l5e/assets-v1/5b4b365a-2fa1-411e-a6d2-b43fb929c36e/venom2.jpg",
     ],
   },
+  {
+    id: "49", name: "Tarantula's Club", slug: "tarantulas-club",
+    logo: "https://tarantulasclub.com/cdn/shop/files/Pi7_Gemini_Generated_Image_340kez340kez340k_1_5aca510d-bcab-4085-ae21-7befabe655ed.png?v=1782161139&width=600",
+    banner: "https://tarantulasclub.com/cdn/shop/files/751a7ec3a52ca8d7cec12e7076c65e21.jpg?v=1777879705&width=2048",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Gothic web-core streetwear — cracked-cross hoodies, vessel trousers, latex, corsetry and leather built around a spider mythology.",
+    story: "Tarantula's Club builds a full gothic wardrobe out of web imagery and ritual language. Heavyweight oxblood and thornweb hoodies sit next to Dominus Morte vessel trousers, blood oath jackets, faux-leather wide legs, corsets, latex shirts and webcore duffles — a dark, theatrical take on streetwear where every drop reads like a chapter.",
+    founded: "2025", founderNote: "\"Caught in the web.\"",
+    vibes: ["Gothic", "Webcore", "Leather & latex", "Theatrical"],
+    origin: "Online", website: "https://tarantulasclub.com", affiliateUrl: "https://tarantulasclub.com",
+    instagram: "@tarantulasclub", aesthetics: ["Streetwear", "Grunge", "Archive"],
+    categories: ["Tops", "Bottoms", "Outerwear", "Accessories"],
+    priceRange: "mid", followers: 3400, rating: 4.7, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-08"
+  },
 ];
 export const products: Product[] = [
   { id: "p-arcynic1", name: "KRAKEN", brandId: "48", brandName: "ARCYNIC by ARCY", image: "/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg", images: ["/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg"], price: 150, description: "Made-to-order hoodie with a hand-drawn kraken sprawling across the back and inked tentacle sleeves. Heavyweight fleece, oversized drop-shoulder fit. Order direct via Instagram DM.", category: "Tops", aesthetics: ["Streetwear", "Grunge", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://instagram.com/arcynic_byarcy", trending: true, newArrival: true, addedAt: "2026-08-06" },
