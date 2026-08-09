@@ -571,7 +571,7 @@ export const brands: Brand[] = [
     id: "49", name: "Tarantulas", slug: "tarantulas",
     logo: "https://tarantulasclub.com/cdn/shop/files/Pi7_Gemini_Generated_Image_340kez340kez340k_1_5aca510d-bcab-4085-ae21-7befabe655ed.png?v=1782161139&width=600",
     banner: "https://tarantulasclub.com/cdn/shop/files/751a7ec3a52ca8d7cec12e7076c65e21.jpg?v=1777879705&width=2048",
-    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    logoFont: "'Space Grotesk', sans-serif", lightCard: true,
     bio: "Gothic web-core streetwear — cracked-cross hoodies, vessel trousers, latex, corsetry and leather built around a spider mythology.",
     story: "Tarantulas builds a full gothic wardrobe out of web imagery and ritual language. Heavyweight oxblood and thornweb hoodies sit next to Dominus Morte vessel trousers, blood oath jackets, faux-leather wide legs, corsets, latex shirts and webcore duffles — a dark, theatrical take on streetwear where every drop reads like a chapter.",
     founded: "2025", founderNote: "\"Caught in the web.\"",
