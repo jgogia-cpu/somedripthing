@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thedripway.com/</loc>
-    <lastmod>2026-08-08</lastmod>
+    <lastmod>2026-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -1195,6 +1195,18 @@
     <loc>https://thedripway.com/product/p926</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/i-spent-1000-at-5-different-streetwear-brands-ranking-them-a-2026-08-09</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-comeback-nobody-expected-baggy-jeans-are-everywhere-agai-2026-08-08</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://thedripway.com/blog/gen-z-killed-hypebeast-culture-heres-what-replaced-it-2026-08-07</loc>
