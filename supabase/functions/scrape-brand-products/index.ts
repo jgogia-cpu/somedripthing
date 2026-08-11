@@ -24,6 +24,7 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "45", name: "Don't Be Last", site: "https://dontbelastbrand.com" },
   { id: "46", name: "Ritual One", site: "https://ritualone.ca" },
   { id: "49", name: "Tarantulas", site: "https://tarantulasclub.com" },
+  { id: "50", name: "DÉPRIMÉ", site: "https://deprime.shop" },
 ];
 
 // Non-Shopify stores (ikas platform). Products are discovered through the

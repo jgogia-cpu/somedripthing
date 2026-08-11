@@ -157,6 +157,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://thedripway.com/brand/deprime</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://thedripway.com/product/p28</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
