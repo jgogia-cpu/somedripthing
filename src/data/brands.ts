@@ -597,6 +597,21 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 2100, rating: 4.7, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-11"
   },
+  {
+    id: "51", name: "UNODENINGUNO", slug: "unodeninguno",
+    logo: "https://www.unodeninguno.com/cdn/shop/files/Recurso_2udn.png?v=1760334873",
+    banner: "https://cdn.shopify.com/s/files/1/0730/5386/3988/files/GG_1.png?v=1784934116",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Mexican small-batch streetwear — LOCAL CELEBRITY jerseys, hats and heavyweight tees dropped in tiny colorways.",
+    story: "UNODENINGUNO (one of none) works out of Mexico in deliberately small numbers. The LOCAL CELEBRITY line runs across jerseys, caps and heavyweight tees in one-off colorways — green goblin, carbon black, pink red, olive — each drop sized so no two people show up in the same fit.",
+    founded: "2025", founderNote: "\"Uno de ninguno.\"",
+    vibes: ["One of none", "Local celebrity", "Small batch", "Mexico"],
+    origin: "Mexico", website: "https://unodeninguno.com", affiliateUrl: "https://unodeninguno.com",
+    instagram: "@unodeninguno", aesthetics: ["Streetwear", "Archive"],
+    categories: ["Tops", "Accessories"],
+    priceRange: "mid", followers: 1800, rating: 4.7, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-11"
+  },
 ];
 export const products: Product[] = [
   { id: "p-arcynic1", name: "KRAKEN", brandId: "48", brandName: "ARCYNIC by ARCY", image: "/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg", images: ["/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg"], price: 150, description: "Made-to-order hoodie with a hand-drawn kraken sprawling across the back and inked tentacle sleeves. Heavyweight fleece, oversized drop-shoulder fit. Order direct via Instagram DM.", category: "Tops", aesthetics: ["Streetwear", "Grunge", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://instagram.com/arcynic_byarcy", trending: true, newArrival: true, addedAt: "2026-08-06" },
