@@ -2,7 +2,9 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
 // Curated list of brands to keep in sync. Mirrors src/data/brands.ts (id, name, site).
-const BRANDS: Array<{ id: string; name: string; site: string }> = [
+// `usdBase: true` — shop currency isn't USD, so use the Shopify Markets
+// USD-scoped feed for the stored base price instead of the shop default.
+const BRANDS: Array<{ id: string; name: string; site: string; usdBase?: boolean }> = [
   { id: "17", name: "Drip by Rage", site: "https://dripbyrage.store" },
   { id: "24", name: "Preview Worldwide", site: "https://previewworldwide.com" },
   { id: "25", name: "SABR", site: "https://sabrclothing2024.com" },
@@ -25,6 +27,7 @@ const BRANDS: Array<{ id: string; name: string; site: string }> = [
   { id: "46", name: "Ritual One", site: "https://ritualone.ca" },
   { id: "49", name: "Tarantulas", site: "https://tarantulasclub.com" },
   { id: "50", name: "DÉPRIMÉ", site: "https://deprime.shop" },
+  { id: "51", name: "UNODENINGUNO", site: "https://unodeninguno.com", usdBase: true },
 ];
 
 // Non-Shopify stores (ikas platform). Products are discovered through the
@@ -376,7 +379,10 @@ Deno.serve(async (req) => {
         const orderedImgs = [liveImage, ...imgs.filter((img) => img !== liveImage)];
         const variants =
           (p.variants as Array<Record<string, string | null>> | undefined) ?? [];
-        const price = parseFloat(String(variants[0]?.price ?? "0"));
+        const rawPrice = parseFloat(String(variants[0]?.price ?? "0"));
+        const price = brand.usdBase
+          ? (currencyMaps.USD.get(handle) ?? rawPrice)
+          : rawPrice;
         if (!price) continue;
         // Build native-price map. Skip currencies whose price equals the shop
         // default (Shopify without Markets returns the same number for every
@@ -385,6 +391,9 @@ Deno.serve(async (req) => {
         const prices: Partial<Record<Currency, number>> = {};
         for (const c of CURRENCIES) {
           const v = currencyMaps[c].get(handle);
+          // For non-USD shops, a currency that still returns the raw shop-currency
+          // number wasn't actually converted — skip it.
+          if (brand.usdBase && c !== "USD" && v && Math.abs(v - rawPrice) < 0.01) continue;
           if (v && v > 0 && (c === "USD" || Math.abs(v - baseline) > 0.01)) {
             prices[c] = v;
           }
