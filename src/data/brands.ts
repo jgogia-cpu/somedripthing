@@ -582,6 +582,21 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 3400, rating: 4.7, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-08"
   },
+  {
+    id: "50", name: "DÉPRIMÉ", slug: "deprime",
+    logo: "https://deprime.shop/cdn/shop/files/Subject_2_746x.png?v=1756515125",
+    banner: "https://cdn.shopify.com/s/files/1/0742/1050/9014/files/P1511620_958f6cc8-b7a3-4ea0-ace3-1590296d1f59.jpg?v=1763422793",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Anime-coded melancholy streetwear — screenprinted boxcut tees, cropped quarter-zips and distressed zip-ups built on heavyweight cotton.",
+    story: "DÉPRIMÉ turns anime and manga references into slow, moody streetwear. Death Note, Tokyo Ghoul and Jujutsu Kaisen nods land on 230gsm boxcut tees, knitted sweaters and distressed zip-up hoodies — small runs, screenprinted by hand, styled around a washed-out, downcast palette.",
+    founded: "2026", founderNote: "\"Sadness, screenprinted.\"",
+    vibes: ["Anime", "Melancholy", "Boxcut fits", "Heavyweight cotton"],
+    origin: "Online", website: "https://deprime.shop", affiliateUrl: "https://deprime.shop",
+    instagram: "@deprime", aesthetics: ["Streetwear", "Grunge", "Archive"],
+    categories: ["Tops", "Outerwear"],
+    priceRange: "mid", followers: 2100, rating: 4.7, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-11"
+  },
 ];
 export const products: Product[] = [
   { id: "p-arcynic1", name: "KRAKEN", brandId: "48", brandName: "ARCYNIC by ARCY", image: "/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg", images: ["/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg"], price: 150, description: "Made-to-order hoodie with a hand-drawn kraken sprawling across the back and inked tentacle sleeves. Heavyweight fleece, oversized drop-shoulder fit. Order direct via Instagram DM.", category: "Tops", aesthetics: ["Streetwear", "Grunge", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://instagram.com/arcynic_byarcy", trending: true, newArrival: true, addedAt: "2026-08-06" },
