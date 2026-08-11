@@ -391,6 +391,9 @@ Deno.serve(async (req) => {
         const prices: Partial<Record<Currency, number>> = {};
         for (const c of CURRENCIES) {
           const v = currencyMaps[c].get(handle);
+          // For non-USD shops, a currency that still returns the raw shop-currency
+          // number wasn't actually converted — skip it.
+          if (brand.usdBase && c !== "USD" && v && Math.abs(v - rawPrice) < 0.01) continue;
           if (v && v > 0 && (c === "USD" || Math.abs(v - baseline) > 0.01)) {
             prices[c] = v;
           }
