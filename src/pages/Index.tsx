@@ -391,10 +391,24 @@ export default function Index() {
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {newDropBrands.map((brand, i) => (
+            {visibleDropBrands.map((brand, i) => (
               <BrandCard key={brand.id} brand={brand} index={i} />
             ))}
           </div>
+          {newDropBrands.length > 4 && (
+            <div className="mt-8 flex justify-center">
+              <Button
+                variant="outline"
+                onClick={() => setShowAllDrops((v) => !v)}
+                className="gap-2"
+              >
+                {showAllDrops ? "Show less" : `More brands (${newDropBrands.length - 4})`}
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${showAllDrops ? "rotate-180" : ""}`}
+                />
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
