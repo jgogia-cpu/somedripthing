@@ -616,7 +616,7 @@ export const brands: Brand[] = [
     id: "52", name: "EXITUS", slug: "exitus",
     logo: "https://exitusclothing.com.au/cdn/shop/files/1200_x_628_2_34a2561e-5c9b-4577-8f57-48fb24a59a37.png?v=1735963966",
     banner: "https://exitusclothing.com.au/cdn/shop/files/1200_x_628.png?v=1733285152",
-    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    logoFont: "'Space Grotesk', sans-serif", lightCard: true,
     bio: "Perth-based Christian streetwear — faith-driven graphics on heavyweight tees, hoodies, jerseys and tracksuits.",
     story: "EXITUS takes its name from Exodus — the way out. The Perth label builds faith-driven streetwear that wears its message loud: Forever Grateful drop-shoulder tees, Christ the Redeemer jerseys, sherpa quarter-zips and Brazilian tracksuit sets, plus crown-of-thorns jewellery. Heavyweight fabrics, boxy silhouettes, and a message of freedom stitched into every piece.",
     founded: "2023", founderNote: "\"Freedom through Jesus.\"",
