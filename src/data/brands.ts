@@ -627,6 +627,21 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 2400, rating: 4.8, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-12"
   },
+  {
+    id: "53", name: "THREADED", slug: "threaded",
+    logo: "/__l5e/assets-v1/855f74ae-f4d6-4893-ae4a-ad599e5f798b/threaded-logo.jpg",
+    banner: "https://cdn.shopify.com/s/files/1/0763/0349/9455/files/IMG_6873_c87ba771-26a3-4bc0-888e-5a56139cc917.jpg?v=1786324339",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Rhinestone-set denim and oversized cuts — hand-finished crystal work on jackets, joggers and jorts.",
+    story: "THREADED builds every piece around crystal work: rhinestone-studded denim shirts, oversized joggers, jorts and jackets set stone by stone. Gothic crosses, bling lettering and a small-batch drop cadence — each garment is finished by hand, so no two run exactly alike.",
+    founded: "2025", founderNote: "\"Every stone set by hand.\"",
+    vibes: ["Rhinestone", "Denim", "Oversized", "Y2K"],
+    origin: "United States", website: "https://threadedwear.us", affiliateUrl: "https://threadedwear.us",
+    instagram: "@threadedwear", aesthetics: ["Streetwear", "Y2K"],
+    categories: ["Tops", "Bottoms", "Outerwear"],
+    priceRange: "mid", followers: 1200, rating: 4.8, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-12"
+  },
 ];
 export const products: Product[] = [
   { id: "p-arcynic1", name: "KRAKEN", brandId: "48", brandName: "ARCYNIC by ARCY", image: "/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg", images: ["/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg"], price: 150, description: "Made-to-order hoodie with a hand-drawn kraken sprawling across the back and inked tentacle sleeves. Heavyweight fleece, oversized drop-shoulder fit. Order direct via Instagram DM.", category: "Tops", aesthetics: ["Streetwear", "Grunge", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://instagram.com/arcynic_byarcy", trending: true, newArrival: true, addedAt: "2026-08-06" },
