@@ -1,0 +1,1 @@
+DELETE FROM public.scraped_products WHERE brand_id = '52' AND (name ILIKE '%gift card%' OR name ILIKE '%package protection%' OR name ILIKE '%checkout+%');

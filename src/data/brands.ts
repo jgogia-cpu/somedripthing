@@ -612,6 +612,21 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 1800, rating: 4.7, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-11"
   },
+  {
+    id: "52", name: "EXITUS", slug: "exitus",
+    logo: "https://exitusclothing.com.au/cdn/shop/files/1200_x_628_2_34a2561e-5c9b-4577-8f57-48fb24a59a37.png?v=1735963966",
+    banner: "https://exitusclothing.com.au/cdn/shop/files/1200_x_628.png?v=1733285152",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Perth-based Christian streetwear — faith-driven graphics on heavyweight tees, hoodies, jerseys and tracksuits.",
+    story: "EXITUS takes its name from Exodus — the way out. The Perth label builds faith-driven streetwear that wears its message loud: Forever Grateful drop-shoulder tees, Christ the Redeemer jerseys, sherpa quarter-zips and Brazilian tracksuit sets, plus crown-of-thorns jewellery. Heavyweight fabrics, boxy silhouettes, and a message of freedom stitched into every piece.",
+    founded: "2023", founderNote: "\"Freedom through Jesus.\"",
+    vibes: ["Faith-driven", "Perth", "Heavyweight", "Message wear"],
+    origin: "Perth, Australia", website: "https://exitusclothing.com.au", affiliateUrl: "https://exitusclothing.com.au",
+    instagram: "@exitusclothing", aesthetics: ["Streetwear", "Archive"],
+    categories: ["Tops", "Bottoms", "Outerwear", "Accessories"],
+    priceRange: "mid", followers: 2400, rating: 4.8, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-12"
+  },
 ];
 export const products: Product[] = [
   { id: "p-arcynic1", name: "KRAKEN", brandId: "48", brandName: "ARCYNIC by ARCY", image: "/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg", images: ["/__l5e/assets-v1/9b466625-2d12-483b-b84a-e9349757e325/kraken.jpg"], price: 150, description: "Made-to-order hoodie with a hand-drawn kraken sprawling across the back and inked tentacle sleeves. Heavyweight fleece, oversized drop-shoulder fit. Order direct via Instagram DM.", category: "Tops", aesthetics: ["Streetwear", "Grunge", "Archive"], sizes: ["S", "M", "L", "XL", "2XL"], affiliateUrl: "https://instagram.com/arcynic_byarcy", trending: true, newArrival: true, addedAt: "2026-08-06" },
