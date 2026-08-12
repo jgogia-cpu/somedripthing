@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
@@ -187,6 +187,7 @@ function getCarouselTransform(index: number, active: number, total: number) {
 
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showAllDrops, setShowAllDrops] = useState(false);
   const { formatPrice } = useCurrency();
   const heroProducts = useMemo(() => buildHeroProducts(), []);
   const trendingProducts = useMemo(() => {
@@ -213,7 +214,14 @@ export default function Index() {
     const rest = restOrder.map((id) => restPool.find((p) => p.id === id)!).filter(Boolean);
     return [...picked, ...rest].slice(0, 12);
   }, []);
-  const newDropBrands = brands.filter(b => b.newDrop);
+  const newDropBrands = useMemo(
+    () =>
+      [...brands]
+        .filter((b) => b.newDrop)
+        .sort((a, b) => String(b.addedAt ?? "").localeCompare(String(a.addedAt ?? ""))),
+    [],
+  );
+  const visibleDropBrands = showAllDrops ? newDropBrands : newDropBrands.slice(0, 4);
 
   const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
   const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
@@ -383,10 +391,24 @@ export default function Index() {
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {newDropBrands.map((brand, i) => (
+            {visibleDropBrands.map((brand, i) => (
               <BrandCard key={brand.id} brand={brand} index={i} />
             ))}
           </div>
+          {newDropBrands.length > 4 && (
+            <div className="mt-8 flex justify-center">
+              <Button
+                variant="outline"
+                onClick={() => setShowAllDrops((v) => !v)}
+                className="gap-2"
+              >
+                {showAllDrops ? "Show less" : `More brands (${newDropBrands.length - 4})`}
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${showAllDrops ? "rotate-180" : ""}`}
+                />
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
