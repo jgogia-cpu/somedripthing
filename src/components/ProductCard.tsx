@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/data/brands";
@@ -13,7 +13,7 @@ interface ProductCardProps {
   index?: number;
 }
 
-export default function ProductCard({ product, index = 0 }: ProductCardProps) {
+function ProductCard({ product, index = 0 }: ProductCardProps) {
   const { formatPrice } = useCurrency();
   const { user } = useAuth();
   const { isInWishlist, toggleWishlist } = useWishlist();
@@ -128,3 +128,5 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     </div>
   );
 }
+
+export default memo(ProductCard);
