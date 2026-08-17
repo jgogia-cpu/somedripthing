@@ -657,6 +657,21 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 5200, rating: 4.8, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-12"
   },
+  {
+    id: "55", name: "SYMAG", slug: "symag",
+    logo: "https://symag-sg.com/cdn/shop/files/SG_Vettoriale_1.png?v=1679745659",
+    banner: "https://cdn.shopify.com/s/files/1/0652/0841/8572/files/D61764CC-0BC7-42B8-8FD4-56EA0B00A521.jpg?v=1786037639",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Bergamo-born streetwear \u2014 mesh court sets and football-coded jerseys made for the Success Generation.",
+    story: "SYMAG started with a group of young minds in Bergamo turning local court and pitch culture into wearable kit. Breathable micro-mesh court sets with contrast trims and drawstring waists, plus numbered jerseys cut for the street \u2014 all produced in FAMA-certified facilities. Small runs, sport DNA, Italian energy.",
+    founded: "2023", founderNote: "\"Made for the culture. Worn by the Success Generation.\"",
+    vibes: ["Court culture", "Mesh", "Jerseys", "Bergamo"],
+    origin: "Bergamo, Italy", website: "https://symag-sg.com", affiliateUrl: "https://symag-sg.com",
+    instagram: "@symag_sg", aesthetics: ["Streetwear", "Y2K"],
+    categories: ["Tops", "Bottoms"],
+    priceRange: "mid", followers: 1800, rating: 4.7, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-17"
+  },
 ];
 export const products: Product[] = [
   // Punjabi Drip
