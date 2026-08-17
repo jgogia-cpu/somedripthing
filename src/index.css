@@ -150,6 +150,8 @@
   .masonry-grid {
     columns: 2;
     column-gap: 1rem;
+    /* keep column layout stable while images stream in */
+    column-fill: balance;
   }
 
   @media (min-width: 768px) {
@@ -167,11 +169,14 @@
   .masonry-item {
     break-inside: avoid;
     margin-bottom: 1rem;
+    /* isolate paint so hovering one card can't repaint the whole column */
+    contain: paint;
   }
 
   .content-auto {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 520px;
+    /* content-visibility:auto caused cards to pop/reflow between columns
+       while scrolling — intentionally disabled. */
+    content-visibility: visible;
   }
 
   /* Glass effect utility */
