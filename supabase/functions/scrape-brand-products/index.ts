@@ -30,6 +30,7 @@ const BRANDS: Array<{ id: string; name: string; site: string; usdBase?: boolean 
   { id: "51", name: "UNODENINGUNO", site: "https://unodeninguno.com", usdBase: true },
   { id: "52", name: "EXITUS", site: "https://exitusclothing.com.au", usdBase: true },
   { id: "53", name: "THREADED", site: "https://threadedwear.us" },
+  { id: "55", name: "SYMAG", site: "https://symag-sg.com", usdBase: true },
 ];
 
 // Non-Shopify stores (ikas platform). Products are discovered through the
