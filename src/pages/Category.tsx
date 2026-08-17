@@ -139,7 +139,10 @@ export default function Category() {
   const label = SUBCATEGORY_LABELS[subcategory || ""] || subcategory;
   const genderLabel = gender === "him" ? "Him" : "Her";
   const matcher = MATCHERS[subcategory || ""];
-  const filtered = matcher ? products.filter(matcher) : [];
+  const filtered = useMemo(() => {
+    const base = matcher ? products.filter(matcher) : [];
+    return shuffleWithSeed(base, `${gender || ""}-${subcategory || ""}`);
+  }, [matcher, gender, subcategory]);
   const visibleProducts = filtered.slice(0, visibleCount);
 
   useEffect(() => {
