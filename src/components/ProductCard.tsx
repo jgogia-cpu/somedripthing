@@ -30,40 +30,15 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   }, [product.images, product.image]);
   const hasMultiple = allImages.length > 1;
   const [imgIndex, setImgIndex] = useState(0);
-  const [visibleSrc, setVisibleSrc] = useState(allImages[0]);
-  const [loadedSrcs, setLoadedSrcs] = useState(() => new Set<string>([allImages[0]]));
   const [failed, setFailed] = useState(false);
-  // Load the first row eagerly with high priority, and load ALL other product
-  // images immediately (loading="eager") instead of lazy so cards don't
-  // pop in as the user scrolls. `fetchpriority="low"` keeps the network
-  // polite for below-the-fold cards.
-  const eager = index < 4;
+  // First two rows load eagerly; everything below the fold is lazy so the
+  // browser isn't fetching hundreds of images at once (that was the jank).
+  const eager = index < 8;
 
   useEffect(() => {
     setImgIndex(0);
-    setVisibleSrc(allImages[0]);
-    setLoadedSrcs(new Set([allImages[0]]));
     setFailed(false);
   }, [allImages]);
-
-  // Only prefetch the *currently active* alternate image — avoids hammering the
-  // network with every product's full image set on mount.
-  useEffect(() => {
-    if (!hasMultiple) return;
-    const src = allImages[imgIndex];
-    if (!src || loadedSrcs.has(src)) return;
-    const img = new Image();
-    img.decoding = "async";
-    img.onload = () => {
-      setLoadedSrcs((current) => {
-        if (current.has(src)) return current;
-        const nextSet = new Set(current);
-        nextSet.add(src);
-        return nextSet;
-      });
-    };
-    img.src = src;
-  }, [allImages, hasMultiple, imgIndex, loadedSrcs]);
 
   const changeImage = (direction: 1 | -1) => {
     setImgIndex((i) => (i + direction + allImages.length) % allImages.length);
@@ -86,11 +61,11 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             style={{ aspectRatio: index % 3 === 0 ? "3/4" : index % 3 === 1 ? "4/5" : "1/1" }}
           >
             <img
-              src={visibleSrc}
+              src={allImages[imgIndex]}
               alt={product.name}
-              loading="eager"
+              loading={eager ? "eager" : "lazy"}
               // @ts-expect-error - fetchpriority is a valid HTML attribute
-              fetchpriority={eager ? "high" : "low"}
+              fetchpriority={eager ? "high" : "auto"}
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover"
               onError={() => {
@@ -98,17 +73,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
                 setFailed(true);
               }}
             />
-            {allImages[imgIndex] !== visibleSrc && (
-              <img
-                key={allImages[imgIndex]}
-                src={allImages[imgIndex]}
-                alt=""
-                loading="eager"
-                decoding="async"
-                className="absolute inset-0 h-full w-full object-cover opacity-0"
-                onLoad={() => setVisibleSrc(allImages[imgIndex])}
-              />
-            )}
             {hasMultiple && (
               <>
                 <button
