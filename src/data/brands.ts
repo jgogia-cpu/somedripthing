@@ -661,7 +661,7 @@ export const brands: Brand[] = [
     id: "55", name: "SYMAG", slug: "symag",
     logo: "https://symag-sg.com/cdn/shop/files/SG_Vettoriale_1.png?v=1679745659",
     banner: "https://cdn.shopify.com/s/files/1/0652/0841/8572/files/D61764CC-0BC7-42B8-8FD4-56EA0B00A521.jpg?v=1786037639",
-    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    logoFont: "'Space Grotesk', sans-serif", lightCard: true,
     bio: "Bergamo-born streetwear \u2014 mesh court sets and football-coded jerseys made for the Success Generation.",
     story: "SYMAG started with a group of young minds in Bergamo turning local court and pitch culture into wearable kit. Breathable micro-mesh court sets with contrast trims and drawstring waists, plus numbered jerseys cut for the street \u2014 all produced in FAMA-certified facilities. Small runs, sport DNA, Italian energy.",
     founded: "2023", founderNote: "\"Made for the culture. Worn by the Success Generation.\"",
@@ -671,6 +671,21 @@ export const brands: Brand[] = [
     categories: ["Tops", "Bottoms"],
     priceRange: "mid", followers: 1800, rating: 4.7, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-17"
+  },
+  {
+    id: "56", name: "13 by Rivera", slug: "13-by-rivera",
+    logo: "https://13byrivera.com/cdn/shop/files/20260626-DSC03192.jpg?width=800",
+    banner: "https://13byrivera.com/cdn/shop/files/20260626-DSC02528_ede33905-0eb7-4f48-b902-6d4a8853118d.jpg?width=1600",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Made-in-Mission-Viejo workwear \u2014 handmade raglans, canvas and denim carpenter pants, cut and sewn in house.",
+    story: "13 by Rivera is designed by Christopher Rivera and handmade in house in Mission Viejo, California. Every raglan hoodie, long sleeve and bomber is built from 100% cotton thermal lining, French terry and rib knit, with the fabric, fit and thread all picked piece by piece. Garments are made to order \u2014 give it 2\u20133 weeks from order to shipping.",
+    founded: "2026", founderNote: "\"Made by order, made by hand.\"",
+    vibes: ["Made to order", "Workwear", "Handmade", "California"],
+    origin: "Mission Viejo, California", website: "https://13byrivera.com", affiliateUrl: "https://13byrivera.com",
+    instagram: "@13byrivera", aesthetics: ["Streetwear", "Minimal"],
+    categories: ["Tops", "Bottoms", "Outerwear", "Accessories"],
+    priceRange: "mid", followers: 1200, rating: 4.8, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-19"
   },
 ];
 export const products: Product[] = [
