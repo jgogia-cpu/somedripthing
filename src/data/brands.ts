@@ -90,6 +90,7 @@ export const CATEGORIES = [
 ] as const;
 
 import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
+import thirteenByRiveraLogo from "@/assets/13byrivera/13byrivera-logo.jpg.asset.json";
 import pv1 from "@/assets/preview/pv1.jpg.asset.json";
 import pv2 from "@/assets/preview/pv2.jpg.asset.json";
 import pv3 from "@/assets/preview/pv3.jpg.asset.json";
@@ -673,8 +674,8 @@ export const brands: Brand[] = [
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-17"
   },
   {
-    id: "56", name: "13 by Rivera", slug: "13-by-rivera",
-    logo: "https://13byrivera.com/cdn/shop/files/20260626-DSC03192.jpg?width=800",
+    id: "56", name: "13byrivera", slug: "13byrivera",
+    logo: thirteenByRiveraLogo.url,
     banner: "https://13byrivera.com/cdn/shop/files/20260626-DSC02528_ede33905-0eb7-4f48-b902-6d4a8853118d.jpg?width=1600",
     logoFont: "'Space Grotesk', sans-serif", darkCard: true,
     bio: "Made-in-Mission-Viejo workwear \u2014 handmade raglans, canvas and denim carpenter pants, cut and sewn in house.",
