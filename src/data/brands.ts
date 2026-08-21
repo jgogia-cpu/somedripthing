@@ -691,7 +691,7 @@ export const brands: Brand[] = [
   },
   {
     id: "57", name: "Greyz", slug: "greyz",
-    logo: "https://static.wixstatic.com/media/a887a608f3604c60a63143c4248f8aeb.jpg",
+    logo: greyzLogo.url,
     banner: "https://static.wixstatic.com/media/5976d3_d9e5f5a3ef134a1890fea3dfec825c15~mv2.jpeg",
     logoFont: "'Space Grotesk', sans-serif", darkCard: true,
     bio: "Canadian minimal essentials \u2014 contrast-stitch tees, core shorts and matching sets built for movement.",
