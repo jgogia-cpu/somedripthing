@@ -1,6 +1,48 @@
 {
-  "generatedAt": "2026-08-21T15:49:37.958Z",
+  "generatedAt": "2026-08-21T15:55:20.398Z",
   "products": [
+    {
+      "id": "p-gz1",
+      "brandId": "57",
+      "image": "https://static.wixstatic.com/media/5976d3_4ef8bb0cbf124b25a9f06f071d891286~mv2.jpg/v1/fit/w_1200,h_1200,q_90/file.jpg",
+      "affiliateUrl": "https://www.greyzapparel.ca/product-page/greyz-core-tee"
+    },
+    {
+      "id": "p-gz2",
+      "brandId": "57",
+      "image": "https://static.wixstatic.com/media/5976d3_4e8d2649c38941dabe0fe812446a733c~mv2.jpg/v1/fit/w_1200,h_1200,q_90/file.jpg",
+      "affiliateUrl": "https://www.greyzapparel.ca/product-page/concrete-grey-tee"
+    },
+    {
+      "id": "p-gz3",
+      "brandId": "57",
+      "image": "https://static.wixstatic.com/media/5976d3_ea29e90cec104ea28b5c93c896074483~mv2.jpg/v1/fit/w_1200,h_1200,q_90/file.jpg",
+      "affiliateUrl": "https://www.greyzapparel.ca/product-page/copy-of-greyz-core-shorts"
+    },
+    {
+      "id": "p-gz4",
+      "brandId": "57",
+      "image": "https://static.wixstatic.com/media/5976d3_fafeab215786438fb2282203224cf6f6~mv2.jpg/v1/fit/w_1200,h_1200,q_90/file.jpg",
+      "affiliateUrl": "https://www.greyzapparel.ca/product-page/copy-of-concrete-grey-core-shorts"
+    },
+    {
+      "id": "p-gz5",
+      "brandId": "57",
+      "image": "https://static.wixstatic.com/media/5976d3_7650d1248c3347049dfb34297af22132~mv2.jpg/v1/fit/w_1200,h_1200,q_90/file.jpg",
+      "affiliateUrl": "https://www.greyzapparel.ca/product-page/concrete-grey-shorts"
+    },
+    {
+      "id": "p-gz6",
+      "brandId": "57",
+      "image": "https://static.wixstatic.com/media/5976d3_cd05c32ceee3442c86324f68098b7975~mv2.jpg/v1/fit/w_1200,h_1200,q_90/file.jpg",
+      "affiliateUrl": "https://www.greyzapparel.ca/product-page/copy-of-greyz-performance-set"
+    },
+    {
+      "id": "p-gz7",
+      "brandId": "57",
+      "image": "https://static.wixstatic.com/media/5976d3_b70e178fb84143c38811282facedab17~mv2.jpg/v1/fit/w_1200,h_1200,q_90/file.jpg",
+      "affiliateUrl": "https://www.greyzapparel.ca/product-page/packable-anorak-jacket"
+    },
     {
       "id": "p-pd1",
       "brandId": "54",
