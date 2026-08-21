@@ -91,6 +91,7 @@ export const CATEGORIES = [
 
 import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
 import thirteenByRiveraLogo from "@/assets/13byrivera/13byrivera-logo.jpg.asset.json";
+import greyzLogo from "@/assets/greyz/greyz-logo.png.asset.json";
 import pv1 from "@/assets/preview/pv1.jpg.asset.json";
 import pv2 from "@/assets/preview/pv2.jpg.asset.json";
 import pv3 from "@/assets/preview/pv3.jpg.asset.json";
@@ -690,7 +691,7 @@ export const brands: Brand[] = [
   },
   {
     id: "57", name: "Greyz", slug: "greyz",
-    logo: "https://static.wixstatic.com/media/a887a608f3604c60a63143c4248f8aeb.jpg",
+    logo: greyzLogo.url,
     banner: "https://static.wixstatic.com/media/5976d3_d9e5f5a3ef134a1890fea3dfec825c15~mv2.jpeg",
     logoFont: "'Space Grotesk', sans-serif", darkCard: true,
     bio: "Canadian minimal essentials \u2014 contrast-stitch tees, core shorts and matching sets built for movement.",
