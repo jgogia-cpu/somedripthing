@@ -91,6 +91,7 @@ export const CATEGORIES = [
 
 import previewWorldwideLogo from "@/assets/preview-worldwide-logo.png";
 import thirteenByRiveraLogo from "@/assets/13byrivera/13byrivera-logo.jpg.asset.json";
+import greyzLogo from "@/assets/greyz/greyz-logo.png.asset.json";
 import pv1 from "@/assets/preview/pv1.jpg.asset.json";
 import pv2 from "@/assets/preview/pv2.jpg.asset.json";
 import pv3 from "@/assets/preview/pv3.jpg.asset.json";
