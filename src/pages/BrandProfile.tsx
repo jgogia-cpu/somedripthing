@@ -35,18 +35,9 @@ export default function BrandProfile() {
   const { slug } = useParams<{ slug: string }>();
   const brand = getBrandBySlug(slug || "");
   const [storyExpanded, setStoryExpanded] = useState(false);
-
-  if (!brand) {
-    return (
-      <div className="container py-20 text-center">
-        <p className="text-lg">Brand not found.</p>
-        <Link to="/collections" className="mt-4 text-sm text-accent hover:underline">← Back to Home</Link>
-      </div>
-    );
-  }
-
   const scraped = useScrapedProducts();
   const brandProducts = useMemo(() => {
+    if (!brand) return [];
     const staticProducts = getProductsByBrand(brand.id);
     const scrapedForBrand = scraped.filter((p) => p.brandId === brand.id);
     const seen = new Set(staticProducts.map((p) => p.name.toLowerCase().trim()));
@@ -57,7 +48,17 @@ export default function BrandProfile() {
       return true;
     });
     return [...staticProducts, ...extras];
-  }, [brand.id, scraped]);
+  }, [brand?.id, scraped]);
+
+  if (!brand) {
+    return (
+      <div className="container py-20 text-center">
+        <p className="text-lg">Brand not found.</p>
+        <Link to="/collections" className="mt-4 text-sm text-accent hover:underline">← Back to Home</Link>
+      </div>
+    );
+  }
+
   const similar = getSimilarBrands(brand);
 
   const brandLd = {
