@@ -32,6 +32,7 @@ const BRANDS: Array<{ id: string; name: string; site: string; usdBase?: boolean 
   { id: "53", name: "THREADED", site: "https://threadedwear.us" },
   { id: "55", name: "SYMAG", site: "https://symag-sg.com", usdBase: true },
   { id: "56", name: "13 by Rivera", site: "https://13byrivera.com" },
+  { id: "59", name: "5K Enterprise", site: "https://www.5kenterprise.com" },
 ];
 
 // Non-Shopify stores (ikas platform). Products are discovered through the
