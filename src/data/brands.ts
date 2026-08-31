@@ -226,6 +226,7 @@ import cos4 from "@/assets/cityofsaints/cos4.jpg.asset.json";
 import cos5 from "@/assets/cityofsaints/cos5.jpg.asset.json";
 import cos6 from "@/assets/cityofsaints/cos6.jpg.asset.json";
 import cos7 from "@/assets/cityofsaints/cos7.jpg.asset.json";
+import fivekLogo from "@/assets/5k/5k-logo.png.asset.json";
 const CITYOFSAINTS_LOOKBOOK = [cos1, cos2, cos3, cos4, cos5, cos6, cos7].map(a => a.url);
 const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
 const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
@@ -718,6 +719,21 @@ export const brands: Brand[] = [
     categories: ["Tops", "Bottoms", "Outerwear"],
     priceRange: "mid", followers: 4200, rating: 4.8, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-21"
+  },
+  {
+    id: "59", name: "5K Enterprise", slug: "5k-enterprise",
+    logo: fivekLogo.url,
+    banner: "https://www.5kenterprise.com/cdn/shop/files/5k-lifestyle-studioshoot-1.jpg?width=1600",
+    logoFont: "'Space Grotesk', sans-serif", darkCard: true,
+    bio: "Engineered everyday essentials \u2014 heavyweight Atelier Five tees, zip-ups and knit sweaters built for daily wear.",
+    story: "5K Enterprise builds quality, comfortable clothing engineered for daily wear. The Atelier Five line runs on 100% cotton at 195 gsm for a substantial, durable hand feel, alongside jerseys, zip-ups, knit sweaters, the BMIO hoodie and 5K caps. Understated branding, heavyweight fabrics, made to be worn every day.",
+    founded: "2024", founderNote: "\"Engineered for your lifestyle.\"",
+    vibes: ["Heavyweight", "Everyday", "Minimal", "Essentials"],
+    origin: "Canada", website: "https://www.5kenterprise.com", affiliateUrl: "https://www.5kenterprise.com",
+    instagram: "@5kenterprise", aesthetics: ["Minimal", "Streetwear"],
+    categories: ["Tops", "Outerwear", "Accessories"],
+    priceRange: "mid", followers: 1500, rating: 4.7, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-31"
   },
 ];
 export const products: Product[] = [
