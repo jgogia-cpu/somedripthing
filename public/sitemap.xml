@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thedripway.com/</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -1240,6 +1240,48 @@
     <loc>https://thedripway.com/product/p926</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/these-influencers-are-lying-about-their-outfits-2026-08-31</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/why-korean-streetwear-is-taking-over-the-world-2026-08-30</loc>
+    <lastmod>2026-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-10-collabs-that-actually-changed-fashion-forever-2026-08-29</loc>
+    <lastmod>2026-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/how-resellers-ruined-streetwear-and-how-brands-fight-back-2026-08-28</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-best-streetwear-under-50-that-doesnt-look-cheap-2026-08-27</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/quiet-luxury-is-dead-loud-fashion-is-back-2026-08-26</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/this-startup-just-raised-20m-to-disrupt-streetwear-2026-08-25</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://thedripway.com/blog/7-outfit-formulas-that-work-every-single-time-2026-08-24</loc>
