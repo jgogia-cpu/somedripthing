@@ -735,6 +735,21 @@ export const brands: Brand[] = [
     priceRange: "mid", followers: 1500, rating: 4.7, featured: true, newDrop: true,
     themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-08-31"
   },
+  {
+    id: "60", name: "DRIPDIST", slug: "dripdist",
+    logo: "https://cdn.shopify.com/s/files/1/0701/6697/0456/files/Untitled_Project-32.png?v=1775446193&width=1200",
+    banner: "https://cdn.shopify.com/s/files/1/0701/6697/0456/files/63FDE68B-0E40-45C2-B316-58AF7DA40800.png?v=1778863197&width=1600",
+    logoFont: "'Space Grotesk', sans-serif", lightCard: true, nameColor: "black", tagColor: "dark",
+    bio: "Chrome-monogram streetwear out of Brampton \u2014 heavyweight oversized and boxy tees built around graphic-led drops.",
+    story: "DRIPDIST runs on tight, graphic-led drops: heavyweight 260 GSM cotton tees in oversized and boxy fits, pre-shrunk and finished with the brand's chrome double-D monogram. Small-batch Canadian streetwear that leans on fabric weight and print quality instead of volume.",
+    founded: "2026", founderNote: "\"Every drop is limited.\"",
+    vibes: ["Chrome", "Graphic", "Heavyweight", "Canadian"],
+    origin: "Canada", website: "https://dripdist.com", affiliateUrl: "https://dripdist.com",
+    instagram: "@dripdist", aesthetics: ["Streetwear", "Graphic"],
+    categories: ["Tops"],
+    priceRange: "mid", followers: 900, rating: 4.7, featured: true, newDrop: true,
+    themeColor: "#0A0A0A", themeTextTone: "light", addedAt: "2026-09-14"
+  },
 ];
 export const products: Product[] = [
   // Mari (marifyr)
