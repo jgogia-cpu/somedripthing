@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thedripway.com/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -198,6 +198,11 @@
   </url>
   <url>
     <loc>https://thedripway.com/brand/mari</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/brand/5k-enterprise</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -1240,6 +1245,90 @@
     <loc>https://thedripway.com/product/p926</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/why-your-favorite-streetwear-brand-is-dying-2026-09-14</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/these-7-brands-will-blow-up-in-2026-get-in-early-2026-09-13</loc>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/corteiz-vs-stssy-which-one-actually-holds-up-2026-09-12</loc>
+    <lastmod>2026-09-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-underground-brand-that-sold-out-in-47-seconds-2026-09-11</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/i-wore-only-thrift-fits-for-30-days-heres-what-happened-2026-09-10</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/why-every-rapper-is-wearing-this-one-brand-right-now-2026-09-09</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-30-brand-thats-making-stssy-fans-switch-up-2026-09-08</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/nike-just-killed-their-best-shoe-and-nobodys-talking-about-i-2026-09-07</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-brands-celebrities-wear-when-theyre-not-being-paid-2026-09-06</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/why-your-style-peaked-in-2019-and-how-to-fix-it-2026-09-05</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/palace-vs-stssy-vs-carhartt-wip-the-ultimate-comparison-2026-09-04</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-sneaker-bubble-finally-popped-now-what-2026-09-03</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/how-to-tell-if-a-streetwear-brand-is-actually-independent-2026-09-02</loc>
+    <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thedripway.com/blog/the-new-wave-of-black-owned-streetwear-brands-you-need-to-kn-2026-09-01</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://thedripway.com/blog/these-influencers-are-lying-about-their-outfits-2026-08-31</loc>
