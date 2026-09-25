@@ -231,19 +231,12 @@ const CITYOFSAINTS_LOOKBOOK = [cos1, cos2, cos3, cos4, cos5, cos6, cos7].map(a =
 
 /** Hand-reviewed campaign photos that visibly feature people wearing the clothes. */
 export const HERO_MODEL_IMAGES: ReadonlyArray<{ brandId: string; image: string }> = [
-  ...[ad1, ad2, ad3, ad4, ad5, ad6].map((asset) => ({ brandId: "40", image: asset.url })),
-  ...[cos1, cos2, cos3, cos4, cos5, cos7].map((asset) => ({ brandId: "42", image: asset.url })),
-  ...[dw1, dw2, dw3, dw4, dw5, dw6].map((asset) => ({ brandId: "37", image: asset.url })),
-  ...[ev1, ev2, ev3, ev4, ev5].map((asset) => ({ brandId: "35", image: asset.url })),
-  ...[ff1, ff2, ff3, ff4, ff5, ff6, ff7, ff8, ff9, ff10].map((asset) => ({ brandId: "26", image: asset.url })),
-  ...[hx1, hx2, hx3, hx4].map((asset) => ({ brandId: "28", image: asset.url })),
-  ...[ls1, ls2, ls3, ls4, ls5, ls6, ls7].map((asset) => ({ brandId: "36", image: asset.url })),
-  ...[mk1, mk2, mk3, mk4, mk5].map((asset) => ({ brandId: "31", image: asset.url })),
-  ...[mnLb1, mnLb2, mnLb3, mnLb4, mnLb5, mnLb6].map((asset) => ({ brandId: "29", image: asset.url })),
-  ...[ph1, ph2, ph3, ph4, ph5, ph6, ph7, ph8].map((asset) => ({ brandId: "38", image: asset.url })),
-  ...[pv1, pv2, pv3, pv4].map((asset) => ({ brandId: "24", image: asset.url })),
-  ...[rd1, rd2, rd3, rd4, rd5, rd6].map((asset) => ({ brandId: "34", image: asset.url })),
-  ...[zd1, zd2, zd3, zd4, zd5].map((asset) => ({ brandId: "39", image: asset.url })),
+  ...[ff3, ff4].map((asset) => ({ brandId: "26", image: asset.url })),
+  { brandId: "42", image: cos2.url },
+  ...[ad3, ad4].map((asset) => ({ brandId: "40", image: asset.url })),
+  { brandId: "34", image: rd4.url },
+  { brandId: "37", image: dw2.url },
+  { brandId: "31", image: mk5.url },
 ];
 const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
 const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
