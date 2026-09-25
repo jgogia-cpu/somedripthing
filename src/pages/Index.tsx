@@ -77,13 +77,13 @@ export default function Index() {
   if (!heroProducts.length) return null;
   const current = heroProducts[currentSlide];
   const currentBrand = getBrandById(current.brandId);
-  const heroImage = currentBrand?.lookbook?.[0] || currentBrand?.banner || current.image;
+  const heroImage = current.images?.[0] || current.image;
 
   return (
     <main className="min-h-screen overflow-hidden bg-background">
       <SEO title="DRIPWAY — Discover Niche Fashion Brands" description="Discover the brands Instagram won't show you. DRIPWAY is your curated discovery engine for underground, emerging, and niche streetwear and designer labels." path="/" type="website" />
 
-      <section className="relative flex h-[calc(100svh-4rem)] min-h-[620px] max-h-[920px] items-center overflow-hidden border-b border-foreground/20">
+      <section className="relative flex h-[calc(100svh-7.75rem)] min-h-[620px] max-h-[920px] items-center overflow-hidden border-b border-foreground/20 md:h-[calc(100svh-4rem)]">
         <img key={heroImage} src={heroImage} alt={`${currentBrand?.name ?? current.brandName} editorial`} fetchPriority="high" className="absolute inset-0 h-full w-full animate-fade-in object-cover object-center" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/25 via-background/5 to-background/90" />
         <div className="absolute inset-0 bg-background/10" />
