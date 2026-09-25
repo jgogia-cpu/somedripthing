@@ -7,7 +7,7 @@ import FeaturedBrandSection from "@/components/FeaturedBrandSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import InstagramCTA from "@/components/InstagramCTA";
 import SEO from "@/components/SEO";
-import { brands, products, getBrandById, type Product } from "@/data/brands";
+import { brands, products, getBrandById, HERO_MODEL_IMAGES, type Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import RecentlyViewed from "@/components/RecentlyViewed";
 
@@ -22,11 +22,21 @@ function shuffle<T>(items: T[]) {
   return next;
 }
 
-function buildHeroProducts() {
-  return shuffle(products.filter((product) => {
-    const brand = getBrandById(product.brandId);
-    return brand && !forbidden.has(brand.name) && (brand.lookbook?.length || brand.banner);
-  })).slice(0, 8);
+interface HeroSlide {
+  product: Product;
+  image: string;
+}
+
+function buildHeroSlides(): HeroSlide[] {
+  const eligibleImages = HERO_MODEL_IMAGES.filter(({ brandId }) => {
+    const brand = getBrandById(brandId);
+    return brand && !forbidden.has(brand.name);
+  });
+
+  return shuffle(eligibleImages).slice(0, 8).flatMap(({ brandId, image }) => {
+    const product = products.find((item) => item.brandId === brandId);
+    return product ? [{ product, image }] : [];
+  });
 }
 
 function EditorialProduct({ product }: { product: Product }) {
@@ -55,26 +65,25 @@ export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showAllDrops, setShowAllDrops] = useState(false);
   const { formatPrice } = useCurrency();
-  const heroProducts = useMemo(buildHeroProducts, []);
+  const heroSlides = useMemo(buildHeroSlides, []);
   const trendingProducts = useMemo(() => shuffle(products.filter((product) => product.trending && !forbidden.has(product.brandName))).slice(0, 3), []);
   const newDropBrands = useMemo(() => [...brands]
     .filter((brand) => brand.newDrop && !forbidden.has(brand.name))
     .sort((a, b) => String(b.addedAt ?? "").localeCompare(String(a.addedAt ?? ""))), []);
   const visibleDropBrands = showAllDrops ? newDropBrands : newDropBrands.slice(0, 4);
 
-  const nextSlide = useCallback(() => setCurrentSlide((value) => (value + 1) % heroProducts.length), [heroProducts.length]);
-  const prevSlide = useCallback(() => setCurrentSlide((value) => (value - 1 + heroProducts.length) % heroProducts.length), [heroProducts.length]);
+  const nextSlide = useCallback(() => setCurrentSlide((value) => (value + 1) % heroSlides.length), [heroSlides.length]);
+  const prevSlide = useCallback(() => setCurrentSlide((value) => (value - 1 + heroSlides.length) % heroSlides.length), [heroSlides.length]);
 
   useEffect(() => {
-    if (!heroProducts.length) return;
+    if (!heroSlides.length) return;
     const timer = window.setInterval(nextSlide, 7000);
     return () => window.clearInterval(timer);
-  }, [heroProducts.length, nextSlide]);
+  }, [heroSlides.length, nextSlide]);
 
-  if (!heroProducts.length) return null;
-  const current = heroProducts[currentSlide];
+  if (!heroSlides.length) return null;
+  const { product: current, image: heroImage } = heroSlides[currentSlide];
   const currentBrand = getBrandById(current.brandId);
-  const heroImage = current.images?.[0] || current.image;
 
   return (
     <main className="min-h-screen overflow-hidden bg-background">
@@ -84,7 +93,7 @@ export default function Index() {
         <div className="flex items-end justify-between border-b border-border pb-4 text-[9px] font-medium uppercase text-muted-foreground md:text-[10px]">
           <span>Est. 2024</span>
           <span className="hidden md:block">Independent fashion discovery</span>
-          <span>{String(currentSlide + 1).padStart(2, "0")} / {String(heroProducts.length).padStart(2, "0")}</span>
+          <span>{String(currentSlide + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}</span>
         </div>
         <h1 className="select-none py-3 text-center font-display text-[clamp(5rem,18vw,16rem)] font-normal leading-[0.78] text-foreground md:py-5">DRIPWAY</h1>
 

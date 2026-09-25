@@ -228,6 +228,16 @@ import cos6 from "@/assets/cityofsaints/cos6.jpg.asset.json";
 import cos7 from "@/assets/cityofsaints/cos7.jpg.asset.json";
 import fivekLogo from "@/assets/5k/5k-logo.png.asset.json";
 const CITYOFSAINTS_LOOKBOOK = [cos1, cos2, cos3, cos4, cos5, cos6, cos7].map(a => a.url);
+
+/** Hand-reviewed campaign photos that visibly feature people wearing the clothes. */
+export const HERO_MODEL_IMAGES: ReadonlyArray<{ brandId: string; image: string }> = [
+  ...[ff3, ff4].map((asset) => ({ brandId: "26", image: asset.url })),
+  { brandId: "42", image: cos2.url },
+  ...[ad3, ad4].map((asset) => ({ brandId: "40", image: asset.url })),
+  { brandId: "34", image: rd4.url },
+  { brandId: "37", image: dw2.url },
+  { brandId: "31", image: mk5.url },
+];
 const LATELIER_LOGO = "https://static.wixstatic.com/media/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png/v1/fill/w_1200,h_1200,al_c/d08e68_4a84fe7a8c7940a3b12d45583bbd139b~mv2.png";
 const DAEWEAR_LOGO = "https://static.wixstatic.com/media/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png/v1/fill/w_1200,h_1200,al_c/8207c6_3e5bca37c7124491b132951ae590da2f~mv2.png";
 
