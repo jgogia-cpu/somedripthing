@@ -1,53 +1,35 @@
 ## Goal
-Make DRIPWAY feel lighter and easier to navigate without abandoning the dark aesthetic.
+Transform the DRIPWAY homepage into a bold, shoppable fashion-magazine experience built around the selected **Editorial magazine cover** direction.
 
-## 1. Softer dark theme
-Edit `src/index.css` `.dark` tokens (the app runs in dark mode globally):
-- `--background`: `0 0% 5%` → `0 0% 11%` (lifted charcoal)
-- `--card`: `0 0% 8%` → `0 0% 14%`
-- `--popover`: match card
-- `--secondary` / `--muted`: `0 0% 12%` → `0 0% 18%`
-- `--border` / `--input`: `0 0% 14%` → `0 0% 22%` (more visible separators)
-- `--muted-foreground`: `0 0% 50%` → `0 0% 65%` (readable secondary text)
-- `--foreground`: keep `0 0% 95%`
-- Accent coral stays the same so brand color is unchanged.
+## Visual direction
+- Lock the chosen charcoal-and-ember palette: `#1a1a1a`, `#2d2d2d`, `#4a4a4a`, `#e85d3a`, expressed through semantic theme tokens.
+- Use **Libre Baskerville** for commanding editorial headlines and **IBM Plex Sans** for navigation, prices, labels, and supporting text.
+- Use broken-grid composition, oversized type, dramatic image crops, thin editorial rules, and restrained issue-style metadata.
+- Keep the presentation dark, raw, and fashion-led rather than glossy or conventionally ecommerce.
 
-No component changes needed — everything uses semantic tokens, so the whole site lifts in one pass. Spot-check Navbar, ProductCard, BrandCard, Footer for any hardcoded `bg-black` / `bg-[#...]` and swap to tokens.
+## Homepage cover
+- Replace the current small 3D-card hero with one dominant, full-bleed fashion image drawn from DRIPWAY’s existing brand and lookbook assets.
+- Make **DRIPWAY** an oversized magazine masthead across the first viewport.
+- Add sparse issue-style details and one short fashion-culture statement without cluttering the image.
+- Keep the cover immediately shoppable with clear links to the featured product and Collections.
+- Preserve automatic product rotation, but express it through large editorial image changes rather than floating cards.
+- Keep the next section visible at the bottom edge so the page clearly continues.
 
-## 2. Navbar restructure (`src/components/Navbar.tsx`)
-Replace fiddly hover dropdowns and consolidate top-level items.
+## Editorial shopping flow
+- Turn Trending into a broken magazine spread: one or two dominant product stories supported by smaller product tiles instead of a uniform masonry wall.
+- Restyle the featured-brand area as a full-width editorial chapter with larger photography and stronger brand typography.
+- Present New Drops as bold image-led brand stories while preserving the newest-four default and existing “More brands” control.
+- Restyle category links, recently viewed, newsletter, and Instagram areas to fit the same print system without changing their behavior.
 
-New desktop nav order:
-```
-DRIPWAY | Shop ▾   Brands   Collections   Blog | [search bar] [♥] [👤] [currency]
-```
+## Interaction and mobile
+- Use restrained cover-line and image-reveal motion, subtle crop movement, and crisp hover states.
+- Respect reduced-motion settings.
+- Recompose the cover and broken grids for phone screens so text never obscures the subject or controls.
+- Keep product, brand, collection, wishlist, currency, and newsletter behavior unchanged.
 
-- **Shop ▾** — single click-to-open mega menu (Radix `DropdownMenu`, no hover) with two columns: "Him" and "Her", each listing the 8 subcategories. Closes on outside click / route change.
-- **Brands** — new link to `/collections` (or a dedicated brands view if desired later) so brand discovery is one click.
-- **Collections** — keep.
-- **Blog** — promoted from More dropdown to top level.
-- **Affiliate** — moved to footer + a small accent pill in the user dropdown (less prominent, still reachable).
-- Remove the separate Him / Her / More dropdowns and the hover-intent logic.
-
-**Visible search bar**
-- Replace the search icon with an inline input (`w-56`, rounded-full, muted background) between nav links and icons on `md+`.
-- Submitting routes to `/collections?q=<term>`; Collections page already filters — extend it to read the `q` param and pre-fill its search field. Icon-only fallback on mobile.
-
-**Mobile menu**
-- Replace nested Him/Her accordions with a flat list: Shop Him, Shop Her (each opens its own subcategory sheet), Brands, Collections, Blog, Affiliate.
-- Larger tap targets (`py-3.5`), full-width search at the top of the sheet.
-
-## 3. Routing / supporting edits
-- `src/pages/Collections.tsx`: read `?q=` from `useSearchParams` on mount and seed the existing search state. No other logic changes.
-- No new routes, no backend changes.
-
-## Out of scope
-- No light mode toggle (user picked softer dark).
-- No homepage redesign, no product card changes, no data changes.
-- Affiliate, admin, blog flows untouched beyond nav placement.
-
-## Files touched
-- `src/index.css` (theme tokens)
-- `src/components/Navbar.tsx` (rewrite desktop + mobile nav)
-- `src/pages/Collections.tsx` (read `q` query param)
-- Minor token swaps in `Footer.tsx` / any component using hardcoded near-black backgrounds (audit during build).
+## Technical details
+- Update homepage presentation components and shared semantic design tokens only; no database or scraper changes.
+- Load the selected fonts through the document head rather than CSS imports.
+- Replace hardcoded visual colors in touched homepage components with semantic tokens and button variants.
+- Reuse existing DRIPWAY media; do not introduce forbidden brands Apollo Originals, Christopher Noir, or VeroBottega.
+- Verify the completed homepage at desktop and mobile sizes, including image loading, navigation, section continuity, and reduced-motion behavior.
