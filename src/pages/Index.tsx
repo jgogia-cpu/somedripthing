@@ -1,6 +1,6 @@
-import { useEffect, useCallback, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowDown, ArrowRight, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import BrandCard from "@/components/BrandCard";
@@ -8,416 +8,156 @@ import FeaturedBrandSection from "@/components/FeaturedBrandSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import InstagramCTA from "@/components/InstagramCTA";
 import SEO from "@/components/SEO";
-import { brands, products, blogPosts, AESTHETICS, getBrandById, Product } from "@/data/brands";
+import { brands, products, AESTHETICS, getBrandById, type Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import RecentlyViewed from "@/components/RecentlyViewed";
-import { isRecent } from "@/lib/isRecent";
-import { hideProductLocally, isHidden } from "@/lib/hiddenProducts";
 
+const forbidden = new Set(["Apollo Originals", "Christopher Noir", "VeroBottega"]);
 
-// Shuffle whose result is cached in-memory for the lifetime of this JS module
-// (i.e., the current page load). Navigating between routes inside the SPA
-// keeps the same order, but a hard refresh / new tab reshuffles.
-function shuffleArr<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
+function shuffle<T>(items: T[]) {
+  const next = [...items];
+  for (let i = next.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    [next[i], next[j]] = [next[j], next[i]];
   }
-  return a;
+  return next;
 }
-const __shuffleCache = new Map<string, string[]>();
-function sessionShuffleIds(key: string, ids: string[]): string[] {
-  const cached = __shuffleCache.get(key);
-  if (cached) {
-    const set = new Set(ids);
-    const kept = cached.filter((id) => set.has(id));
-    const added = ids.filter((id) => !cached.includes(id));
-    const next = added.length === 0 && kept.length === cached.length ? cached : [...kept, ...shuffleArr(added)];
-    __shuffleCache.set(key, next);
-    return next;
-  }
-  const shuffled = shuffleArr(ids);
-  __shuffleCache.set(key, shuffled);
-  return shuffled;
-}
-
-function HeroCarouselCard({ product, index, currentSlide, total, onSelect, formatPrice }: {
-  product: Product; index: number; currentSlide: number; total: number;
-  onSelect: (i: number) => void; formatPrice: (p: number, native?: Product["prices"]) => string;
-}) {
-  const [failedImage, setFailedImage] = useState(false);
-  const navigate = useNavigate();
-  const t = getCarouselTransform(index, currentSlide, total);
-  // Don't render off-screen cards at all — they were invisible (opacity 0) but
-  // still spinning framer-motion animations and decoding images.
-  if (t.opacity === 0 || failedImage || isHidden(product.id)) return null;
-  const productBrand = getBrandById(product.brandId);
-  const isActive = index === currentSlide;
-  const allImages = product.images?.length > 0 ? product.images : [product.image];
-  const hasMultiple = allImages.length > 1;
-  // Isolated / cut-out PNGs need a lighter backdrop so they don't render as a transparent blob on the dark card.
-  const isCutout =
-    product.brandId === "30" ||
-    /removebg|transparent|cutout|Tee2-/i.test(allImages[0] || "");
-  const sized = (url: string) => {
-    if (!url.includes("cdn.shopify.com") && !url.includes("dripbyrage.store")) return url;
-    if (url.includes("width=")) return url;
-    return url + (url.includes("?") ? "&" : "?") + "width=500";
-  };
-
-  const handleCardClick = () => {
-    if (isActive) {
-      navigate(`/product/${product.id}`);
-    } else {
-      onSelect(index);
-    }
-  };
-
-  return (
-    <div
-      className="absolute cursor-pointer group"
-      style={{
-        zIndex: t.zIndex,
-        transformStyle: "preserve-3d",
-        width: "280px",
-        opacity: t.opacity,
-        transform: `translate3d(${t.translateX}px, 0, ${t.translateZ}px) rotateY(${t.rotateY}deg) scale(${t.scale})`,
-        transition: "transform 420ms cubic-bezier(0.32, 0.72, 0, 1), opacity 180ms ease",
-      }}
-      onClick={handleCardClick}
-    >
-      <div className={`overflow-hidden rounded-2xl bg-card shadow-xl transition-shadow duration-500 ${isActive ? "shadow-2xl ring-2 ring-accent/30" : ""}`}>
-        {product.brandId === "17" && (
-          <div className="bg-accent px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-black">
-            GET 10% OFF WITH CODE DRIPWAYAPPAREL
-          </div>
-        )}
-        <div className="relative">
-          <div
-            className={`relative w-full ${isCutout ? "bg-gradient-to-b from-neutral-200 to-neutral-400" : ""}`}
-            style={{ height: "340px" }}
-          >
-            <img
-              src={sized(allImages[0])}
-              alt={product.name}
-              loading={isActive ? "eager" : "lazy"}
-              decoding="async"
-              className={`absolute inset-0 h-full w-full ${isCutout ? "object-contain p-4" : "object-cover"}`}
-              onError={() => {
-                hideProductLocally(product.id);
-                setFailedImage(true);
-              }}
-            />
-            {hasMultiple && (
-              <img
-                src={sized(allImages[1])}
-                alt={product.name}
-                loading="lazy"
-                decoding="async"
-                className={`absolute inset-0 h-full w-full opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100 ${isCutout ? "object-contain p-4" : "object-cover"}`}
-              />
-            )}
-          </div>
-          {isRecent(product.addedAt) && (
-            <span className="absolute left-3 top-3 rounded-full bg-accent px-2.5 py-0.5 text-xs font-medium text-accent-foreground">New</span>
-          )}
-        </div>
-        <div className="p-4">
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{productBrand?.name}</p>
-          <p className="mt-0.5 truncate text-sm font-semibold">{product.name}</p>
-          <p className="mt-0.5 text-sm font-bold text-accent">{formatPrice(product.price, product.prices)}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-
 
 function buildHeroProducts() {
-  // Fully random lineup on every page load — pulls from every product in the
-  // catalogue. Computed at render time (not module load) so hidden products
-  // fetched in main.tsx have already been spliced out of `products`.
-  const shuffled = [...products];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  const picks = shuffled.slice(0, 12);
-  const hasParris = picks.some((p) => p.brandId === "41");
-  if (!hasParris) {
-    const parris = products.filter((p) => p.brandId === "41");
-    if (parris.length) picks[0] = parris[Math.floor(Math.random() * parris.length)];
-  }
-  const hasCos = picks.some((p) => p.brandId === "42");
-  if (!hasCos) {
-    const cos = products.filter((p) => p.brandId === "42");
-    if (cos.length) picks[1] = cos[Math.floor(Math.random() * cos.length)];
-  }
-  const hasDrekn = picks.some((p) => p.brandId === "44");
-  if (!hasDrekn) {
-    const drekn = products.filter((p) => p.brandId === "44");
-    if (drekn.length) {
-      picks[2] = drekn[Math.floor(Math.random() * drekn.length)];
-      if (drekn.length > 1) {
-        const other = drekn.find((p) => p.id !== picks[2].id);
-        if (other) picks[3] = other;
-      }
-    }
-  }
-  return picks;
+  return shuffle(products.filter((product) => {
+    const brand = getBrandById(product.brandId);
+    return brand && !forbidden.has(brand.name) && (brand.lookbook?.length || brand.banner);
+  })).slice(0, 8);
 }
 
-function getCarouselTransform(index: number, active: number, total: number) {
-  let offset = index - active;
-  if (offset > Math.floor(total / 2)) offset -= total;
-  if (offset < -Math.floor(total / 2)) offset += total;
+function EditorialProduct({ product, featured = false, index = 0 }: { product: Product; featured?: boolean; index?: number }) {
+  const { formatPrice } = useCurrency();
+  const brand = getBrandById(product.brandId);
 
-  const absOffset = Math.abs(offset);
-  const translateX = offset * 280;
-  const translateZ = -absOffset * 200;
-  const rotateY = offset * -25;
-  const scale = 1 - absOffset * 0.15;
-  const opacity = absOffset > 2 ? 0 : 1;
-  const zIndex = 10 - absOffset;
+  if (!featured) return <ProductCard product={product} index={index} />;
 
-  return { translateX, translateZ, rotateY, scale, opacity, zIndex };
+  return (
+    <Link to={`/product/${product.id}`} className="group block h-full">
+      <article className="relative h-full min-h-[520px] overflow-hidden border border-border bg-card md:min-h-[760px]">
+        <img src={product.images?.[0] || product.image} alt={product.name} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/5 to-background/10" />
+        <div className="absolute inset-x-0 bottom-0 p-6 md:p-10">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-accent">Cover story · {brand?.name}</p>
+          <h3 className="mt-3 max-w-2xl font-display text-4xl font-bold leading-[1.02] md:text-6xl">{product.name}</h3>
+          <div className="mt-5 flex items-center justify-between border-t border-foreground/30 pt-4 text-sm font-semibold uppercase tracking-[0.15em]">
+            <span>{formatPrice(product.price, product.prices)}</span>
+            <span className="inline-flex items-center gap-2">View piece <ArrowRight className="h-4 w-4" /></span>
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
 }
 
 export default function Index() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showAllDrops, setShowAllDrops] = useState(false);
   const { formatPrice } = useCurrency();
-  const heroProducts = useMemo(() => buildHeroProducts(), []);
-  const trendingProducts = useMemo(() => {
-    const newerBrandIds = ["19", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "42"];
-    const olderBrandIds = ["17"];
-    // 2 picks per newer brand (shuffled per-session), 1 per older brand
-    const newerPicks = newerBrandIds.flatMap((brandId) => {
-      const pool = products.filter((p) => p.brandId === brandId && p.trending);
-      const order = sessionShuffleIds(`dw:trend:brand:${brandId}`, pool.map((p) => p.id));
-      return order.slice(0, 2).map((id) => pool.find((p) => p.id === id)!).filter(Boolean);
-    });
-    const olderPicks = olderBrandIds
-      .map((brandId) => {
-        const pool = products.filter((p) => p.brandId === brandId && p.trending);
-        const order = sessionShuffleIds(`dw:trend:brand:${brandId}`, pool.map((p) => p.id));
-        return pool.find((p) => p.id === order[0]);
-      })
-      .filter((p): p is (typeof products)[number] => Boolean(p));
-    const pickedPool = [...newerPicks, ...olderPicks];
-    const pickedOrder = sessionShuffleIds("dw:trend:picked", pickedPool.map((p) => p.id));
-    const picked = pickedOrder.map((id) => pickedPool.find((p) => p.id === id)!).filter(Boolean);
-    const restPool = products.filter((p) => p.trending && !picked.some((g) => g.id === p.id));
-    const restOrder = sessionShuffleIds("dw:trend:rest", restPool.map((p) => p.id));
-    const rest = restOrder.map((id) => restPool.find((p) => p.id === id)!).filter(Boolean);
-    return [...picked, ...rest].slice(0, 12);
-  }, []);
-  const newDropBrands = useMemo(
-    () =>
-      [...brands]
-        .filter((b) => b.newDrop)
-        .sort((a, b) => String(b.addedAt ?? "").localeCompare(String(a.addedAt ?? ""))),
-    [],
-  );
+  const heroProducts = useMemo(buildHeroProducts, []);
+  const trendingProducts = useMemo(() => shuffle(products.filter((product) => product.trending && !forbidden.has(product.brandName))).slice(0, 9), []);
+  const newDropBrands = useMemo(() => [...brands]
+    .filter((brand) => brand.newDrop && !forbidden.has(brand.name))
+    .sort((a, b) => String(b.addedAt ?? "").localeCompare(String(a.addedAt ?? ""))), []);
   const visibleDropBrands = showAllDrops ? newDropBrands : newDropBrands.slice(0, 4);
 
-  const nextSlide = useCallback(() => setCurrentSlide(i => (i + 1) % heroProducts.length), []);
-  const prevSlide = useCallback(() => setCurrentSlide(i => (i - 1 + heroProducts.length) % heroProducts.length), []);
+  const nextSlide = useCallback(() => setCurrentSlide((value) => (value + 1) % heroProducts.length), [heroProducts.length]);
+  const prevSlide = useCallback(() => setCurrentSlide((value) => (value - 1 + heroProducts.length) % heroProducts.length), [heroProducts.length]);
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
-    return () => clearInterval(timer);
-  }, [nextSlide]);
+    if (!heroProducts.length) return;
+    const timer = window.setInterval(nextSlide, 7000);
+    return () => window.clearInterval(timer);
+  }, [heroProducts.length, nextSlide]);
 
-  if (heroProducts.length === 0) return null;
-
-  const current = heroProducts[currentSlide % heroProducts.length];
-  const brand = getBrandById(current.brandId);
+  if (!heroProducts.length) return null;
+  const current = heroProducts[currentSlide];
+  const currentBrand = getBrandById(current.brandId);
+  const heroImage = current.images?.[0] || current.image;
 
   return (
-    <div className="min-h-screen bg-background">
-      <SEO
-        title="DRIPWAY — Discover Niche Fashion Brands"
-        description="Discover the brands Instagram won't show you. DRIPWAY is your curated discovery engine for underground, emerging, and niche streetwear and designer labels."
-        path="/"
-        type="website"
-      />
-      {/* 3D Carousel Hero */}
-      <section
-        className="relative overflow-hidden bg-cover bg-center py-12 md:py-20"
-        style={{ backgroundImage: "url(/hero-carousel-bg.png)" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/40 to-background/80" />
-        <div className="container relative z-10">
-          <h1
-            className="mb-1 flex flex-wrap justify-center gap-x-[0.25em] text-center text-5xl font-bold tracking-tight md:text-7xl"
-            style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "-0.02em" }}
-          >
-            DRIPWAY
-          </h1>
-          <p
-            className="mb-8 text-center text-sm font-medium uppercase tracking-widest text-muted-foreground"
-          >
-            Today's Featured Picks
-          </p>
-          {/* 3D Carousel */}
-          <div
-            className="relative mx-auto flex items-center justify-center touch-pan-y select-none"
-            style={{ perspective: "1200px", height: "440px" }}
-            onTouchStart={(e) => {
-              (e.currentTarget as any)._touchStartX = e.touches[0].clientX;
-            }}
-            onTouchEnd={(e) => {
-              const startX = (e.currentTarget as any)._touchStartX;
-              if (startX == null) return;
-              const dx = e.changedTouches[0].clientX - startX;
-              if (dx > 40) prevSlide();
-              else if (dx < -40) nextSlide();
-              (e.currentTarget as any)._touchStartX = null;
-            }}
-          >
-            {heroProducts.map((product, i) => (
-              <HeroCarouselCard
-                key={product.id}
-                product={product}
-                index={i}
-                currentSlide={currentSlide}
-                total={heroProducts.length}
-                onSelect={setCurrentSlide}
-                formatPrice={formatPrice}
-              />
-            ))}
+    <main className="min-h-screen overflow-hidden bg-background">
+      <SEO title="DRIPWAY — Discover Niche Fashion Brands" description="Discover the brands Instagram won't show you. DRIPWAY is your curated discovery engine for underground, emerging, and niche streetwear and designer labels." path="/" type="website" />
+
+      <section className="relative flex h-[calc(100svh-7.75rem)] min-h-[620px] max-h-[920px] items-center overflow-hidden border-b border-foreground/20 md:h-[calc(100svh-4rem)]">
+        <img key={heroImage} src={heroImage} alt={`${currentBrand?.name ?? current.brandName} editorial`} fetchPriority="high" className="absolute inset-0 h-full w-full animate-fade-in object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/25 via-background/5 to-background/90" />
+        <div className="absolute inset-0 bg-background/10" />
+
+        <div className="container relative z-10 flex h-full flex-col justify-between py-7 md:py-10">
+          <div className="flex items-start justify-between text-[9px] font-semibold uppercase tracking-[0.32em] text-foreground/80 md:text-[10px]">
+            <div><p>Issue 001</p><p className="mt-1 text-foreground/50">The independent edition</p></div>
+            <p className="hidden md:block">Global fashion discovery</p>
           </div>
 
-          {/* Navigation */}
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <button onClick={prevSlide} className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-accent hover:text-accent-foreground hover:border-accent">
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <div className="flex gap-2">
-              {heroProducts.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentSlide(i)}
-                  className={`h-2 rounded-full transition-all ${
-                    i === currentSlide ? "w-8 bg-accent" : "w-2 bg-muted-foreground/30"
-                  }`}
-                />
-              ))}
+          <h1 className="select-none text-center font-display text-[clamp(4rem,17vw,15rem)] font-bold italic leading-[0.72] text-foreground drop-shadow-2xl">DRIPWAY</h1>
+
+          <div className="grid gap-6 border-t border-foreground/30 pt-5 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-5">
+              <p className="max-w-md font-display text-xl leading-tight md:text-3xl">A new perspective on independent fashion culture.</p>
+              <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground/60">Featured: {currentBrand?.name}</p>
             </div>
-            <button onClick={nextSlide} className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-accent hover:text-accent-foreground hover:border-accent">
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
-
-          {/* Active product info */}
-          <div className="mt-6 text-center">
-              {brand && (
-                <Link to={`/brand/${brand.slug}`} className="text-sm font-medium text-accent hover:underline">
-                  {brand.name}
-                </Link>
-              )}
-              <h2 className="mt-1 font-display text-2xl font-bold md:text-3xl">{current.name}</h2>
-              <div className="mt-2 flex justify-center gap-2">
-                {current.aesthetics.map(a => (
-                  <span key={a} className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
-                    {a}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-4 flex justify-center gap-3">
-                <Link to={`/product/${current.id}`}>
-                  <Button className="gap-2 rounded-full">View Product <ArrowRight className="h-4 w-4" /></Button>
-                </Link>
-                <Link to="/collections">
-                  <Button variant="outline" className="rounded-full">Browse Collections</Button>
-                </Link>
+            <div className="md:col-span-4 md:col-start-9">
+              <h2 className="line-clamp-2 text-xl font-semibold md:text-2xl">{current.name}</h2>
+              <p className="mt-1 text-sm text-foreground/70">{formatPrice(current.price, current.prices)}</p>
+              <div className="mt-4 flex gap-2">
+                <Button asChild size="lg" className="flex-1 rounded-none uppercase tracking-[0.12em]"><Link to={`/product/${current.id}`}>Shop feature <ArrowRight /></Link></Button>
+                <Button asChild size="lg" variant="outline" className="rounded-none border-foreground/40 bg-background/30 backdrop-blur-md"><Link to="/collections">Explore</Link></Button>
               </div>
             </div>
+          </div>
         </div>
+
+        <div className="absolute bottom-1/2 left-4 z-20 hidden -translate-y-1/2 xl:block"><Button variant="outline" size="icon" onClick={prevSlide} aria-label="Previous cover" className="rounded-none border-foreground/30 bg-background/20 backdrop-blur-md"><ChevronLeft /></Button></div>
+        <div className="absolute bottom-1/2 right-4 z-20 hidden -translate-y-1/2 xl:block"><Button variant="outline" size="icon" onClick={nextSlide} aria-label="Next cover" className="rounded-none border-foreground/30 bg-background/20 backdrop-blur-md"><ChevronRight /></Button></div>
+        <a href="#trending" aria-label="Continue to trending" className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 md:block"><ArrowDown className="h-5 w-5 animate-bounce" /></a>
       </section>
 
-      {/* Category Chips */}
-      <section className="border-b py-6">
+      <nav aria-label="Shop by aesthetic" className="border-b border-border bg-background py-4">
+        <div className="container flex gap-7 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {AESTHETICS.map((tag, index) => <Link key={tag} to="/collections" className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-accent"><span className="mr-2 text-accent">{String(index + 1).padStart(2, "0")}</span>{tag}</Link>)}
+        </div>
+      </nav>
+
+      <RecentlyViewed />
+
+      <section id="trending" className="border-b border-border py-16 md:py-24">
         <div className="container">
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            {AESTHETICS.map(tag => (
-              <Link
-                key={tag}
-                to={`/collections`}
-                className="shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-              >
-                {tag}
-              </Link>
-            ))}
+          <div className="mb-10 grid gap-5 border-t border-border pt-4 md:grid-cols-12 md:items-end">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-accent md:col-span-3">01 · The edit</p>
+            <h2 className="font-display text-5xl font-bold leading-none md:col-span-7 md:text-8xl">Trending now</h2>
+            <Link to="/collections" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] md:justify-self-end">View all <ArrowRight className="h-4 w-4" /></Link>
           </div>
+          <div className="grid gap-4 lg:grid-cols-12">
+            <div className="lg:col-span-7 lg:row-span-2"><EditorialProduct product={trendingProducts[0]} featured /></div>
+            <div className="grid grid-cols-2 gap-4 lg:col-span-5">{trendingProducts.slice(1, 5).map((product, index) => <EditorialProduct key={product.id} product={product} index={index} />)}</div>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">{trendingProducts.slice(5, 9).map((product, index) => <EditorialProduct key={product.id} product={product} index={index + 5} />)}</div>
         </div>
       </section>
 
-      <RecentlyViewed className="dw-wallpaper" />
-
-      {/* Trending Products */}
-      <section className="content-auto dw-wallpaper py-16">
-        <div className="container">
-          <div className="mb-8 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-accent" />
-              <h2 className="font-display text-2xl font-bold">Trending Now</h2>
-            </div>
-            <Link to="/collections" className="text-sm font-medium text-accent hover:underline">
-              View all
-            </Link>
-          </div>
-          <div className="masonry-grid">
-            {trendingProducts.map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Brand — rotates daily */}
       <FeaturedBrandSection />
 
-      {/* New Drops */}
-      <section className="content-auto dw-wallpaper border-t py-16">
+      <section className="border-b border-border py-16 md:py-24">
         <div className="container">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="font-display text-2xl font-bold">New Drops 🔥</h2>
-            <Link to="/collections" className="text-sm font-medium text-accent hover:underline">
-              View all
-            </Link>
+          <div className="mb-10 grid gap-5 border-t border-border pt-4 md:grid-cols-12 md:items-end">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-accent md:col-span-3">03 · Fresh arrivals</p>
+            <h2 className="font-display text-5xl font-bold leading-none md:col-span-7 md:text-8xl">New drops</h2>
+            <Link to="/brands" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] md:justify-self-end">All brands <ArrowRight className="h-4 w-4" /></Link>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {visibleDropBrands.map((brand, i) => (
-              <BrandCard key={brand.id} brand={brand} index={i} />
-            ))}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
+            {visibleDropBrands.map((brand, index) => <div key={brand.id} className={index % 4 === 0 || index % 4 === 3 ? "lg:col-span-7" : "lg:col-span-5"}><BrandCard brand={brand} index={index} /></div>)}
           </div>
-          {newDropBrands.length > 4 && (
-            <div className="mt-8 flex justify-center">
-              <Button
-                variant="outline"
-                onClick={() => setShowAllDrops((v) => !v)}
-                className="gap-2"
-              >
-                {showAllDrops ? "Show less" : `More brands (${newDropBrands.length - 4})`}
-                <ChevronDown
-                  className={`h-4 w-4 transition-transform ${showAllDrops ? "rotate-180" : ""}`}
-                />
-              </Button>
-            </div>
-          )}
+          {newDropBrands.length > 4 && <div className="mt-10 flex justify-center"><Button variant="outline" onClick={() => setShowAllDrops((value) => !value)} className="rounded-none border-foreground/30 px-7 uppercase tracking-[0.15em]">{showAllDrops ? "Show less" : `More brands (${newDropBrands.length - 4})`}<ChevronDown className={showAllDrops ? "rotate-180" : ""} /></Button></div>}
         </div>
       </section>
 
-      {/* Newsletter */}
       <NewsletterSignup />
-
-      {/* Instagram */}
       <InstagramCTA handle="@dripwayapparel" label="On The Gram" />
-
-    </div>
+    </main>
   );
 }

@@ -22,14 +22,14 @@ export default function InstagramCTA({
   const displayHeading = heading || `Follow @${cleanHandle}`;
 
   return (
-    <section className="border-t border-border/40 py-16 md:py-24">
+    <section className="border-b border-border py-16 md:py-24">
       <div className="container">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center font-display text-xs font-bold uppercase tracking-[0.2em] text-accent"
+          className="border-t border-border pt-3 text-left text-[10px] font-bold uppercase tracking-[0.3em] text-accent"
         >
           {label}
         </motion.p>
@@ -39,7 +39,7 @@ export default function InstagramCTA({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto mt-8 max-w-3xl"
+          className="mt-8"
         >
           <TrackedOutboundLink
             href={url}
@@ -51,17 +51,16 @@ export default function InstagramCTA({
               source: "instagram_cta",
               ...trackingProperties,
             }}
-            className="group relative block overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-br from-card/80 via-card/40 to-card/80 p-10 backdrop-blur-sm transition-all hover:border-accent/50 md:p-14"
+            className="group relative block overflow-hidden border-y border-border bg-card p-8 transition-colors hover:bg-secondary md:p-14"
           >
-            <div className="relative flex flex-col items-center text-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 via-purple-500 to-orange-500 shadow-lg">
-                <Instagram className="h-8 w-8 text-white" />
+            <div className="relative grid gap-8 md:grid-cols-12 md:items-center">
+              <div className="flex h-16 w-16 items-center justify-center border border-border md:col-span-1">
+                <Instagram className="h-8 w-8 text-accent" />
               </div>
-
-              <h3 className="mt-6 font-display text-3xl font-bold md:text-5xl">
+              <div className="md:col-span-7">
+              <h3 className="font-display text-4xl font-bold md:text-6xl">
                 {displayHeading}
               </h3>
-
               <p className="mt-3 max-w-md text-sm text-muted-foreground md:text-base">
                 Drops, fits, behind-the-scenes. The good stuff lives on the gram.
               </p>
@@ -72,7 +71,8 @@ export default function InstagramCTA({
                 </p>
               )}
 
-              <div className="mt-8 inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-transform group-hover:scale-105">
+              </div>
+              <div className="inline-flex items-center justify-center gap-2 border border-foreground px-7 py-4 text-sm font-semibold uppercase tracking-[0.14em] transition-colors group-hover:bg-foreground group-hover:text-background md:col-span-3 md:col-start-10">
                 Open Instagram
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
