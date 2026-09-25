@@ -33,7 +33,7 @@ function buildHeroSlides(): HeroSlide[] {
     return brand && !forbidden.has(brand.name);
   });
 
-  return shuffle(eligibleImages).slice(0, 8).flatMap(({ brandId, image }) => {
+  return shuffle(eligibleImages).flatMap(({ brandId, image }) => {
     const product = products.find((item) => item.brandId === brandId);
     return product ? [{ product, image }] : [];
   });
