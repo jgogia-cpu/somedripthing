@@ -105,7 +105,7 @@ export default function Index() {
         <h1 className="select-none py-3 text-center font-display text-[clamp(5rem,18vw,16rem)] font-normal leading-[0.78] text-foreground md:py-5">DRIPWAY</h1>
 
         <div className="relative aspect-[4/5] overflow-hidden border border-border bg-card sm:aspect-[16/10] lg:aspect-[21/9]">
-          <img key={heroImage} src={heroImage} alt={`${currentBrand?.name ?? current.brandName} editorial`} fetchPriority="high" className="h-full w-full animate-fade-in object-cover object-center" />
+          <img key={heroImage} src={heroImage} alt={`${brandName} editorial`} fetchPriority="high" className="h-full w-full animate-fade-in object-cover object-center" />
           <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-background/65 to-transparent" />
           <Button variant="outline" size="icon" onClick={prevSlide} aria-label="Previous cover" className="absolute left-3 top-1/2 -translate-y-1/2 rounded-none border-foreground/30 bg-background/60 backdrop-blur-sm"><ChevronLeft /></Button>
           <Button variant="outline" size="icon" onClick={nextSlide} aria-label="Next cover" className="absolute right-3 top-1/2 -translate-y-1/2 rounded-none border-foreground/30 bg-background/60 backdrop-blur-sm"><ChevronRight /></Button>
