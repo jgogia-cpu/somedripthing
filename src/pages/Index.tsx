@@ -23,7 +23,9 @@ function shuffle<T>(items: T[]) {
 }
 
 interface HeroSlide {
-  product: Product;
+  product?: Product;
+  brandSlug: string;
+  brandName: string;
   image: string;
 }
 
@@ -34,8 +36,14 @@ function buildHeroSlides(): HeroSlide[] {
   });
 
   return shuffle(eligibleImages).flatMap(({ brandId, image }) => {
-    const product = products.find((item) => item.brandId === brandId);
-    return product ? [{ product, image }] : [];
+    const brand = getBrandById(brandId);
+    if (!brand) return [];
+    // Pair the photo with the product it actually shows; if the shot isn't a
+    // specific catalogue product, the slide links to the brand page instead.
+    const product = products.find(
+      (item) => item.brandId === brandId && (item.image === image || item.images?.includes(image))
+    );
+    return [{ product, brandSlug: brand.slug, brandName: brand.name, image }];
   });
 }
 
@@ -82,8 +90,7 @@ export default function Index() {
   }, [heroSlides.length, nextSlide]);
 
   if (!heroSlides.length) return null;
-  const { product: current, image: heroImage } = heroSlides[currentSlide];
-  const currentBrand = getBrandById(current.brandId);
+  const { product: current, brandSlug, brandName, image: heroImage } = heroSlides[currentSlide];
 
   return (
     <main className="min-h-screen overflow-hidden bg-background">
@@ -98,7 +105,7 @@ export default function Index() {
         <h1 className="select-none py-3 text-center font-display text-[clamp(5rem,18vw,16rem)] font-normal leading-[0.78] text-foreground md:py-5">DRIPWAY</h1>
 
         <div className="relative aspect-[4/5] overflow-hidden border border-border bg-card sm:aspect-[16/10] lg:aspect-[21/9]">
-          <img key={heroImage} src={heroImage} alt={`${currentBrand?.name ?? current.brandName} editorial`} fetchPriority="high" className="h-full w-full animate-fade-in object-cover object-center" />
+          <img key={heroImage} src={heroImage} alt={`${brandName} editorial`} fetchPriority="high" className="h-full w-full animate-fade-in object-cover object-center" />
           <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-background/65 to-transparent" />
           <Button variant="outline" size="icon" onClick={prevSlide} aria-label="Previous cover" className="absolute left-3 top-1/2 -translate-y-1/2 rounded-none border-foreground/30 bg-background/60 backdrop-blur-sm"><ChevronLeft /></Button>
           <Button variant="outline" size="icon" onClick={nextSlide} aria-label="Next cover" className="absolute right-3 top-1/2 -translate-y-1/2 rounded-none border-foreground/30 bg-background/60 backdrop-blur-sm"><ChevronRight /></Button>
@@ -107,12 +114,18 @@ export default function Index() {
         <div className="mt-8 grid gap-8 border-t border-border pt-6 md:grid-cols-12 md:items-end">
           <p className="max-w-md text-sm uppercase leading-relaxed text-muted-foreground md:col-span-5">A considered edit of independent labels shaping fashion beyond the algorithm.</p>
           <div className="md:col-span-4 md:col-start-7">
-            <p className="text-[10px] font-medium uppercase text-accent">{currentBrand?.name}</p>
-            <h2 className="mt-2 font-display text-3xl leading-none md:text-4xl">{current.name}</h2>
-            <p className="mt-2 text-sm text-muted-foreground">{formatPrice(current.price, current.prices)}</p>
+            <p className="text-[10px] font-medium uppercase text-accent">{brandName}</p>
+            {current ? (
+              <>
+                <h2 className="mt-2 font-display text-3xl leading-none md:text-4xl">{current.name}</h2>
+                <p className="mt-2 text-sm text-muted-foreground">{formatPrice(current.price, current.prices)}</p>
+              </>
+            ) : (
+              <h2 className="mt-2 font-display text-3xl leading-none md:text-4xl">{brandName}</h2>
+            )}
           </div>
-          <Link to={`/product/${current.id}`} className="group inline-flex items-center justify-between gap-5 text-xs font-semibold uppercase md:col-span-2 md:justify-self-end">
-            View piece <span className="h-px w-10 bg-foreground transition-[width] group-hover:w-16" />
+          <Link to={current ? `/product/${current.id}` : `/brand/${brandSlug}`} className="group inline-flex items-center justify-between gap-5 text-xs font-semibold uppercase md:col-span-2 md:justify-self-end">
+            {current ? "View piece" : "View brand"} <span className="h-px w-10 bg-foreground transition-[width] group-hover:w-16" />
           </Link>
         </div>
       </section>
