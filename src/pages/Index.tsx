@@ -90,8 +90,7 @@ export default function Index() {
   }, [heroSlides.length, nextSlide]);
 
   if (!heroSlides.length) return null;
-  const { product: current, image: heroImage } = heroSlides[currentSlide];
-  const currentBrand = getBrandById(current.brandId);
+  const { product: current, brandSlug, brandName, image: heroImage } = heroSlides[currentSlide];
 
   return (
     <main className="min-h-screen overflow-hidden bg-background">
