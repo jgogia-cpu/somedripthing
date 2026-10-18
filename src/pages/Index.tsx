@@ -114,12 +114,18 @@ export default function Index() {
         <div className="mt-8 grid gap-8 border-t border-border pt-6 md:grid-cols-12 md:items-end">
           <p className="max-w-md text-sm uppercase leading-relaxed text-muted-foreground md:col-span-5">A considered edit of independent labels shaping fashion beyond the algorithm.</p>
           <div className="md:col-span-4 md:col-start-7">
-            <p className="text-[10px] font-medium uppercase text-accent">{currentBrand?.name}</p>
-            <h2 className="mt-2 font-display text-3xl leading-none md:text-4xl">{current.name}</h2>
-            <p className="mt-2 text-sm text-muted-foreground">{formatPrice(current.price, current.prices)}</p>
+            <p className="text-[10px] font-medium uppercase text-accent">{brandName}</p>
+            {current ? (
+              <>
+                <h2 className="mt-2 font-display text-3xl leading-none md:text-4xl">{current.name}</h2>
+                <p className="mt-2 text-sm text-muted-foreground">{formatPrice(current.price, current.prices)}</p>
+              </>
+            ) : (
+              <h2 className="mt-2 font-display text-3xl leading-none md:text-4xl">{brandName}</h2>
+            )}
           </div>
-          <Link to={`/product/${current.id}`} className="group inline-flex items-center justify-between gap-5 text-xs font-semibold uppercase md:col-span-2 md:justify-self-end">
-            View piece <span className="h-px w-10 bg-foreground transition-[width] group-hover:w-16" />
+          <Link to={current ? `/product/${current.id}` : `/brand/${brandSlug}`} className="group inline-flex items-center justify-between gap-5 text-xs font-semibold uppercase md:col-span-2 md:justify-self-end">
+            {current ? "View piece" : "View brand"} <span className="h-px w-10 bg-foreground transition-[width] group-hover:w-16" />
           </Link>
         </div>
       </section>
