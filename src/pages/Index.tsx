@@ -23,7 +23,9 @@ function shuffle<T>(items: T[]) {
 }
 
 interface HeroSlide {
-  product: Product;
+  product?: Product;
+  brandSlug: string;
+  brandName: string;
   image: string;
 }
 
@@ -34,8 +36,14 @@ function buildHeroSlides(): HeroSlide[] {
   });
 
   return shuffle(eligibleImages).flatMap(({ brandId, image }) => {
-    const product = products.find((item) => item.brandId === brandId);
-    return product ? [{ product, image }] : [];
+    const brand = getBrandById(brandId);
+    if (!brand) return [];
+    // Pair the photo with the product it actually shows; if the shot isn't a
+    // specific catalogue product, the slide links to the brand page instead.
+    const product = products.find(
+      (item) => item.brandId === brandId && (item.image === image || item.images?.includes(image))
+    );
+    return [{ product, brandSlug: brand.slug, brandName: brand.name, image }];
   });
 }
 
