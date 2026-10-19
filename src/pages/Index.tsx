@@ -96,7 +96,8 @@ export default function Index() {
       <SEO title="DRIPWAY — Discover Niche Fashion Brands" description="Discover the brands Instagram won't show you. DRIPWAY is your curated discovery engine for underground, emerging, and niche streetwear and designer labels." path="/" type="website" />
 
       <section className="relative -mt-16 h-[100svh] min-h-[600px] overflow-hidden bg-card">
-        <img key={heroImage} src={heroImage} alt={`${brandName} editorial`} fetchPriority="high" className="absolute inset-0 h-full w-full animate-fade-in object-cover object-[center_18%]" />
+        <img key={`${heroImage}-bg`} src={heroImage} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-2xl" />
+        <img key={heroImage} src={heroImage} alt={`${brandName} editorial`} fetchPriority="high" className="absolute inset-0 h-full w-full animate-fade-in object-contain" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/85" />
         <div className="relative flex h-full flex-col justify-between px-5 pb-8 pt-24 md:px-10 md:pb-10">
           <div className="flex justify-between text-[10px] uppercase tracking-[0.32em] text-foreground/80">
