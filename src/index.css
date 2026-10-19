@@ -229,3 +229,7 @@
   img { transition: opacity .6s ease, transform 1.2s cubic-bezier(.2,.6,.2,1); }
   h1, h2, h3 { letter-spacing: -0.01em; }
 }
+@layer base {
+  h1, h2, h3, .font-display { text-transform: uppercase; letter-spacing: -0.005em; font-style: normal; }
+  em, i { font-style: normal; }
+}

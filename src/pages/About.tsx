@@ -24,7 +24,7 @@ export default function About() {
           style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", letterSpacing: "-0.025em" }}
         >
           The algorithm is a bad{" "}
-          <span className="italic font-light text-foreground/70">stylist.</span>
+          <span className="font-light text-foreground/70">stylist.</span>
         </h1>
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
           DRIPWAY exists because discovery is broken. Instagram surfaces the same five brands

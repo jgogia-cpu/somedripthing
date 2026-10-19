@@ -251,7 +251,7 @@ export default function BrandProfile() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={0}
-                className="font-display text-4xl font-bold uppercase italic tracking-tighter md:text-6xl"
+                className="font-display text-4xl font-bold uppercase tracking-tighter md:text-6xl"
               >
                 Drop Selects
               </motion.h2>
@@ -291,7 +291,7 @@ export default function BrandProfile() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={0}
-                className="font-display text-4xl font-bold uppercase italic tracking-tighter md:text-6xl"
+                className="font-display text-4xl font-bold uppercase tracking-tighter md:text-6xl"
               >
                 Lookbook
               </motion.h2>
@@ -391,7 +391,7 @@ export default function BrandProfile() {
                   >
                     “
                   </span>
-                  <p className="font-display text-2xl font-medium italic leading-snug text-foreground md:text-3xl">
+                  <p className="font-display text-2xl font-medium leading-snug text-foreground md:text-3xl">
                     {brand.founderNote}
                   </p>
                   <div className="mt-6 flex items-center gap-4">
