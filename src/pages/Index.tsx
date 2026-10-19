@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import BrandCard from "@/components/BrandCard";
 import FeaturedBrandSection from "@/components/FeaturedBrandSection";
 import NewsletterSignup from "@/components/NewsletterSignup";
-import InstagramCTA from "@/components/InstagramCTA";
 import SEO from "@/components/SEO";
 import { brands, products, getBrandById, HERO_MODEL_IMAGES, type Product } from "@/data/brands";
 import { useCurrency } from "@/contexts/CurrencyContext";
@@ -133,7 +132,7 @@ export default function Index() {
       <section id="trending" className="border-y border-border py-20 md:py-28">
         <div className="container">
           <div className="mb-12 flex items-end justify-between md:mb-16">
-            <div><p className="mb-2 text-[10px] font-medium uppercase text-muted-foreground">Curated selection</p><h2 className="font-display text-5xl italic leading-none md:text-7xl">Trending now</h2></div>
+            <div><p className="mb-2 text-[10px] font-medium uppercase text-muted-foreground">Curated selection</p><h2 className="font-display text-5xl leading-none md:text-7xl">Trending now</h2></div>
             <Link to="/collections" className="hidden items-center gap-2 text-xs font-semibold uppercase md:inline-flex">View all <ArrowRight className="h-4 w-4" /></Link>
           </div>
           <div className="grid border border-border sm:grid-cols-3">
@@ -148,7 +147,7 @@ export default function Index() {
       <section className="border-b border-border py-20 md:py-28">
         <div className="container">
           <div className="mb-12 flex items-end justify-between md:mb-16">
-            <div><p className="mb-2 text-[10px] font-medium uppercase text-muted-foreground">Fresh arrivals</p><h2 className="font-display text-5xl italic leading-none md:text-7xl">New drops</h2></div>
+            <div><p className="mb-2 text-[10px] font-medium uppercase text-muted-foreground">Fresh arrivals</p><h2 className="font-display text-5xl leading-none md:text-7xl">New drops</h2></div>
             <Link to="/brands" className="inline-flex items-center gap-2 text-xs font-semibold uppercase">Brand directory <ArrowRight className="h-4 w-4" /></Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -160,7 +159,6 @@ export default function Index() {
 
       <RecentlyViewed />
       <NewsletterSignup />
-      <InstagramCTA handle="@dripwayapparel" label="On The Gram" />
     </main>
   );
 }
