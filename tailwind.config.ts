@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Instrument Serif"', 'Georgia', 'serif'],
+        display: ['Anton', '"Bebas Neue"', 'Impact', 'sans-serif'],
         body: ['"Work Sans"', 'system-ui', 'sans-serif'],
       },
       colors: {
