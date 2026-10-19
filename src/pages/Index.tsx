@@ -95,37 +95,31 @@ export default function Index() {
     <main className="min-h-screen overflow-hidden bg-background">
       <SEO title="DRIPWAY — Discover Niche Fashion Brands" description="Discover the brands Instagram won't show you. DRIPWAY is your curated discovery engine for underground, emerging, and niche streetwear and designer labels." path="/" type="website" />
 
-      <section className="container pb-20 pt-10 md:pb-28 md:pt-16">
-        <div className="flex items-end justify-between border-b border-border pb-4 text-[9px] font-medium uppercase text-muted-foreground md:text-[10px]">
-          <span>Est. 2024</span>
-          <span className="hidden md:block">Independent fashion discovery</span>
-          <span>{String(currentSlide + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}</span>
-        </div>
-        <h1 className="select-none py-3 text-center font-display text-[clamp(5rem,18vw,16rem)] font-normal leading-[0.78] text-foreground md:py-5">DRIPWAY</h1>
-
-        <div className="relative aspect-[4/5] overflow-hidden border border-border bg-card sm:aspect-[16/10] lg:aspect-[16/8]">
-          <img key={heroImage} src={heroImage} alt={`${brandName} editorial`} fetchPriority="high" className="h-full w-full animate-fade-in object-cover object-[center_18%]" />
-          <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-background/65 to-transparent" />
-          <Button variant="outline" size="icon" onClick={prevSlide} aria-label="Previous cover" className="absolute left-3 top-1/2 -translate-y-1/2 rounded-none border-foreground/30 bg-background/60 backdrop-blur-sm"><ChevronLeft /></Button>
-          <Button variant="outline" size="icon" onClick={nextSlide} aria-label="Next cover" className="absolute right-3 top-1/2 -translate-y-1/2 rounded-none border-foreground/30 bg-background/60 backdrop-blur-sm"><ChevronRight /></Button>
-        </div>
-
-        <div className="mt-8 grid gap-8 border-t border-border pt-6 md:grid-cols-12 md:items-end">
-          <p className="max-w-md text-sm uppercase leading-relaxed text-muted-foreground md:col-span-5">A considered edit of independent labels shaping fashion beyond the algorithm.</p>
-          <div className="md:col-span-4 md:col-start-7">
-            <p className="text-[10px] font-medium uppercase text-accent">{brandName}</p>
-            {current ? (
-              <>
-                <h2 className="mt-2 font-display text-3xl leading-none md:text-4xl">{current.name}</h2>
-                <p className="mt-2 text-sm text-muted-foreground">{formatPrice(current.price, current.prices)}</p>
-              </>
-            ) : (
-              <h2 className="mt-2 font-display text-3xl leading-none md:text-4xl">{brandName}</h2>
-            )}
+      <section className="relative -mt-16 h-[100svh] min-h-[600px] overflow-hidden bg-card">
+        <img key={heroImage} src={heroImage} alt={`${brandName} editorial`} fetchPriority="high" className="absolute inset-0 h-full w-full animate-fade-in object-cover object-[center_18%]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/85" />
+        <div className="relative flex h-full flex-col justify-between px-5 pb-8 pt-24 md:px-10 md:pb-10">
+          <div className="flex justify-between text-[10px] uppercase tracking-[0.32em] text-foreground/80">
+            <span>Est. 2024</span>
+            <span>{String(currentSlide + 1).padStart(2, "0")} / {String(heroSlides.length).padStart(2, "0")}</span>
           </div>
-          <Link to={current ? `/product/${current.id}` : `/brand/${brandSlug}`} className="group inline-flex items-center justify-between gap-5 text-xs font-semibold uppercase md:col-span-2 md:justify-self-end">
-            {current ? "View piece" : "View brand"} <span className="h-px w-10 bg-foreground transition-[width] group-hover:w-16" />
-          </Link>
+          <div>
+            <h1 className="select-none font-display text-[clamp(4.5rem,17vw,15rem)] leading-[0.8] text-foreground">DRIPWAY</h1>
+            <div className="mt-6 flex flex-col gap-6 border-t border-foreground/25 pt-5 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.32em] text-foreground/70">{brandName}</p>
+                <p className="mt-2 font-display text-2xl leading-none md:text-3xl">{current ? current.name : brandName}</p>
+                {current && <p className="mt-2 text-sm text-foreground/70">{formatPrice(current.price, current.prices)}</p>}
+              </div>
+              <div className="flex items-center gap-3">
+                <Button variant="outline" size="icon" onClick={prevSlide} aria-label="Previous cover" className="rounded-none border-foreground/30 bg-transparent"><ChevronLeft /></Button>
+                <Button variant="outline" size="icon" onClick={nextSlide} aria-label="Next cover" className="rounded-none border-foreground/30 bg-transparent"><ChevronRight /></Button>
+                <Link to={current ? `/product/${current.id}` : `/brand/${brandSlug}`} className="group ml-4 inline-flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.2em]">
+                  {current ? "View piece" : "View brand"} <span className="h-px w-10 bg-foreground transition-[width] group-hover:w-16" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -150,9 +144,21 @@ export default function Index() {
             <div><p className="mb-2 text-[10px] font-medium uppercase text-muted-foreground">Fresh arrivals</p><h2 className="font-display text-5xl leading-none md:text-7xl">New drops</h2></div>
             <Link to="/brands" className="inline-flex items-center gap-2 text-xs font-semibold uppercase">Brand directory <ArrowRight className="h-4 w-4" /></Link>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {visibleDropBrands.map((brand, index) => <BrandCard key={brand.id} brand={brand} index={index} />)}
-          </div>
+          <ol className="border-t border-border">
+            {visibleDropBrands.map((brand, index) => (
+              <li key={brand.id} className="border-b border-border">
+                <Link to={`/brand/${brand.slug}`} className="group grid grid-cols-[3rem_1fr_auto] items-center gap-4 py-6 md:grid-cols-[5rem_1fr_16rem] md:py-8">
+                  <span className="text-xs tracking-[0.2em] text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="font-display text-3xl leading-none transition-transform duration-500 group-hover:translate-x-2 md:text-6xl">{brand.name}</span>
+                  {(brand.lookbook?.[0] || brand.banner || brand.logo) && (
+                    <span className="block aspect-[4/3] w-24 overflow-hidden bg-card md:w-64">
+                      <img src={brand.lookbook?.[0] || brand.banner || brand.logo} alt="" loading="lazy" className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+                    </span>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ol>
           {newDropBrands.length > 4 && <div className="mt-10 flex justify-center"><Button variant="outline" onClick={() => setShowAllDrops((value) => !value)} className="rounded-none border-foreground/30 px-7 uppercase">{showAllDrops ? "Show less" : `More brands (${newDropBrands.length - 4})`}<ChevronDown className={showAllDrops ? "rotate-180" : ""} /></Button></div>}
         </div>
       </section>
