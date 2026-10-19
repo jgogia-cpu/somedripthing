@@ -85,7 +85,7 @@ export default function Brands() {
                 <Link to={`/brand/${brand.slug}`} className="group relative grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 py-5 md:grid-cols-[4rem_1fr_auto] md:py-6">
                   <span className="text-xs tracking-[0.2em] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
                   <span className="font-display text-3xl leading-none text-foreground/70 transition-colors duration-300 group-hover:text-foreground md:text-6xl">{brand.name}</span>
-                  <span className="hidden text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:block">{brand.tags?.slice(0, 2).join(" / ")}</span>
+                  <span className="hidden text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:block">{brand.aesthetics.slice(0, 2).join(" / ")}</span>
                   <img src={brand.lookbook?.[0] || brand.banner || brand.logo} alt="" loading="lazy" className="pointer-events-none absolute right-40 top-1/2 z-10 hidden aspect-[3/4] w-48 -translate-y-1/2 object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 lg:block" />
                 </Link>
               </li>
