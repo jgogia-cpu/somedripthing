@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useMemo, useState } from "react";
 import BrandCard from "@/components/BrandCard";
 import SEO from "@/components/SEO";
-import { brands, AESTHETICS } from "@/data/brands";
+import { brands, products, AESTHETICS } from "@/data/brands";
 import BrandEditorialPicks from "@/components/BrandEditorialPicks";
 
 export default function Brands() {
