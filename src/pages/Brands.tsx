@@ -9,16 +9,17 @@ export default function Brands() {
   const [active, setActive] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
 
-  // Which row the pointer is currently over, and whether the page is scrolling.
+  // Which row the pointer is over, and whether the page is mid-scroll.
   const pointerId = useRef<string | null>(null);
   const scrolling = useRef(false);
   const scrollIdle = useRef<number | undefined>(undefined);
   const openTimer = useRef<number | undefined>(undefined);
 
-  // While the page is scrolling we freeze the open row: opening or closing one
-  // pushes every row below it up or down, which fights the scroll gesture.
+  // Opening or closing a row pushes every row below it up or down, which fights
+  // a scroll gesture. So while the page is moving we hold the open row still and
+  // only sync to wherever the pointer ended up once the scroll settles.
   useEffect(() => {
-    const onScroll = () => {
+    const markScroll = () => {
       if (!scrolling.current) {
         scrolling.current = true;
         window.clearTimeout(openTimer.current);
@@ -29,9 +30,14 @@ export default function Brands() {
         setOpenId(pointerId.current);
       }, 180);
     };
-    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+    const opts = { passive: true, capture: true } as const;
+    window.addEventListener("wheel", markScroll, opts);
+    window.addEventListener("touchmove", markScroll, opts);
+    window.addEventListener("scroll", markScroll, opts);
     return () => {
-      window.removeEventListener("scroll", onScroll, { capture: true });
+      window.removeEventListener("wheel", markScroll, opts);
+      window.removeEventListener("touchmove", markScroll, opts);
+      window.removeEventListener("scroll", markScroll, opts);
       window.clearTimeout(scrollIdle.current);
       window.clearTimeout(openTimer.current);
     };
@@ -44,11 +50,17 @@ export default function Brands() {
     openTimer.current = window.setTimeout(() => setOpenId(id), 90);
   };
 
+  // A row scrolling out from under the pointer also fires pointerleave, so
+  // leaving a row only tracks the pointer — the list itself closes the panel.
   const leaveRow = (id: string) => {
     if (pointerId.current === id) pointerId.current = null;
+  };
+
+  const leaveList = () => {
+    pointerId.current = null;
     if (scrolling.current) return;
     window.clearTimeout(openTimer.current);
-    setOpenId(cur => (cur === id ? null : cur));
+    setOpenId(null);
   };
 
   const pick = (tag: string | null) => {
@@ -137,7 +149,7 @@ export default function Brands() {
             </button>
           </div>
         ) : (
-          <ol className="border-t border-border" onPointerLeave={() => { pointerId.current = null; if (!scrolling.current) setOpenId(null); }}>
+          <ol className="border-t border-border" onPointerLeave={leaveList}>
             {filtered.map((brand, i) => {
               const isOpen = openId === brand.id;
               return (
