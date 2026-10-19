@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useMemo, useState } from "react";
 import BrandCard from "@/components/BrandCard";
 import SEO from "@/components/SEO";
@@ -41,10 +42,10 @@ export default function Brands() {
         <div className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <button
             onClick={() => setActive(null)}
-            className={`shrink-0 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-all min-h-[44px] ${
+            className={`shrink-0 border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-all min-h-[44px] ${
               active === null
-                ? "border-accent bg-accent text-accent-foreground"
-                : "border-border/60 text-muted-foreground hover:border-accent/60 hover:text-foreground"
+                ? "border-foreground bg-foreground text-background"
+                : "border-border/60 text-muted-foreground hover:border-foreground/60 hover:text-foreground"
             }`}
           >
             All <span className="ml-1 opacity-60">{sorted.length}</span>
@@ -55,10 +56,10 @@ export default function Brands() {
               <button
                 key={tag}
                 onClick={() => setActive(isActive ? null : tag)}
-                className={`shrink-0 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-all min-h-[44px] ${
+                className={`shrink-0 border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-all min-h-[44px] ${
                   isActive
-                    ? "border-accent bg-accent text-accent-foreground"
-                    : "border-border/60 text-muted-foreground hover:border-accent/60 hover:text-foreground"
+                    ? "border-foreground bg-foreground text-background"
+                    : "border-border/60 text-muted-foreground hover:border-foreground/60 hover:text-foreground"
                 }`}
               >
                 {tag}
@@ -78,20 +79,18 @@ export default function Brands() {
             </button>
           </div>
         ) : (
-          <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {filtered.map((brand, i) => {
-              // Editorial rhythm: every 5th card spans 2 columns on desktop
-              const featured = i % 5 === 0;
-              return (
-                <div
-                  key={brand.id}
-                  className={featured ? "lg:col-span-2" : "lg:col-span-1"}
-                >
-                  <BrandCard brand={brand} index={i} />
-                </div>
-              );
-            })}
-          </div>
+          <ol className="border-t border-border">
+            {filtered.map((brand, i) => (
+              <li key={brand.id} className="border-b border-border">
+                <Link to={`/brand/${brand.slug}`} className="group relative grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 py-5 md:grid-cols-[4rem_1fr_auto] md:py-6">
+                  <span className="text-xs tracking-[0.2em] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-display text-3xl leading-none text-foreground/70 transition-colors duration-300 group-hover:text-foreground md:text-6xl">{brand.name}</span>
+                  <span className="hidden text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:block">{brand.tags?.slice(0, 2).join(" / ")}</span>
+                  <img src={brand.lookbook?.[0] || brand.banner || brand.logo} alt="" loading="lazy" className="pointer-events-none absolute right-40 top-1/2 z-10 hidden aspect-[3/4] w-48 -translate-y-1/2 object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 lg:block" />
+                </Link>
+              </li>
+            ))}
+          </ol>
         )}
       </section>
     </div>
