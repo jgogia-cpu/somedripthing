@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import BrandCard from "@/components/BrandCard";
 import SEO from "@/components/SEO";
 import { brands, products, AESTHETICS } from "@/data/brands";
@@ -7,6 +7,55 @@ import BrandEditorialPicks from "@/components/BrandEditorialPicks";
 
 export default function Brands() {
   const [active, setActive] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  // Which row the pointer is currently over, and whether the page is scrolling.
+  const pointerId = useRef<string | null>(null);
+  const scrolling = useRef(false);
+  const scrollIdle = useRef<number | undefined>(undefined);
+  const openTimer = useRef<number | undefined>(undefined);
+
+  // While the page is scrolling we freeze the open row: opening or closing one
+  // pushes every row below it up or down, which fights the scroll gesture.
+  useEffect(() => {
+    const onScroll = () => {
+      if (!scrolling.current) {
+        scrolling.current = true;
+        window.clearTimeout(openTimer.current);
+      }
+      window.clearTimeout(scrollIdle.current);
+      scrollIdle.current = window.setTimeout(() => {
+        scrolling.current = false;
+        setOpenId(pointerId.current);
+      }, 180);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll, { capture: true });
+      window.clearTimeout(scrollIdle.current);
+      window.clearTimeout(openTimer.current);
+    };
+  }, []);
+
+  const enterRow = (id: string) => {
+    pointerId.current = id;
+    if (scrolling.current) return;
+    window.clearTimeout(openTimer.current);
+    openTimer.current = window.setTimeout(() => setOpenId(id), 90);
+  };
+
+  const leaveRow = (id: string) => {
+    if (pointerId.current === id) pointerId.current = null;
+    if (scrolling.current) return;
+    window.clearTimeout(openTimer.current);
+    setOpenId(cur => (cur === id ? null : cur));
+  };
+
+  const pick = (tag: string | null) => {
+    setActive(tag);
+    setOpenId(null);
+  };
+
   const productsByBrand = useMemo(() => {
     const map = new Map<string, typeof products>();
     for (const p of products) {
@@ -50,7 +99,7 @@ export default function Brands() {
         {/* Aesthetic pill filters */}
         <div className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <button
-            onClick={() => setActive(null)}
+            onClick={() => pick(null)}
             className={`shrink-0 border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-all min-h-[44px] ${
               active === null
                 ? "border-foreground bg-foreground text-background"
@@ -64,7 +113,7 @@ export default function Brands() {
             return (
               <button
                 key={tag}
-                onClick={() => setActive(isActive ? null : tag)}
+                onClick={() => pick(isActive ? null : tag)}
                 className={`shrink-0 border px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition-all min-h-[44px] ${
                   isActive
                     ? "border-foreground bg-foreground text-background"
@@ -81,37 +130,45 @@ export default function Brands() {
           <div className="rounded-2xl border border-border/40 bg-secondary/20 p-12 text-center">
             <p className="text-sm text-muted-foreground">Nothing here yet — we're always adding.</p>
             <button
-              onClick={() => setActive(null)}
+              onClick={() => pick(null)}
               className="mt-3 text-xs font-semibold uppercase tracking-[0.15em] text-accent hover:underline"
             >
               Clear filters
             </button>
           </div>
         ) : (
-          <ol className="border-t border-border">
-            {filtered.map((brand, i) => (
-              <li key={brand.id} className="border-b border-border">
-                <Link to={`/brand/${brand.slug}`} className="group block py-5 md:py-6">
-                  <div className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 md:grid-cols-[4rem_1fr_auto]">
-                    <span className="text-xs tracking-[0.2em] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="text-3xl font-bold leading-none text-foreground/70 transition-colors duration-300 group-hover:text-foreground md:text-6xl" style={{ fontFamily: brand.logoFont || "Anton, sans-serif" }}>{brand.name}</span>
-                    <span className="hidden text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:block">{brand.aesthetics.slice(0, 2).join(" / ")}</span>
-                  </div>
-                  <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr]">
-                    <div className="overflow-hidden">
-                      <div className="flex gap-3 pt-5 md:pl-[5rem]">
-                        {(productsByBrand.get(brand.id) ?? []).map((p) => (
-                          <div key={p.id} className="w-28 shrink-0 md:w-36">
-                            <div className="aspect-[3/4] overflow-hidden bg-card"><img src={p.image} alt={p.name} loading="lazy" className="h-full w-full object-cover" /></div>
-                            <p className="mt-2 truncate text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{p.name}</p>
-                          </div>
-                        ))}
+          <ol className="border-t border-border" onPointerLeave={() => { pointerId.current = null; if (!scrolling.current) setOpenId(null); }}>
+            {filtered.map((brand, i) => {
+              const isOpen = openId === brand.id;
+              return (
+                <li key={brand.id} className="border-b border-border">
+                  <Link
+                    to={`/brand/${brand.slug}`}
+                    className="group block py-5 md:py-6"
+                    onPointerEnter={() => enterRow(brand.id)}
+                    onPointerLeave={() => leaveRow(brand.id)}
+                  >
+                    <div className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 md:grid-cols-[4rem_1fr_auto]">
+                      <span className="text-xs tracking-[0.2em] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="text-3xl font-bold leading-none text-foreground/70 transition-colors duration-300 group-hover:text-foreground md:text-6xl" style={{ fontFamily: brand.logoFont || "Anton, sans-serif" }}>{brand.name}</span>
+                      <span className="hidden text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:block">{brand.aesthetics.slice(0, 2).join(" / ")}</span>
+                    </div>
+                    <div className={`grid transition-[grid-template-rows] duration-500 ease-out group-focus-visible:grid-rows-[1fr] ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                      <div className="overflow-hidden">
+                        <div className="flex gap-3 overflow-x-auto pt-5 md:pl-[5rem] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                          {(productsByBrand.get(brand.id) ?? []).map((p) => (
+                            <div key={p.id} className="w-28 shrink-0 md:w-36">
+                              <div className="aspect-[3/4] overflow-hidden bg-card"><img src={p.image} alt={p.name} loading="lazy" className="h-full w-full object-cover" /></div>
+                              <p className="mt-2 truncate text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{p.name}</p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              </li>
-            ))}
+                  </Link>
+                </li>
+              );
+            })}
           </ol>
         )}
       </section>
