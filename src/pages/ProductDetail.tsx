@@ -96,14 +96,14 @@ export default function ProductDetail() {
           ]}
         />
 
-        <div className="grid gap-12 lg:grid-cols-2">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
           {/* Images */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="space-y-4"
           >
-            <div className="overflow-hidden rounded-xl bg-secondary">
+            <div className="overflow-hidden bg-card">
               <img
                 src={activeColor?.image || product.images[selectedImage] || product.image}
                 alt={product.name}
@@ -118,7 +118,7 @@ export default function ProductDetail() {
                   <button
                     key={i}
                     onClick={() => setSelectedImage(i)}
-                    className={`overflow-hidden rounded-lg bg-secondary ring-2 transition-all ${selectedImage === i ? "ring-accent" : "ring-transparent"}`}
+                    className={`overflow-hidden bg-card ring-1 transition-all ${selectedImage === i ? "ring-foreground" : "ring-transparent opacity-60"}`}
                   >
                     <img src={img} alt="" className="aspect-square w-full object-cover" onError={() => hideProductLocally(product.id)} />
                   </button>
@@ -131,10 +131,10 @@ export default function ProductDetail() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="space-y-6"
+            className="space-y-6 self-start lg:sticky lg:top-24"
           >
             {brand && (
-              <Link to={`/brand/${brand.slug}`} className="text-sm font-medium uppercase tracking-wider text-accent hover:underline">
+              <Link to={`/brand/${brand.slug}`} className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground hover:text-foreground">
                 {brand.name}
               </Link>
             )}
