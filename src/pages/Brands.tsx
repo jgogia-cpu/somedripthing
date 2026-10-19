@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import BrandCard from "@/components/BrandCard";
 import SEO from "@/components/SEO";
 import { brands, AESTHETICS } from "@/data/brands";
+import BrandEditorialPicks from "@/components/BrandEditorialPicks";
 
 export default function Brands() {
   const [active, setActive] = useState<string | null>(null);
@@ -19,19 +20,22 @@ export default function Brands() {
   return (
     <div className="min-h-screen bg-background dw-wallpaper">
       <SEO
-        title="Brands — DRIPWAY"
-        description="Browse every niche fashion brand on DRIPWAY. Discover emerging streetwear, designer and underground labels in one place."
+        title="Underground Streetwear Brands & Independent Labels — DRIPWAY"
+        description="Discover underground streetwear brands and independent fashion labels. Explore Y2K graphics, grunge and minimal styles, with selected pieces and catalogue prices."
         path="/brands"
         type="website"
       />
       <section className="container py-12 md:py-16">
         <div className="mb-8">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Directory</p>
-          <h1 className="mt-1 font-display text-3xl font-bold md:text-5xl">Brands</h1>
+          <h1 className="mt-1 font-display text-3xl md:text-5xl">Underground streetwear brands</h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Every label on DRIPWAY — curated, niche, and worth your attention.
+            Independent labels, from graphic-heavy Y2K streetwear to grunge, archive-inspired and minimal pieces. Explore the edit, then browse every brand by aesthetic.
           </p>
         </div>
+
+        <BrandEditorialPicks />
+        <h2 className="mb-4 font-display text-2xl">All independent labels</h2>
 
         {/* Aesthetic pill filters */}
         <div className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
