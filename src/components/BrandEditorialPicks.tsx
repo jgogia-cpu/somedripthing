@@ -5,7 +5,7 @@ import { useCurrency } from "@/contexts/CurrencyContext";
 import { Button } from "@/components/ui/button";
 
 const selections = [
-  { productId: "p71", heading: "Graphics with Y2K energy", note: "Preview Worldwide’s Racing Team Zip-Up Hoodie brings motorsport graphics to a familiar streetwear shape. A starting point for a louder, graphic-led wardrobe." },
+  { productId: "p69", heading: "Graphics with Y2K energy", note: "Preview Worldwide’s Multicolor Logo Hoodie puts bright graphic branding on a familiar streetwear shape. A starting point for a louder, graphic-led wardrobe." },
   { productId: "p165", heading: "A heavier everyday layer", note: "Harvx’s Pure Soul Vibe is a full-zip cotton layer with dropped shoulders and a kangaroo pocket. Its catalogue specifies 400 GSM cotton; the garment treatment can produce shade differences." },
   { productId: "p94", heading: "Small details, reflective finish", note: "SABR’s satin reflective skull-caps offer an accessory-led entry into the label. The listed piece pairs satin construction with reflective branding." },
 ];
