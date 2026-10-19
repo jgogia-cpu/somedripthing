@@ -149,7 +149,7 @@ export default function Index() {
         <div className="container">
           <div className="mb-12 flex items-end justify-between md:mb-16">
             <div><p className="mb-2 text-[10px] font-medium uppercase text-muted-foreground">Fresh arrivals</p><h2 className="font-display text-5xl italic leading-none md:text-7xl">New drops</h2></div>
-            <Link to="/brands" className="hidden items-center gap-2 text-xs font-semibold uppercase md:inline-flex">All brands <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/brands" className="inline-flex items-center gap-2 text-xs font-semibold uppercase">Brand directory <ArrowRight className="h-4 w-4" /></Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {visibleDropBrands.map((brand, index) => <BrandCard key={brand.id} brand={brand} index={index} />)}

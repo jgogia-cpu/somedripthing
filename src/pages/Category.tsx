@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ProductCard from "@/components/ProductCard";
 import { products, type Product } from "@/data/brands";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import SEO from "@/components/SEO";
 
 function cyrb128(str: string) {
   let h1 = 1779033703,
@@ -138,6 +139,7 @@ export default function Category() {
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   const label = SUBCATEGORY_LABELS[subcategory || ""] || subcategory;
   const genderLabel = gender === "him" ? "Him" : "Her";
+  const searchLabel = subcategory === "kicks" ? "Sneakers & Footwear" : label || "Streetwear";
   const matcher = MATCHERS[subcategory || ""];
   const filtered = useMemo(() => {
     const base = matcher ? products.filter(matcher) : [];
@@ -151,6 +153,11 @@ export default function Category() {
 
   return (
     <div className="min-h-screen py-8">
+      <SEO
+        title={`${searchLabel} for ${genderLabel} — Independent Streetwear | DRIPWAY`}
+        description={`Explore ${searchLabel.toLowerCase()} in DRIPWAY’s ${genderLabel.toLowerCase()} edit from independent and underground fashion brands. Compare pieces and catalogue prices, then shop directly with the brand.`}
+        path={`/shop/${gender}/${subcategory}`}
+      />
       <div className="container">
         <Breadcrumbs
           className="mb-4"
