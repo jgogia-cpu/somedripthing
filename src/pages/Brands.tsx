@@ -4,6 +4,7 @@ import BrandCard from "@/components/BrandCard";
 import SEO from "@/components/SEO";
 import { brands, products, AESTHETICS } from "@/data/brands";
 import BrandEditorialPicks from "@/components/BrandEditorialPicks";
+import { useScrapedProducts } from "@/hooks/useScrapedProducts";
 
 export default function Brands() {
   const [active, setActive] = useState<string | null>(null);
@@ -66,15 +67,17 @@ export default function Brands() {
     setOpenId(null);
   };
 
+  const scraped = useScrapedProducts();
   const productsByBrand = useMemo(() => {
     const map = new Map<string, typeof products>();
-    for (const p of products) {
+    for (const p of [...products, ...scraped]) {
+      if (!p.image) continue;
       const list = map.get(p.brandId) ?? [];
       if (list.length < 6) list.push(p);
       map.set(p.brandId, list);
     }
     return map;
-  }, []);
+  }, [scraped]);
 
   const sorted = useMemo(
     () => [...brands].sort((a, b) => a.name.localeCompare(b.name)),
