@@ -7,6 +7,15 @@ import BrandEditorialPicks from "@/components/BrandEditorialPicks";
 
 export default function Brands() {
   const [active, setActive] = useState<string | null>(null);
+  const productsByBrand = useMemo(() => {
+    const map = new Map<string, typeof products>();
+    for (const p of products) {
+      const list = map.get(p.brandId) ?? [];
+      if (list.length < 6) list.push(p);
+      map.set(p.brandId, list);
+    }
+    return map;
+  }, []);
 
   const sorted = useMemo(
     () => [...brands].sort((a, b) => a.name.localeCompare(b.name)),
@@ -82,11 +91,24 @@ export default function Brands() {
           <ol className="border-t border-border">
             {filtered.map((brand, i) => (
               <li key={brand.id} className="border-b border-border">
-                <Link to={`/brand/${brand.slug}`} className="group relative grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 py-5 md:grid-cols-[4rem_1fr_auto] md:py-6">
-                  <span className="text-xs tracking-[0.2em] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="font-display text-3xl leading-none text-foreground/70 transition-colors duration-300 group-hover:text-foreground md:text-6xl">{brand.name}</span>
-                  <span className="hidden text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:block">{brand.aesthetics.slice(0, 2).join(" / ")}</span>
-                  <img src={brand.lookbook?.[0] || brand.banner || brand.logo} alt="" loading="lazy" className="pointer-events-none absolute right-40 top-1/2 z-10 hidden aspect-[3/4] w-48 -translate-y-1/2 object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 lg:block" />
+                <Link to={`/brand/${brand.slug}`} className="group block py-5 md:py-6">
+                  <div className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 md:grid-cols-[4rem_1fr_auto]">
+                    <span className="text-xs tracking-[0.2em] text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-3xl font-bold leading-none text-foreground/70 transition-colors duration-300 group-hover:text-foreground md:text-6xl" style={{ fontFamily: brand.logoFont || "Anton, sans-serif" }}>{brand.name}</span>
+                    <span className="hidden text-[10px] uppercase tracking-[0.3em] text-muted-foreground sm:block">{brand.aesthetics.slice(0, 2).join(" / ")}</span>
+                  </div>
+                  <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr]">
+                    <div className="overflow-hidden">
+                      <div className="flex gap-3 pt-5 md:pl-[5rem]">
+                        {(productsByBrand.get(brand.id) ?? []).map((p) => (
+                          <div key={p.id} className="w-28 shrink-0 md:w-36">
+                            <div className="aspect-[3/4] overflow-hidden bg-card"><img src={p.image} alt={p.name} loading="lazy" className="h-full w-full object-cover" /></div>
+                            <p className="mt-2 truncate text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{p.name}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </Link>
               </li>
             ))}
