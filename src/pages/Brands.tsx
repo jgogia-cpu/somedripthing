@@ -13,41 +13,40 @@ export default function Brands() {
   const pointerId = useRef<string | null>(null);
   const scrolling = useRef(false);
   const scrollIdle = useRef<number | undefined>(undefined);
-  const openTimer = useRef<number | undefined>(undefined);
 
   // Opening or closing a row pushes every row below it up or down, which fights
-  // a scroll gesture. So while the page is moving we hold the open row still and
-  // only sync to wherever the pointer ended up once the scroll settles.
+  // a scroll gesture. So while the page is moving the open row holds still; the
+  // hover only catches up when the pointer itself moves, or once a scroll ends
+  // with the pointer off the list entirely.
   useEffect(() => {
     const markScroll = () => {
-      if (!scrolling.current) {
-        scrolling.current = true;
-        window.clearTimeout(openTimer.current);
-      }
+      scrolling.current = true;
       window.clearTimeout(scrollIdle.current);
       scrollIdle.current = window.setTimeout(() => {
         scrolling.current = false;
-        setOpenId(pointerId.current);
+        if (pointerId.current === null) setOpenId(null);
       }, 180);
+    };
+    const onMove = () => {
+      if (!scrolling.current && pointerId.current) setOpenId(pointerId.current);
     };
     const opts = { passive: true, capture: true } as const;
     window.addEventListener("wheel", markScroll, opts);
     window.addEventListener("touchmove", markScroll, opts);
     window.addEventListener("scroll", markScroll, opts);
+    window.addEventListener("pointermove", onMove, opts);
     return () => {
       window.removeEventListener("wheel", markScroll, opts);
       window.removeEventListener("touchmove", markScroll, opts);
       window.removeEventListener("scroll", markScroll, opts);
+      window.removeEventListener("pointermove", onMove, opts);
       window.clearTimeout(scrollIdle.current);
-      window.clearTimeout(openTimer.current);
     };
   }, []);
 
   const enterRow = (id: string) => {
     pointerId.current = id;
-    if (scrolling.current) return;
-    window.clearTimeout(openTimer.current);
-    openTimer.current = window.setTimeout(() => setOpenId(id), 90);
+    if (!scrolling.current) setOpenId(id);
   };
 
   // A row scrolling out from under the pointer also fires pointerleave, so
@@ -58,13 +57,12 @@ export default function Brands() {
 
   const leaveList = () => {
     pointerId.current = null;
-    if (scrolling.current) return;
-    window.clearTimeout(openTimer.current);
-    setOpenId(null);
+    if (!scrolling.current) setOpenId(null);
   };
 
   const pick = (tag: string | null) => {
     setActive(tag);
+    pointerId.current = null;
     setOpenId(null);
   };
 
