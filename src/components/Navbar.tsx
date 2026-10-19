@@ -320,10 +320,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 !rounded-none border-x-0 border-t-0 transition-all duration-300 ${
+      className={`sticky top-0 z-50 !rounded-none border-x-0 border-t-0 transition-colors duration-500 ${
         scrolled
-          ? "border-b border-border/40 bg-background/95 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.35)]"
-          : "border-b border-border/30 bg-background/95"
+          ? "border-b border-border bg-background"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
       <div className="container flex h-16 items-center gap-4">

@@ -152,7 +152,7 @@ export default function Category() {
   }, [gender, subcategory]);
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12">
       <SEO
         title={`${searchLabel} for ${genderLabel} — Independent Streetwear | DRIPWAY`}
         description={`Explore ${searchLabel.toLowerCase()} in DRIPWAY’s ${genderLabel.toLowerCase()} edit from independent and underground fashion brands. Compare pieces and catalogue prices, then shop directly with the brand.`}
@@ -166,12 +166,14 @@ export default function Category() {
             { label: label || "" },
           ]}
         />
-        <h1 className="mb-2 font-display text-3xl font-bold">{label}</h1>
-        <p className="mb-8 text-muted-foreground">Shop {label} for {genderLabel}</p>
+        <div className="mb-12 flex items-end justify-between border-b border-border pb-6">
+          <h1 className="font-display text-6xl leading-none md:text-8xl">{label}</h1>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">{genderLabel} / {filtered.length} pieces</p>
+        </div>
 
         {filtered.length > 0 ? (
           <>
-            <div className="masonry-grid">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-3 lg:grid-cols-4">
               {visibleProducts.map((product, i) => (
                 <ProductCard key={product.id} product={product} index={i} />
               ))}
@@ -181,7 +183,7 @@ export default function Category() {
                 <button
                   type="button"
                   onClick={() => setVisibleCount((count) => count + LOAD_MORE)}
-                  className="rounded-full border border-border/60 px-5 py-2 text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:border-accent hover:text-accent"
+                  className="border border-foreground/30 px-8 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:bg-foreground hover:text-background"
                 >
                   Load more
                 </button>
